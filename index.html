@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#ff6a13">
+<link rel="icon" href="icon.svg">
+<link rel="apple-touch-icon" href="icon.svg">
+<title>HotelesCS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: one mobile column, sticky search header, cards list → hotel detail, bottom sheet for quick review */
+:root{
+  --bg:#f4f3f2; --surface:#ffffff; --fg:#1d1d1f; --muted:#62605d; --line:#e2dfdc;
+  --accent:#ff6a13; --accent-fg:#1a1a1a; --brand:#ff6a13; --brand-fg:#1a1a1a; --ink:#2b2b2d; --ink-fg:#ffffff;
+  --ok:#1f7a4d; --ok-bg:#e3f3ea; --warn:#b4400a; --warn-bg:#fde9dc; --star:#ff6a13; --water:#dfe8ec; --land:#fbfaf8; --border:#b9b3ac; --pin2:#7d7873;
+  --f-head:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --f-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --r:12px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#121212; --surface:#1e1e1f; --fg:#ececec; --muted:#a3a09c; --line:#343332;
+  --accent:#ff7a2b; --accent-fg:#1a1a1a; --brand:#ff7a2b; --brand-fg:#1a1a1a; --ink:#ececec; --ink-fg:#1a1a1a;
+  --ok:#5fd39a; --ok-bg:#163327; --warn:#ffa36b; --warn-bg:#3b2214; --star:#ff7a2b; --water:#0d1a20; --land:#232322; --border:#4a4744; --pin2:#9a958f; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121212; --surface:#1e1e1f; --fg:#ececec; --muted:#a3a09c; --line:#343332;
+  --accent:#ff7a2b; --accent-fg:#1a1a1a; --brand:#ff7a2b; --brand-fg:#1a1a1a; --ink:#ececec; --ink-fg:#1a1a1a;
+  --ok:#5fd39a; --ok-bg:#163327; --warn:#ffa36b; --warn-bg:#3b2214; --star:#ff7a2b; --water:#0d1a20; --land:#232322; --border:#4a4744; --pin2:#9a958f; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.45}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--brand)}
+.wrap{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-head);text-wrap:balance;margin:0;letter-spacing:.01em}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.tnum{font-variant-numeric:tabular-nums}
+
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--brand);color:var(--brand-fg)}
+header.top .wrap{padding-block:12px 14px;display:grid;gap:10px}
+.brandrow{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.logo{font-family:var(--f-head);font-size:24px;font-weight:700;display:flex;align-items:center;gap:8px}
+.logo svg{flex:none}
+.who{font-size:12px;opacity:.85;font-weight:500;text-align:right}
+.search{display:flex;align-items:center;gap:8px;background:var(--surface);color:var(--fg);border-radius:10px;padding:0 12px;border:2px solid var(--brand-fg)}
+.search input{border:0;background:transparent;flex:1;min-width:0;padding:11px 0;font-size:16px;outline:none}
+.dates{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:end}
+.dates label{display:grid;gap:2px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;opacity:.85}
+.dates input{background:var(--surface);color:var(--fg);border:0;border-radius:8px;padding:8px;font-size:15px;width:100%;min-width:0}
+.nights{font-family:var(--f-head);font-size:20px;padding-bottom:6px;white-space:nowrap}
+
+.chips{display:flex;gap:6px;overflow-x:auto;padding-block:12px 4px;scrollbar-width:none}
+.chip{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:500}
+.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
+
+.banner{margin-top:12px;padding:10px 12px;border-radius:10px;background:var(--warn-bg);color:var(--warn);font-size:13px}
+.list{display:grid;gap:10px;padding-block:10px 120px}
+.card{display:grid;grid-template-columns:1fr auto;gap:4px 12px;text-align:left;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px}
+.card h3{font-size:21px;line-height:1.1}
+.card .meta{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px 10px;color:var(--muted);font-size:13px;align-items:center}
+.price{font-family:var(--f-head);font-size:22px;text-align:right;line-height:1}
+.price small{display:block;font-family:var(--f-body);font-size:11px;color:var(--muted);font-weight:400}
+.pill{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;letter-spacing:.02em}
+.pill.ok{background:var(--ok-bg);color:var(--ok)} .pill.warn{background:var(--warn-bg);color:var(--warn)}
+.pill.ex{background:var(--line);color:var(--muted)}
+.stars{color:var(--star);letter-spacing:1px;white-space:nowrap}
+.stars .off{color:var(--line)}
+.empty{text-align:center;padding:40px 12px;color:var(--muted)}
+.empty h2{color:var(--fg);font-size:26px;margin-bottom:6px}
+
+.fab{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:6;background:var(--ink);color:var(--ink-fg);border:0;border-radius:999px;padding:14px 20px;font-family:var(--f-head);font-size:20px;font-weight:700;box-shadow:0 6px 18px rgba(0,0,0,.25);display:flex;gap:6px;align-items:center}
+
+/* detail */
+.back{background:none;border:0;padding:12px 0;color:var(--muted);font-weight:600}
+.dhead{display:grid;gap:6px;padding-bottom:12px}
+.dhead h2{font-size:32px;line-height:1.05}
+.score{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.score .big{font-family:var(--f-head);font-size:40px;line-height:1}
+.section{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;display:grid;gap:10px;margin-bottom:12px}
+.section h3{font-size:19px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
+.lbtn{display:flex;justify-content:space-between;align-items:center;gap:6px;padding:12px;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:var(--fg);font-weight:600;background:var(--bg)}
+.lbtn span{color:var(--muted);font-weight:400;font-size:12px;white-space:nowrap}
+.note{font-size:12px;color:var(--muted)}
+.mail pre{white-space:pre-wrap;font-family:var(--f-body);font-size:13px;background:var(--bg);border-radius:8px;padding:10px;margin:0;user-select:text;max-height:220px;overflow:auto}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:0;border-radius:10px;padding:12px 16px;font-weight:600;background:var(--ink);color:var(--ink-fg)}
+.btn.acc{background:var(--accent);color:var(--accent-fg)}
+.btn.ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.btn.wide{flex:1}
+.addr{font-weight:600;user-select:all}
+.rev{display:grid;gap:4px;padding-block:10px;border-top:1px solid var(--line)}
+.rev:first-of-type{border-top:0;padding-top:0}
+.rev .top{display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap}
+.rev .who{opacity:1;text-align:left;font-weight:600;font-size:14px}
+.rev .tags{display:flex;gap:4px;flex-wrap:wrap}
+.tag{font-size:12px;background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:1px 6px}
+.subh{font-size:18px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-top:8px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.subh .note{text-transform:none;letter-spacing:0;font-family:var(--f-body);font-weight:400}
+.card.lite{background:transparent}
+.card.lite h3{font-size:19px}
+.sugg button small,.sel small{display:block;font-size:12px;color:var(--muted);font-weight:400}
+.sel small{color:inherit;opacity:.8}
+#manual summary{cursor:pointer;color:var(--muted);font-size:13px;text-decoration:underline;padding-block:6px}
+#newBox{display:grid;gap:8px;margin-top:4px}
+#newBox[hidden]{display:none}
+.viewtog{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;margin-top:10px;background:var(--surface)}
+.viewtog button{border:0;background:transparent;padding:7px 16px;font-weight:600;font-size:14px}
+.viewtog button[aria-pressed="true"]{background:var(--ink);color:var(--ink-fg)}
+#mapBox{margin-top:10px;display:grid;gap:6px}
+#mapBox[hidden]{display:none}
+.mapwrap{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--line)}
+#map{display:block;width:100%;height:min(62vh,520px);touch-action:none;cursor:grab;user-select:none}
+.pin{cursor:pointer}
+.mapctl{position:absolute;right:10px;top:10px;display:grid;gap:6px}
+.mapctl button{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--surface);font-size:20px;font-weight:600;line-height:1}
+.maplegend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--muted);align-items:center}
+.maplegend span{display:flex;align-items:center;gap:5px}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%}
+.dot.team{background:var(--accent)} .dot.cat{background:var(--pin2)}
+.del{background:none;border:0;color:var(--muted);font-size:12px;text-decoration:underline;padding:0;justify-self:start}
+
+/* sheet */
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:20}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:21;background:var(--surface);border-radius:18px 18px 0 0;max-height:92vh;overflow:auto;padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+.sheet .wrap{display:grid;gap:14px;padding-block:16px}
+.sheet h2{font-size:26px}
+.field{display:grid;gap:6px}
+.field>span{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600}
+.inp{border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:11px 12px;font-size:16px;width:100%;min-width:0}
+.sugg{display:grid;gap:4px}
+.sugg button{text-align:left;border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:9px 12px}
+.sel{display:flex;justify-content:space-between;align-items:center;gap:8px;background:var(--ok-bg);color:var(--ok);border-radius:10px;padding:10px 12px;font-weight:600}
+.sel button{background:none;border:0;color:inherit;text-decoration:underline;font-size:13px}
+.starpick{display:flex;gap:4px}
+.starpick button{background:none;border:0;font-size:40px;line-height:1;padding:0 2px;color:var(--line)}
+.starpick button.on{color:var(--star)}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg button{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:8px 12px;font-size:14px}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--ink-fg);border-color:var(--ink)}
+.pricein{display:flex;align-items:center;gap:8px}
+.pricein .inp{max-width:130px;font-family:var(--f-head);font-size:24px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.err{color:var(--warn);font-size:13px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:30;background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:999px;font-size:14px;font-weight:600;max-width:calc(100% - 32px)}
+@media (prefers-reduced-motion:no-preference){.sheet{animation:up .18s ease-out}@keyframes up{from{transform:translateY(30px);opacity:.6}}}
+
+/* ---- corporate skin: graphite + industrial orange, square corners ---- */
+:root{--brand:#ff5f00;--accent:#ff5f00;--star:#ff5f00;--corp:#1c1c1e;--corp-fg:#ffffff;--r:4px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--brand:#ff6d1a;--accent:#ff6d1a;--star:#ff6d1a;--corp:#000000;--corp-fg:#ffffff}}
+:root[data-theme="dark"]{--brand:#ff6d1a;--accent:#ff6d1a;--star:#ff6d1a;--corp:#000000;--corp-fg:#ffffff}
+body::before{background:var(--corp)}
+header.top{background:var(--brand);box-shadow:0 2px 0 rgba(0,0,0,.08)}
+header.top .corp{background:var(--corp);color:var(--corp-fg);border-bottom:3px solid var(--brand)}
+header.top .corp .wrap{padding-block:10px}
+header.top .band{padding-block:12px 14px;display:grid;gap:10px}
+.logo{font-size:26px;letter-spacing:.02em;text-transform:uppercase;gap:10px}
+.logo svg{color:var(--brand)}
+.logo .cs{background:var(--brand);color:#111;padding:0 6px;margin-left:-6px;border-radius:2px}
+.who{font-size:11px;text-transform:uppercase;letter-spacing:.08em;opacity:.75}
+.search{border-radius:4px;border-width:0;box-shadow:inset 0 0 0 2px var(--corp)}
+.dates input{border-radius:3px}
+.dates label{font-weight:700;color:#111;opacity:1}
+.nights{color:#111}
+.chip{border-radius:3px;text-transform:uppercase;font-size:12px;letter-spacing:.05em;font-weight:600}
+.chip[aria-pressed="true"]{background:var(--corp);color:#fff;border-color:var(--corp);box-shadow:inset 0 -3px 0 var(--brand)}
+.card{border-radius:4px;border-left:4px solid var(--brand)}
+.card.lite{border-left:1px solid var(--line)}
+.section{border-radius:4px;border-top:3px solid var(--brand)}
+.section h3{color:var(--fg)}
+.subh{color:var(--fg);border-left:4px solid var(--brand);padding-left:8px}
+.lbtn,.btn,.inp,.sugg button,.sel,.mapctl button,.mail pre,.banner{border-radius:4px}
+.btn.acc{color:#111}
+.pill{border-radius:3px}
+.viewtog{border-radius:4px}
+.viewtog button[aria-pressed="true"]{background:var(--corp);color:#fff;box-shadow:inset 0 -3px 0 var(--brand)}
+.fab{background:var(--brand);color:#111;border-radius:4px;text-transform:uppercase;letter-spacing:.04em;box-shadow:0 6px 18px rgba(0,0,0,.3),inset 0 -4px 0 rgba(0,0,0,.18)}
+.sheet{border-radius:6px 6px 0 0;border-top:4px solid var(--brand)}
+.seg button{border-radius:3px}
+.seg button[aria-pressed="true"]{background:var(--corp);color:#fff;border-color:var(--corp)}
+.score .big{color:var(--brand)}
+.foot{margin:8px 0 110px;padding-top:14px;border-top:3px solid var(--corp);font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.foot b{font-family:var(--f-head);font-size:15px;color:var(--fg)} .foot b span{color:var(--brand)}
+.list{padding-bottom:16px}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="corp"><div class="wrap brandrow">
+      <div class="logo"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 18V8m0 6h18v4M7 14v-3a2 2 0 0 1 2-2h8a4 4 0 0 1 4 4v1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="10.5" r="1.6" fill="currentColor"/></svg><span>Hoteles</span><span class="cs">CS</span></div>
+      <div class="who" id="who">Customer Service · Uso interno</div>
+    </div></div>
+  <div class="wrap band">
+    <label class="search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input id="q" type="search" placeholder="Ciudad, zona u hotel" autocomplete="off" aria-label="Buscar ciudad u hotel"></label>
+    <div class="dates">
+      <label>Entrada<input id="din" type="date"></label>
+      <label>Salida<input id="dout" type="date"></label>
+      <div class="nights tnum" id="nights">1 noche</div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="vList">
+    <div class="chips" role="group" aria-label="Filtros">
+      <button class="chip" data-f="t:Hotel" aria-pressed="false">Hotel</button>
+      <button class="chip" data-f="t:Aparthotel" aria-pressed="false">Aparthotel</button>
+      <button class="chip" data-f="t:Apartamento" aria-pressed="false">Apartamento</button>
+      <button class="chip" data-f="p80" aria-pressed="false">Hasta 80 €</button>
+      <button class="chip" data-f="g:Parking" aria-pressed="false">Parking</button>
+      <button class="chip" data-f="g:Desayuno temprano" aria-pressed="false">Desayuno temprano</button>
+      <button class="chip" data-f="s4" aria-pressed="false">4★ o más</button>
+    </div>
+    <div id="banner" hidden></div>
+    <div class="viewtog" role="group" aria-label="Vista"><button id="vtList" aria-pressed="true">Lista</button><button id="vtMap" aria-pressed="false">Mapa</button></div>
+    <div id="mapBox" hidden>
+      <div class="mapwrap"><svg id="map" role="img" aria-label="Mapa de alojamientos"></svg>
+        <div class="mapctl"><button id="zIn" aria-label="Acercar">+</button><button id="zOut" aria-label="Alejar">−</button><button id="zFit" aria-label="Ajustar a resultados">⤢</button></div>
+      </div>
+      <div class="maplegend"><span><i class="dot team"></i>Con reseñas del equipo</span><span><i class="dot cat"></i>Sin reseñas</span><a id="gmaps" class="note" target="_blank" rel="noopener" hidden>Ver en Google Maps ↗</a></div>
+      <div class="note" id="mapNote"></div>
+    </div>
+    <div class="list" id="list"></div>
+  </section>
+
+  <section id="vHotel" hidden>
+    <button class="back" id="back">← Volver a la lista</button>
+    <div id="hotel"></div>
+  </section>
+  <footer class="foot"><b>Hoteles<span>CS</span></b> · Customer Service · Herramienta interna del equipo técnico</footer>
+</main>
+
+<button class="fab" id="fab" aria-label="Añadir reseña"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>Reseña</button>
+
+<div class="scrim" id="scrim" hidden></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sTitle" hidden>
+  <form class="wrap" id="form" novalidate>
+    <div class="brandrow"><h2 id="sTitle">Nueva reseña</h2><button type="button" class="btn ghost" id="close">Cerrar</button></div>
+
+    <div class="field" id="pickWrap">
+      <span>Alojamiento</span>
+      <div id="selBox" hidden></div>
+      <div id="pickBox">
+        <input class="inp" id="fName" placeholder="Nombre del alojamiento" autocomplete="off">
+        <div class="sugg" id="sugg"></div>
+        <div class="note" id="catHint">Escribe el nombre o la ciudad: busca entre <span id="catCount">miles de</span> alojamientos de España.</div>
+        <details id="manual" hidden><summary>¿No aparece? Añádelo a mano</summary></details>
+        <div id="newBox" hidden>
+          <input class="inp" id="fCity" placeholder="Ciudad o pueblo" autocomplete="off">
+          <div class="seg" id="fType">
+            <button type="button" aria-pressed="true" data-v="Hotel">Hotel</button>
+            <button type="button" aria-pressed="false" data-v="Aparthotel">Aparthotel</button>
+            <button type="button" aria-pressed="false" data-v="Apartamento">Apartamento</button>
+            <button type="button" aria-pressed="false" data-v="Hostal">Hostal</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field"><span>Nota</span>
+      <div class="starpick" id="fStars" role="radiogroup" aria-label="Nota de 1 a 5">
+        <button type="button" data-v="1" aria-label="1 estrella">★</button><button type="button" data-v="2" aria-label="2 estrellas">★</button><button type="button" data-v="3" aria-label="3 estrellas">★</button><button type="button" data-v="4" aria-label="4 estrellas">★</button><button type="button" data-v="5" aria-label="5 estrellas">★</button>
+      </div>
+    </div>
+
+    <div class="field"><span>Precio por noche</span>
+      <div class="pricein"><input class="inp tnum" id="fPrice" type="number" inputmode="decimal" min="0" step="1" placeholder="72"><b>€</b><span id="priceHint" class="note"></span></div>
+    </div>
+
+    <div class="field"><span>Lo que destaca (opcional)</span>
+      <div class="seg" id="fTags"></div>
+    </div>
+
+    <div class="field"><span>Comentario (opcional)</span>
+      <textarea class="inp" id="fComment" rows="2" placeholder="Ej.: a 10 min del cliente, parking gratis en la calle"></textarea>
+    </div>
+
+    <div class="err" id="fErr" hidden></div>
+    <button class="btn acc" id="fSave" type="submit">Guardar reseña</button>
+  </form>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+
+<script src="vendor/supabase.js"></script>
+<script src="config.js"></script>
+<script src="backend.js"></script>
+<script>
+const AGENCY = "barcelona3@bmcglobal.net";
+const LIMIT = 80;
+const TAGS = ["Parking","Desayuno temprano","Wifi bueno","Limpio","Tranquilo","Cerca del cliente","Cocina","Factura a empresa","Ruidoso","Lejos"];
+const $ = s => document.querySelector(s);
+const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+/* Example data, shown only while the shared store is empty or unavailable. Never written anywhere. */
+const EXAMPLES = {
+  hotels:[
+    {id:"ej1",name:"Hotel Ejemplo Polígono",city:"Martorell",type:"Hotel",example:true},
+    {id:"ej2",name:"Aparthotel Ejemplo Centro",city:"Valladolid",type:"Aparthotel",example:true},
+    {id:"ej3",name:"Apartamentos Ejemplo Ría",city:"Vigo",type:"Apartamento",example:true}
+  ],
+  reviews:[
+    {id:"r1",hotelId:"ej1",rating:4,price:68,tags:["Parking","Desayuno temprano"],comment:"Ejemplo: a 5 min de la planta, desayuno desde las 6:30.",authorId:"",createdAt:Date.now()-864e5*12,example:true},
+    {id:"r2",hotelId:"ej1",rating:5,price:72,tags:["Limpio","Tranquilo"],comment:"Ejemplo: habitaciones al patio, muy tranquilas.",authorId:"",createdAt:Date.now()-864e5*40,example:true},
+    {id:"r3",hotelId:"ej2",rating:3,price:89,tags:["Cocina","Wifi bueno"],comment:"Ejemplo: bien, pero pasa del límite entre semana.",authorId:"",createdAt:Date.now()-864e5*5,example:true},
+    {id:"r4",hotelId:"ej3",rating:4,price:61,tags:["Cocina","Parking"],comment:"",authorId:"",createdAt:Date.now()-864e5*20,example:true}
+  ]
+};
+
+const S = {hotels:[],reviews:[],live:false,loading:true,db:null,user:null,me:null,myName:"",names:{},filters:new Set(),view:"list",hotelId:null,
+  form:{hotelId:null,stars:0,type:"Hotel",tags:new Set()}};
+
+/* ---------- dates ---------- */
+const iso = d => new Date(d.getTime()-d.getTimezoneOffset()*6e4).toISOString().slice(0,10);
+const addDays = (s,n) => {const d=new Date(s+"T12:00:00");d.setDate(d.getDate()+n);return iso(d)};
+const nightsOf = () => {const a=new Date($("#din").value+"T12:00:00"),b=new Date($("#dout").value+"T12:00:00");return Math.max(0,Math.round((b-a)/864e5))};
+const longDate = s => new Date(s+"T12:00:00").toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+const shortDate = s => new Date(s+"T12:00:00").toLocaleDateString("es-ES",{day:"2-digit",month:"2-digit"});
+(function initDates(){
+  let din=iso(new Date()), dout=addDays(din,1);
+  try{const saved=JSON.parse(localStorage.getItem("ryc-dates")||"null"); if(saved&&saved.din>=din){din=saved.din;dout=saved.dout}}catch(e){}
+  $("#din").value=din; $("#dout").value=dout; $("#din").min=iso(new Date());
+})();
+function onDates(e){
+  if(e&&e.target.id==="din"&&$("#dout").value<=$("#din").value) $("#dout").value=addDays($("#din").value,1);
+  $("#dout").min=addDays($("#din").value,1);
+  const n=nightsOf(); $("#nights").textContent=n+(n===1?" noche":" noches");
+  try{localStorage.setItem("ryc-dates",JSON.stringify({din:$("#din").value,dout:$("#dout").value}))}catch(e){}
+  if(S.view==="hotel") renderHotel();
+}
+$("#din").addEventListener("change",onDates); $("#dout").addEventListener("change",onDates); onDates();
+
+/* ---------- derived ---------- */
+const data = () => (S.live && S.hotels.length) ? {hotels:S.hotels,reviews:S.reviews,ex:false} : (S.loading&&S.live?{hotels:[],reviews:[],ex:false}:{hotels:EXAMPLES.hotels,reviews:EXAMPLES.reviews,ex:true});
+function stats(h,reviews){
+  const rs=reviews.filter(r=>r.hotelId===h.id).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+  const avg=rs.length?rs.reduce((s,r)=>s+(+r.rating||0),0)/rs.length:0;
+  const ps=rs.map(r=>+r.price).filter(p=>p>0);
+  const price=ps.length?Math.round(ps.reduce((a,b)=>a+b,0)/ps.length):null;
+  const last=rs.find(r=>+r.price>0);
+  const tagCount={}; rs.forEach(r=>(r.tags||[]).forEach(t=>tagCount[t]=(tagCount[t]||0)+1));
+  const topTags=Object.entries(tagCount).sort((a,b)=>b[1]-a[1]).map(e=>e[0]);
+  return {rs,avg,price,last:last?+last.price:null,topTags};
+}
+const starStr = v => {const n=Math.round(v);return `<span class="stars" aria-label="${v.toFixed(1)} de 5">${"★".repeat(n)}<span class="off">${"★".repeat(5-n)}</span></span>`};
+const pricePill = p => p==null?"":(p<=LIMIT?`<span class="pill ok">Dentro de ${LIMIT} €</span>`:`<span class="pill warn">Pasa de ${LIMIT} €</span>`);
+const norm = s => String(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+
+/* ---------- catalogue: lodging in Spain from OpenStreetMap (hotels-es.json beside the page) ---------- */
+const TYPEMAP={H:"Hotel",A:"Apartamento",S:"Hostal",M:"Motel",P:"Aparthotel"};
+let CAT=null,catP=null;
+function loadCat(){
+  if(catP) return catP;
+  catP=fetch("hotels-es.json").then(r=>r.ok?r.json():[]).then(a=>{
+    CAT=a.map(x=>({id:"osm-"+x[0],osm:x[0],name:x[1],type:TYPEMAP[x[2]]||"Hotel",address:x[3],city:x[4],region:x[5],lat:x[6],lon:x[7],stars:x[8],catalog:true,k:norm(x[1]),kc:norm(x[4]+" "+x[5])}));
+    const n=document.getElementById("catCount"); if(n) n.textContent=CAT.length.toLocaleString("es-ES");
+    rerender(); return CAT}).catch(()=>{CAT=[];return CAT});
+  return catP;
+}
+function catSearch(q,n,exclude){
+  if(!CAT) return [];
+  const toks=norm(q).split(/\s+/).filter(t=>t.length>1); if(!toks.length||norm(q).length<3) return [];
+  const out=[];
+  for(const c of CAT){
+    if(exclude&&exclude.has(c.osm)) continue;
+    let ok=true,score=0;
+    for(const t of toks){const inName=c.k.includes(t),inCity=c.kc.includes(t); if(!inName&&!inCity){ok=false;break} score+=inName?(c.k.startsWith(t)?3:2):1}
+    if(ok){out.push([score,c]); if(out.length>3000)break}
+  }
+  out.sort((a,b)=>b[0]-a[0]||a[1].name.localeCompare(b[1].name));
+  return out.slice(0,n).map(x=>x[1]);
+}
+const findHotel = id => data().hotels.find(x=>x.id===id) || (CAT&&id&&id.startsWith("osm-")? (S.hotels.find(h=>"osm-"+h.osm===id) || CAT.find(c=>c.id===id)) : null);
+const placeLine = h => [h.address,h.city,h.region&&h.region!==h.city?h.region:""].filter(Boolean).join(", ");
+
+/* ---------- list ---------- */
+function renderList(){
+  const {hotels,reviews,ex}=data();
+  const q=norm($("#q").value.trim());
+  const banner=$("#banner");
+  if(ex){banner.hidden=false;banner.className="banner";banner.textContent=S.live?"Aún no hay reseñas. Lo que ves son ejemplos: pulsa «Reseña» para añadir el primer alojamiento de verdad.":"Vista de ejemplo. Para guardar y ver reseñas del equipo, abre la página con tu cuenta."}
+  else banner.hidden=true;
+  let rows=hotels.map(h=>({h,st:stats(h,reviews)}));
+  if(q) rows=rows.filter(({h})=>norm(h.name+" "+h.city+" "+(h.area||"")).includes(q));
+  for(const f of S.filters){
+    if(f.startsWith("t:")) rows=rows.filter(({h})=>h.type===f.slice(2));
+    if(f==="p80") rows=rows.filter(({st})=>st.price!=null&&st.price<=LIMIT);
+    if(f.startsWith("g:")) rows=rows.filter(({st})=>st.topTags.includes(f.slice(2)));
+    if(f==="s4") rows=rows.filter(({st})=>st.avg>=4);
+  }
+  rows.sort((a,b)=>b.st.avg-a.st.avg||b.st.rs.length-a.st.rs.length);
+  const list=$("#list");
+  if(S.live&&S.loading){list.innerHTML=`<div class="empty">Cargando reseñas…</div>`;return}
+  const known=new Set(hotels.map(h=>h.osm).filter(Boolean));
+  const typeF=[...S.filters].find(f=>f.startsWith("t:"));
+  const onlyTeam=[...S.filters].some(f=>!f.startsWith("t:"));
+  let cat=(q.length>=3&&!onlyTeam)?catSearch($("#q").value,60,known):[];
+  if(typeF) cat=cat.filter(c=>c.type===typeF.slice(2));
+  S.mapPts=[...rows.map(({h,st})=>({h,team:true,avg:st.avg})),...cat.slice(0,300).map(c=>({h:c,team:false}))].filter(p=>p.h.lat!=null&&p.h.lon!=null);
+  const mk=q+"|"+[...S.filters].join(",");
+  if(mk!==S.mapKey){S.mapKey=mk;S.mapFit=true}
+  const gq=$("#q").value.trim(); const gm=$("#gmaps"); gm.hidden=gq.length<3; if(gq.length>=3) gm.href="https://www.google.com/maps/search/"+encodeURIComponent("hoteles "+gq);
+  if(S.mode==="map") drawMap();
+  cat=cat.slice(0,25);
+  const catHtml=cat.length?`<h2 class="subh">Otros alojamientos <span class="note">sin reseñas del equipo</span></h2>`+cat.map(c=>`
+    <button class="card lite" data-h="${esc(c.id)}">
+      <div><h3>${esc(c.name)}</h3></div><div class="note">${esc(c.type)}${c.stars?" · "+esc(c.stars)+"★":""}</div>
+      <div class="meta"><span>${esc(placeLine(c))}</span></div>
+    </button>`).join(""):(q.length>=3&&CAT===null?`<div class="note">Cargando alojamientos de España…</div>`:"");
+  if(!rows.length){list.innerHTML=(cat.length?(q?`<div class="note">Ningún compañero ha reseñado todavía un sitio con «${esc($("#q").value)}».</div>`:""):`<div class="empty"><h2>Nada por aquí</h2><p>${q?"No encuentro «"+esc($("#q").value)+"». Prueba con la ciudad o parte del nombre.":"No hay alojamientos con esos filtros."}</p><button class="btn acc" data-new="1">Añadirlo a mano</button></div>`)+catHtml;return}
+  list.innerHTML=(rows.length&&q.length>=3?`<h2 class="subh">Con reseñas del equipo</h2>`:"")+rows.map(({h,st})=>`
+    <button class="card" data-h="${esc(h.id)}">
+      <div><h3>${esc(h.name)}</h3></div>
+      <div class="price tnum">${st.price!=null?st.price+" €":"–"}<small>media/noche</small></div>
+      <div class="meta">${st.rs.length?starStr(st.avg)+`<b class="tnum">${st.avg.toFixed(1)}</b>`:""}<span>${st.rs.length} ${st.rs.length===1?"reseña":"reseñas"}</span><span>${esc(h.type)} · ${esc(h.city)}</span>${pricePill(st.price)}${h.example?`<span class="pill ex">Ejemplo</span>`:""}</div>
+      ${st.topTags.length?`<div class="meta">${st.topTags.slice(0,3).map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>`:""}
+    </button>`).join("")+catHtml;
+}
+$("#list").addEventListener("click",e=>{
+  const c=e.target.closest("[data-h]"); if(c) return openHotel(c.dataset.h);
+  if(e.target.closest("[data-new]")) openSheet(null,$("#q").value.trim());
+});
+$("#q").addEventListener("input",()=>{if(S.view!=="list")showList();renderList()});
+document.querySelectorAll(".chip").forEach(b=>b.addEventListener("click",()=>{
+  const f=b.dataset.f; S.filters.has(f)?S.filters.delete(f):S.filters.add(f); b.setAttribute("aria-pressed",S.filters.has(f)); renderList();
+}));
+
+/* ---------- hotel detail ---------- */
+function bookingLinks(h){
+  const din=$("#din").value,dout=$("#dout").value,q=encodeURIComponent(h.name+" "+h.city);
+  const mq=encodeURIComponent(h.name+", "+placeLine(h));
+  return [
+    ["Booking",`https://www.booking.com/searchresults.es.html?ss=${q}&checkin=${din}&checkout=${dout}&group_adults=1&no_rooms=1&group_children=0`],
+    ["Hoteles.com",`https://es.hoteles.com/Hotel-Search?destination=${q}&startDate=${din}&endDate=${dout}&adults=1`],
+    ["Google Hoteles",`https://www.google.com/travel/search?q=${q}&hl=es`],
+    ["Mapa",`https://www.google.com/maps/search/?api=1&query=${mq}`]
+  ];
+}
+function mailText(h){
+  const din=$("#din").value,dout=$("#dout").value,n=nightsOf();
+  const subject=`Reserva alojamiento: ${h.name} (${h.city}), ${shortDate(din)} a ${shortDate(dout)}`;
+  const body=`Hola,
+
+Por favor, ¿me podéis reservar alojamiento con estos datos?
+
+Alojamiento: ${h.name}
+Localidad: ${h.city}${h.address?"\nDirección: "+h.address:""}
+Entrada: ${longDate(din)}
+Salida: ${longDate(dout)}
+Noches: ${n}
+Habitación: individual, 1 persona
+
+Muchas gracias.
+${S.myName||"[Tu nombre]"}`;
+  return {subject,body};
+}
+function renderHotel(){
+  const {reviews}=data(); const h=findHotel(S.hotelId);
+  const box=$("#hotel");
+  if(!h){box.innerHTML=`<div class="empty"><h2>Alojamiento no encontrado</h2></div>`;return}
+  const st=stats(h,reviews); const m=mailText(h); const n=nightsOf();
+  const est=st.price!=null?st.price*n:null;
+  const names=S.names;
+  box.innerHTML=`
+    <div class="dhead">
+      <div class="note">${esc(h.type)}${h.stars?" · "+esc(h.stars)+"★":""} · ${esc(h.city)} ${h.example?`<span class="pill ex">Ejemplo</span>`:""}</div>
+      <h2>${esc(h.name)}</h2>
+      ${h.address?`<div>${esc(placeLine(h))}</div>`:""}
+      <div class="score">${st.rs.length?`<span class="big tnum">${st.avg.toFixed(1)}</span>${starStr(st.avg)}`:""}<span class="note">${st.rs.length?st.rs.length+" "+(st.rs.length===1?"reseña del equipo":"reseñas del equipo"):"Aún sin reseñas del equipo. Mira el precio en los enlaces."}</span></div>
+      ${st.rs.length?"":`<!--`}<div class="score"><span class="price tnum" style="text-align:left">${st.price!=null?st.price+" €":"Sin precio"}<small>media pagada por noche${st.last!=null&&st.last!==st.price?` · última ${st.last} €`:""}</small></span>${pricePill(st.price)}${est!=null&&n>1?`<span class="note tnum">≈ ${est} € por ${n} noches</span>`:""}</div>${st.rs.length?"":`-->`}
+    </div>
+
+    <div class="section">
+      <h3>Precio de hoy y reserva</h3>
+      <div class="links">${bookingLinks(h).map(([t,u])=>`<a class="lbtn" href="${esc(u)}" target="_blank" rel="noopener">${t}<span>abrir ↗</span></a>`).join("")}</div>
+      <div class="note">Se abren con tus fechas (${shortDate($("#din").value)} a ${shortDate($("#dout").value)}) para ver el precio real de hoy.</div>
+    </div>
+
+    <div class="section mail">
+      <h3>Reservar por la agencia</h3>
+      <div class="row" style="align-items:center;justify-content:space-between"><span>Para: <span class="addr">${AGENCY}</span></span><button class="btn ghost" data-copy="addr">Copiar dirección</button></div>
+      <pre id="mailPre"><b>Asunto:</b> ${esc(m.subject)}
+
+${esc(m.body)}</pre>
+      <div class="row"><button class="btn acc wide" data-copy="mail">Copiar correo</button><a class="btn ghost" href="mailto:${AGENCY}?subject=${encodeURIComponent(m.subject)}&body=${encodeURIComponent(m.body)}">Abrir en el correo</a></div>
+      <div class="note">«Copiar correo» copia asunto y texto. Pégalo en un correo nuevo a la agencia.</div>
+    </div>
+
+    <div class="section">
+      <div class="row" style="justify-content:space-between;align-items:center"><h3>Opiniones</h3><button class="btn acc" data-rev="1">+ Mi reseña</button></div>
+      ${st.rs.length?st.rs.map(r=>`
+        <div class="rev">
+          <div class="top"><span class="who">${esc(r.example?"Compañero (ejemplo)":(names[r.authorId]||"Compañero"))}</span><span class="note tnum">${r.createdAt?new Date(r.createdAt).toLocaleDateString("es-ES",{month:"short",year:"numeric"}):""}</span></div>
+          <div class="top" style="justify-content:flex-start">${starStr(+r.rating||0)}${+r.price>0?`<b class="tnum">${+r.price} €/noche</b>`:""}</div>
+          ${(r.tags||[]).length?`<div class="tags">${r.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>`:""}
+          ${r.comment?`<div>${esc(r.comment)}</div>`:""}
+          ${S.me&&r.authorId===S.me&&!r.example?`<button class="del" data-del="${esc(r.id)}">Borrar mi reseña</button>`:""}
+        </div>`).join(""):`<div class="note">Nadie ha opinado todavía.</div>`}
+    </div>`;
+}
+$("#hotel").addEventListener("click",async e=>{
+  const c=e.target.closest("[data-copy]");
+  if(c){const h=findHotel(S.hotelId);const m=mailText(h);
+    const txt=c.dataset.copy==="addr"?AGENCY:`Asunto: ${m.subject}\n\n${m.body}`;
+    try{await navigator.clipboard.writeText(txt);toast(c.dataset.copy==="addr"?"Dirección copiada":"Correo copiado")}
+    catch(err){const el=c.dataset.copy==="addr"?document.querySelector(".addr"):$("#mailPre");const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);toast("Texto seleccionado: cópialo con el menú")}
+    return}
+  if(e.target.closest("[data-rev]")) return openSheet(S.hotelId);
+  const d=e.target.closest("[data-del]");
+  if(d){ if(d.dataset.confirm!=="1"){d.dataset.confirm="1";d.textContent="Pulsa otra vez para borrar";return}
+    try{await S.db.doc("reviews/"+d.dataset.del).delete();toast("Reseña borrada")}catch(err){toast("No se ha podido borrar")}}
+});
+function openHotel(id){S.view="hotel";S.hotelId=id;$("#vList").hidden=true;$("#vHotel").hidden=false;renderHotel();scrollTo(0,0);
+  try{history.replaceState(null,"","#h-"+id)}catch(e){}}
+function showList(){S.view="list";$("#vList").hidden=false;$("#vHotel").hidden=true;renderList();
+  try{history.replaceState(null,"",location.pathname+location.search)}catch(e){}}
+$("#back").addEventListener("click",showList);
+
+/* ---------- review sheet ---------- */
+$("#fTags").innerHTML=TAGS.map(t=>`<button type="button" aria-pressed="false" data-v="${esc(t)}">${esc(t)}</button>`).join("");
+function openSheet(hotelId,prefill){
+  const f=S.form; f.hotelId=hotelId||null; f.stars=0; f.tags=new Set(); f.type="Hotel";
+  $("#fName").value=prefill||""; $("#fCity").value=""; $("#fPrice").value=""; $("#fComment").value=""; $("#fErr").hidden=true;
+  document.querySelectorAll("#fTags button,#fType button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.v==="Hotel"&&b.parentElement.id==="fType"));
+  paintStars(); paintPick(); priceHint();
+  $("#scrim").hidden=false; $("#sheet").hidden=false;
+  setTimeout(()=>{(hotelId?$("#fStars button"):$("#fName")).focus()},50);
+}
+function closeSheet(){$("#scrim").hidden=true;$("#sheet").hidden=true}
+$("#fab").addEventListener("click",()=>openSheet(S.view==="hotel"?S.hotelId:null));
+$("#close").addEventListener("click",closeSheet); $("#scrim").addEventListener("click",closeSheet);
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#sheet").hidden)closeSheet()});
+function paintPick(){
+  const f=S.form; const h=f.hotelId?findHotel(f.hotelId):null;
+  $("#selBox").hidden=!h; $("#pickBox").hidden=!!h;
+  if(h) $("#selBox").innerHTML=`<div class="sel"><span>${esc(h.name)}<small>${esc(placeLine(h))}</small></span><button type="button" id="chg">Cambiar</button></div>`;
+  else suggest();
+}
+$("#selBox").addEventListener("click",e=>{if(e.target.id==="chg"){S.form.hotelId=null;paintPick();$("#fName").focus()}});
+function suggest(){
+  const raw=$("#fName").value.trim(), q=norm(raw); const {hotels,ex}=data();
+  const toks=q.split(/\s+/).filter(Boolean);
+  const m=q.length<2?[]:hotels.filter(h=>!ex&&toks.every(t=>norm(h.name+" "+h.city).includes(t))).slice(0,4);
+  const known=new Set(S.hotels.map(h=>h.osm).filter(Boolean));
+  const c=catSearch(raw,8,known);
+  $("#sugg").innerHTML=m.map(h=>`<button type="button" data-pick="${esc(h.id)}"><b>${esc(h.name)}</b> · ${esc(h.city)} <span class="pill ok">con reseñas</span></button>`).join("")
+    +c.map(h=>`<button type="button" data-pick="${esc(h.id)}"><b>${esc(h.name)}</b><small>${esc(h.type)} · ${esc(placeLine(h))}</small></button>`).join("")
+    +(q.length>=3&&CAT===null?`<div class="note">Cargando alojamientos de España…</div>`:"");
+  const showNew=q.length>=3&&$("#manual").open;
+  $("#manual").hidden=q.length<3;
+  $("#newBox").hidden=!showNew;
+}
+$("#fName").addEventListener("input",suggest);
+$("#manual").addEventListener("toggle",suggest);
+$("#sugg").addEventListener("click",e=>{const b=e.target.closest("[data-pick]");if(b){S.form.hotelId=b.dataset.pick;paintPick()}});
+$("#fType").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;S.form.type=b.dataset.v;[...$("#fType").children].forEach(x=>x.setAttribute("aria-pressed",x===b))});
+$("#fTags").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;const t=S.form.tags;t.has(b.dataset.v)?t.delete(b.dataset.v):t.add(b.dataset.v);b.setAttribute("aria-pressed",t.has(b.dataset.v))});
+function paintStars(){[...$("#fStars").children].forEach(b=>{b.classList.toggle("on",+b.dataset.v<=S.form.stars);b.setAttribute("aria-checked",+b.dataset.v===S.form.stars)})}
+$("#fStars").addEventListener("click",e=>{const b=e.target.closest("button");if(b){S.form.stars=+b.dataset.v;paintStars()}});
+function priceHint(){const p=+$("#fPrice").value;const el=$("#priceHint");if(!p){el.textContent="";return}el.innerHTML=p<=LIMIT?`<span class="pill ok">Dentro de ${LIMIT} €</span>`:`<span class="pill warn">Pasa de ${LIMIT} €</span>`}
+$("#fPrice").addEventListener("input",priceHint);
+
+let saving=false;
+$("#form").addEventListener("submit",async e=>{
+  e.preventDefault(); if(saving) return;
+  const f=S.form, err=$("#fErr"); const fail=m=>{err.textContent=m;err.hidden=false};
+  if(!S.db) return fail("Esta vista es de ejemplo y no guarda. Abre la página con tu cuenta para publicar reseñas.");
+  if(!f.hotelId && (!$("#fName").value.trim()||!$("#fCity").value.trim()||$("#newBox").hidden)) return fail("Elige un alojamiento de la lista. Si no aparece, pulsa «Añádelo a mano» y pon la ciudad.");
+  if(f.hotelId && f.hotelId.startsWith("ej")) return fail("Ese es un alojamiento de ejemplo. Escribe el nombre de uno real.");
+  if(!f.stars) return fail("Toca las estrellas para poner nota.");
+  saving=true; $("#fSave").textContent="Guardando…";
+  try{
+    let hid=f.hotelId;
+    if(hid&&hid.startsWith("osm-")){
+      const c=findHotel(hid);
+      const dup=S.hotels.find(h=>h.osm===c.osm)||S.hotels.find(h=>norm(h.name)===norm(c.name)&&norm(h.city)===norm(c.city));
+      if(dup) hid=dup.id;
+      else{const ref=await S.db.collection("hotels").add({name:c.name,city:c.city,type:c.type,address:c.address||"",region:c.region||"",lat:c.lat,lon:c.lon,osm:c.osm,stars:c.stars||"",createdBy:S.me||"",createdAt:Date.now()});hid=ref.id}
+    }
+    if(!hid){
+      const name=$("#fName").value.trim(), city=$("#fCity").value.trim();
+      const dup=S.hotels.find(h=>norm(h.name)===norm(name)&&norm(h.city)===norm(city));
+      if(dup) hid=dup.id;
+      else{const ref=await S.db.collection("hotels").add({name,city,type:f.type,createdBy:S.me||"",createdAt:Date.now()});hid=ref.id}
+    }
+    const price=Math.round(+$("#fPrice").value)||0;
+    await S.db.collection("reviews").add({hotelId:hid,rating:f.stars,price,tags:[...f.tags],comment:$("#fComment").value.trim().slice(0,500),authorId:S.me||"",createdAt:Date.now()});
+    closeSheet(); toast("Reseña guardada. ¡Gracias!"); openHotel(hid);
+  }catch(x){fail("No se ha podido guardar. Revisa la conexión y vuelve a intentarlo.")}
+  finally{saving=false;$("#fSave").textContent="Guardar reseña"}
+});
+
+/* ---------- toast ---------- */
+let tt; function toast(m){const t=$("#toast");t.textContent=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>t.hidden=true,2200)}
+
+/* ---------- boot ---------- */
+/* ---------- map (own drawing: outline + dots; no external tiles allowed here) ---------- */
+let LAND=null,landPath="";const COS=Math.cos(40*Math.PI/180);
+const MV={lon:-3.7,lat:40.1,span:9.5};
+S.mode="list";S.mapPts=[];S.mapFit=true;
+function loadLand(){fetch("spain.json").then(r=>r.ok?r.json():[]).then(a=>{LAND=a;drawMap()}).catch(()=>{LAND=[]})}
+function setMode(m){S.mode=m;$("#vtList").setAttribute("aria-pressed",m==="list");$("#vtMap").setAttribute("aria-pressed",m==="map");$("#mapBox").hidden=m!=="map";$("#list").classList.toggle("under-map",m==="map");if(m==="map"){if(!LAND)loadLand();S.mapFit=true;drawMap()}try{localStorage.setItem("ryc-mode",m)}catch(e){}}
+$("#vtList").addEventListener("click",()=>setMode("list"));$("#vtMap").addEventListener("click",()=>setMode("map"));
+function fitMap(){
+  const P=S.mapPts; if(!P.length){MV.lon=-3.7;MV.lat=40.1;MV.span=9.5;return}
+  let a=90,b=-90,c=180,d=-180;for(const p of P){a=Math.min(a,p.h.lat);b=Math.max(b,p.h.lat);c=Math.min(c,p.h.lon);d=Math.max(d,p.h.lon)}
+  const svg=$("#map"),W=svg.clientWidth||360,H=svg.clientHeight||360;
+  MV.lat=(a+b)/2;MV.lon=(c+d)/2;MV.span=Math.max(0.03,(b-a)*1.35,(d-c)*COS*1.35*H/W);
+}
+function landD(px,W,H){
+  if(!LAND) return "";
+  const lon0=MV.lon-MV.span*W/H/COS, lon1=MV.lon+MV.span*W/H/COS, la0=MV.lat-MV.span, la1=MV.lat+MV.span;
+  let d="";
+  for(const o of LAND){const r=o.r;let mnx=180,mxx=-180,mny=90,mxy=-90;
+    for(let i=0;i<r.length;i+=2){if(r[i]<mnx)mnx=r[i];if(r[i]>mxx)mxx=r[i];if(r[i+1]<mny)mny=r[i+1];if(r[i+1]>mxy)mxy=r[i+1]}
+    if(mxx<lon0||mnx>lon1||mxy<la0||mny>la1) continue;
+    for(let i=0;i<r.length;i+=2){const [x,y]=px(r[i],r[i+1]);d+=(i?"L":"M")+Math.max(-1e5,Math.min(1e5,x)).toFixed(1)+","+Math.max(-1e5,Math.min(1e5,y)).toFixed(1)}
+    d+="Z"}
+  return d;
+}
+function drawMap(){
+  if(S.mode!=="map") return;
+  const svg=$("#map"),W=svg.clientWidth||360,H=svg.clientHeight||360;
+  if(S.mapFit){fitMap();S.mapFit=false}
+  const k=H/MV.span; const px=(lon,lat)=>[W/2+(lon-MV.lon)*COS*k,H/2-(lat-MV.lat)*k];
+  svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
+  const vis=S.mapPts.map(p=>({p,xy:px(p.h.lon,p.h.lat)})).filter(o=>o.xy[0]>-10&&o.xy[0]<W+10&&o.xy[1]>-10&&o.xy[1]<H+10);
+  vis.sort((x,y)=>(x.p.team?1:0)-(y.p.team?1:0));
+  const labels=vis.length<=14;
+  // scale bar
+  const kmPerPx=111/k; const nice=[0.1,0.2,0.5,1,2,5,10,20,50,100,200,500].find(v=>v/kmPerPx>=60)||500; const bw=nice/kmPerPx;
+  svg.innerHTML=`<rect width="${W}" height="${H}" fill="var(--water)"/>
+    <path d="${landD(px,W,H)}" fill="var(--land)" stroke="var(--border)" stroke-width="1"/>
+    ${vis.map(({p,xy})=>`<g class="pin" data-h="${esc(p.h.id)}" tabindex="0" role="button" aria-label="${esc(p.h.name)}">
+      <circle cx="${xy[0].toFixed(1)}" cy="${xy[1].toFixed(1)}" r="${p.team?9:5.5}" fill="${p.team?"var(--accent)":"var(--pin2)"}" stroke="var(--land)" stroke-width="2"/>
+      ${p.team&&p.avg?`<text x="${xy[0].toFixed(1)}" y="${(xy[1]+3.5).toFixed(1)}" text-anchor="middle" font-size="9.5" font-weight="700" fill="var(--accent-fg)">${p.avg.toFixed(1)}</text>`:""}
+      ${labels?`<text x="${(xy[0]+(xy[0]>W*0.6?-12:12)).toFixed(1)}" text-anchor="${xy[0]>W*0.6?"end":"start"}" y="${(xy[1]+4).toFixed(1)}" font-size="12" fill="var(--fg)" stroke="var(--land)" stroke-width="3" paint-order="stroke">${esc(p.h.name.length>26?p.h.name.slice(0,25)+"…":p.h.name)}</text>`:""}
+    </g>`).join("")}
+    <g transform="translate(12,${H-16})"><rect x="0" y="-4" width="${bw.toFixed(1)}" height="4" fill="var(--fg)"/><text x="0" y="-9" font-size="11" fill="var(--fg)">${nice<1?nice*1000+" m":nice+" km"}</text></g>`;
+  const off=S.mapPts.length-vis.length, noGeo=S.mapPts.length===0;
+  $("#mapNote").textContent=noGeo?($("#q").value.trim().length>=3?"Ningún resultado tiene ubicación.":"Busca una ciudad o un hotel para verlos en el mapa."):(vis.length+" en pantalla"+(off?", "+off+" fuera":"")+". Arrastra para moverte. Toca un punto para abrir la ficha.");
+}
+(function(){
+  const svg=$("#map");const pts=new Map();let moved=0,last=null,pinch=null;
+  svg.addEventListener("pointerdown",e=>{svg.setPointerCapture(e.pointerId);pts.set(e.pointerId,[e.clientX,e.clientY]);moved=0;last=[e.clientX,e.clientY];if(pts.size===2){const [a,b]=[...pts.values()];pinch={d:Math.hypot(a[0]-b[0],a[1]-b[1]),span:MV.span}}});
+  svg.addEventListener("pointermove",e=>{if(!pts.has(e.pointerId))return;pts.set(e.pointerId,[e.clientX,e.clientY]);
+    if(pts.size===2&&pinch){const [a,b]=[...pts.values()];const d=Math.hypot(a[0]-b[0],a[1]-b[1]);MV.span=Math.min(14,Math.max(0.01,pinch.span*pinch.d/Math.max(d,1)));moved=99;drawMap();return}
+    const k=(svg.clientHeight||360)/MV.span;const dx=e.clientX-last[0],dy=e.clientY-last[1];last=[e.clientX,e.clientY];moved+=Math.abs(dx)+Math.abs(dy);
+    MV.lon-=dx/(COS*k);MV.lat+=dy/k;drawMap()});
+  const up=e=>{pts.delete(e.pointerId);if(pts.size<2)pinch=null;if(pts.size===1)last=[...pts.values()][0]};
+  svg.addEventListener("pointerup",e=>{const wasTap=moved<6;up(e);if(wasTap){const g=document.elementFromPoint(e.clientX,e.clientY);const pin=g&&g.closest&&g.closest(".pin");if(pin)openHotel(pin.dataset.h)}});
+  svg.addEventListener("pointercancel",up);
+  svg.addEventListener("wheel",e=>{e.preventDefault();MV.span=Math.min(14,Math.max(0.01,MV.span*(e.deltaY>0?1.25:0.8)));drawMap()},{passive:false});
+  svg.addEventListener("keydown",e=>{const pin=e.target.closest&&e.target.closest(".pin");if(pin&&(e.key==="Enter"||e.key===" ")){e.preventDefault();openHotel(pin.dataset.h)}});
+  $("#zIn").addEventListener("click",()=>{MV.span=Math.max(0.01,MV.span/1.6);drawMap()});
+  $("#zOut").addEventListener("click",()=>{MV.span=Math.min(14,MV.span*1.6);drawMap()});
+  $("#zFit").addEventListener("click",()=>{S.mapFit=true;drawMap()});
+  addEventListener("resize",()=>drawMap());
+})();
+function rerender(){S.view==="hotel"?renderHotel():renderList(); if(!$("#sheet").hidden&&!S.form.hotelId) suggest()}
+async function resolveNames(){
+  if(!S.user) return;
+  const ids=[...new Set(S.reviews.map(r=>r.authorId).filter(Boolean))];
+  if(!ids.length) return;
+  try{const ps=await S.user.profiles(ids);for(const id of ids)S.names[id]=(ps[id]&&ps[id].name)||"Compañero";if(S.view==="hotel")renderHotel()}catch(e){}
+}
+function routeFromHash(){const m=/^#h-([A-Za-z0-9_-]+)$/.exec(location.hash);if(m)openHotel(m[1])}
+renderList(); routeFromHash();
+setTimeout(loadCat,300);
+try{if(localStorage.getItem("ryc-mode")==="map")setMode("map")}catch(e){}
+(async function(){
+  let db=null,user=null;
+  if(window.rycBackend){try{({db,user}=await window.rycBackend())}catch(e){console.error(e)}}
+  else if(window.claude&&claude.use){[db,user]=await Promise.all([claude.use("db"),claude.use("user")])}
+  else return;
+  S.user=user;
+  if(user){try{S.me=await user.id();S.myName=(await user.name())||"";if(S.myName)$("#who").textContent="Hola, "+S.myName.split(" ")[0]}catch(e){}}
+  if(!db){rerender();return}
+  S.db=db; S.live=true; S.loading=true; rerender();
+  let got=0; const timer=setTimeout(()=>{if(S.loading){S.loading=false;rerender()}},10000);
+  const done=()=>{if(++got>=2){clearTimeout(timer);S.loading=false} rerender()};
+  let h1=false,h2=false;
+  db.collection("hotels").onSnapshot(s=>{S.hotels=s.docs.map(d=>({id:d.id,...d.data()}));if(!h1){h1=true;done()}else rerender()},()=>{if(!h1){h1=true;done()}});
+  db.collection("reviews").onSnapshot(s=>{S.reviews=s.docs.map(d=>({id:d.id,...d.data()}));resolveNames();if(!h2){h2=true;done()}else rerender()},()=>{if(!h2){h2=true;done()}});
+  routeFromHash();
+})();
+</script>
+</body>
+</html>
