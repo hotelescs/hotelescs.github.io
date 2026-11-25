@@ -1,4 +1,5 @@
 # HotelesCS
+\nWeb: https://hotelescs.github.io
 
 Reseñas de hoteles y apartamentos para el equipo técnico. Web estática (GitHub Pages) + Supabase gratis (base de datos y acceso con correo de empresa).
 
