@@ -64,4 +64,4 @@ jobs:
           git add hotels-es.json data/registros.json data/geocache.json
           if git diff --cached --quiet; then echo "Sin cambios"; exit 0; fi
           git commit -m "Catálogo de alojamientos actualizado (OpenStreetMap + registros oficiales) ($(date +%F))"
-          git push
+          for i in 1 2 3; do git pull --rebase -q && git push && break; sleep 10; done
