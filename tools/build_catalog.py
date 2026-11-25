@@ -49,6 +49,8 @@ class H(osmium.SimpleHandler):
         pts = [(nd.location.lat, nd.location.lon) for nd in w.nodes if nd.location.valid()]
         if pts: self.add('w%d' % w.id, dict(tg), sum(p[0] for p in pts) / len(pts), sum(p[1] for p in pts) / len(pts))
 
+W = {'city': 0.15, 'town': 0.5, 'village': 1}   # prefer the big town nearby over a tiny village next door
+
 def grid(points, f):
     G = {}
     for p in points: G.setdefault((int(p[0] * f), int(p[1] * f)), []).append(p)
@@ -60,7 +62,7 @@ def nearest(G, f, lat, lon, ok, rng=3):
         for dy in range(-rng, rng + 1):
             for p in G.get((gx + dx, gy + dy), []):
                 if not ok(p): continue
-                d = (p[0] - lat) ** 2 + ((p[1] - lon) * c) ** 2
+                d = ((p[0] - lat) ** 2 + ((p[1] - lon) * c) ** 2) * (W.get(p[3], 1) if len(p) > 3 else 1)
                 if d < bd: bd, best = d, p
     return best
 
