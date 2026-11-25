@@ -21,7 +21,7 @@ def region_of(pc):
 
 class H(osmium.SimpleHandler):
     def __init__(self):
-        super().__init__(); self.items = {}; self.places = []
+        super().__init__(); self.items = {}; self.places = []; self.pcs = {}
     def add(self, key, tags, lat, lon):
         name = (tags.get('name') or '').strip()
         if not name or lat is None: return
@@ -36,6 +36,8 @@ class H(osmium.SimpleHandler):
         pc = tags.get('addr:postcode', '')
         if pc and not re.match(r'\s*\d{5}\b', pc): return            # foreign postcode: outside Spain
         if pc and not region_of(pc): return
+        if pc:
+            a = self.pcs.setdefault(pc.strip()[:5], [0, 0, 0]); a[0] += lat; a[1] += lon; a[2] += 1
         self.items[key] = [key, name, ty, street, tags.get('addr:city', ''), region_of(pc) or '', round(lat, 5), round(lon, 5), tags.get('stars', '')]
     def node(self, n):
         tg = n.tags
@@ -84,6 +86,10 @@ def main(out, files):
             p = nearest(KG, 10, r[6], r[7], lambda p: True, rng=4)
             r[5] = p[2] if p else ''
     rows = [r for r in rows if r[5]]
+    # side file for tools/merge_registries.py: towns and postcode centres, to place registry entries without coordinates
+    json.dump({'places': [[round(p[0], 5), round(p[1], 5), p[2], p[3]] for p in h.places],
+               'pcs': {k: [round(v[0] / v[2], 5), round(v[1] / v[2], 5)] for k, v in h.pcs.items()}},
+              open(out + '.places', 'w'), ensure_ascii=False)
     rows.sort(key=lambda x: (x[5], x[4], x[1]))
     json.dump(rows, open(out, 'w'), ensure_ascii=False, separators=(',', ':'))
     from collections import Counter
