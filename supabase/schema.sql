@@ -98,3 +98,4 @@ drop policy if exists "mis favoritos" on public.favorites;
 create policy "mis favoritos" on public.favorites for all to authenticated
   using (user_id = auth.uid()) with check (user_id = auth.uid() and public.is_team());
 grant select, insert, delete on public.favorites to authenticated;
+

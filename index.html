@@ -256,6 +256,18 @@ header.top .band{padding-block:8px 16px;display:grid;gap:10px}
 @media (min-width:600px){.chips{flex-wrap:wrap;overflow:visible}}
 @media (max-width:599px){#vList>.chips{-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent);padding-right:24px}}
 .chipsep{flex:none;width:1px;align-self:stretch;margin:4px 4px;background:var(--line)}
+
+.osmmap{display:grid;gap:4px;margin:4px 0 12px}
+.osmmap iframe{width:100%;height:220px;border:0;border-radius:var(--r);box-shadow:var(--sh1);background:var(--line)}
+.osmmap.small iframe{height:160px;border-radius:12px}
+.osmmap.small{margin:8px 0 0}
+.gallery{display:flex;gap:8px;overflow-x:auto;margin:0 0 12px;scrollbar-width:none}
+.gallery img{height:150px;width:auto;border-radius:12px;display:block;box-shadow:var(--sh1)}
+.rphotos{display:flex;gap:6px;flex-wrap:wrap}
+.rphotos img{width:72px;height:72px;object-fit:cover;border-radius:10px;display:block}
+.thumb{width:58px;height:58px;border-radius:14px;background:center/cover no-repeat var(--line);position:relative}
+.thumb span{position:absolute;left:4px;bottom:4px;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#111;font-family:var(--f-head);font-weight:700;font-size:15px;border-radius:7px;padding:0 5px}
+.wmnote{margin:-6px 0 12px}
 </style>
 </head>
 <body>
@@ -516,9 +528,29 @@ const findHotel = id => data().hotels.find(x=>x.id===id) || (CAT&&id&&id.startsW
 const placeLine = h => [h.address,h.city,h.region&&h.region!==h.city?h.region:""].filter(Boolean).join(", ");
 
 /* ---------- list ---------- */
+/* real street map (OpenStreetMap embed) for a place with coordinates */
+function osmEmbed(h,cls){
+  if(h.lat==null||h.lon==null||location.protocol==="about:"||/claudeusercontent|claude\.ai/.test(location.host)) return "";
+  const la=+h.lat, lo=+h.lon, d=0.006;
+  const src=`https://www.openstreetmap.org/export/embed.html?bbox=${lo-d*1.4},${la-d},${lo+d*1.4},${la+d}&layer=mapnik&marker=${la},${lo}`;
+  return `<div class="osmmap ${cls||""}"><iframe title="Mapa de ${esc(h.name)}" loading="lazy" src="${esc(src)}"></iframe><a class="note" target="_blank" rel="noopener" href="https://www.openstreetmap.org/?mlat=${la}&mlon=${lo}#map=17/${la}/${lo}">Ver mapa grande ↗</a></div>`;
+}
+const photosOf=rs=>rs.flatMap(r=>(r.photos||[]).filter(u=>/^https:\/\//.test(u)));
+/* free photos taken right next to the place (Wikimedia Commons), when there are any */
+const WM={};
+async function loadWikiPhotos(h){
+  const box=document.getElementById("wmPhotos"); if(!box||h.lat==null||h.lon==null) return;
+  const key=(+h.lat).toFixed(5)+","+(+h.lon).toFixed(5);
+  if(!(key in WM)){ WM[key]=[];
+    try{const r=await fetch("https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=geosearch&ggsnamespace=6&ggslimit=8&ggsradius=60&ggscoord="+(+h.lat)+"|"+(+h.lon)+"&prop=imageinfo&iiprop=url&iiurlwidth=480");
+      const j=await r.json(); WM[key]=Object.values((j.query&&j.query.pages)||{}).map(p=>p.imageinfo&&p.imageinfo[0]).filter(x=>x&&/^https:\/\//.test(x.thumburl||"")&&/\.(jpe?g|png|webp)$/i.test(x.url||"")).map(x=>({src:x.thumburl,href:x.descriptionurl}));
+    }catch(e){} }
+  const b2=document.getElementById("wmPhotos"); if(!b2||S.hotelId!==h.id) return;
+  b2.innerHTML=WM[key].length?`<div class="gallery">${WM[key].map(x=>`<a href="${esc(x.href)}" target="_blank" rel="noopener"><img src="${esc(x.src)}" alt="Foto de la zona" loading="lazy"></a>`).join("")}</div><p class="note wmnote">Fotos públicas tomadas junto a este sitio (Wikimedia Commons). Puede que no todas sean del alojamiento.</p>`:"";
+}
 function teamCard(h,st,extra){
   return `<button class="card team" data-h="${esc(h.id)}">
-      <div class="badge tnum"><b>${st.rs.length?st.avg.toFixed(1):"–"}</b><small>${st.rs.length} ${st.rs.length===1?"reseña":"reseñas"}</small></div>
+      ${photosOf(st.rs)[0]?`<div class="thumb" style="background-image:url('${esc(photosOf(st.rs)[0])}')"><span class="tnum">${st.rs.length?st.avg.toFixed(1):"–"}</span></div>`:""}<div class="badge tnum"${photosOf(st.rs)[0]?" hidden":""}><b>${st.rs.length?st.avg.toFixed(1):"–"}</b><small>${st.rs.length} ${st.rs.length===1?"reseña":"reseñas"}</small></div>
       <div class="body"><h3>${S.favs.has(h.id)?`<span class="heart" aria-label="Favorito">♥</span> `:""}${esc(h.name)}</h3>
         <div class="meta"><span>${esc(h.type)} · ${esc(h.city)}</span>${extra||""}${h.example?`<span class="pill ex">Ejemplo</span>`:""}</div>
         <div class="meta">${pricePill(st.price)}${st.topTags.slice(0,2).map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div></div>
@@ -618,6 +650,9 @@ function renderHotel(){
       ${st.rs.length?"":`<!--`}<div class="score"><span class="price tnum" style="text-align:left">${st.price!=null?bandLabel(st.price):"Sin precio"}<small>lo que suele costar por noche${st.last!=null&&bandIx(st.last)!==bandIx(st.price)?` · última vez ${bandLabel(st.last)}`:""}</small></span>${pricePill(st.price)}</div>${st.rs.length?"":`-->`}
     </div>
 
+    ${photosOf(st.rs).length?`<div class="gallery">${photosOf(st.rs).slice(0,12).map(u=>`<a href="${esc(u)}" target="_blank" rel="noopener"><img src="${esc(u)}" alt="Foto de un compañero" loading="lazy"></a>`).join("")}</div>`:""}
+    ${osmEmbed(h)}
+    <div id="wmPhotos"></div>
     <div class="section">
       <h3>Precio de hoy y reserva</h3>
       <div class="links">${bookingLinks(h).map(([t,u])=>`<a class="lbtn" href="${esc(u)}" target="_blank" rel="noopener">${t}<span>abrir ↗</span></a>`).join("")}</div>
@@ -642,9 +677,11 @@ ${esc(m.body)}</pre>
           <div class="top" style="justify-content:flex-start">${starStr(+r.rating||0)}${+r.price>0?`<b class="tnum">${bandLabel(+r.price)}/noche</b>`:""}${r.via?`<span class="pill via">Reservado por ${esc(r.via)}</span>`:""}</div>
           ${(r.tags||[]).length?`<div class="tags">${r.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>`:""}
           ${r.comment?`<div>${esc(r.comment)}</div>`:""}
+          ${(r.photos||[]).length?`<div class="rphotos">${photosOf([r]).map(u=>`<a href="${esc(u)}" target="_blank" rel="noopener"><img src="${esc(u)}" alt="" loading="lazy"></a>`).join("")}</div>`:""}
           ${S.me&&r.authorId===S.me&&!r.example?`<button class="del" data-del="${esc(r.id)}">Borrar mi reseña</button>`:""}
         </div>`).join(""):`<div class="note">Nadie ha opinado todavía.</div>`}
     </div>`;
+  if(!h.example) loadWikiPhotos(h);
 }
 $("#hotel").addEventListener("click",async e=>{
   const c=e.target.closest("[data-copy]");
@@ -682,7 +719,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#sheet").hidden
 function paintPick(){
   const f=S.form; const h=f.hotelId?findHotel(f.hotelId):null;
   $("#selBox").hidden=!h; $("#pickBox").hidden=!!h;
-  if(h) $("#selBox").innerHTML=`<div class="sel"><span>${esc(h.name)}<small>${esc(placeLine(h))}</small></span><button type="button" id="chg">Cambiar</button></div>`;
+  if(h) $("#selBox").innerHTML=`<div class="sel"><span>${esc(h.name)}<small>${esc(placeLine(h))}</small></span><button type="button" id="chg">Cambiar</button></div>`+(osmEmbed(h,"small")||"");
   else suggest();
 }
 $("#selBox").addEventListener("click",e=>{if(e.target.id==="chg"){S.form.hotelId=null;paintPick();$("#fName").focus()}});

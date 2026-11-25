@@ -10,9 +10,9 @@
         lat: d.lat ?? null, lon: d.lon ?? null, osm: d.osm || null, stars: d.stars ? String(d.stars) : null })
     },
     reviews: {
-      toApp: r => ({ id: r.id, hotelId: r.hotel_id, rating: r.rating, price: r.price, tags: r.tags || [], via: r.via || "", comment: r.comment || "",
+      toApp: r => ({ id: r.id, hotelId: r.hotel_id, rating: r.rating, price: r.price, tags: r.tags || [], via: r.via || "", photos: r.photos || [], comment: r.comment || "",
         authorId: r.author_id, createdAt: Date.parse(r.created_at) }),
-      toDb: d => ({ hotel_id: d.hotelId, rating: d.rating, price: d.price || null, tags: d.tags || [], via: d.via || null, comment: d.comment || null })
+      toDb: d => ({ hotel_id: d.hotelId, rating: d.rating, price: d.price || null, tags: d.tags || [], via: d.via || null, photos: (d.photos && d.photos.length) ? d.photos : null, comment: d.comment || null })
     }
   };
 
@@ -98,10 +98,10 @@
       collection(table) {
         return {
           async add(d) {
-            const row = T[table].toDb(d); if (!row.via) delete row.via;
+            const row = T[table].toDb(d); if (!row.via) delete row.via; if (!row.photos) delete row.photos;
             let { data, error } = await sb.from(table).insert(row).select("id").single();
-            if (error && "via" in row && /via/.test(error.message || "")) {   // columna aún no creada en Supabase
-              delete row.via; ({ data, error } = await sb.from(table).insert(row).select("id").single());
+            for (const col of ["photos", "via"]) {   // columna aún no creada en Supabase: guardar sin ella
+              if (error && col in row && new RegExp(col).test(error.message || "")) { delete row[col]; ({ data, error } = await sb.from(table).insert(row).select("id").single()); }
             }
             if (error && error.code === "23505" && table === "hotels" && d.osm) {   // otro compañero lo añadió a la vez
               ({ data, error } = await sb.from("hotels").select("id").eq("osm", d.osm).single());
