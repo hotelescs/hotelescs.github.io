@@ -1,0 +1,26 @@
+name: Buscar fuentes oficiales de alojamientos
+
+# Herramienta de mantenimiento: lista los datos abiertos de alojamientos de datos.gob.es
+# y guarda el resultado en data/discovery.json para revisarlo.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  buscar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python tools/discover_sources.py
+      - name: Guardar
+        run: |
+          git config user.name "HotelesCS bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/discovery.json
+          git diff --cached --quiet || (git commit -m "Fuentes oficiales encontradas ($(date +%F))" && git push)
