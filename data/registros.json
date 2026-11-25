@@ -1,0 +1,803 @@
+{
+ "total": 42574,
+ "añadidos": 18090,
+ "por_region": {
+  "Asturias": 26,
+  "C. Valenciana": 1953,
+  "Canarias": 3240,
+  "Castilla y León": 4387,
+  "Cataluña": 5117,
+  "Extremadura": 1812,
+  "Galicia": 18,
+  "Murcia": 733,
+  "País Vasco": 804
+ },
+ "fuentes": [
+  {
+   "fuente": "cat",
+   "region": "Cataluña",
+   "url": "https://analisi.transparenciacatalunya.cat/api/v3/views/t2h3-cgys/export.csv?accessType=DOWNLOAD",
+   "filas": 112271,
+   "resultado": {
+    "excluido (VUT, camping...)": 104412,
+    "ya estaba": 2086,
+    "añadido (ubicación aproximada)": 5117,
+    "sin ubicación": 458,
+    "repetido en la fuente": 166,
+    "sin nombre": 32
+   },
+   "errores": [],
+   "tipos": {
+    "Habitatges d'ús turístic": 104052,
+    "Hotels Hotel Hotel": 1959,
+    "Llars compartides": 1455,
+    "Hotels Hostal o pensió No aplica": 1061,
+    "Turisme rural Allotjaments rurals Masoveria": 1011,
+    "Turisme rural Allotjaments rurals Casa poble independent": 610,
+    "Turisme rural Cases de pagès o establiments d'agroturisme Ma": 512,
+    "Càmpings": 352,
+    "Apartaments Turístics": 340,
+    "Turisme rural Cases de pagès o establiments d'agroturisme Ca": 297,
+    "Turisme rural Allotjaments rurals Masia": 221,
+    "Hotels Hotel Hotel-apartament": 198,
+    "Turisme rural Allotjaments rurals Casa poble compartida": 163,
+    "Autocaravanes": 8
+   }
+  },
+  {
+   "fuente": "can-hot",
+   "region": "Canarias",
+   "url": "https://datos.canarias.es/catalogos/general/dataset/429db33d-cbce-4920-b1b6-b4dde9e5f90f/resource/87741d75-2ce2-4a45-8131-ad8263257664/download/establecimientos-hoteleros-inscritos-en-el-registro-general-turistico-de-canarias.csv",
+   "filas": 849,
+   "resultado": {
+    "ya estaba": 547,
+    "añadido": 239,
+    "añadido (ubicación aproximada)": 51,
+    "repetido en la fuente": 9,
+    "sin ubicación": 3
+   },
+   "errores": [],
+   "tipos": {
+    "Hotel Hotelera": 582,
+    "Pension Hotelera": 119,
+    "Hotel Urbano Hotelera": 66,
+    "Hotel Rural Hotelera": 49,
+    "Hotel Emblematico Hotelera": 32,
+    "Medio Rural H Hotelera": 1
+   }
+  },
+  {
+   "fuente": "can-ext",
+   "region": "Canarias",
+   "url": "https://datos.canarias.es/catalogos/general/dataset/1364104c-b86c-4ab9-8ef5-12fdf399aa01/resource/d98c2617-db26-4d15-8ee4-3b2da1130bd0/download/establecimientos-extrahoteleros-sin-viviendas-vacacionales-inscritos-en-el-registro-general-turi.csv",
+   "filas": 2797,
+   "resultado": {
+    "añadido (ubicación aproximada)": 299,
+    "añadido": 1419,
+    "ya estaba": 688,
+    "repetido en la fuente": 37,
+    "excluido (VUT, camping...)": 319,
+    "sin ubicación": 34,
+    "sin nombre": 1
+   },
+   "errores": [],
+   "tipos": {
+    "Apartamento Extrahotelera": 1166,
+    "Casa Rural Extrahotelera": 809,
+    "Villa Extrahotelera": 349,
+    "Vivienda Turistica Extrahotelera": 319,
+    "Casa Emblematica Extrahotelera": 84,
+    "Medio Rural E Extrahotelera": 62,
+    "Medio Rural H Extrahotelera": 2,
+    "Hotel Emblematico Extrahotelera": 2,
+    "_U Extrahotelera": 1,
+    "Pension Extrahotelera": 1,
+    "Hotel Rural Extrahotelera": 1
+   }
+  },
+  {
+   "fuente": "can-alojatur",
+   "region": "Canarias",
+   "url": "https://datos.canarias.es/catalogos/estadisticas/dataset/46b11d54-6efc-42d7-8de7-7f849168cbe5/resource/01215581-33a6-4b4e-a6f5-f0eb6c120a40/download/alojatur_2026.csv",
+   "filas": 1336,
+   "resultado": {
+    "ya estaba": 1247,
+    "añadido": 80,
+    "repetido en la fuente": 9
+   },
+   "errores": [],
+   "tipos": {
+    "Apartamentos": 700,
+    "Hotel": 636
+   }
+  },
+  {
+   "fuente": "tenerife",
+   "region": "Canarias",
+   "url": "https://datos.tenerife.es/ckan/dataset/d9cffe8d-3ff5-43b4-864a-b246c8b98cb7/resource/539bc405-514f-4966-ad7f-2437eaaefe73/download/alojamientos-turisticos-y-agencias-de-viajes-en-tenerife.csv",
+   "filas": 5986,
+   "resultado": {
+    "excluido (VUT, camping...)": 4328,
+    "ya estaba": 668,
+    "añadido": 865,
+    "repetido en la fuente": 123,
+    "sin nombre": 2
+   },
+   "errores": [],
+   "tipos": {
+    "vivienda vacacional": 3782,
+    "informador turistico": 749,
+    "alojamiento extrahotelero": 571,
+    "agencia de viajes": 546,
+    "alojamiento hotelero": 281,
+    "oficina de turismo": 50,
+    "cerrado sin actividad": 3,
+    "administracion publica servicios": 1,
+    "puerto deportivo": 1
+   }
+  },
+  {
+   "fuente": "tenerife2",
+   "region": "Canarias",
+   "url": "https://datos.tenerife.es/ckan/dataset/253d5bb2-c6ec-4b9c-a02c-397ba128ad59/resource/4c045ca7-e1be-48cf-b3e9-dbd9dce58212/download/alojamientos-turisticos-de-tenerife.csv",
+   "filas": 717,
+   "resultado": {
+    "añadido (ubicación aproximada)": 198,
+    "ya estaba": 458,
+    "repetido en la fuente": 11,
+    "excluido (VUT, camping...)": 15,
+    "sin ubicación": 35
+   },
+   "errores": [],
+   "tipos": {
+    "HOTEL HOTELERA": 209,
+    "APARTAMENTO EXTRAHOTELERA": 174,
+    "CASA RURAL EXTRAHOTELERA": 167,
+    "PENSION HOTELERA": 47,
+    "CASA EMBLEMATICA EXTRAHOTELERA": 42,
+    "HOTEL RURAL HOTELERA": 24,
+    "HOTEL EMBLEMATICO HOTELERA": 16,
+    "HOTEL URBANO HOTELERA": 15,
+    "VIVIENDA TURISTICA EXTRAHOTELERA": 15,
+    "VILLA EXTRAHOTELERA": 3,
+    "BUNGALOW EXTRAHOTELERA": 2,
+    "HOTEL CONGRESO HOTELERA": 1,
+    "HOTEL APARTAMENTO HOTELERA": 1,
+    "HOTEL CIUDAD HOTELERA": 1
+   }
+  },
+  {
+   "fuente": "lapalma",
+   "region": "Canarias",
+   "url": "https://www.opendatalapalma.es/datasets/5066d53b830746e5977e51c475b4cc6f_0.geojson",
+   "filas": 604,
+   "resultado": {
+    "ya estaba": 276,
+    "repetido en la fuente": 4,
+    "añadido": 89,
+    "excluido (VUT, camping...)": 235
+   },
+   "errores": [],
+   "tipos": {
+    "Vivienda turística Extrahotelera": 235,
+    "Casa Rural Extrahotelera": 209,
+    "Apartamento Extrahotelera": 119,
+    "Pensión Hotelera": 17,
+    "Hotel Hotelera": 15,
+    "Casa Medio rural Extrahotelera": 4,
+    "Villa Extrahotelera": 3,
+    "Casa Emblemática Extrahotelera": 1,
+    "Hotel Emblemático Hotelera": 1
+   }
+  },
+  {
+   "fuente": "eus-hot",
+   "region": "País Vasco",
+   "url": "https://opendata.euskadi.eus/contenidos/ds_recursos_turisticos/hoteles_de_euskadi/opendata/alojamientos.geojson",
+   "filas": 859,
+   "resultado": {
+    "ya estaba": 462,
+    "añadido": 386,
+    "repetido en la fuente": 10,
+    "sin nombre": 1
+   },
+   "errores": [],
+   "tipos": {
+    "Hoteles": 327,
+    "Pensiones": 309,
+    "Apartamentos": 201,
+    "Hotel-Apartamento": 21
+   }
+  },
+  {
+   "fuente": "eus-all",
+   "region": "País Vasco",
+   "url": "https://opendata.euskadi.eus/contenidos/ds_recursos_turisticos/alojamiento_de_euskadi/opendata/alojamientos.geojson",
+   "filas": 1484,
+   "resultado": {
+    "ya estaba": 1030,
+    "repetido en la fuente": 46,
+    "añadido": 379,
+    "excluido (VUT, camping...)": 28,
+    "sin nombre": 1
+   },
+   "errores": [],
+   "tipos": {
+    "Hoteles": 338,
+    "Pensiones": 330,
+    "Casas Rurales": 298,
+    "Apartamentos": 223,
+    "Agroturismos": 158,
+    "Albergues": 87,
+    "Campings": 28,
+    "Hotel-Apartamento": 21
+   }
+  },
+  {
+   "fuente": "eus-rur",
+   "region": "País Vasco",
+   "url": "https://opendata.euskadi.eus/contenidos/ds_recursos_turisticos/alojamientos_rurales_euskadi/opendata/alojamientos.geojson",
+   "filas": 423,
+   "resultado": {
+    "ya estaba": 378,
+    "añadido": 39,
+    "repetido en la fuente": 6
+   },
+   "errores": [],
+   "tipos": {
+    "Casas Rurales": 247,
+    "Agroturismos": 176
+   }
+  },
+  {
+   "fuente": "eus-alb",
+   "region": "País Vasco",
+   "url": "https://opendata.euskadi.eus/contenidos/ds_recursos_turisticos/albergues_de_euskadi/opendata/alojamientos.geojson",
+   "filas": 87,
+   "resultado": {
+    "ya estaba": 85,
+    "repetido en la fuente": 2
+   },
+   "errores": [],
+   "tipos": {
+    "Albergues": 87
+   }
+  },
+  {
+   "fuente": "ext-hot",
+   "region": "Extremadura",
+   "url": "https://www.juntaex.es/documents/77055/5801338/AlojamientosHoteleros.csv",
+   "filas": 417,
+   "resultado": {
+    "ya estaba": 216,
+    "añadido (ubicación aproximada)": 190,
+    "sin ubicación": 8,
+    "repetido en la fuente": 3
+   },
+   "errores": [],
+   "tipos": {
+    "Hostal": 209,
+    "Hotel": 170,
+    "Pensión": 34,
+    "Hotel apartamento": 4
+   }
+  },
+  {
+   "fuente": "ext-apt",
+   "region": "Extremadura",
+   "url": "https://www.juntaex.es/documents/77055/5801338/AptosTuristicos.csv",
+   "filas": 818,
+   "resultado": {
+    "añadido (ubicación aproximada)": 673,
+    "ya estaba": 126,
+    "repetido en la fuente": 12,
+    "sin nombre": 1,
+    "sin ubicación": 6
+   },
+   "errores": [],
+   "tipos": {
+    "Apartamento turístico": 817
+   }
+  },
+  {
+   "fuente": "ext-rur",
+   "region": "Extremadura",
+   "url": "https://www.juntaex.es/documents/77055/5801338/AlojamientosRurales.csv",
+   "filas": 1167,
+   "resultado": {
+    "añadido (ubicación aproximada)": 925,
+    "ya estaba": 180,
+    "repetido en la fuente": 18,
+    "sin ubicación": 44
+   },
+   "errores": [],
+   "tipos": {
+    "Casa rural": 1081,
+    "Hotel rural": 86
+   }
+  },
+  {
+   "fuente": "ext-alb",
+   "region": "Extremadura",
+   "url": "https://www.juntaex.es/documents/77055/5801338/Albergues.xlsx",
+   "filas": 56,
+   "resultado": {
+    "ya estaba": 31,
+    "añadido (ubicación aproximada)": 24,
+    "sin ubicación": 1
+   },
+   "errores": [],
+   "tipos": {
+    "": 56
+   }
+  },
+  {
+   "fuente": "gva-hot",
+   "region": "C. Valenciana",
+   "url": "https://dadesobertes.gva.es/dataset/247d0314-ecb0-4d25-a0f3-bd3d977fc911/resource/71d330c9-85e9-4ad5-94b6-95a07e6c2d51/download/listarthoteles_20260317.json",
+   "filas": 1603,
+   "resultado": {
+    "ya estaba": 577,
+    "añadido (ubicación aproximada)": 921,
+    "sin ubicación": 99,
+    "repetido en la fuente": 4,
+    "sin nombre": 2
+   },
+   "errores": [],
+   "tipos": {
+    "HOTEL HOTEL": 770,
+    "PENSIÓN": 254,
+    "PENSIÓN PENSIÓN": 161,
+    "HOTEL-APARTAMENTO HOTEL": 132,
+    "HOSTAL": 95,
+    "HOSTAL-RESIDENCIA HOSTAL": 80,
+    "HOSTAL HOSTAL": 75,
+    "HOTEL": 31,
+    "HOTEL-BALNEARIO HOTEL": 3
+   }
+  },
+  {
+   "fuente": "gva-rur",
+   "region": "C. Valenciana",
+   "url": "https://dadesobertes.gva.es/dataset/981cda16-b6a5-428e-920a-729cb153f9b8/resource/6b31800d-f2e8-4e99-ad4d-913aa71ad1dc/download/lista-de-casas-rurales.csv",
+   "filas": 1088,
+   "resultado": {
+    "añadido (ubicación aproximada)": 845,
+    "ya estaba": 166,
+    "sin ubicación": 68,
+    "repetido en la fuente": 9
+   },
+   "errores": [],
+   "tipos": {
+    "CASA RURAL": 1088
+   }
+  },
+  {
+   "fuente": "gva-alb",
+   "region": "C. Valenciana",
+   "url": "https://dadesobertes.gva.es/dataset/7b1766e8-cd5a-41fd-8867-825b0d6a74ce/resource/2ccc33a9-0e63-4bcd-a3af-f5b94c5787d0/download/lista-de-albergues.csv",
+   "filas": 101,
+   "resultado": {
+    "añadido (ubicación aproximada)": 55,
+    "ya estaba": 40,
+    "sin ubicación": 6
+   },
+   "errores": [],
+   "tipos": {
+    "ALBERGUE": 101
+   }
+  },
+  {
+   "fuente": "cas-hot",
+   "region": "C. Valenciana",
+   "url": "https://dipcas.opendatasoft.com/api/v2/catalog/datasets/hoteles/exports/csv",
+   "filas": 168,
+   "resultado": {
+    "ya estaba": 143,
+    "añadido": 25
+   },
+   "errores": [],
+   "tipos": {
+    "HOTEL Hotel": 156,
+    "APARTHOTELOTEL Hotel": 12
+   }
+  },
+  {
+   "fuente": "cas-hs",
+   "region": "C. Valenciana",
+   "url": "https://dipcas.opendatasoft.com/api/v2/catalog/datasets/hostales/exports/csv",
+   "filas": 50,
+   "resultado": {
+    "ya estaba": 37,
+    "añadido": 13
+   },
+   "errores": [],
+   "tipos": {
+    "HS HS": 36,
+    "SR HS": 14
+   }
+  },
+  {
+   "fuente": "cas-rur",
+   "region": "C. Valenciana",
+   "url": "https://dipcas.opendatasoft.com/api/v2/catalog/datasets/casas-rurales/exports/csv",
+   "filas": 440,
+   "resultado": {
+    "ya estaba": 342,
+    "añadido": 90,
+    "añadido (ubicación aproximada)": 4,
+    "repetido en la fuente": 4
+   },
+   "errores": [],
+   "tipos": {
+    "": 440
+   }
+  },
+  {
+   "fuente": "mur-hot",
+   "region": "Murcia",
+   "url": "http://nexo.carm.es/nexo/archivos/recursos/opendata/csv/Hoteles.csv",
+   "filas": 169,
+   "resultado": {
+    "ya estaba": 109,
+    "añadido": 53,
+    "añadido (ubicación aproximada)": 5,
+    "repetido en la fuente": 2
+   },
+   "errores": [],
+   "tipos": {
+    "": 169
+   }
+  },
+  {
+   "fuente": "mur-ha",
+   "region": "Murcia",
+   "url": "http://nexo.carm.es/nexo/archivos/recursos/opendata/csv/HotelApartamento.csv",
+   "filas": 5,
+   "resultado": {
+    "ya estaba": 4,
+    "añadido": 1
+   },
+   "errores": [],
+   "tipos": {
+    "": 5
+   }
+  },
+  {
+   "fuente": "mur-apt",
+   "region": "Murcia",
+   "url": "http://nexo.carm.es/nexo/archivos/recursos/opendata/csv/ApartamentosTursticos.csv",
+   "filas": 130,
+   "resultado": {
+    "ya estaba": 26,
+    "añadido": 70,
+    "añadido (ubicación aproximada)": 33,
+    "sin ubicación": 1
+   },
+   "errores": [],
+   "tipos": {
+    "": 130
+   }
+  },
+  {
+   "fuente": "mur-hs",
+   "region": "Murcia",
+   "url": "http://nexo.carm.es/nexo/archivos/recursos/opendata/csv/Hostales.csv",
+   "filas": 3,
+   "resultado": {
+    "añadido (ubicación aproximada)": 2,
+    "añadido": 1
+   },
+   "errores": [],
+   "tipos": {
+    "": 3
+   }
+  },
+  {
+   "fuente": "mur-pen",
+   "region": "Murcia",
+   "url": "http://nexo.carm.es/nexo/archivos/recursos/opendata/csv/Pensiones.csv",
+   "filas": 63,
+   "resultado": {
+    "añadido": 38,
+    "ya estaba": 24,
+    "añadido (ubicación aproximada)": 1
+   },
+   "errores": [],
+   "tipos": {
+    "": 63
+   }
+  },
+  {
+   "fuente": "mur-alb",
+   "region": "Murcia",
+   "url": "http://nexo.carm.es/nexo/archivos/recursos/opendata/csv/Albergues.csv",
+   "filas": 56,
+   "resultado": {
+    "ya estaba": 25,
+    "añadido": 18,
+    "repetido en la fuente": 3,
+    "añadido (ubicación aproximada)": 10
+   },
+   "errores": [],
+   "tipos": {
+    "": 56
+   }
+  },
+  {
+   "fuente": "mur-rur",
+   "region": "Murcia",
+   "url": "http://nexo.carm.es/nexo/archivos/recursos/opendata/csv/CasasRurales.csv",
+   "filas": 676,
+   "resultado": {
+    "añadido": 352,
+    "añadido (ubicación aproximada)": 149,
+    "ya estaba": 163,
+    "repetido en la fuente": 10,
+    "sin ubicación": 2
+   },
+   "errores": [],
+   "tipos": {
+    "": 676
+   }
+  },
+  {
+   "fuente": "ara-hot",
+   "region": "Aragón",
+   "url": "https://opendata.aragon.es/GA_OD_Core/download?resource_id=65&formato=csv",
+   "filas": 946,
+   "resultado": {
+    "sin nombre": 946
+   },
+   "errores": [],
+   "tipos": {}
+  },
+  {
+   "fuente": "ara-apt",
+   "region": "Aragón",
+   "url": "https://opendata.aragon.es/GA_OD_Core/download?resource_id=66&formato=csv",
+   "filas": 508,
+   "resultado": {
+    "sin ubicación": 507,
+    "sin nombre": 1
+   },
+   "errores": [],
+   "tipos": {
+    "": 507
+   }
+  },
+  {
+   "fuente": "ara-rur",
+   "region": "Aragón",
+   "url": "https://opendata.aragon.es/GA_OD_Core/download?resource_id=73&formato=csv",
+   "filas": 2057,
+   "resultado": {
+    "sin nombre": 2057
+   },
+   "errores": [],
+   "tipos": {}
+  },
+  {
+   "fuente": "ara-alb",
+   "region": "Aragón",
+   "url": "https://opendata.aragon.es/GA_OD_Core/download?resource_id=64&formato=csv",
+   "filas": 178,
+   "resultado": {
+    "sin ubicación": 178
+   },
+   "errores": [],
+   "tipos": {
+    "": 178
+   }
+  },
+  {
+   "fuente": "cyl-hot",
+   "region": "Castilla y León",
+   "url": "https://datosabiertos.jcyl.es/web/jcyl/risp/es/turismo/alojamientos_hoteleros/1284211831639.csv",
+   "filas": 1738,
+   "resultado": {
+    "añadido (ubicación aproximada)": 855,
+    "ya estaba": 799,
+    "sin ubicación": 72,
+    "sin nombre": 1,
+    "repetido en la fuente": 11
+   },
+   "errores": [],
+   "tipos": {
+    "Hostal": 475,
+    "Hotel": 471,
+    "Pensión": 340,
+    "Hostal Residencia": 299,
+    "Hotel Residencia": 114,
+    "Hotel Apartamento": 23,
+    "Motel": 6,
+    "Residencia Apartamento": 6,
+    "Motel Residencia": 3
+   }
+  },
+  {
+   "fuente": "cyl-apt",
+   "region": "Castilla y León",
+   "url": "https://datosabiertos.jcyl.es/web/jcyl/risp/es/turismo/apartamentos/1284211832109.csv",
+   "filas": 683,
+   "resultado": {
+    "añadido (ubicación aproximada)": 472,
+    "ya estaba": 171,
+    "sin ubicación": 38,
+    "repetido en la fuente": 2
+   },
+   "errores": [],
+   "tipos": {
+    "": 683
+   }
+  },
+  {
+   "fuente": "cyl-alb",
+   "region": "Castilla y León",
+   "url": "https://datosabiertos.jcyl.es/web/jcyl/risp/es/turismo/albergues_turisticos/1284211830763.csv",
+   "filas": 367,
+   "resultado": {
+    "ya estaba": 145,
+    "añadido (ubicación aproximada)": 199,
+    "sin ubicación": 21,
+    "repetido en la fuente": 2
+   },
+   "errores": [],
+   "tipos": {
+    "Albergue turístico": 248,
+    "Albergue turístico de los Caminos a Santiago": 119
+   }
+  },
+  {
+   "fuente": "cyl-rur",
+   "region": "Castilla y León",
+   "url": "https://datosabiertos.jcyl.es/web/jcyl/risp/es/turismo/turismo_rural/1284211842462.csv",
+   "filas": 4140,
+   "resultado": {
+    "añadido (ubicación aproximada)": 2861,
+    "ya estaba": 884,
+    "sin ubicación": 373,
+    "repetido en la fuente": 22
+   },
+   "errores": [],
+   "tipos": {
+    "Casa Rural": 1903,
+    "Casa Rural de Alquiler": 1478,
+    "Hotel Rural": 536,
+    "Posada": 123,
+    "Casa Rural de Alojamiento Compartido": 100
+   }
+  },
+  {
+   "fuente": "nav-all",
+   "region": "Navarra",
+   "url": null,
+   "filas": 0,
+   "resultado": {},
+   "errores": [
+    "https://datosabiertos.navarra.es/datastore/dump/5527debf-7e72-4f9e-8e12-b562f302 URLError(TimeoutError(110, 'Connection timed out'))"
+   ],
+   "tipos": {}
+  },
+  {
+   "fuente": "nav-hot",
+   "region": "Navarra",
+   "url": null,
+   "filas": 0,
+   "resultado": {},
+   "errores": [
+    "https://datosabiertos.navarra.es/datastore/dump/623f1d34-6ef3-4591-bbc0-6a71ff86 URLError(TimeoutError(110, 'Connection timed out'))"
+   ],
+   "tipos": {}
+  },
+  {
+   "fuente": "nav-apt",
+   "region": "Navarra",
+   "url": null,
+   "filas": 0,
+   "resultado": {},
+   "errores": [
+    "https://datosabiertos.navarra.es/datastore/dump/e761b1ec-23ed-4523-bf56-d8f7a338 URLError(TimeoutError(110, 'Connection timed out'))"
+   ],
+   "tipos": {}
+  },
+  {
+   "fuente": "nav-alb",
+   "region": "Navarra",
+   "url": null,
+   "filas": 0,
+   "resultado": {},
+   "errores": [
+    "https://datosabiertos.navarra.es/datastore/dump/95ca4059-d22d-4dbe-86d8-f05dc5a2 URLError(TimeoutError(110, 'Connection timed out'))"
+   ],
+   "tipos": {}
+  },
+  {
+   "fuente": "nav-rur",
+   "region": "Navarra",
+   "url": null,
+   "filas": 0,
+   "resultado": {},
+   "errores": [
+    "https://datosabiertos.navarra.es/datastore/dump/74e164d1-a0a4-485f-993c-15befc3b URLError(TimeoutError(110, 'Connection timed out'))"
+   ],
+   "tipos": {}
+  },
+  {
+   "fuente": "gal",
+   "region": "Galicia",
+   "url": null,
+   "filas": 0,
+   "resultado": {},
+   "errores": [
+    "https://abertos.xunta.gal/catalogo/cultura-ocio-deporte/-/dataset/0022/rexistro- URLError(TimeoutError(110, 'Connection timed out'))",
+    "https://abertos.xunta.gal/catalogo/cultura-ocio-deporte/-/dataset/0022/rexistro- URLError(TimeoutError(110, 'Connection timed out'))"
+   ],
+   "tipos": {}
+  },
+  {
+   "fuente": "vigo",
+   "region": "Galicia",
+   "url": "https://datos.vigo.org/data/turismo/poi-hoteles-es.csv",
+   "filas": 42,
+   "resultado": {
+    "añadido": 18,
+    "ya estaba": 24
+   },
+   "errores": [],
+   "tipos": {
+    "Hotel de 1 estrella": 12,
+    "Hotel de 2 estrellas": 11,
+    "Hotel de 3 estrellas": 8,
+    "Hotel de 4 estrellas": 8,
+    "Hotel de 5 estrellas": 2,
+    "Residencia de estudiantes": 1
+   }
+  },
+  {
+   "fuente": "mad",
+   "region": "Madrid",
+   "url": null,
+   "filas": 0,
+   "resultado": {},
+   "errores": [
+    "https://datos.comunidad.madrid/dataset/ef437c50-5b26-4843-92c3-d8eef5507fac/reso <HTTPError 502: 'Bad Gateway'>",
+    "https://datos.comunidad.madrid/dataset/ef437c50-5b26-4843-92c3-d8eef5507fac/reso <HTTPError 502: 'Bad Gateway'>"
+   ],
+   "tipos": {}
+  },
+  {
+   "fuente": "aviles",
+   "region": "Asturias",
+   "url": "https://datos.aviles.es/datastore/dump/18dbf57e-71a0-4ea9-9402-8b7e727d434c?format=csv&bom=True",
+   "filas": 187,
+   "resultado": {
+    "añadido (ubicación aproximada)": 10,
+    "ya estaba": 10,
+    "excluido (VUT, camping...)": 167
+   },
+   "errores": [],
+   "tipos": {
+    "Vivienda de Uso Turístico": 158,
+    "Hotel/ Hotel Apartamento/Pensión": 13,
+    "Vivienda Vacacional": 9,
+    "Apartamento Turístico": 6,
+    "Apartamento  Rural": 1
+   }
+  },
+  {
+   "fuente": "gijon",
+   "region": "Asturias",
+   "url": "https://opendata.gijon.es/descargar.php?id=736&tipo=CSV",
+   "filas": 26,
+   "resultado": {
+    "sin ubicación": 10,
+    "añadido (ubicación aproximada)": 16
+   },
+   "errores": [],
+   "tipos": {
+    "": 26
+   }
+  }
+ ]
+}
