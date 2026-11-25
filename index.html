@@ -281,6 +281,7 @@ a.logo{color:inherit;text-decoration:none}
 .gclose{position:absolute;top:10px;right:12px;border:0;background:none;font-size:26px;color:var(--muted);line-height:1}
 #suggTxt{margin:4px 0 8px}
 @media (prefers-reduced-motion:no-preference){.gbox{animation:up .2s ease-out}}
+body[data-tab="mio"] .top .band{display:none}
 </style>
 </head>
 <body>
@@ -358,6 +359,7 @@ a.logo{color:inherit;text-decoration:none}
     <div class="field" id="pickWrap">
       <span>Alojamiento</span>
       <div id="selBox" hidden></div>
+      <p class="note" id="fMine" hidden style="color:var(--accent,#ff5f00);margin:6px 0 0">Ya tienes una reseña de este sitio. Si guardas esta, sustituirá a la anterior (solo cuenta una por persona).</p>
       <div id="pickBox">
         <input class="inp" id="fName" placeholder="Nombre del alojamiento" autocomplete="off">
         <div class="sugg" id="sugg"></div>
@@ -716,7 +718,7 @@ $("#hotel").addEventListener("click",async e=>{
   if(d){ if(d.dataset.confirm!=="1"){d.dataset.confirm="1";d.textContent="Pulsa otra vez para borrar";return}
     try{await S.db.doc("reviews/"+d.dataset.del).delete();toast("Reseña borrada")}catch(err){toast("No se ha podido borrar")}}
 });
-function openHotel(id){S.view="hotel";S.hotelId=id;$("#vList").hidden=true;$("#vTab").hidden=true;$("#vHotel").hidden=false;renderHotel();scrollTo(0,0);
+function openHotel(id){S.view="hotel";document.body.dataset.tab="";S.hotelId=id;$("#vList").hidden=true;$("#vTab").hidden=true;$("#vHotel").hidden=false;renderHotel();scrollTo(0,0);
   try{history.replaceState(null,"","#h-"+id)}catch(e){}}
 function showList(){if(S.tab!=="buscar")return setTab(S.tab);S.view="list";$("#vList").hidden=false;$("#vTab").hidden=true;$("#vHotel").hidden=true;renderList();
   try{history.replaceState(null,"",location.pathname+location.search)}catch(e){}}
@@ -736,8 +738,13 @@ function closeSheet(){$("#scrim").hidden=true;$("#sheet").hidden=true}
 $("#fab").addEventListener("click",()=>openSheet(S.view==="hotel"?S.hotelId:null));
 $("#close").addEventListener("click",closeSheet); $("#scrim").addEventListener("click",closeSheet);
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#sheet").hidden)closeSheet()});
+/* the saved hotel (Supabase) a catalogue / hand-typed pick corresponds to, if any */
+function savedIdFor(id){ if(!id) return null; if(!id.startsWith("osm-")) return id;
+  const c=findHotel(id); if(!c) return null; const d=S.hotels.find(h=>h.osm===c.osm)||S.hotels.find(h=>norm(h.name)===norm(c.name)&&norm(h.city)===norm(c.city)); return d?d.id:null }
+const myReviewOf=hid=>hid&&S.me?S.reviews.find(r=>r.hotelId===hid&&r.authorId===S.me):null;
 function paintPick(){
   const f=S.form; const h=f.hotelId?findHotel(f.hotelId):null;
+  const mine=h?myReviewOf(savedIdFor(f.hotelId)):null; $("#fMine").hidden=!mine;
   $("#selBox").hidden=!h; $("#pickBox").hidden=!!h;
   if(h) $("#selBox").innerHTML=`<div class="sel"><span>${esc(h.name)}<small>${esc(placeLine(h))}</small></span><button type="button" id="chg">Cambiar</button></div>`+(osmEmbed(h,"small")||"");
   else suggest();
@@ -790,8 +797,10 @@ $("#form").addEventListener("submit",async e=>{
       else{const ref=await S.db.collection("hotels").add({name,city,type:f.type,address:$("#fAddr").value.trim().slice(0,200),createdBy:S.me||"",createdAt:Date.now()});hid=ref.id}
     }
     const price=f.price||0;
+    const old=S.reviews.filter(r=>r.hotelId===hid&&r.authorId===S.me);   // one review per person and place: the new one replaces the old
     await S.db.collection("reviews").add({hotelId:hid,rating:f.stars,price,tags:[...f.tags],via:f.via||"",comment:$("#fComment").value.trim().slice(0,500),authorId:S.me||"",createdAt:Date.now()});
-    closeSheet(); toast("Reseña guardada. ¡Gracias!"); openHotel(hid);
+    for(const o of old){try{await S.db.doc("reviews/"+o.id).delete()}catch(e){}}
+    closeSheet(); toast(old.length?"Reseña actualizada. Sustituye a la que tenías.":"Reseña guardada. ¡Gracias!"); openHotel(hid);
   }catch(x){fail("No se ha podido guardar. Revisa la conexión y vuelve a intentarlo.")}
   finally{saving=false;$("#fSave").textContent="Guardar reseña"}
 });
@@ -866,7 +875,7 @@ function drawMap(){
 
 /* ---------- tabs: ranking, near a client, favourites & my reviews ---------- */
 function setTab(t){
-  S.tab=t; document.querySelectorAll(".bnav button").forEach(b=>{if(b.dataset.tab===t)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current")});
+  S.tab=t; document.body.dataset.tab=t; document.querySelectorAll(".bnav button").forEach(b=>{if(b.dataset.tab===t)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current")});
   if(t==="buscar"){S.view="list";$("#vList").hidden=false;$("#vTab").hidden=true;$("#vHotel").hidden=true;renderList()}
   else{S.view="tab";$("#vList").hidden=true;$("#vHotel").hidden=true;$("#vTab").hidden=false;renderTab()}
   try{history.replaceState(null,"",location.pathname+location.search)}catch(e){} scrollTo(0,0);

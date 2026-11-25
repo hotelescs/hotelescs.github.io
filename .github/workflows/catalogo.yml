@@ -35,8 +35,8 @@ jobs:
       - name: Descargar España y Canarias (Geofabrik)
         run: |
           mkdir -p /tmp/osm && cd /tmp/osm
-          curl -fsSL --retry 5 -o spain.osm.pbf https://download.geofabrik.de/europe/spain-latest.osm.pbf
-          curl -fsSL --retry 5 -o canarias.osm.pbf https://download.geofabrik.de/africa/canary-islands-latest.osm.pbf
+          curl -fsSL --retry 8 --retry-all-errors --retry-delay 30 -o spain.osm.pbf https://download.geofabrik.de/europe/spain-latest.osm.pbf
+          curl -fsSL --retry 8 --retry-all-errors --retry-delay 30 -o canarias.osm.pbf https://download.geofabrik.de/africa/canary-islands-latest.osm.pbf
           ls -lh
 
       - name: Quedarse solo con alojamientos y pueblos
