@@ -126,6 +126,8 @@ header.top .wrap{padding-block:12px 14px;display:grid;gap:10px}
 .lpin.cat.near{background:#9aa3ae}
 .ltip{font:600 12px/1.2 system-ui,sans-serif;padding:2px 6px;border-radius:6px}
 .mapwrap .mapctl{z-index:500}
+/* keep Leaflet's own layers (z-index 400+) under the sticky header and bottom bar */
+.mapwrap,.osmmap{position:relative;z-index:0;isolation:isolate}
 .pin{cursor:pointer}
 .mapctl{position:absolute;right:10px;top:10px;display:grid;gap:6px}
 .mapctl button{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--surface);font-size:20px;font-weight:600;line-height:1}
