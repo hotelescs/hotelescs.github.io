@@ -255,6 +255,7 @@ header.top .band{padding-block:8px 16px;display:grid;gap:10px}
 /* filter chips: wrap on wide screens, swipe with a fade hint on phones */
 @media (min-width:600px){.chips{flex-wrap:wrap;overflow:visible}}
 @media (max-width:599px){#vList>.chips{-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent);padding-right:24px}}
+.chipsep{flex:none;width:1px;align-self:stretch;margin:4px 4px;background:var(--line)}
 </style>
 </head>
 <body>
@@ -281,6 +282,8 @@ header.top .band{padding-block:8px 16px;display:grid;gap:10px}
       <button class="chip" data-f="t:Hotel" aria-pressed="false">Hotel</button>
       <button class="chip" data-f="t:Aparthotel" aria-pressed="false">Aparthotel</button>
       <button class="chip" data-f="t:Apartamento" aria-pressed="false">Apartamento</button>
+      <button class="chip" data-f="t:Residencia" aria-pressed="false">Residencia</button>
+      <span class="chipsep" aria-hidden="true"></span>
       <button class="chip" data-f="p80" aria-pressed="false">Hasta 80 €</button>
       <button class="chip" data-f="g:Parking" aria-pressed="false">Parking</button>
       <button class="chip" data-f="g:Desayuno temprano" aria-pressed="false">Desayuno temprano</button>
@@ -565,7 +568,10 @@ $("#list").addEventListener("click",e=>{
 });
 $("#q").addEventListener("input",()=>{if(S.view==="hotel"||(S.view==="tab"&&S.tab!=="ranking"))setTab("buscar");if(S.tab==="ranking"){renderTab();return}renderList();liveSearch($("#q").value)});
 document.querySelectorAll(".chip").forEach(b=>b.addEventListener("click",()=>{
-  const f=b.dataset.f; S.filters.has(f)?S.filters.delete(f):S.filters.add(f); b.setAttribute("aria-pressed",S.filters.has(f)); renderList();
+  const f=b.dataset.f;
+  if(S.filters.has(f)) S.filters.delete(f);
+  else{ if(f.startsWith("t:")) [...S.filters].filter(x=>x.startsWith("t:")).forEach(x=>S.filters.delete(x)); S.filters.add(f); }   // type: only one at a time
+  document.querySelectorAll(".chip[data-f]").forEach(c=>c.setAttribute("aria-pressed",S.filters.has(c.dataset.f))); renderList();
 }));
 
 /* ---------- hotel detail ---------- */
