@@ -61,7 +61,9 @@ SOURCES = [
  ("nav-apt", "na", "A", ["https://datosabiertos.navarra.es/datastore/dump/e761b1ec-23ed-4523-bf56-d8f7a338ae3c?format=csv&bom=True"], {}),
  ("nav-alb", "na", "S", ["https://datosabiertos.navarra.es/datastore/dump/95ca4059-d22d-4dbe-86d8-f05dc5a20c3f?format=csv&bom=True"], {}),
  ("nav-rur", "na", "S", ["https://datosabiertos.navarra.es/datastore/dump/74e164d1-a0a4-485f-993c-15befc3b04b7?format=csv&bom=True"], {}),
- ("and", "an", "H", ["https://datos.juntadeandalucia.es/api/v0/openrta/all?format=csv", "https://datos.juntadeandalucia.es/api/v0/openrta/all?format=json"], {"utm": 30}),
+ ("and", "an", "H", ["https://datos.juntadeandalucia.es/api/v0/openrta/all?format=csv", "https://datos.juntadeandalucia.es/api/v0/openrta/all?format=json"],
+   # the Andalusian register mixes everything: "Completa"/"Por habitaciones" are tourist flats (VFT), left out on purpose
+   {"utm": 30, "keep": r"hotel|hostal|pension|albergue|apartamento|apartahotel|casa rural|casas rurales"}),
  ("bal-mal", "ib", "H", ["https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_mallorca/allotjaments_turistics_mallorca.geojson",
                          "https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_mallorca/allotjaments_turistics_mallorca.csv"], {"utm": 31}),
  ("bal-men", "ib", "H", ["https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_menorca/allotjaments_turistics_menorca.geojson",
@@ -176,7 +178,7 @@ NAME = ["retol", "nombre_alojamiento", "nombre_de_la_vivienda", "establecimiento
         "nombre", "name", "etiqueta", "title", "titulo", "nome", "nome_comercial", "rotulo", "denominacion_comercial"]
 TYPE = ["tipus_establiment", "object_type", "group", "alojamiento_tipo", "actividad_sigla", "tipo_vivienda", "tipo_establecimiento_categoria", "grup", "modalitat", "establecimiento_tipologia", "establecimiento_modalidad", "nom_tipo", "tipo_recurso",
         "tipo_establecimiento", "tipologia", "tipo", "modalidad", "grupo", "lodgingtype", "actividad_tipo", "subcategoria", "clase", "categoria_establecimiento"]
-CITY = ["municipi", "localidad_establecimiento", "direccion_municipio_nombre", "municipio_nombre", "nom_municipio", "municipio", "municipality", "concello", "localidad", "localitat", "poblacion", "locality"]
+CITY = ["municipi", "localidad_establecimiento", "direccion_municipio_nombre", "municipio_nombre", "nom_municipio", "municipio", "municipality", "concello", "localidad", "localitat", "poblacion", "locality", "municipalities"]
 ADDR = ["direccion_establecimiento", "establishment_address", "adreca_establiment", "adreca", "direccion", "domicilio", "address", "direccion_completa", "enderezo", "adreca"]
 PC = ["codi_postal", "postal_code", "codigo_postal_establecimiento", "cdpostal", "direccion_codigo_postal", "codigo_postal", "cod_postal", "c_postal", "cp", "c_p", "postalcode", "postcode", "codpostal"]
 CAT = ["categoria", "categories", "category", "nom_categor", "clasificacion", "establecimiento_clasificacion", "categoria_establecimiento"]
@@ -355,8 +357,10 @@ def main(path):
             typ = " ".join(v.get(k, "") for k in TYPE if v.get(k))
             types[typ[:60]] += 1
             ty = classify(typ, name, pick(v, CAT), dty)
+            if ty and opt.get("keep") and not re.search(opt["keep"], strip(typ)) and not (not typ.strip() and re.search(r"\b(hotel|hostal|pension|albergue|apartahotel|aparthotel)\b", strip(name))): ty = None
             if not ty: st["excluido (VUT, camping...)"] += 1; continue
             city = fix_city(pick(v, CITY))
+            if re.fullmatch(r"[\d\s.,]*|.*[{\[].*", city or ""): city = ""
             if code == "cat" and not city: continue
             addr = pick(v, ADDR)
             if not addr and v.get("nom_de_la_via"):
