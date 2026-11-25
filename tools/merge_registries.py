@@ -164,13 +164,13 @@ def strip(s): return "".join(c for c in unicodedata.normalize("NFD", str(s or ""
 def colkey(c): return re.sub(r"[^a-z0-9]+", "_", strip(c)).strip("_")
 def val(r): return {colkey(k): ("" if v is None else str(v).strip()) for k, v in r.items() if k is not None}
 
-NAME = ["retol", "establecimiento_nombre_comercial", "nombre_comercial", "nombre_establecimiento", "denominacion", "documentname",
+NAME = ["retol", "nombre_alojamiento", "nombre_de_la_vivienda", "establecimiento_nombre_comercial", "nombre_comercial", "nombre_establecimiento", "denominacion", "documentname",
         "nombre", "name", "etiqueta", "title", "titulo", "nome", "nome_comercial", "rotulo", "denominacion_comercial"]
-TYPE = ["tipus_establiment", "grup", "modalitat", "establecimiento_tipologia", "establecimiento_modalidad", "nom_tipo", "tipo_recurso",
+TYPE = ["tipus_establiment", "alojamiento_tipo", "actividad_sigla", "tipo_vivienda", "tipo_establecimiento_categoria", "grup", "modalitat", "establecimiento_tipologia", "establecimiento_modalidad", "nom_tipo", "tipo_recurso",
         "tipo_establecimiento", "tipologia", "tipo", "modalidad", "grupo", "lodgingtype", "actividad_tipo", "subcategoria", "clase", "categoria_establecimiento"]
-CITY = ["municipi", "direccion_municipio_nombre", "municipio_nombre", "nom_municipio", "municipio", "municipality", "concello", "localidad", "localitat", "poblacion", "locality"]
-ADDR = ["direccion", "domicilio", "address", "direccion_completa", "enderezo", "adreca"]
-PC = ["codi_postal", "direccion_codigo_postal", "codigo_postal", "cod_postal", "c_postal", "cp", "c_p", "postalcode", "postcode", "codpostal"]
+CITY = ["municipi", "localidad_establecimiento", "direccion_municipio_nombre", "municipio_nombre", "nom_municipio", "municipio", "municipality", "concello", "localidad", "localitat", "poblacion", "locality"]
+ADDR = ["direccion_establecimiento", "direccion", "domicilio", "address", "direccion_completa", "enderezo", "adreca"]
+PC = ["codi_postal", "codigo_postal_establecimiento", "cdpostal", "direccion_codigo_postal", "codigo_postal", "cod_postal", "c_postal", "cp", "c_p", "postalcode", "postcode", "codpostal"]
 CAT = ["categoria", "category", "nom_categor", "clasificacion", "establecimiento_clasificacion", "categoria_establecimiento"]
 STAT = ["estat", "estado", "situacion", "estado_actual"]
 LAT = ["latitud", "latitude", "lat", "coordenada_y", "y"]
@@ -181,7 +181,7 @@ def pick(v, keys):
         if v.get(k): return v[k]
     return ""
 
-SKIP = re.compile(r"vivienda[s]? (vacacional|de uso tur|turistic|tur[ií]stica)|habitatge|\bhut\b|\bvut\b|\bvv\b|\bvft\b|vivenda|camping|c[aà]mping|campament|autocaravan|area de acampada|agencia|ag[eè]ncia|turismo activo|refugi|caravan|bungalow park|empresa|guia|restaura|cafeter|llars compartides|informador|oficina de turismo|puerto deportivo|administracion|cerrado sin actividad", re.I)
+SKIP = re.compile(r"vivienda[s]? (vacacional|de uso tur|turistic|tur[ií]stica)|habitatge|\bhut\b|\bvut\b|\bvv\b|\bvt\b|\bvft\b|vivenda|camping|c[aà]mping|campament|autocaravan|area de acampada|agencia|ag[eè]ncia|turismo activo|refugi|caravan|vivienda de uso|vivienda turistica|vivienda turística|bungalow park|empresa|guia|restaura|cafeter|llars compartides|informador|oficina de turismo|puerto deportivo|administracion|cerrado sin actividad", re.I)
 CLOSED = re.compile(r"baja|baixa|cese|cesad|cerrad|revocad|anulad|inactiv|extingu|clausur", re.I)
 
 def classify(typ, name, cat, default):
@@ -190,9 +190,9 @@ def classify(typ, name, cat, default):
     if re.search(r"apart\s*-?\s*hotel|apartahotel|hotel[- ]?apartament|hotel apartament|^ha$|\bha\b", t + " " + n): return "P"
     if re.search(r"motel", t + " " + n): return "M"
     if re.search(r"colegio mayor|residencia universitari|residencia de estudiantes|residencia juvenil", t) or (re.fullmatch(r"\s*residencias?\s*", t)): return "R"
-    if re.search(r"hostal|pension|pensio|fonda|casa de huesped|hospedaje|albergue|alberg|aterpe|rural|agroturism|casa de aldea|posada|hosteria|hospederia|\bhs\b|\bhr\b|\bp\b|turismo de interior|landa|masia|masoveria|fogar|casa de turismo", t):
+    if re.search(r"hostal|pension|pensio|fonda|casa de huesped|hospedaje|albergue|alberg|aterpe|rural|agroturism|casa de aldea|posada|hosteria|hospederia|\bhs\b|\bhr\b|\bp\b|\bcr\b|\btr\b|\bal\b|turismo de interior|landa|masia|masoveria|fogar|casa de turismo", t):
         return "H" if re.search(r"hotel rural|hotel", t) and not re.search(r"hostal", t) else "S"
-    if re.search(r"apartament|apartamento|ap\b|villa|bungalow|extrahotel|estudio", t): return "A"
+    if re.search(r"apartament|apartamento|ap\b|\bat\b|villa|bungalow|extrahotel|estudio", t): return "A"
     if re.search(r"hotel|parador|hotel-|^h$|\bh\b|establiments? hotelers?|hotelera|balneario", t): return "H"
     return default
 
@@ -229,6 +229,9 @@ def coords(v, raw, reg, opt):
             while isinstance(gg[0], list): gg = gg[0]
             lon, lat = float(gg[0]), float(gg[1])
         except Exception: pass
+    if (lat is None or lat == 0) and v.get("localizacion"):
+        m = re.search(r"lon:\s*(-?\d+\.\d+).*lat:\s*(-?\d+\.\d+)", v["localizacion"], re.I)
+        if m: lon, lat = float(m.group(1)), float(m.group(2))
     if (lat is None or lat == 0) and v.get("ubicacion"):
         m = re.match(r"\s*(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)", v["ubicacion"])
         if m: lat, lon = float(m.group(1)), float(m.group(2))
@@ -273,7 +276,7 @@ def same(a, b):
     return SequenceMatcher(None, a, b).ratio() >= 0.86
 
 # ---------- street-level positions from CartoCiudad (official free geocoder of the IGN), cached in data/geocache.json ----------
-def geocode(rows, budget=1800):
+def geocode(rows, budget=2700):
     path = "data/geocache.json"
     cache = json.load(open(path)) if os.path.exists(path) else {}
     t0 = time.time(); fails = [0]; asked = [0]
@@ -340,6 +343,7 @@ def main(path):
             name = nice(pick(v, NAME))
             if not name or len(name) < 3: st["sin nombre"] += 1; continue
             if CLOSED.search(pick(v, STAT)): st["de baja"] += 1; continue
+            if re.match(r"(VT|VUT|HUT|VV|VFT|VUT)\b", v.get("signatura", "").upper()): st["excluido (VUT, camping...)"] += 1; continue
             typ = " ".join(v.get(k, "") for k in TYPE if v.get(k))
             types[typ[:60]] += 1
             ty = classify(typ, name, pick(v, CAT), dty)
@@ -349,6 +353,7 @@ def main(path):
             addr = pick(v, ADDR)
             if not addr and v.get("nom_de_la_via"):
                 addr = " ".join(x for x in (v.get("tipus_de_via", ""), v.get("nom_de_la_via", ""))) + (", " + v["numero"] if v.get("numero") else "")
+            if not addr and v.get("via_nombre"): addr = (v.get("via_tipo", "").capitalize() + " " + v["via_nombre"]).strip() + (", " + v["numero"] if v.get("numero") else "")
             if not addr and v.get("via"): addr = (v.get("tipo_via", "") + " " + v["via"]).strip() + (", " + v["no"] if v.get("no") else "")
             addr = nice(addr)
             pc = re.sub(r"\.0$", "", pick(v, PC)).strip()
