@@ -1,15 +1,16 @@
 {
- "total": 43873,
- "añadidos": 19389,
+ "total": 44017,
+ "añadidos": 19533,
  "por_region": {
-  "Asturias": 26,
+  "Aragón": 2223,
+  "Asturias": 18,
   "C. Valenciana": 1953,
   "Canarias": 2630,
   "Castilla y León": 4387,
   "Cataluña": 3824,
   "Extremadura": 1812,
   "Galicia": 18,
-  "Madrid": 3202,
+  "Madrid": 1131,
   "Murcia": 733,
   "País Vasco": 804
  },
@@ -424,10 +425,10 @@
    },
    "errores": [],
    "tipos": {
-    "Vivienda turística Extrahotelera": 235,
     "Casa Rural Extrahotelera": 209,
     "Apartamento Extrahotelera": 119,
     "Pensión Hotelera": 17,
+    "Vivienda turística Extrahotelera": 16,
     "Hotel Hotelera": 15,
     "Casa Medio rural Extrahotelera": 4,
     "Villa Extrahotelera": 3,
@@ -1868,10 +1869,17 @@
    "url": "https://opendata.aragon.es/GA_OD_Core/download?resource_id=65&formato=csv",
    "filas": 946,
    "resultado": {
-    "sin nombre": 946
+    "añadido (ubicación aproximada)": 415,
+    "ya estaba": 442,
+    "sin ubicación": 80,
+    "repetido en la fuente": 9
    },
    "errores": [],
-   "tipos": {},
+   "tipos": {
+    "H 1": 512,
+    "H 2": 307,
+    "H 3": 127
+   },
    "columnas": [
     "signatura",
     "tot_hab",
@@ -1948,12 +1956,15 @@
    "url": "https://opendata.aragon.es/GA_OD_Core/download?resource_id=66&formato=csv",
    "filas": 508,
    "resultado": {
-    "sin ubicación": 507,
+    "añadido (ubicación aproximada)": 333,
+    "ya estaba": 90,
+    "sin ubicación": 79,
+    "repetido en la fuente": 5,
     "sin nombre": 1
    },
    "errores": [],
    "tipos": {
-    "": 507
+    "AT": 507
    },
    "columnas": [
     "signatura",
@@ -2031,10 +2042,24 @@
    "url": "https://opendata.aragon.es/GA_OD_Core/download?resource_id=73&formato=csv",
    "filas": 2057,
    "resultado": {
-    "sin nombre": 2057
+    "añadido (ubicación aproximada)": 1370,
+    "sin ubicación": 503,
+    "ya estaba": 167,
+    "repetido en la fuente": 14,
+    "sin nombre": 3
    },
    "errores": [],
-   "tipos": {},
+   "tipos": {
+    "CR Casa turismo rural 2": 1150,
+    "CR Apartamento turismo rural 2": 539,
+    "CR ..... 1": 331,
+    "CR Casa turismo rural 1": 9,
+    "CR 1 2": 9,
+    "CR 3 1": 5,
+    "MR Casa turismo rural 2": 5,
+    "CR 2 2": 3,
+    "CR ..... 2": 3
+   },
    "columnas": [
     "signatura",
     "actividad_sigla",
@@ -2111,11 +2136,14 @@
    "url": "https://opendata.aragon.es/GA_OD_Core/download?resource_id=64&formato=csv",
    "filas": 178,
    "resultado": {
-    "sin ubicación": 178
+    "añadido (ubicación aproximada)": 105,
+    "ya estaba": 43,
+    "sin ubicación": 30
    },
    "errores": [],
    "tipos": {
-    "": 178
+    "A AL": 157,
+    "A RE": 21
    },
    "columnas": [
     "signatura",
@@ -2595,16 +2623,26 @@
    "url": "https://datos.comunidad.madrid/dataset/ef437c50-5b26-4843-92c3-d8eef5507fac/resource/260e80ac-2062-41f6-9f96-4902675b1078/download/alojamientos_turisticos.csv",
    "filas": 8240,
    "resultado": {
-    "ya estaba": 2396,
-    "añadido (ubicación aproximada)": 3202,
-    "repetido en la fuente": 279,
+    "ya estaba": 1126,
+    "añadido (ubicación aproximada)": 1131,
+    "repetido en la fuente": 178,
     "sin nombre": 2295,
-    "sin ubicación": 48,
-    "excluido (VUT, camping...)": 20
+    "sin ubicación": 25,
+    "excluido (VUT, camping...)": 3485
    },
    "errores": [],
    "tipos": {
-    "": 5945
+    "HOTEL": 523,
+    "HOSTAL": 468,
+    "CASA HUESPEDES": 446,
+    "APART-TURISTICO": 290,
+    "PENSION": 254,
+    "CASA RURAL": 156,
+    "APARTAMENTO RURAL": 125,
+    "HOSTERIAS": 83,
+    "HOTEL RURAL": 64,
+    "HOTEL-APART.": 51,
+    "CAMPING": 20
    },
    "columnas": [
     "alojamiento_tipo",
@@ -2651,9 +2689,7 @@
    },
    "errores": [],
    "tipos": {
-    "Vivienda de Uso Turístico": 158,
     "Hotel/ Hotel Apartamento/Pensión": 13,
-    "Vivienda Vacacional": 9,
     "Apartamento Turístico": 6,
     "Apartamento  Rural": 1
    },
@@ -2706,8 +2742,11 @@
    "url": "https://opendata.gijon.es/descargar.php?id=736&tipo=CSV",
    "filas": 26,
    "resultado": {
-    "sin ubicación": 10,
-    "añadido (ubicación aproximada)": 16
+    "ya estaba": 11,
+    "añadido (ubicación aproximada)": 7,
+    "sin ubicación": 6,
+    "añadido": 1,
+    "repetido en la fuente": 1
    },
    "errores": [],
    "tipos": {
