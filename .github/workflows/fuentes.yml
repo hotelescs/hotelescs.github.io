@@ -11,16 +11,17 @@ permissions:
 jobs:
   buscar:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: python tools/discover_sources.py
+      - run: pip install openpyxl xlrd
+      - run: python tools/probe_sources.py
       - name: Guardar
         run: |
           git config user.name "HotelesCS bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/discovery.json
+          git add data/
           git diff --cached --quiet || (git commit -m "Fuentes oficiales encontradas ($(date +%F))" && git push)
