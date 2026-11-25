@@ -1,6 +1,6 @@
 -- HotelesCS: tablas, permisos y tiempo real.
 -- Pegar entero en Supabase > SQL Editor > New query > Run.
--- Sustituye __DOMINIO__ por el dominio del correo de empresa (p. ej. kuka.com).
+-- Solo correos @kuka.com.
 
 create table if not exists public.profiles (
   id uuid primary key references auth.users on delete cascade,
@@ -31,13 +31,13 @@ create table if not exists public.reviews (
 -- Solo correos del dominio de empresa
 create or replace function public.is_team() returns boolean
 language sql stable as $$
-  select coalesce(auth.jwt()->>'email','') ilike '%@__DOMINIO__'
+  select coalesce(auth.jwt()->>'email','') ilike '%@kuka.com'
 $$;
 
 create or replace function public.handle_new_user() returns trigger
 language plpgsql security definer set search_path = public as $$
 begin
-  if new.email is null or new.email not ilike '%@__DOMINIO__' then
+  if new.email is null or new.email not ilike '%@kuka.com' then
     raise exception 'Solo se admiten correos de empresa';
   end if;
   insert into public.profiles(id, name)

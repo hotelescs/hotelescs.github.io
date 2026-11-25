@@ -2,5 +2,5 @@
 window.RYC_CONFIG = {
   url: "__SUPABASE_URL__",
   key: "__SUPABASE_ANON_KEY__",
-  domain: "__DOMINIO__"          // p. ej. "kuka.com": solo se admiten correos de este dominio
+  domain: "kuka.com"          // p. ej. "kuka.com": solo se admiten correos de este dominio
 };
