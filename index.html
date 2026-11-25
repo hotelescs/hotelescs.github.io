@@ -3,9 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#ff6a13">
+<meta name="theme-color" content="#1c1c1e">
 <link rel="icon" href="icon.svg">
-<link rel="apple-touch-icon" href="icon.svg">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="HotelesCS">
 <title>HotelesCS</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&display=swap">
@@ -158,7 +161,7 @@ body{-webkit-font-smoothing:antialiased;letter-spacing:-.005em}
 body::before{background:var(--corp)}
 header.top{background:linear-gradient(180deg,var(--corp) 0,var(--corp2) 100%);color:#fff;box-shadow:0 6px 20px rgba(0,0,0,.18)}
 header.top .corp{background:transparent;border:0}
-header.top .corp .wrap{padding-block:12px 4px}
+header.top .corp .wrap{padding-block:12px 4px;display:flex;align-items:center;justify-content:space-between}
 header.top .band{padding-block:8px 16px;display:grid;gap:10px}
 .logo{font-size:26px;letter-spacing:.01em;gap:10px;color:#fff}
 .logo svg{color:var(--brand)}
@@ -224,6 +227,30 @@ header.top .band{padding-block:8px 16px;display:grid;gap:10px}
 .foot b{font-family:var(--f-head);font-size:15px;color:var(--fg)} .foot b span{color:var(--brand)}
 .list{padding-bottom:16px}
 @media (prefers-reduced-motion:no-preference){.card{animation:fadein .25s ease both}@keyframes fadein{from{opacity:0;transform:translateY(4px)}}}
+
+/* bottom navigation & tabs */
+.bnav{position:fixed;left:0;right:0;bottom:0;z-index:7;display:grid;grid-template-columns:repeat(4,1fr);background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:6px max(8px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px))}
+.bnav button{background:none;border:0;display:grid;justify-items:center;gap:2px;font-size:11px;font-weight:600;color:var(--muted);padding:4px 0;border-radius:12px}
+.bnav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.bnav button[aria-current]{color:var(--brand)}
+.bnav button[aria-current] svg{fill:color-mix(in srgb,var(--brand) 18%,transparent)}
+.fab{bottom:calc(78px + env(safe-area-inset-bottom,0px))}
+.toast{bottom:calc(150px + env(safe-area-inset-bottom,0px))}
+.foot{margin-bottom:170px}
+#vTab{padding-bottom:170px}
+.tabhead{padding-top:14px;display:grid;gap:4px}
+.tabhead h2{font-size:28px}
+.nearf{display:flex;gap:8px;margin-top:8px}
+.nearf .inp{flex:1}
+.pill.rank{background:var(--corp2);color:#fff}
+.pill.dist{background:color-mix(in srgb,var(--brand) 16%,transparent);color:var(--fg)}
+.rk{padding-block:6px}
+.heart{color:var(--brand)}
+.titlerow{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.favbtn{flex:none;width:46px;height:46px;border-radius:50%;border:0;background:var(--surface);box-shadow:var(--sh1);font-size:24px;line-height:1;color:var(--brand);transition:transform .12s}
+.favbtn:active{transform:scale(.9)}
+.card.myrev{grid-template-columns:1fr;text-align:left}
+.card.myrev a{color:inherit}
 </style>
 </head>
 <body>
@@ -267,12 +294,21 @@ header.top .band{padding-block:8px 16px;display:grid;gap:10px}
     <div class="list" id="list"></div>
   </section>
 
+  <section id="vTab" hidden><div id="tabBody"></div></section>
+
   <section id="vHotel" hidden>
     <button class="back" id="back">← Volver a la lista</button>
     <div id="hotel"></div>
   </section>
   <footer class="foot"><b>Hoteles<span>CS</span></b> · Customer Service · Herramienta interna del equipo técnico</footer>
 </main>
+
+<nav class="bnav" aria-label="Secciones">
+  <button data-tab="buscar" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>Buscar</button>
+  <button data-tab="ranking"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4zM7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3"/></svg>Ranking</button>
+  <button data-tab="cerca"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Cerca</button>
+  <button data-tab="mio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>Lo mío</button>
+</nav>
 
 <button class="fab" id="fab" aria-label="Añadir reseña"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>Reseña</button>
 
@@ -371,7 +407,7 @@ const EXAMPLES = {
   ]
 };
 
-const S = {hotels:[],reviews:[],live:false,loading:true,db:null,user:null,me:null,myName:"",names:{},filters:new Set(),view:"list",hotelId:null,
+const S = {tab:"buscar",favs:new Set(),favApi:null,near:null,nearOnly80:true,nearMin4:false,installEvt:null,hotels:[],reviews:[],live:false,loading:true,db:null,user:null,me:null,myName:"",names:{},filters:new Set(),view:"list",hotelId:null,
   form:{hotelId:null,stars:0,type:"Hotel",tags:new Set()}};
 
 /* ---------- dates ---------- */
@@ -473,6 +509,20 @@ const findHotel = id => data().hotels.find(x=>x.id===id) || (CAT&&id&&id.startsW
 const placeLine = h => [h.address,h.city,h.region&&h.region!==h.city?h.region:""].filter(Boolean).join(", ");
 
 /* ---------- list ---------- */
+function teamCard(h,st,extra){
+  return `<button class="card team" data-h="${esc(h.id)}">
+      <div class="badge tnum"><b>${st.rs.length?st.avg.toFixed(1):"–"}</b><small>${st.rs.length} ${st.rs.length===1?"reseña":"reseñas"}</small></div>
+      <div class="body"><h3>${S.favs.has(h.id)?`<span class="heart" aria-label="Favorito">♥</span> `:""}${esc(h.name)}</h3>
+        <div class="meta"><span>${esc(h.type)} · ${esc(h.city)}</span>${extra||""}${h.example?`<span class="pill ex">Ejemplo</span>`:""}</div>
+        <div class="meta">${pricePill(st.price)}${st.topTags.slice(0,2).map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div></div>
+      <div class="price tnum">${st.price!=null?bandLabel(st.price):"–"}<small>por noche</small></div>
+    </button>`;
+}
+const liteCard=(c,extra)=>`<button class="card lite" data-h="${esc(c.id)}">
+      <div class="ico" aria-hidden="true">${esc((c.type||"H")[0])}</div>
+      <div class="body"><h3>${S.favs.has(c.id)?`<span class="heart">♥</span> `:""}${esc(c.name)}</h3><div class="meta"><span>${esc(c.type)}${c.stars?" · "+esc(c.stars)+"★":""}</span>${extra||""}<span>${esc(placeLine(c))}</span></div></div>
+      <div class="go" aria-hidden="true">›</div>
+    </button>`;
 function renderList(){
   const {hotels,reviews,ex}=data();
   const q=norm($("#q").value.trim());
@@ -501,27 +551,15 @@ function renderList(){
   const gq=$("#q").value.trim(); const gm=$("#gmaps"); gm.hidden=gq.length<3; if(gq.length>=3) gm.href="https://www.google.com/maps/search/"+encodeURIComponent("hoteles "+gq);
   if(S.mode==="map") drawMap();
   cat=cat.slice(0,25);
-  const catHtml=cat.length?`<h2 class="subh">Otros alojamientos <span class="note">sin reseñas del equipo</span></h2>`+cat.map(c=>`
-    <button class="card lite" data-h="${esc(c.id)}">
-      <div class="ico" aria-hidden="true">${esc((c.type||"H")[0])}</div>
-      <div class="body"><h3>${esc(c.name)}</h3><div class="meta"><span>${esc(c.type)}${c.stars?" · "+esc(c.stars)+"★":""}</span><span>${esc(placeLine(c))}</span></div></div>
-      <div class="go" aria-hidden="true">›</div>
-    </button>`).join(""):(q.length>=3&&CAT===null?`<div class="note">Cargando alojamientos de España…</div>`:"");
+  const catHtml=cat.length?`<h2 class="subh">Otros alojamientos <span class="note">sin reseñas del equipo</span></h2>`+cat.map(c=>liteCard(c)).join(""):(q.length>=3&&CAT===null?`<div class="note">Cargando alojamientos de España…</div>`:"");
   if(!rows.length){list.innerHTML=(cat.length?(q?`<div class="note">Ningún compañero ha reseñado todavía un sitio con «${esc($("#q").value)}».</div>`:""):`<div class="empty"><h2>Nada por aquí</h2><p>${q?"No encuentro «"+esc($("#q").value)+"». Prueba con la ciudad o parte del nombre.":"No hay alojamientos con esos filtros."}</p><button class="btn acc" data-new="1">Añadirlo a mano</button></div>`)+catHtml;return}
-  list.innerHTML=(rows.length&&q.length>=3?`<h2 class="subh">Con reseñas del equipo</h2>`:"")+rows.map(({h,st})=>`
-    <button class="card team" data-h="${esc(h.id)}">
-      <div class="badge tnum"><b>${st.rs.length?st.avg.toFixed(1):"–"}</b><small>${st.rs.length} ${st.rs.length===1?"reseña":"reseñas"}</small></div>
-      <div class="body"><h3>${esc(h.name)}</h3>
-        <div class="meta"><span>${esc(h.type)} · ${esc(h.city)}</span>${h.example?`<span class="pill ex">Ejemplo</span>`:""}</div>
-        <div class="meta">${pricePill(st.price)}${st.topTags.slice(0,2).map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div></div>
-      <div class="price tnum">${st.price!=null?bandLabel(st.price):"–"}<small>por noche</small></div>
-    </button>`).join("")+catHtml;
+  list.innerHTML=(rows.length&&q.length>=3?`<h2 class="subh">Con reseñas del equipo</h2>`:"")+rows.map(({h,st})=>teamCard(h,st)).join("")+catHtml;
 }
 $("#list").addEventListener("click",e=>{
   const c=e.target.closest("[data-h]"); if(c) return openHotel(c.dataset.h);
   if(e.target.closest("[data-new]")) openSheet(null,$("#q").value.trim());
 });
-$("#q").addEventListener("input",()=>{if(S.view!=="list")showList();renderList();liveSearch($("#q").value)});
+$("#q").addEventListener("input",()=>{if(S.view==="hotel"||(S.view==="tab"&&S.tab!=="ranking"))setTab("buscar");if(S.tab==="ranking"){renderTab();return}renderList();liveSearch($("#q").value)});
 document.querySelectorAll(".chip").forEach(b=>b.addEventListener("click",()=>{
   const f=b.dataset.f; S.filters.has(f)?S.filters.delete(f):S.filters.add(f); b.setAttribute("aria-pressed",S.filters.has(f)); renderList();
 }));
@@ -564,7 +602,7 @@ function renderHotel(){
   box.innerHTML=`
     <div class="dhead">
       <div class="note">${esc(h.type)}${h.stars?" · "+esc(h.stars)+"★":""} · ${esc(h.city)} ${h.example?`<span class="pill ex">Ejemplo</span>`:""}</div>
-      <h2>${esc(h.name)}</h2>
+      <div class="titlerow"><h2>${esc(h.name)}</h2>${h.example?"":`<button class="favbtn" data-fav="${esc(h.id)}" aria-pressed="${S.favs.has(h.id)}" aria-label="${S.favs.has(h.id)?"Quitar de favoritos":"Guardar en favoritos"}">${S.favs.has(h.id)?"♥":"♡"}</button>`}</div>
       ${h.address?`<div>${esc(placeLine(h))}</div>`:""}
       <div class="score">${st.rs.length?`<span class="big tnum">${st.avg.toFixed(1)}</span>${starStr(st.avg)}`:""}<span class="note">${st.rs.length?st.rs.length+" "+(st.rs.length===1?"reseña del equipo":"reseñas del equipo"):"Aún sin reseñas del equipo. Mira el precio en los enlaces."}</span></div>
       ${st.rs.length?"":`<!--`}<div class="score"><span class="price tnum" style="text-align:left">${st.price!=null?bandLabel(st.price):"Sin precio"}<small>lo que suele costar por noche${st.last!=null&&bandIx(st.last)!==bandIx(st.price)?` · última vez ${bandLabel(st.last)}`:""}</small></span>${pricePill(st.price)}</div>${st.rs.length?"":`-->`}
@@ -606,13 +644,14 @@ $("#hotel").addEventListener("click",async e=>{
     catch(err){const el=c.dataset.copy==="addr"?document.querySelector(".addr"):$("#mailPre");const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);toast("Texto seleccionado: cópialo con el menú")}
     return}
   if(e.target.closest("[data-rev]")) return openSheet(S.hotelId);
+  const fv=e.target.closest("[data-fav]"); if(fv) return toggleFav(fv.dataset.fav);
   const d=e.target.closest("[data-del]");
   if(d){ if(d.dataset.confirm!=="1"){d.dataset.confirm="1";d.textContent="Pulsa otra vez para borrar";return}
     try{await S.db.doc("reviews/"+d.dataset.del).delete();toast("Reseña borrada")}catch(err){toast("No se ha podido borrar")}}
 });
-function openHotel(id){S.view="hotel";S.hotelId=id;$("#vList").hidden=true;$("#vHotel").hidden=false;renderHotel();scrollTo(0,0);
+function openHotel(id){S.view="hotel";S.hotelId=id;$("#vList").hidden=true;$("#vTab").hidden=true;$("#vHotel").hidden=false;renderHotel();scrollTo(0,0);
   try{history.replaceState(null,"","#h-"+id)}catch(e){}}
-function showList(){S.view="list";$("#vList").hidden=false;$("#vHotel").hidden=true;renderList();
+function showList(){if(S.tab!=="buscar")return setTab(S.tab);S.view="list";$("#vList").hidden=false;$("#vTab").hidden=true;$("#vHotel").hidden=true;renderList();
   try{history.replaceState(null,"",location.pathname+location.search)}catch(e){}}
 $("#back").addEventListener("click",showList);
 
@@ -675,7 +714,7 @@ $("#form").addEventListener("submit",async e=>{
       const c=findHotel(hid);
       const dup=S.hotels.find(h=>h.osm===c.osm)||S.hotels.find(h=>norm(h.name)===norm(c.name)&&norm(h.city)===norm(c.city));
       if(dup) hid=dup.id;
-      else{const ref=await S.db.collection("hotels").add({name:c.name,city:c.city,type:c.type,address:c.address||"",region:c.region||"",lat:c.lat,lon:c.lon,osm:c.osm,stars:c.stars||"",createdBy:S.me||"",createdAt:Date.now()});hid=ref.id}
+      else{const ref=await S.db.collection("hotels").add({name:c.name,city:c.city||c.region||"",type:c.type,address:c.address||"",region:c.region||"",lat:c.lat,lon:c.lon,osm:c.osm,stars:c.stars||"",createdBy:S.me||"",createdAt:Date.now()});hid=ref.id}
     }
     if(!hid){
       const name=$("#fName").value.trim(), city=$("#fCity").value.trim();
@@ -757,7 +796,103 @@ function drawMap(){
   $("#zFit").addEventListener("click",()=>{S.mapFit=true;drawMap()});
   addEventListener("resize",()=>drawMap());
 })();
-function rerender(){S.view==="hotel"?renderHotel():renderList(); if(!$("#sheet").hidden&&!S.form.hotelId) suggest()}
+
+/* ---------- tabs: ranking, near a client, favourites & my reviews ---------- */
+function setTab(t){
+  S.tab=t; document.querySelectorAll(".bnav button").forEach(b=>{if(b.dataset.tab===t)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current")});
+  if(t==="buscar"){S.view="list";$("#vList").hidden=false;$("#vTab").hidden=true;$("#vHotel").hidden=true;renderList()}
+  else{S.view="tab";$("#vList").hidden=true;$("#vHotel").hidden=true;$("#vTab").hidden=false;renderTab()}
+  try{history.replaceState(null,"",location.pathname+location.search)}catch(e){} scrollTo(0,0);
+}
+document.querySelector(".bnav").addEventListener("click",e=>{const b=e.target.closest("[data-tab]");if(b)setTab(b.dataset.tab)});
+const km=(a,b,c,d)=>{const R=6371,r=Math.PI/180,x=Math.sin((c-a)*r/2)**2+Math.cos(a*r)*Math.cos(c*r)*Math.sin((d-b)*r/2)**2;return 2*R*Math.asin(Math.sqrt(x))};
+const kmTxt=d=>d==null?"misma ciudad":d<1?"a menos de 1 km":"a "+d.toFixed(d<10?1:0).replace(".",",")+" km";
+function renderTab(){
+  const box=$("#tabBody"), {hotels,reviews,ex}=data();
+  const rated=hotels.map(h=>({h,st:stats(h,reviews)})).filter(x=>x.st.rs.length);
+  if(S.tab==="ranking"){
+    const q=norm($("#q").value.trim()); const by={};
+    for(const x of rated){const k=norm(x.h.city||x.h.region||"Sin ciudad"); if(q&&!k.includes(q)&&!norm(x.h.name).includes(q)) continue; (by[k]=by[k]||{city:x.h.city||x.h.region||"Sin ciudad",xs:[]}).xs.push(x)}
+    const cities=Object.values(by).sort((a,b)=>b.xs.length-a.xs.length||a.city.localeCompare(b.city));
+    box.innerHTML=`<div class="tabhead"><h2>Ranking por ciudad</h2><p class="note">Los mejor valorados por el equipo${q?` en «${esc($("#q").value.trim())}»`:""}. Escribe una ciudad arriba para filtrar.</p></div>`+
+      (cities.length?cities.map(c=>{c.xs.sort((a,b)=>b.st.avg-a.st.avg||b.st.rs.length-a.st.rs.length);
+        return `<h2 class="subh">${esc(c.city)} <span class="note">${c.xs.length} ${c.xs.length===1?"alojamiento":"alojamientos"}</span></h2><div class="list rk">`+c.xs.slice(0,5).map((x,i)=>teamCard(x.h,x.st,`<span class="pill rank">#${i+1}</span>`)).join("")+`</div>`}).join("")
+      :`<div class="empty"><h2>Sin datos todavía</h2><p>${q?"Nadie ha reseñado aún en esa ciudad.":"Cuando el equipo suba reseñas, aquí verás los mejores de cada ciudad."}</p></div>`);
+    return;
+  }
+  if(S.tab==="cerca"){
+    const N=S.near;
+    let html=`<div class="tabhead"><h2>Cerca del cliente</h2><p class="note">Escribe la dirección o el pueblo del cliente y te enseño dónde dormir cerca.</p>
+      <form id="nearF" class="nearf"><input class="inp" id="nearQ" placeholder="Ej.: Polígono Plaza, Zaragoza" value="${esc(N?N.q:"")}" autocomplete="off"><button class="btn acc">Buscar</button></form>
+      <div class="chips" style="padding-top:10px"><button class="chip" data-nf="80" aria-pressed="${S.nearOnly80}">Solo hasta 80 €</button><button class="chip" data-nf="4" aria-pressed="${S.nearMin4}">Nota 4 o más</button></div></div>`;
+    if(N&&N.loading) html+=`<div class="empty">Buscando «${esc(N.q)}»…</div>`;
+    else if(N&&N.err) html+=`<div class="empty"><h2>No encuentro ese sitio</h2><p>Prueba con el nombre del pueblo o la ciudad.</p></div>`;
+    else if(N){
+      const city=norm(N.city||"");
+      let xs=rated.map(x=>{const d=(x.h.lat!=null&&x.h.lon!=null)?km(N.lat,N.lon,+x.h.lat,+x.h.lon):(city&&norm(x.h.city)===city?null:Infinity);return {...x,d}}).filter(x=>x.d==null||x.d<=30);
+      if(S.nearOnly80) xs=xs.filter(x=>x.st.price==null||x.st.price<=LIMIT);
+      if(S.nearMin4) xs=xs.filter(x=>x.st.avg>=4);
+      xs.sort((a,b)=>b.st.avg-a.st.avg||(a.d??0)-(b.d??0));
+      const known=new Set(hotels.map(h=>h.osm).filter(Boolean));
+      const cat=(CAT||[]).filter(c=>c.lat!=null&&!known.has(c.osm)).map(c=>({c,d:km(N.lat,N.lon,c.lat,c.lon)})).filter(x=>x.d<=10).sort((a,b)=>a.d-b.d).slice(0,15);
+      html+=`<p class="note">Cerca de <b>${esc(N.label)}</b></p>`;
+      html+=`<h2 class="subh">Con reseñas del equipo <span class="note">a 30 km o menos</span></h2>`+(xs.length?`<div class="list">`+xs.map(x=>teamCard(x.h,x.st,`<span class="pill dist">${kmTxt(x.d)}</span>`)).join("")+`</div>`:`<p class="note">Ningún sitio reseñado cerca${S.nearOnly80?" dentro de 80 €":""} todavía.</p>`);
+      html+=cat.length?`<h2 class="subh">Otros alojamientos <span class="note">a 10 km o menos, sin reseñas</span></h2><div class="list">`+cat.map(x=>liteCard(x.c,`<span class="pill dist">${kmTxt(x.d)}</span>`)).join("")+`</div>`:"";
+      if(CAT===null) loadCat().then(()=>S.tab==="cerca"&&renderTab());
+    }
+    box.innerHTML=html; return;
+  }
+  if(S.tab==="mio"){
+    const favs=[...S.favs].map(id=>findHotel(id)).filter(Boolean);
+    const mine=S.me?reviews.filter(r=>r.authorId===S.me&&!r.example).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)):[];
+    const ios=/iphone|ipad|ipod/i.test(navigator.userAgent), standalone=matchMedia("(display-mode: standalone)").matches||navigator.standalone;
+    box.innerHTML=`<div class="tabhead"><h2>Lo mío</h2></div>
+      <h2 class="subh">Favoritos <span class="note">pulsa ♡ en la ficha de un hotel</span></h2>
+      ${favs.length?`<div class="list">`+favs.map(h=>{const st=stats(h,reviews);return st.rs.length?teamCard(h,st):liteCard(h)}).join("")+`</div>`:`<p class="note">Aún no tienes favoritos.</p>`}
+      <h2 class="subh">Mis reseñas <span class="note">${mine.length}</span></h2>
+      ${mine.length?`<div class="list">`+mine.map(r=>{const h=findHotel(r.hotelId)||{name:"Alojamiento",city:""};return `<div class="card myrev"><div class="body"><h3><a href="#h-${esc(r.hotelId)}" data-open="${esc(r.hotelId)}">${esc(h.name)}</a></h3>
+        <div class="meta">${starStr(+r.rating||0)}${+r.price>0?`<b class="tnum">${bandLabel(+r.price)}</b>`:""}${r.via?`<span class="pill via">${esc(r.via)}</span>`:""}<span class="note">${r.createdAt?new Date(r.createdAt).toLocaleDateString("es-ES",{day:"numeric",month:"short",year:"numeric"}):""}</span></div>
+        ${r.comment?`<div>${esc(r.comment)}</div>`:""}<button class="del" data-mydel="${esc(r.id)}">Borrar</button></div></div>`}).join("")+`</div>`:`<p class="note">${S.me?"Todavía no has escrito ninguna reseña.":"Entra con tu cuenta para ver tus reseñas."}</p>`}
+      <h2 class="subh">App en el móvil</h2>
+      <div class="section">${standalone?`<p>Ya la estás usando como app. 👍</p>`:S.installEvt?`<p>Instálala para abrirla desde la pantalla de inicio, como una app.</p><button class="btn acc" id="installBtn">Instalar HotelesCS</button>`
+        :ios?`<p>En iPhone: pulsa <b>Compartir</b> (el cuadrado con la flecha) y luego <b>Añadir a pantalla de inicio</b>.</p>`
+        :`<p>En Android: menú <b>⋮</b> del navegador → <b>Instalar aplicación</b> o <b>Añadir a pantalla de inicio</b>.</p>`}</div>`;
+  }
+}
+$("#tabBody").addEventListener("click",async e=>{
+  const o=e.target.closest("[data-open]"); if(o){e.preventDefault();return openHotel(o.dataset.open)}
+  const c=e.target.closest("[data-h]"); if(c) return openHotel(c.dataset.h);
+  const nf=e.target.closest("[data-nf]"); if(nf){if(nf.dataset.nf==="80")S.nearOnly80=!S.nearOnly80;else S.nearMin4=!S.nearMin4;return renderTab()}
+  if(e.target.id==="installBtn"&&S.installEvt){S.installEvt.prompt();try{await S.installEvt.userChoice}catch(x){} S.installEvt=null;return renderTab()}
+  const d=e.target.closest("[data-mydel]");
+  if(d){ if(d.dataset.confirm!=="1"){d.dataset.confirm="1";d.textContent="Pulsa otra vez para borrar";return}
+    try{await S.db.doc("reviews/"+d.dataset.mydel).delete();toast("Reseña borrada")}catch(err){toast("No se ha podido borrar")}}
+});
+$("#tabBody").addEventListener("submit",async e=>{
+  if(e.target.id!=="nearF") return; e.preventDefault();
+  const q=$("#nearQ").value.trim(); if(q.length<3) return;
+  S.near={q,loading:true}; renderTab();
+  let res=null;
+  try{const r=await fetch("https://photon.komoot.io/api/?lang=default&limit=1&bbox=-18.5,27.4,4.6,44.0&q="+encodeURIComponent(q));
+    const j=await r.json(); const f=(j.features||[])[0];
+    if(f){const p=f.properties||{};res={lat:f.geometry.coordinates[1],lon:f.geometry.coordinates[0],city:p.city||p.town||p.village||(p.type==="city"?p.name:"")||"",label:[p.name,p.street,p.city||p.town||p.village,p.state].filter(Boolean).filter((v,i,a)=>a.indexOf(v)===i).join(", ")}}
+  }catch(x){}
+  if(!res){ // offline fallback: a town we already know from the team or the catalogue
+    await loadCat(); const nq=norm(q); const pool=[...data().hotels,...(CAT||[])].filter(h=>h.lat!=null&&nq.includes(norm(h.city||"#")));
+    if(pool.length){res={lat:pool.reduce((a,h)=>a+ +h.lat,0)/pool.length,lon:pool.reduce((a,h)=>a+ +h.lon,0)/pool.length,city:pool[0].city,label:pool[0].city}}
+  }
+  S.near=res?{q,...res}:{q,err:true}; renderTab();
+});
+addEventListener("beforeinstallprompt",e=>{e.preventDefault();S.installEvt=e;if(S.tab==="mio")renderTab()});
+
+/* favourites: saved in the team database when available, and on this device */
+function lsFavs(){try{return JSON.parse(localStorage.getItem("ryc-favs")||"[]")}catch(e){return []}}
+function saveFavsLocal(){try{localStorage.setItem("ryc-favs",JSON.stringify([...S.favs]))}catch(e){}}
+S.favs=new Set(lsFavs());
+async function loadFavs(){ if(!S.favApi) return; try{const ks=await S.favApi.list(); for(const k of ks) S.favs.add(k); saveFavsLocal(); rerender()}catch(e){S.favApi=null} }
+async function toggleFav(id){ const on=!S.favs.has(id); on?S.favs.add(id):S.favs.delete(id); saveFavsLocal(); rerender(); toast(on?"Guardado en favoritos":"Quitado de favoritos");
+  if(S.favApi){try{on?await S.favApi.add(id):await S.favApi.remove(id)}catch(e){}} }
+function rerender(){S.view==="hotel"?renderHotel():S.view==="tab"?renderTab():renderList(); if(!$("#sheet").hidden&&!S.form.hotelId) suggest()}
 async function resolveNames(){
   if(!S.user) return;
   const ids=[...new Set(S.reviews.map(r=>r.authorId).filter(Boolean))];
@@ -770,7 +905,7 @@ setTimeout(loadCat,300);
 try{if(localStorage.getItem("ryc-mode")==="map")setMode("map")}catch(e){}
 (async function(){
   let db=null,user=null;
-  if(window.rycBackend){try{({db,user}=await window.rycBackend())}catch(e){console.error(e)}}
+  if(window.rycBackend){try{let favs;({db,user,favs}=await window.rycBackend());S.favApi=favs||null;loadFavs()}catch(e){console.error(e)}}
   else if(window.claude&&claude.use){[db,user]=await Promise.all([claude.use("db"),claude.use("user")])}
   else return;
   S.user=user;
@@ -785,5 +920,6 @@ try{if(localStorage.getItem("ryc-mode")==="map")setMode("map")}catch(e){}
   routeFromHash();
 })();
 </script>
+<script>if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))</script>
 </body>
 </html>

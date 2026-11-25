@@ -85,3 +85,16 @@ exception when duplicate_object then null; end $$;
 
 -- Por si la tabla ya existía antes de añadir «cómo se reservó»
 alter table public.reviews add column if not exists via text check (via in ('Agencia','Booking','Hoteles.com','Directo','Otro'));
+
+-- Favoritos de cada técnico (solo los ve y cambia su dueño)
+create table if not exists public.favorites (
+  user_id uuid not null default auth.uid() references auth.users on delete cascade,
+  hotel_key text not null check (length(hotel_key) <= 80),
+  created_at timestamptz not null default now(),
+  primary key (user_id, hotel_key)
+);
+alter table public.favorites enable row level security;
+drop policy if exists "mis favoritos" on public.favorites;
+create policy "mis favoritos" on public.favorites for all to authenticated
+  using (user_id = auth.uid()) with check (user_id = auth.uid() and public.is_team());
+grant select, insert, delete on public.favorites to authenticated;

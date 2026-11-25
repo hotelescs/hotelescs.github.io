@@ -134,6 +134,11 @@
     const who = document.getElementById("who");
     if (who) { who.title = "Pulsa para cerrar sesión"; who.style.cursor = "pointer";
       who.addEventListener("click", async () => { if (confirm("¿Cerrar sesión?")) { await sb.auth.signOut(); location.reload(); } }); }
-    return { db, user };
+    const favs = {
+      async list() { const { data, error } = await sb.from("favorites").select("hotel_key"); if (error) throw error; return data.map(r => r.hotel_key); },
+      async add(k) { const { error } = await sb.from("favorites").insert({ hotel_key: k }); if (error && error.code !== "23505") throw error; },
+      async remove(k) { const { error } = await sb.from("favorites").delete().eq("hotel_key", k); if (error) throw error; }
+    };
+    return { db, user, favs };
   };
 })();
