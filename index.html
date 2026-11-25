@@ -149,43 +149,81 @@ header.top .wrap{padding-block:12px 14px;display:grid;gap:10px}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:30;background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:999px;font-size:14px;font-weight:600;max-width:calc(100% - 32px)}
 @media (prefers-reduced-motion:no-preference){.sheet{animation:up .18s ease-out}@keyframes up{from{transform:translateY(30px);opacity:.6}}}
 
-/* ---- corporate skin: graphite + industrial orange, square corners ---- */
-:root{--brand:#ff5f00;--accent:#ff5f00;--star:#ff5f00;--corp:#1c1c1e;--corp-fg:#ffffff;--r:4px}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--brand:#ff6d1a;--accent:#ff6d1a;--star:#ff6d1a;--corp:#000000;--corp-fg:#ffffff}}
-:root[data-theme="dark"]{--brand:#ff6d1a;--accent:#ff6d1a;--star:#ff6d1a;--corp:#000000;--corp-fg:#ffffff}
+/* ---- modern skin: graphite + KUKA-style orange, soft cards ---- */
+:root{--brand:#ff5f00;--brand2:#ff8a3d;--accent:#ff5f00;--star:#ff5f00;--corp:#1c1c1e;--corp2:#2c2c30;--corp-fg:#fff;--r:16px;
+  --bg:#f3f2f0;--line:#e7e4e0;--sh1:0 1px 2px rgba(20,16,12,.06),0 4px 14px rgba(20,16,12,.06);--sh2:0 2px 6px rgba(20,16,12,.08),0 12px 28px rgba(20,16,12,.12);--chip:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--brand:#ff6d1a;--brand2:#ff9a52;--accent:#ff6d1a;--star:#ff6d1a;--corp:#0b0b0c;--corp2:#1d1d20;--bg:#111113;--line:#2c2b2a;--sh1:0 1px 2px rgba(0,0,0,.5);--sh2:0 10px 30px rgba(0,0,0,.6);--chip:#1e1e1f}}
+:root[data-theme="dark"]{--brand:#ff6d1a;--brand2:#ff9a52;--accent:#ff6d1a;--star:#ff6d1a;--corp:#0b0b0c;--corp2:#1d1d20;--bg:#111113;--line:#2c2b2a;--sh1:0 1px 2px rgba(0,0,0,.5);--sh2:0 10px 30px rgba(0,0,0,.6);--chip:#1e1e1f}
+body{-webkit-font-smoothing:antialiased;letter-spacing:-.005em}
 body::before{background:var(--corp)}
-header.top{background:var(--brand);box-shadow:0 2px 0 rgba(0,0,0,.08)}
-header.top .corp{background:var(--corp);color:var(--corp-fg);border-bottom:3px solid var(--brand)}
-header.top .corp .wrap{padding-block:10px}
-header.top .band{padding-block:12px 14px;display:grid;gap:10px}
-.logo{font-size:26px;letter-spacing:.02em;text-transform:uppercase;gap:10px}
+header.top{background:linear-gradient(180deg,var(--corp) 0,var(--corp2) 100%);color:#fff;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+header.top .corp{background:transparent;border:0}
+header.top .corp .wrap{padding-block:12px 4px}
+header.top .band{padding-block:8px 16px;display:grid;gap:10px}
+.logo{font-size:26px;letter-spacing:.01em;gap:10px;color:#fff}
 .logo svg{color:var(--brand)}
-.logo .cs{background:var(--brand);color:#111;padding:0 6px;margin-left:-6px;border-radius:2px}
-.who{font-size:11px;text-transform:uppercase;letter-spacing:.08em;opacity:.75}
-.search{border-radius:4px;border-width:0;box-shadow:inset 0 0 0 2px var(--corp)}
-.dates input{border-radius:3px}
-.dates label{font-weight:700;color:#111;opacity:1}
-.nights{color:#111}
-.chip{border-radius:3px;text-transform:uppercase;font-size:12px;letter-spacing:.05em;font-weight:600}
-.chip[aria-pressed="true"]{background:var(--corp);color:#fff;border-color:var(--corp);box-shadow:inset 0 -3px 0 var(--brand)}
-.card{border-radius:4px;border-left:4px solid var(--brand)}
-.card.lite{border-left:1px solid var(--line)}
-.section{border-radius:4px;border-top:3px solid var(--brand)}
-.section h3{color:var(--fg)}
-.subh{color:var(--fg);border-left:4px solid var(--brand);padding-left:8px}
-.lbtn,.btn,.inp,.sugg button,.sel,.mapctl button,.mail pre,.banner{border-radius:4px}
-.btn.acc{color:#111}
-.pill{border-radius:3px}
-.viewtog{border-radius:4px}
-.viewtog button[aria-pressed="true"]{background:var(--corp);color:#fff;box-shadow:inset 0 -3px 0 var(--brand)}
-.fab{background:var(--brand);color:#111;border-radius:4px;text-transform:uppercase;letter-spacing:.04em;box-shadow:0 6px 18px rgba(0,0,0,.3),inset 0 -4px 0 rgba(0,0,0,.18)}
-.sheet{border-radius:6px 6px 0 0;border-top:4px solid var(--brand)}
-.seg button{border-radius:3px}
-.seg button[aria-pressed="true"]{background:var(--corp);color:#fff;border-color:var(--corp)}
+.logo .cs{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#111;padding:0 7px;margin-left:-4px;border-radius:7px}
+.who{font-size:12px;opacity:.7;font-weight:500}
+.search{border:0;border-radius:14px;box-shadow:0 0 0 2px transparent,var(--sh1);background:var(--surface);transition:box-shadow .2s}
+.search:focus-within{box-shadow:0 0 0 3px var(--brand),var(--sh1)}
+.search input{padding:13px 0}
+.dates label{color:rgba(255,255,255,.7);font-weight:600;font-size:10.5px}
+.dates input{border-radius:10px;background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.14);color-scheme:dark}
+.nights{color:var(--brand2);font-size:19px}
+.chips{gap:8px;padding-block:14px 6px}
+.chip{border-radius:999px;background:var(--chip);border-color:var(--line);box-shadow:var(--sh1);font-size:13px;padding:7px 14px;transition:background .15s,color .15s,transform .1s}
+.chip:active{transform:scale(.97)}
+.chip[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:#111}
+.banner{border-radius:12px}
+.viewtog{border:0;border-radius:12px;background:var(--line);padding:3px;gap:2px}
+.viewtog button{border-radius:9px;padding:7px 18px;transition:background .15s}
+.viewtog button[aria-pressed="true"]{background:var(--surface);color:var(--fg);box-shadow:var(--sh1)}
+.mapwrap{border-radius:var(--r);box-shadow:var(--sh1);border:0}
+.list{gap:12px}
+.card{border:0;border-radius:var(--r);box-shadow:var(--sh1);padding:14px;transition:transform .12s ease,box-shadow .2s ease;align-items:center}
+.card:hover{box-shadow:var(--sh2)}
+.card:active{transform:scale(.985)}
+.card.team{grid-template-columns:auto 1fr auto;gap:12px}
+.card .body{display:grid;gap:4px;min-width:0}
+.card .body h3{font-size:20px;line-height:1.1;overflow:hidden;text-overflow:ellipsis}
+.card .meta{grid-column:auto}
+.badge{width:58px;height:58px;border-radius:14px;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#111;display:grid;place-content:center;text-align:center;line-height:1}
+.badge b{font-family:var(--f-head);font-size:26px}
+.badge small{font-size:9.5px;font-weight:600;opacity:.8;margin-top:2px}
+.card .price{font-size:19px;white-space:nowrap}
+.card.lite{background:var(--surface);grid-template-columns:auto 1fr auto;gap:12px;box-shadow:none;border:1px solid var(--line)}
+.card.lite .ico{width:38px;height:38px;border-radius:12px;background:var(--bg);color:var(--muted);display:grid;place-content:center;font-family:var(--f-head);font-weight:700;font-size:18px}
+.card.lite h3{font-size:17px}
+.card .go{color:var(--muted);font-size:24px;line-height:1}
+.tag{border-radius:999px;border:0;background:var(--bg);padding:2px 8px}
+.pill{border-radius:999px}
+.pill.via{background:var(--corp2);color:#fff}
+.subh{border:0;padding:0;color:var(--fg);font-size:17px;margin-top:14px}
+.subh::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--brand);margin-right:2px;transform:translateY(-2px)}
+.section{border:0;border-radius:var(--r);box-shadow:var(--sh1);padding:16px}
+.section h3{color:var(--fg);font-size:17px}
+.lbtn{border:0;border-radius:12px;background:var(--bg);transition:background .15s}
+.lbtn:hover{background:var(--line)}
+.btn{border-radius:12px;transition:transform .1s,filter .15s}
+.btn:active{transform:scale(.97)}
+.btn.acc{color:#111;background:linear-gradient(135deg,var(--brand),var(--brand2))}
+.inp,.sugg button,.mail pre,.mapctl button{border-radius:12px}
+.sel{border-radius:12px}
 .score .big{color:var(--brand)}
-.foot{margin:8px 0 110px;padding-top:14px;border-top:3px solid var(--corp);font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.dhead h2{font-size:34px}
+.fab{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#111;border-radius:999px;padding:15px 22px;box-shadow:0 10px 26px rgba(255,95,0,.38),0 2px 6px rgba(0,0,0,.2);transition:transform .12s}
+.fab:active{transform:scale(.96)}
+.sheet{border-radius:22px 22px 0 0;border:0;box-shadow:0 -10px 40px rgba(0,0,0,.25)}
+.sheet::before{content:"";display:block;width:42px;height:5px;border-radius:9px;background:var(--line);margin:10px auto 0}
+.seg button{border-radius:999px;transition:background .15s,color .15s}
+.seg button[aria-pressed="true"]{background:var(--brand);color:#111;border-color:var(--brand)}
+#fPrice button{padding:10px 18px;font-weight:600}
+#manual summary{border-radius:12px}
+.toast{border-radius:14px;box-shadow:var(--sh2)}
+.foot{margin:12px 0 110px;padding-top:14px;border-top:1px solid var(--line);font-size:11.5px;color:var(--muted);letter-spacing:.04em;text-transform:none}
 .foot b{font-family:var(--f-head);font-size:15px;color:var(--fg)} .foot b span{color:var(--brand)}
 .list{padding-bottom:16px}
+@media (prefers-reduced-motion:no-preference){.card{animation:fadein .25s ease both}@keyframes fadein{from{opacity:0;transform:translateY(4px)}}}
 </style>
 </head>
 <body>
@@ -465,16 +503,18 @@ function renderList(){
   cat=cat.slice(0,25);
   const catHtml=cat.length?`<h2 class="subh">Otros alojamientos <span class="note">sin reseñas del equipo</span></h2>`+cat.map(c=>`
     <button class="card lite" data-h="${esc(c.id)}">
-      <div><h3>${esc(c.name)}</h3></div><div class="note">${esc(c.type)}${c.stars?" · "+esc(c.stars)+"★":""}</div>
-      <div class="meta"><span>${esc(placeLine(c))}</span></div>
+      <div class="ico" aria-hidden="true">${esc((c.type||"H")[0])}</div>
+      <div class="body"><h3>${esc(c.name)}</h3><div class="meta"><span>${esc(c.type)}${c.stars?" · "+esc(c.stars)+"★":""}</span><span>${esc(placeLine(c))}</span></div></div>
+      <div class="go" aria-hidden="true">›</div>
     </button>`).join(""):(q.length>=3&&CAT===null?`<div class="note">Cargando alojamientos de España…</div>`:"");
   if(!rows.length){list.innerHTML=(cat.length?(q?`<div class="note">Ningún compañero ha reseñado todavía un sitio con «${esc($("#q").value)}».</div>`:""):`<div class="empty"><h2>Nada por aquí</h2><p>${q?"No encuentro «"+esc($("#q").value)+"». Prueba con la ciudad o parte del nombre.":"No hay alojamientos con esos filtros."}</p><button class="btn acc" data-new="1">Añadirlo a mano</button></div>`)+catHtml;return}
   list.innerHTML=(rows.length&&q.length>=3?`<h2 class="subh">Con reseñas del equipo</h2>`:"")+rows.map(({h,st})=>`
-    <button class="card" data-h="${esc(h.id)}">
-      <div><h3>${esc(h.name)}</h3></div>
+    <button class="card team" data-h="${esc(h.id)}">
+      <div class="badge tnum"><b>${st.rs.length?st.avg.toFixed(1):"–"}</b><small>${st.rs.length} ${st.rs.length===1?"reseña":"reseñas"}</small></div>
+      <div class="body"><h3>${esc(h.name)}</h3>
+        <div class="meta"><span>${esc(h.type)} · ${esc(h.city)}</span>${h.example?`<span class="pill ex">Ejemplo</span>`:""}</div>
+        <div class="meta">${pricePill(st.price)}${st.topTags.slice(0,2).map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div></div>
       <div class="price tnum">${st.price!=null?bandLabel(st.price):"–"}<small>por noche</small></div>
-      <div class="meta">${st.rs.length?starStr(st.avg)+`<b class="tnum">${st.avg.toFixed(1)}</b>`:""}<span>${st.rs.length} ${st.rs.length===1?"reseña":"reseñas"}</span><span>${esc(h.type)} · ${esc(h.city)}</span>${pricePill(st.price)}${h.example?`<span class="pill ex">Ejemplo</span>`:""}</div>
-      ${st.topTags.length?`<div class="meta">${st.topTags.slice(0,3).map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>`:""}
     </button>`).join("")+catHtml;
 }
 $("#list").addEventListener("click",e=>{

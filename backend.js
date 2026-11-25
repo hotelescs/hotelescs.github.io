@@ -18,13 +18,13 @@
 
   const css = `
   #ryc-login{position:fixed;inset:0;z-index:999;background:var(--bg,#f4f3f2);display:flex;align-items:center;justify-content:center;padding:16px;font-family:var(--f-body,system-ui)}
-  #ryc-login .box{width:100%;max-width:380px;background:var(--surface,#fff);border:1px solid var(--line,#e2dfdc);border-radius:14px;overflow:hidden}
-  #ryc-login .hd{background:var(--brand,#ff6a13);color:var(--brand-fg,#1a1a1a);padding:18px 20px}
+  #ryc-login .box{width:100%;max-width:380px;background:var(--surface,#fff);border-radius:20px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.18)}
+  #ryc-login .hd{background:linear-gradient(180deg,#1c1c1e,#2c2c30);color:#fff;padding:22px 20px;border-bottom:3px solid var(--brand,#ff5f00)}
   #ryc-login .hd b{font-family:var(--f-head,sans-serif);font-size:30px;letter-spacing:.5px;display:block}
   #ryc-login form{padding:18px 20px;display:grid;gap:12px}
   #ryc-login label{font-size:13px;color:var(--muted,#62605d);display:grid;gap:4px}
-  #ryc-login input{font:inherit;font-size:16px;padding:11px 12px;border:1px solid var(--line,#e2dfdc);border-radius:10px;background:var(--surface,#fff);color:var(--fg,#1d1d1f)}
-  #ryc-login button{font:inherit;font-weight:600;font-size:16px;padding:12px;border:0;border-radius:10px;background:var(--ink,#2b2b2d);color:var(--ink-fg,#fff);cursor:pointer}
+  #ryc-login input{font:inherit;font-size:16px;padding:11px 12px;border:1px solid var(--line,#e2dfdc);border-radius:12px;background:var(--surface,#fff);color:var(--fg,#1d1d1f)}
+  #ryc-login button{font:inherit;font-weight:600;font-size:16px;padding:12px;border:0;border-radius:12px;background:linear-gradient(135deg,#ff5f00,#ff8a3d);color:#111;cursor:pointer}
   #ryc-login .sw{background:none;color:var(--fg,#1d1d1f);text-decoration:underline;font-weight:500;font-size:14px;padding:4px}
   #ryc-login [hidden]{display:none}
   #ryc-login .err{color:var(--warn,#b4400a);font-size:14px;min-height:1em;margin:0}`;
@@ -33,7 +33,7 @@
     return new Promise(resolve => {
       const st = document.createElement("style"); st.textContent = css; document.head.appendChild(st);
       const el = document.createElement("div"); el.id = "ryc-login";
-      el.innerHTML = `<div class="box"><div class="hd"><b>Hoteles<span style="background:#2b2b2d;color:#ff7a2b;padding:0 5px;border-radius:5px;margin-left:3px">CS</span></b>Reseñas de alojamientos del equipo técnico</div>
+      el.innerHTML = `<div class="box"><div class="hd"><b>Hoteles<span style="background:linear-gradient(135deg,#ff5f00,#ff8a3d);color:#111;padding:0 7px;border-radius:7px;margin-left:4px">CS</span></b>Reseñas de alojamientos del equipo técnico</div>
         <form novalidate>
           <label>Correo de empresa<input name="email" type="email" autocomplete="email" required placeholder="nombre@${C.domain || "empresa.com"}"></label>
           <label class="nm" hidden>Tu nombre (lo verán los compañeros)<input name="name" autocomplete="name" maxlength="80"></label>
