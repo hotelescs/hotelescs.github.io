@@ -360,6 +360,30 @@ function loadCat(){
     rerender(); return CAT}).catch(()=>{CAT=[];return CAT});
   return catP;
 }
+/* live search in OpenStreetMap (Photon) for places not yet in the downloaded catalogue */
+const LQ={};let liveT=null;
+const PHOTON_TAGS=["hotel","apartment","guest_house","hostel","motel"].map(t=>"&osm_tag=tourism:"+t).join("");
+function liveSearch(raw){
+  const q=norm(raw||"").trim(); if(q.length<3||LQ[q]) return;
+  clearTimeout(liveT);
+  liveT=setTimeout(async()=>{
+    LQ[q]=1;
+    try{
+      const r=await fetch("https://photon.komoot.io/api/?q="+encodeURIComponent(raw.trim())+"&limit=50&bbox=-18.5,27.4,4.6,44.0"+PHOTON_TAGS);
+      if(!r.ok) return; const j=await r.json(); await loadCat(); if(!CAT) return;
+      const have=new Set(CAT.map(c=>c.osm)); let added=0;
+      for(const f of (j.features||[])){
+        const p=f.properties||{}; if(!p.name||(p.countrycode&&p.countrycode!=="ES")) continue;
+        const k=({N:"n",W:"w",R:"r"}[p.osm_type]||"x")+p.osm_id; if(have.has(k)) continue; have.add(k);
+        const co=(f.geometry&&f.geometry.coordinates)||[null,null];
+        const type=/apart\s*-?hotel|apartahotel/i.test(p.name)?"Aparthotel":({hotel:"Hotel",apartment:"Apartamento",guest_house:"Hostal",hostel:"Hostal",motel:"Motel"}[p.osm_value]||"Hotel");
+        const address=[p.street,p.housenumber].filter(Boolean).join(", "), city=p.city||p.town||p.village||p.district||p.county||"", region=p.state||"";
+        CAT.push({id:"osm-"+k,osm:k,name:p.name,type,address,city,region,lat:co[1],lon:co[0],stars:"",catalog:true,live:true,k:norm(p.name),kc:norm(city+" "+region)}); added++;
+      }
+      if(added) rerender();
+    }catch(e){}
+  },450);
+}
 function catSearch(q,n,exclude){
   if(!CAT) return [];
   const toks=norm(q).split(/\s+/).filter(t=>t.length>1); if(!toks.length||norm(q).length<3) return [];
@@ -423,7 +447,7 @@ $("#list").addEventListener("click",e=>{
   const c=e.target.closest("[data-h]"); if(c) return openHotel(c.dataset.h);
   if(e.target.closest("[data-new]")) openSheet(null,$("#q").value.trim());
 });
-$("#q").addEventListener("input",()=>{if(S.view!=="list")showList();renderList()});
+$("#q").addEventListener("input",()=>{if(S.view!=="list")showList();renderList();liveSearch($("#q").value)});
 document.querySelectorAll(".chip").forEach(b=>b.addEventListener("click",()=>{
   const f=b.dataset.f; S.filters.has(f)?S.filters.delete(f):S.filters.add(f); b.setAttribute("aria-pressed",S.filters.has(f)); renderList();
 }));
@@ -553,7 +577,7 @@ function suggest(){
   $("#manual").hidden=q.length<3;
   $("#newBox").hidden=!showNew;
 }
-$("#fName").addEventListener("input",suggest);
+$("#fName").addEventListener("input",()=>{suggest();liveSearch($("#fName").value)});
 $("#manual").addEventListener("toggle",suggest);
 $("#sugg").addEventListener("click",e=>{const b=e.target.closest("[data-pick]");if(b){S.form.hotelId=b.dataset.pick;paintPick()}});
 $("#fType").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;S.form.type=b.dataset.v;[...$("#fType").children].forEach(x=>x.setAttribute("aria-pressed",x===b))});
