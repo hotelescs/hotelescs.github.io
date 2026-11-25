@@ -56,12 +56,14 @@ jobs:
 
       - name: Añadir registros oficiales de turismo (datos abiertos de comunidades y cabildos)
         run: python tools/merge_registries.py hotels-es.json
+      - name: Provincia de cada población
+        run: python tools/provinces.py
 
       - name: Guardar cambios
         run: |
           git config user.name "HotelesCS bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add hotels-es.json data/registros.json data/geocache.json
+          git add hotels-es.json provincias.json data/registros.json data/geocache.json
           if git diff --cached --quiet; then echo "Sin cambios"; exit 0; fi
           git commit -m "Catálogo de alojamientos actualizado (OpenStreetMap + registros oficiales) ($(date +%F))"
           for i in 1 2 3; do git pull --rebase -q && git push && break; sleep 10; done

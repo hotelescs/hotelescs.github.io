@@ -532,6 +532,7 @@ let CAT=null,catP=null;
 function loadCat(){
   if(catP) return catP;
   const get=u=>fetch(u).then(r=>r.ok?r.json():[]).catch(()=>[]);
+  get("provincias.json").then(p=>{PROV=p&&!Array.isArray(p)?p:{}; rerender()});
   catP=Promise.all([get("hotels-es.json"),get("hotels-extra.json")]).then(([a,b])=>{a=(b||[]).concat(a||[]);
     CAT=a.map(x=>({id:"osm-"+x[0],osm:x[0],name:x[1],type:TYPEMAP[x[2]]||"Hotel",address:x[3],city:x[4],region:x[5],lat:x[6],lon:x[7],stars:x[8],approx:x[9]===1,catalog:true,k:norm(x[1]),kc:norm(x[4]+" "+x[5])}));
     const n=document.getElementById("catCount"); if(n) n.textContent=CAT.length.toLocaleString("es-ES");
@@ -555,7 +556,7 @@ function liveSearch(raw){
       const LODGE_V=/^(hotel|apartment|apartments|guest_house|hostel|motel|dormitory|student_accommodation|chalet)$/, LODGE_N=/residencia|living|apartament|apartahotel|aparthotel|suites|hostal|hotel|rooms|pensi[oó]n|albergue|hospeder|posada|inn\b/i;
       const extra=(b.features||[]).filter(f=>{const p=f.properties||{};return p.name&&!SKIP.test(p.osm_key||"")&&toksIn(q,p.name)&&(LODGE_V.test(p.osm_value||"")||LODGE_N.test(p.name))});
       const pf=(b.features||[]).find(f=>{const p=f.properties||{};return p.osm_key==="place"&&/^(city|town|village|hamlet|suburb|municipality|quarter|neighbourhood)$/.test(p.osm_value||"")&&(!p.countrycode||p.countrycode==="ES")&&norm(p.name).startsWith(q)&&f.geometry});
-      if(pf&&!PLACE[q]) PLACE[q]={name:pf.properties.name,lat:pf.geometry.coordinates[1],lon:pf.geometry.coordinates[0]};
+      if(pf&&!PLACE[q]) PLACE[q]={name:pf.properties.name,province:pf.properties.county&&!/comarca|isla/i.test(pf.properties.county)?pf.properties.county.split("/")[0]:"",region:pf.properties.state||"",lat:pf.geometry.coordinates[1],lon:pf.geometry.coordinates[0]};
       const j={features:[...(a.features||[]),...extra]}; await loadCat(); if(!CAT) return;
       const have=new Map(CAT.map(c=>[c.osm,c])); let added=0; const hits=[];
       for(const f of (j.features||[])){
@@ -575,11 +576,13 @@ const PLACE={}; let CITYIX=null;
 function placeFor(q){
   if(!CAT||q.length<3) return null;
   if(!CITYIX||CITYIX.n!==CAT.length){ const m=new Map();
-    for(const c of CAT){ if(c.lat==null||!c.city) continue; const k=norm(c.city).trim(); let e=m.get(k); if(!e){e={name:c.city,la:[],lo:[]};m.set(k,e)} e.la.push(+c.lat); e.lo.push(+c.lon); }
+    for(const c of CAT){ if(c.lat==null||!c.city) continue; const k=norm(c.city).trim(); let e=m.get(k); if(!e){e={name:c.city,region:c.region,la:[],lo:[]};m.set(k,e)} e.la.push(+c.lat); e.lo.push(+c.lon); }
     CITYIX={m,n:CAT.length}; }
   const med=a=>{const b=[...a].sort((x,y)=>x-y);return b[b.length>>1]};   // median: one lodging far out of town does not move the centre
-  if(PLACE[q]) return PLACE[q];
-  const e=CITYIX.m.get(q); if(e) return {name:e.name,lat:med(e.la),lon:med(e.lo)};
+  const e=CITYIX.m.get(q), P=PLACE[q];
+  if(P&&e) return {name:e.name,region:e.region,lat:P.lat,lon:P.lon};   // OSM gives the real town centre, the catalogue gives the province
+  if(P) return P;
+  if(e) return {name:e.name,region:e.region,lat:med(e.la),lon:med(e.lo)};
   return null;
 }
 const kmBetween=(a,b,c,d)=>{const r=Math.PI/180,x=(d-b)*r*Math.cos((a+c)/2*r),y=(c-a)*r;return Math.sqrt(x*x+y*y)*6371};
@@ -608,7 +611,11 @@ function catSearch(q,n,exclude){
   return out.slice(0,n).map(x=>x[1]);
 }
 const findHotel = id => data().hotels.find(x=>x.id===id) || (CAT&&id&&id.startsWith("osm-")? (S.hotels.find(h=>"osm-"+h.osm===id) || CAT.find(c=>c.id===id)) : null);
-const placeLine = h => [h.address,h.city,h.region&&h.region!==h.city?h.region:""].filter(Boolean).join(", ");
+/* province next to a town, so everybody knows where Cullera or Benetússer is: "Cullera (Valencia)" */
+let PROV={};
+function provOf(city,region){ if(!city) return ""; const p=PROV[norm(city).trim()+"|"+norm(region||"")]||""; return p&&!norm(city).includes(norm(p))?p:"" }
+const cityLbl = (h,city) => { const c=city||h.city||""; const p=h.province||provOf(c,h.region); return c+(p?" ("+p+")":"") };
+const placeLine = h => { const p=provOf(h.city,h.region); return [h.address,h.city?cityLbl(h):"",!p&&h.region&&h.region!==h.city?h.region:""].filter(Boolean).join(", ") };
 
 /* ---------- list ---------- */
 /* real street map (OpenStreetMap embed) for a place with coordinates */
@@ -669,7 +676,7 @@ function teamCard(h,st,extra){
   return `<button class="card team" data-h="${esc(h.id)}">
       ${photosOf(st.rs)[0]?`<div class="thumb" style="background-image:url('${esc(photosOf(st.rs)[0])}')"><span class="tnum">${st.rs.length?st.avg.toFixed(1):"–"}</span></div>`:""}<div class="badge tnum"${photosOf(st.rs)[0]?" hidden":""}><b>${st.rs.length?st.avg.toFixed(1):"–"}</b><small>${st.rs.length} ${st.rs.length===1?"reseña":"reseñas"}</small></div>
       <div class="body"><h3>${S.favs.has(h.id)?`<span class="heart" aria-label="Favorito">♥</span> `:""}${esc(h.name)}</h3>
-        <div class="meta"><span>${esc(h.type)} · ${esc(h.city)}</span>${extra||""}${h.example?`<span class="pill ex">Ejemplo</span>`:""}</div>
+        <div class="meta"><span>${esc(h.type)} · ${esc(cityLbl(h))}</span>${extra||""}${h.example?`<span class="pill ex">Ejemplo</span>`:""}</div>
         <div class="meta">${pricePill(st.price)}${st.topTags.slice(0,2).map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div></div>
       <div class="price tnum">${st.price!=null?bandLabel(st.price):"–"}<small>por noche</small></div>
     </button>`;
@@ -711,7 +718,7 @@ function renderList(){
   if(S.mode==="map") drawMap();
   cat=cat.slice(0,pl?50:25);
   const nearN=cat.filter(c=>kmOf.has(c)).length;
-  const catHtml=cat.length?(pl&&nearN?`<h2 class="subh">Más cerca de ${esc(pl.name)} <span class="note">sin reseñas del equipo, del más cercano al más lejano</span></h2>`+cat.slice(0,nearN).map(c=>liteCard(c,`<span class="km tnum">${kmLabel(kmOf.get(c))}</span>`)).join("")+(cat.length>nearN?`<h2 class="subh">Otros con «${esc($("#q").value.trim())}» en el nombre</h2>`+cat.slice(nearN).map(c=>liteCard(c)).join(""):""):`<h2 class="subh">Otros alojamientos <span class="note">sin reseñas del equipo</span></h2>`+cat.map(c=>liteCard(c)).join("")):(q.length>=3&&CAT===null?`<div class="note">Cargando alojamientos de España…</div>`:"");
+  const catHtml=cat.length?(pl&&nearN?`<h2 class="subh">Más cerca de ${esc(cityLbl(pl,pl.name))} <span class="note">sin reseñas del equipo, del más cercano al más lejano</span></h2>`+cat.slice(0,nearN).map(c=>liteCard(c,`<span class="km tnum">${kmLabel(kmOf.get(c))}</span>`)).join("")+(cat.length>nearN?`<h2 class="subh">Otros con «${esc($("#q").value.trim())}» en el nombre</h2>`+cat.slice(nearN).map(c=>liteCard(c)).join(""):""):`<h2 class="subh">Otros alojamientos <span class="note">sin reseñas del equipo</span></h2>`+cat.map(c=>liteCard(c)).join("")):(q.length>=3&&CAT===null?`<div class="note">Cargando alojamientos de España…</div>`:"");
   if(!rows.length){list.innerHTML=(cat.length?(q?`<div class="note">Ningún compañero ha reseñado todavía un sitio con «${esc($("#q").value)}».</div>`:""):`<div class="empty"><h2>Nada por aquí</h2><p>${q?"No encuentro «"+esc($("#q").value)+"». Prueba con la ciudad o parte del nombre.":"No hay alojamientos con esos filtros."}</p><button class="btn acc" data-new="1">Añadirlo a mano</button></div>`)+catHtml;return}
   list.innerHTML=(rows.length&&q.length>=3?`<h2 class="subh">Con reseñas del equipo</h2>`:"")+rows.map(({h,st})=>teamCard(h,st)).join("")+catHtml;
 }
@@ -740,13 +747,13 @@ function bookingLinks(h){
 }
 function mailText(h){
   const din=$("#din").value,dout=$("#dout").value,n=nightsOf();
-  const subject=`Reserva alojamiento: ${h.name} (${h.city}), ${shortDate(din)} a ${shortDate(dout)}`;
+  const subject=`Reserva alojamiento: ${h.name}, ${cityLbl(h)}, ${shortDate(din)} a ${shortDate(dout)}`;
   const body=`Hola,
 
 Por favor, ¿me podéis reservar alojamiento con estos datos?
 
 Alojamiento: ${h.name}
-Localidad: ${h.city}${h.address?"\nDirección: "+h.address:""}
+Localidad: ${cityLbl(h)}${h.address?"\nDirección: "+h.address:""}
 Entrada: ${longDate(din)}
 Salida: ${longDate(dout)}
 Noches: ${n}
@@ -764,7 +771,7 @@ function renderHotel(){
   const names=S.names;
   box.innerHTML=`
     <div class="dhead">
-      <div class="note">${esc(h.type)}${h.stars?" · "+esc(h.stars)+"★":""} · ${esc(h.city)} ${h.example?`<span class="pill ex">Ejemplo</span>`:""}</div>
+      <div class="note">${esc(h.type)}${h.stars?" · "+esc(h.stars)+"★":""} · ${esc(cityLbl(h))} ${h.example?`<span class="pill ex">Ejemplo</span>`:""}</div>
       <div class="titlerow"><h2>${esc(h.name)}</h2>${h.example?"":`<button class="favbtn" data-fav="${esc(h.id)}" aria-pressed="${S.favs.has(h.id)}" aria-label="${S.favs.has(h.id)?"Quitar de favoritos":"Guardar en favoritos"}">${S.favs.has(h.id)?"♥":"♡"}</button>`}</div>
       ${h.address?`<div>${esc(placeLine(h))}</div>`:""}
       <div class="score">${st.rs.length?`<span class="big tnum">${st.avg.toFixed(1)}</span>${starStr(st.avg)}`:""}<span class="note">${st.rs.length?st.rs.length+" "+(st.rs.length===1?"reseña del equipo":"reseñas del equipo"):"Aún sin reseñas del equipo. Mira el precio en los enlaces."}</span></div>
@@ -868,7 +875,7 @@ function suggest(){
   const m=q.length<2?[]:hotels.filter(h=>!ex&&toks.every(t=>norm(h.name+" "+h.city).includes(t))).slice(0,4);
   const known=new Set(S.hotels.map(h=>h.osm).filter(Boolean));
   const c=catSearch(raw,8,known);
-  $("#sugg").innerHTML=m.map(h=>`<button type="button" data-pick="${esc(h.id)}"><b>${esc(h.name)}</b> · ${esc(h.city)} <span class="pill ok">con reseñas</span></button>`).join("")
+  $("#sugg").innerHTML=m.map(h=>`<button type="button" data-pick="${esc(h.id)}"><b>${esc(h.name)}</b> · ${esc(cityLbl(h))} <span class="pill ok">con reseñas</span></button>`).join("")
     +c.map(h=>`<button type="button" data-pick="${esc(h.id)}"><b>${esc(h.name)}</b><small>${esc(h.type)} · ${esc(placeLine(h))}</small></button>`).join("")
     +(q.length>=3&&CAT===null?`<div class="note">Cargando alojamientos de España…</div>`:"");
   const showNew=q.length>=3&&$("#manual").open;
@@ -978,7 +985,7 @@ function paintLeaflet(){
   }
   if(S.mapPlace){ const pl=S.mapPlace;   // the town that was searched: big orange pin, always on top
     const m=L.marker([pl.lat,pl.lon],{icon:L.divIcon({className:"",iconSize:[34,34],iconAnchor:[17,34],html:'<div class="hpin dest"></div>'}),keyboard:false,interactive:false,zIndexOffset:5000}).addTo(LG);
-    m.bindTooltip(esc(pl.name),{permanent:true,direction:"top",offset:[0,-34],className:"ltip dest"}); }
+    m.bindTooltip(esc(cityLbl(pl,pl.name)),{permanent:true,direction:"top",offset:[0,-34],className:"ltip dest"}); }
   const off=S.mapPts.length-S.mapPts.filter(p=>b.contains([p.h.lat,p.h.lon])).length;
   $("#mapNote").textContent=!S.mapPts.length&&z<12?($("#q").value.trim().length>=3?"Ningún resultado tiene ubicación.":"Busca una ciudad o un hotel, o acerca el mapa para ver todos los alojamientos de la zona."):(vis.length+" en pantalla"+(off?", "+off+" fuera":"")+(z<12?". Acerca el mapa para ver también el resto de alojamientos de la zona.":". Toca un punto para abrir la ficha."));
 }
@@ -1044,7 +1051,7 @@ function renderTab(){
   const rated=hotels.map(h=>({h,st:stats(h,reviews)})).filter(x=>x.st.rs.length);
   if(S.tab==="ranking"){
     const q=norm($("#q").value.trim()); const by={};
-    for(const x of rated){const k=norm(x.h.city||x.h.region||"Sin ciudad"); if(q&&!k.includes(q)&&!norm(x.h.name).includes(q)) continue; (by[k]=by[k]||{city:x.h.city||x.h.region||"Sin ciudad",xs:[]}).xs.push(x)}
+    for(const x of rated){const k=norm(x.h.city||x.h.region||"Sin ciudad"); if(q&&!k.includes(q)&&!norm(x.h.name).includes(q)) continue; (by[k]=by[k]||{city:x.h.city?cityLbl(x.h):x.h.region||"Sin ciudad",xs:[]}).xs.push(x)}
     const cities=Object.values(by).sort((a,b)=>b.xs.length-a.xs.length||a.city.localeCompare(b.city));
     box.innerHTML=`<div class="tabhead"><h2>Ranking por ciudad</h2><p class="note">Los mejor valorados por el equipo${q?` en «${esc($("#q").value.trim())}»`:""}. Escribe una ciudad arriba para filtrar.</p></div>`+
       (cities.length?cities.map(c=>{c.xs.sort((a,b)=>b.st.avg-a.st.avg||b.st.rs.length-a.st.rs.length);
