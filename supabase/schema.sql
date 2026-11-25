@@ -71,6 +71,12 @@ create policy "equipo añade reseñas" on public.reviews for insert to authentic
 drop policy if exists "cada uno borra sus reseñas" on public.reviews;
 create policy "cada uno borra sus reseñas" on public.reviews for delete to authenticated using (author_id = auth.uid());
 
+-- Permisos de acceso para usuarios con sesión iniciada (las políticas de arriba limitan qué filas)
+grant usage on schema public to authenticated;
+grant select, update on public.profiles to authenticated;
+grant select, insert on public.hotels to authenticated;
+grant select, insert, delete on public.reviews to authenticated;
+
 -- Actualizar la lista en vivo cuando alguien sube una reseña
 do $$ begin
   alter publication supabase_realtime add table public.hotels, public.reviews;
