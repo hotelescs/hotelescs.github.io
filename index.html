@@ -102,7 +102,9 @@ header.top .wrap{padding-block:12px 14px;display:grid;gap:10px}
 .card.lite h3{font-size:19px}
 .sugg button small,.sel small{display:block;font-size:12px;color:var(--muted);font-weight:400}
 .sel small{color:inherit;opacity:.8}
-#manual summary{cursor:pointer;color:var(--muted);font-size:13px;text-decoration:underline;padding-block:6px}
+#manual summary{cursor:pointer;color:var(--fg);font-size:14px;padding:10px 12px;border:1px dashed var(--brand);border-radius:4px;list-style:none}
+#manual summary b{color:var(--brand)}
+#manual[open] summary{border-style:solid}
 #newBox{display:grid;gap:8px;margin-top:4px}
 #newBox[hidden]{display:none}
 .viewtog{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;margin-top:10px;background:var(--surface)}
@@ -247,14 +249,16 @@ header.top .band{padding-block:12px 14px;display:grid;gap:10px}
         <input class="inp" id="fName" placeholder="Nombre del alojamiento" autocomplete="off">
         <div class="sugg" id="sugg"></div>
         <div class="note" id="catHint">Escribe el nombre o la ciudad: busca entre <span id="catCount">miles de</span> alojamientos de España.</div>
-        <details id="manual" hidden><summary>¿No aparece? Añádelo a mano</summary></details>
+        <details id="manual" hidden><summary>¿No aparece en la lista? <b>Añádelo a mano</b></summary></details>
         <div id="newBox" hidden>
           <input class="inp" id="fCity" placeholder="Ciudad o pueblo" autocomplete="off">
+          <input class="inp" id="fAddr" placeholder="Dirección (opcional)" autocomplete="off">
           <div class="seg" id="fType">
             <button type="button" aria-pressed="true" data-v="Hotel">Hotel</button>
             <button type="button" aria-pressed="false" data-v="Aparthotel">Aparthotel</button>
             <button type="button" aria-pressed="false" data-v="Apartamento">Apartamento</button>
             <button type="button" aria-pressed="false" data-v="Hostal">Hostal</button>
+            <button type="button" aria-pressed="false" data-v="Residencia">Residencia</button>
           </div>
         </div>
       </div>
@@ -362,6 +366,7 @@ function loadCat(){
 }
 /* live search in OpenStreetMap (Photon) for places not yet in the downloaded catalogue */
 const LQ={};let liveT=null;
+const toksIn=(q,name)=>{const n=norm(name);return q.split(/\s+/).filter(t=>t.length>2).some(t=>n.includes(t))};
 const PHOTON_TAGS=["hotel","apartment","guest_house","hostel","motel"].map(t=>"&osm_tag=tourism:"+t).join("");
 function liveSearch(raw){
   const q=norm(raw||"").trim(); if(q.length<3||LQ[q]) return;
@@ -369,14 +374,18 @@ function liveSearch(raw){
   liveT=setTimeout(async()=>{
     LQ[q]=1;
     try{
-      const r=await fetch("https://photon.komoot.io/api/?q="+encodeURIComponent(raw.trim())+"&limit=50&bbox=-18.5,27.4,4.6,44.0"+PHOTON_TAGS);
-      if(!r.ok) return; const j=await r.json(); await loadCat(); if(!CAT) return;
+      const base="https://photon.komoot.io/api/?q="+encodeURIComponent(raw.trim())+"&bbox=-18.5,27.4,4.6,44.0";
+      const [a,b]=await Promise.all([fetch(base+"&limit=50"+PHOTON_TAGS).then(r=>r.ok?r.json():{}).catch(()=>({})),
+        fetch(base+"&limit=15").then(r=>r.ok?r.json():{}).catch(()=>({}))]);
+      const SKIP=/^(place|highway|boundary|landuse|natural|waterway|railway|route|shop|office|leisure|man_made|power|aeroway|public_transport)$/;
+      const extra=(b.features||[]).filter(f=>{const p=f.properties||{};return p.name&&!SKIP.test(p.osm_key||"")&&toksIn(q,p.name)});
+      const j={features:[...(a.features||[]),...extra]}; await loadCat(); if(!CAT) return;
       const have=new Set(CAT.map(c=>c.osm)); let added=0;
       for(const f of (j.features||[])){
         const p=f.properties||{}; if(!p.name||(p.countrycode&&p.countrycode!=="ES")) continue;
         const k=({N:"n",W:"w",R:"r"}[p.osm_type]||"x")+p.osm_id; if(have.has(k)) continue; have.add(k);
         const co=(f.geometry&&f.geometry.coordinates)||[null,null];
-        const type=/apart\s*-?hotel|apartahotel/i.test(p.name)?"Aparthotel":({hotel:"Hotel",apartment:"Apartamento",guest_house:"Hostal",hostel:"Hostal",motel:"Motel"}[p.osm_value]||"Hotel");
+        const type=/apart\s*-?hotel|apartahotel/i.test(p.name)?"Aparthotel":/residencia|living|student|colegio mayor/i.test(p.name)||/dormitory|student_accommodation/.test(p.osm_value||"")?"Residencia":({hotel:"Hotel",apartment:"Apartamento",apartments:"Apartamento",guest_house:"Hostal",hostel:"Hostal",motel:"Motel"}[p.osm_value]||(p.osm_key==="tourism"?"Hotel":"Apartamento"));
         const address=[p.street,p.housenumber].filter(Boolean).join(", "), city=p.city||p.town||p.village||p.district||p.county||"", region=p.state||"";
         CAT.push({id:"osm-"+k,osm:k,name:p.name,type,address,city,region,lat:co[1],lon:co[0],stars:"",catalog:true,live:true,k:norm(p.name),kc:norm(city+" "+region)}); added++;
       }
@@ -547,7 +556,7 @@ $("#back").addEventListener("click",showList);
 $("#fTags").innerHTML=TAGS.map(t=>`<button type="button" aria-pressed="false" data-v="${esc(t)}">${esc(t)}</button>`).join("");
 function openSheet(hotelId,prefill){
   const f=S.form; f.hotelId=hotelId||null; f.stars=0; f.tags=new Set(); f.type="Hotel";
-  $("#fName").value=prefill||""; $("#fCity").value=""; $("#fPrice").value=""; $("#fComment").value=""; $("#fErr").hidden=true;
+  $("#fName").value=prefill||""; $("#fCity").value=""; $("#fAddr").value=""; $("#fPrice").value=""; $("#fComment").value=""; $("#fErr").hidden=true;
   document.querySelectorAll("#fTags button,#fType button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.v==="Hotel"&&b.parentElement.id==="fType"));
   paintStars(); paintPick(); priceHint();
   $("#scrim").hidden=false; $("#sheet").hidden=false;
@@ -608,7 +617,7 @@ $("#form").addEventListener("submit",async e=>{
       const name=$("#fName").value.trim(), city=$("#fCity").value.trim();
       const dup=S.hotels.find(h=>norm(h.name)===norm(name)&&norm(h.city)===norm(city));
       if(dup) hid=dup.id;
-      else{const ref=await S.db.collection("hotels").add({name,city,type:f.type,createdBy:S.me||"",createdAt:Date.now()});hid=ref.id}
+      else{const ref=await S.db.collection("hotels").add({name,city,type:f.type,address:$("#fAddr").value.trim().slice(0,200),createdBy:S.me||"",createdAt:Date.now()});hid=ref.id}
     }
     const price=Math.round(+$("#fPrice").value)||0;
     await S.db.collection("reviews").add({hotelId:hid,rating:f.stars,price,tags:[...f.tags],comment:$("#fComment").value.trim().slice(0,500),authorId:S.me||"",createdAt:Date.now()});
