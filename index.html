@@ -376,7 +376,7 @@ function loadCat(){
   return catP;
 }
 /* live search in OpenStreetMap (Photon) for places not yet in the downloaded catalogue */
-const LQ={};let liveT=null;
+const LQ={},LIVE={};let liveT=null;
 const toksIn=(q,name)=>{const n=norm(name);return q.split(/\s+/).filter(t=>t.length>2).some(t=>n.includes(t))};
 const PHOTON_TAGS=["hotel","apartment","guest_house","hostel","motel"].map(t=>"&osm_tag=tourism:"+t).join("");
 function liveSearch(raw){
@@ -389,27 +389,32 @@ function liveSearch(raw){
       const [a,b]=await Promise.all([fetch(base+"&limit=50"+PHOTON_TAGS).then(r=>r.ok?r.json():{}).catch(()=>({})),
         fetch(base+"&limit=15").then(r=>r.ok?r.json():{}).catch(()=>({}))]);
       const SKIP=/^(place|highway|boundary|landuse|natural|waterway|railway|route|shop|office|leisure|man_made|power|aeroway|public_transport)$/;
-      const extra=(b.features||[]).filter(f=>{const p=f.properties||{};return p.name&&!SKIP.test(p.osm_key||"")&&toksIn(q,p.name)});
+      const LODGE_V=/^(hotel|apartment|apartments|guest_house|hostel|motel|dormitory|student_accommodation|chalet)$/, LODGE_N=/residencia|living|apartament|apartahotel|aparthotel|suites|hostal|hotel|rooms|pensi[oó]n|albergue|hospeder|posada|inn\b/i;
+      const extra=(b.features||[]).filter(f=>{const p=f.properties||{};return p.name&&!SKIP.test(p.osm_key||"")&&toksIn(q,p.name)&&(LODGE_V.test(p.osm_value||"")||LODGE_N.test(p.name))});
       const j={features:[...(a.features||[]),...extra]}; await loadCat(); if(!CAT) return;
-      const have=new Set(CAT.map(c=>c.osm)); let added=0;
+      const have=new Map(CAT.map(c=>[c.osm,c])); let added=0; const hits=[];
       for(const f of (j.features||[])){
         const p=f.properties||{}; if(!p.name||(p.countrycode&&p.countrycode!=="ES")) continue;
-        const k=({N:"n",W:"w",R:"r"}[p.osm_type]||"x")+p.osm_id; if(have.has(k)) continue; have.add(k);
+        const k=({N:"n",W:"w",R:"r"}[p.osm_type]||"x")+p.osm_id; if(have.has(k)){const o=have.get(k);if(!hits.includes(o))hits.push(o);continue}
         const co=(f.geometry&&f.geometry.coordinates)||[null,null];
         const type=/apart\s*-?hotel|apartahotel/i.test(p.name)?"Aparthotel":/residencia|living|student|colegio mayor/i.test(p.name)||/dormitory|student_accommodation/.test(p.osm_value||"")?"Residencia":({hotel:"Hotel",apartment:"Apartamento",apartments:"Apartamento",guest_house:"Hostal",hostel:"Hostal",motel:"Motel"}[p.osm_value]||(p.osm_key==="tourism"?"Hotel":"Apartamento"));
         const address=[p.street,p.housenumber].filter(Boolean).join(", "), city=p.city||p.town||p.village||p.district||p.county||"", region=p.state||"";
-        CAT.push({id:"osm-"+k,osm:k,name:p.name,type,address,city,region,lat:co[1],lon:co[0],stars:"",catalog:true,live:true,k:norm(p.name),kc:norm(city+" "+region)}); added++;
+        const row={id:"osm-"+k,osm:k,name:p.name,type,address,city,region,lat:co[1],lon:co[0],stars:"",catalog:true,live:true,k:norm(p.name),kc:norm(city+" "+region)}; CAT.push(row); have.set(k,row); hits.push(row); added++;
       }
-      if(added) rerender();
+      LIVE[q]=hits; rerender();
     }catch(e){}
   },450);
 }
 function catSearch(q,n,exclude){
   if(!CAT) return [];
   const toks=norm(q).split(/\s+/).filter(t=>t.length>1); if(!toks.length||norm(q).length<3) return [];
-  const out=[];
+  const out=[], seen=new Set();
+  for(const c of (LIVE[norm(q).trim()]||[])){ if((exclude&&exclude.has(c.osm))||seen.has(c.osm)) continue; seen.add(c.osm);
+    const words=(c.k+" "+c.kc).split(/[^a-z0-9]+/).filter(Boolean);
+    const hit=toks.filter(t=>words.some(w=>w.startsWith(t)||(w.length>=4&&t.startsWith(w)))).length;
+    out.push([100+hit,c]); }
   for(const c of CAT){
-    if(exclude&&exclude.has(c.osm)) continue;
+    if((exclude&&exclude.has(c.osm))||seen.has(c.osm)) continue;
     let ok=true,score=0;
     for(const t of toks){const inName=c.k.includes(t),inCity=c.kc.includes(t); if(!inName&&!inCity){ok=false;break} score+=inName?(c.k.startsWith(t)?3:2):1}
     if(ok){out.push([score,c]); if(out.length>3000)break}
