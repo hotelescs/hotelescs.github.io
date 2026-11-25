@@ -139,6 +139,9 @@
       async add(k) { const { error } = await sb.from("favorites").insert({ hotel_key: k }); if (error && error.code !== "23505") throw error; },
       async remove(k) { const { error } = await sb.from("favorites").delete().eq("hotel_key", k); if (error) throw error; }
     };
-    return { db, user, favs };
+    const sugg = {
+      async send(text) { const { error } = await sb.from("suggestions").insert({ text: String(text).slice(0, 1000) }); if (error) throw error; }
+    };
+    return { db, user, favs, sugg };
   };
 })();

@@ -99,3 +99,16 @@ create policy "mis favoritos" on public.favorites for all to authenticated
   using (user_id = auth.uid()) with check (user_id = auth.uid() and public.is_team());
 grant select, insert, delete on public.favorites to authenticated;
 
+
+-- Buzón de sugerencias (los técnicos solo pueden escribir; se leen desde Supabase > Table Editor)
+create table if not exists public.suggestions (
+  id uuid primary key default gen_random_uuid(),
+  author_id uuid not null default auth.uid() references auth.users on delete cascade,
+  text text not null check (length(text) between 1 and 1000),
+  created_at timestamptz not null default now()
+);
+alter table public.suggestions enable row level security;
+drop policy if exists "equipo envía sugerencias" on public.suggestions;
+create policy "equipo envía sugerencias" on public.suggestions for insert to authenticated
+  with check (author_id = auth.uid() and public.is_team());
+grant insert on public.suggestions to authenticated;

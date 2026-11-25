@@ -268,13 +268,26 @@ header.top .band{padding-block:8px 16px;display:grid;gap:10px}
 .thumb{width:58px;height:58px;border-radius:14px;background:center/cover no-repeat var(--line);position:relative}
 .thumb span{position:absolute;left:4px;bottom:4px;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#111;font-family:var(--f-head);font-weight:700;font-size:15px;border-radius:7px;padding:0 5px}
 .wmnote{margin:-6px 0 12px}
+
+a.logo{color:inherit;text-decoration:none}
+.guide{position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.5);display:grid;place-items:center;padding:16px}
+.guide[hidden]{display:none}
+.gbox{position:relative;width:100%;max-width:420px;background:var(--surface);border-radius:22px;box-shadow:var(--sh2);padding:24px 20px 18px;display:grid;gap:14px}
+.gstep{display:grid;gap:6px;min-height:230px;align-content:start}
+.gstep h2{font-size:28px}
+.gico{width:64px;height:64px;border-radius:18px;display:grid;place-items:center;font-size:34px;background:linear-gradient(135deg,var(--brand),var(--brand2));margin-bottom:6px}
+.gnav{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.gdots{display:flex;gap:5px}.gdots i{width:7px;height:7px;border-radius:50%;background:var(--line)}.gdots i.on{background:var(--brand);width:18px;border-radius:9px}
+.gclose{position:absolute;top:10px;right:12px;border:0;background:none;font-size:26px;color:var(--muted);line-height:1}
+#suggTxt{margin:4px 0 8px}
+@media (prefers-reduced-motion:no-preference){.gbox{animation:up .2s ease-out}}
 </style>
 </head>
 <body>
 
 <header class="top">
   <div class="corp"><div class="wrap brandrow">
-      <div class="logo"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 18V8m0 6h18v4M7 14v-3a2 2 0 0 1 2-2h8a4 4 0 0 1 4 4v1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="10.5" r="1.6" fill="currentColor"/></svg><span>Hoteles</span><span class="cs">CS</span></div>
+      <a class="logo" href="./" id="homeLink" aria-label="HotelesCS, ir al inicio"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 18V8m0 6h18v4M7 14v-3a2 2 0 0 1 2-2h8a4 4 0 0 1 4 4v1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="10.5" r="1.6" fill="currentColor"/></svg><span>Hoteles</span><span class="cs">CS</span></a>
       <div class="who" id="who">Customer Service · Uso interno</div>
     </div></div>
   <div class="wrap band">
@@ -321,6 +334,12 @@ header.top .band{padding-block:8px 16px;display:grid;gap:10px}
   </section>
   <footer class="foot"><b>Hoteles<span>CS</span></b> · Customer Service · Herramienta interna del equipo técnico</footer>
 </main>
+
+<div class="guide" id="guide" hidden role="dialog" aria-modal="true" aria-labelledby="gTitle">
+  <div class="gbox"><div class="gstep" id="gStep"></div>
+    <div class="gnav"><div class="gdots" id="gDots"></div><div class="row"><button class="btn ghost" id="gPrev">Atrás</button><button class="btn acc" id="gNext">Siguiente</button></div></div>
+    <button class="gclose" id="gClose" aria-label="Cerrar guía">×</button></div>
+</div>
 
 <nav class="bnav" aria-label="Secciones">
   <button data-tab="buscar" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>Buscar</button>
@@ -407,7 +426,7 @@ const LIMIT = 80;
 const bandIx = p => p<=80?0:p<=90?1:2;
 const BAND_LABEL = ["0-80 €","80-90 €","+90 €"], BAND_VAL=[80,85,95];
 const bandLabel = p => p==null||!(p>0)?"":BAND_LABEL[bandIx(p)];
-const TAGS = ["Parking","Desayuno temprano","Wifi bueno","Limpio","Tranquilo","Cerca del cliente","Cocina","Factura a empresa","Ruidoso","Lejos"];
+const TAGS = ["Parking","Fácil aparcar","Desayuno temprano","Wifi bueno","Limpio","Tranquilo","Cerca del cliente","Cocina","Factura a empresa","Ruidoso","Lejos"];
 const $ = s => document.querySelector(s);
 const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
@@ -900,6 +919,12 @@ function renderTab(){
       ${mine.length?`<div class="list">`+mine.map(r=>{const h=findHotel(r.hotelId)||{name:"Alojamiento",city:""};return `<div class="card myrev"><div class="body"><h3><a href="#h-${esc(r.hotelId)}" data-open="${esc(r.hotelId)}">${esc(h.name)}</a></h3>
         <div class="meta">${starStr(+r.rating||0)}${+r.price>0?`<b class="tnum">${bandLabel(+r.price)}</b>`:""}${r.via?`<span class="pill via">${esc(r.via)}</span>`:""}<span class="note">${r.createdAt?new Date(r.createdAt).toLocaleDateString("es-ES",{day:"numeric",month:"short",year:"numeric"}):""}</span></div>
         ${r.comment?`<div>${esc(r.comment)}</div>`:""}<button class="del" data-mydel="${esc(r.id)}">Borrar</button></div></div>`}).join("")+`</div>`:`<p class="note">${S.me?"Todavía no has escrito ninguna reseña.":"Entra con tu cuenta para ver tus reseñas."}</p>`}
+      <h2 class="subh">Ayuda</h2>
+      <div class="section"><p>¿Alguna duda de cómo va? Repasa la guía rápida en 1 minuto.</p><button class="btn ghost" id="guideBtn">Ver guía rápida</button></div>
+      <h2 class="subh">Sugerencias</h2>
+      <div class="section"><p>¿Echas algo en falta o algo no funciona? Cuéntalo aquí y lo leerá quien lleva la web.</p>
+        <textarea class="inp" id="suggTxt" rows="3" maxlength="1000" placeholder="Ej.: estaría bien poder filtrar por…"></textarea>
+        <button class="btn acc" id="suggBtn">Enviar sugerencia</button></div>
       <h2 class="subh">App en el móvil</h2>
       <div class="section">${standalone?`<p>Ya la estás usando como app. 👍</p>`:S.installEvt?`<p>Instálala para abrirla desde la pantalla de inicio, como una app.</p><button class="btn acc" id="installBtn">Instalar HotelesCS</button>`
         :ios?`<p>En iPhone: pulsa <b>Compartir</b> (el cuadrado con la flecha) y luego <b>Añadir a pantalla de inicio</b>.</p>`
@@ -910,6 +935,10 @@ $("#tabBody").addEventListener("click",async e=>{
   const o=e.target.closest("[data-open]"); if(o){e.preventDefault();return openHotel(o.dataset.open)}
   const c=e.target.closest("[data-h]"); if(c) return openHotel(c.dataset.h);
   const nf=e.target.closest("[data-nf]"); if(nf){if(nf.dataset.nf==="80")S.nearOnly80=!S.nearOnly80;else S.nearMin4=!S.nearMin4;return renderTab()}
+  if(e.target.id==="guideBtn") return openGuide();
+  if(e.target.id==="suggBtn"){const t=$("#suggTxt").value.trim(); if(t.length<3) return toast("Escribe tu sugerencia");
+    if(!S.suggApi) return toast("Para enviar sugerencias entra en la web del equipo");
+    e.target.disabled=true; try{await S.suggApi.send(t); $("#suggTxt").value=""; toast("¡Gracias! Sugerencia enviada")}catch(x){toast("No se ha podido enviar. Inténtalo más tarde")} e.target.disabled=false; return}
   if(e.target.id==="installBtn"&&S.installEvt){S.installEvt.prompt();try{await S.installEvt.userChoice}catch(x){} S.installEvt=null;return renderTab()}
   const d=e.target.closest("[data-mydel]");
   if(d){ if(d.dataset.confirm!=="1"){d.dataset.confirm="1";d.textContent="Pulsa otra vez para borrar";return}
@@ -939,6 +968,28 @@ S.favs=new Set(lsFavs());
 async function loadFavs(){ if(!S.favApi) return; try{const ks=await S.favApi.list(); for(const k of ks) S.favs.add(k); saveFavsLocal(); rerender()}catch(e){S.favApi=null} }
 async function toggleFav(id){ const on=!S.favs.has(id); on?S.favs.add(id):S.favs.delete(id); saveFavsLocal(); rerender(); toast(on?"Guardado en favoritos":"Quitado de favoritos");
   if(S.favApi){try{on?await S.favApi.add(id):await S.favApi.remove(id)}catch(e){}} }
+
+/* ---------- home link, quick guide, suggestions ---------- */
+$("#homeLink").addEventListener("click",e=>{e.preventDefault(); closeSheet(); $("#q").value=""; S.filters.clear(); document.querySelectorAll(".chip[data-f]").forEach(c=>c.setAttribute("aria-pressed","false")); setTab("buscar")});
+const GUIDE=[
+ ["🔎","Busca","Escribe la ciudad, la zona o el nombre del hotel arriba. Primero salen los sitios que ya ha probado el equipo, con su nota y lo que suele costar. Debajo, el resto de alojamientos de la zona."],
+ ["🏨","Mira la ficha","Toca un alojamiento para ver las opiniones, el mapa, y los botones de Booking, Hoteles.com y Google con tus fechas puestas para ver el precio de hoy."],
+ ["✉️","Pide la reserva a la agencia","Pon las fechas de entrada y salida arriba. En la ficha, «Copiar correo» te deja el email listo para la agencia, con el hotel y las fechas. Solo tienes que pegarlo y enviarlo."],
+ ["⭐","Deja tu reseña","Al volver, pulsa «+ Reseña»: elige el sitio, toca las estrellas y el rango de precio. Lo demás es opcional. Son 10 segundos y ayudas a todos."],
+ ["📍","Cerca del cliente y ranking","En la barra de abajo: «Cerca» te enseña dónde dormir cerca de la dirección del cliente, y «Ranking» los mejores de cada ciudad."],
+ ["📱","Tenla en el móvil","En «Lo mío» te explico cómo instalarla como una app. Ahí también tienes tus favoritos, tus reseñas y el buzón de sugerencias."]
+];
+let gi=0;
+function paintGuide(){const g=GUIDE[gi];$("#gStep").innerHTML=`<div class="gico" aria-hidden="true">${g[0]}</div><p class="note">Paso ${gi+1} de ${GUIDE.length}</p><h2 id="gTitle">${esc(g[1])}</h2><p>${esc(g[2])}</p>`;
+  $("#gDots").innerHTML=GUIDE.map((_,i)=>`<i class="${i===gi?"on":""}"></i>`).join("");$("#gPrev").style.visibility=gi?"visible":"hidden";$("#gNext").textContent=gi===GUIDE.length-1?"¡Entendido!":"Siguiente"}
+function openGuide(){gi=0;paintGuide();$("#guide").hidden=false}
+function closeGuide(){$("#guide").hidden=true;try{localStorage.setItem("ryc-guide","1")}catch(e){}}
+$("#gNext").addEventListener("click",()=>{if(gi<GUIDE.length-1){gi++;paintGuide()}else closeGuide()});
+$("#gPrev").addEventListener("click",()=>{if(gi>0){gi--;paintGuide()}});
+$("#gClose").addEventListener("click",closeGuide);
+$("#guide").addEventListener("click",e=>{if(e.target.id==="guide")closeGuide()});
+addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#guide").hidden)closeGuide()});
+function maybeGuide(){let seen=false;try{seen=localStorage.getItem("ryc-guide")==="1"}catch(e){} if(!seen) openGuide()}
 function rerender(){S.view==="hotel"?renderHotel():S.view==="tab"?renderTab():renderList(); if(!$("#sheet").hidden&&!S.form.hotelId) suggest()}
 async function resolveNames(){
   if(!S.user) return;
@@ -952,7 +1003,7 @@ setTimeout(loadCat,300);
 try{if(localStorage.getItem("ryc-mode")==="map")setMode("map")}catch(e){}
 (async function(){
   let db=null,user=null;
-  if(window.rycBackend){try{let favs;({db,user,favs}=await window.rycBackend());S.favApi=favs||null;loadFavs()}catch(e){console.error(e)}}
+  if(window.rycBackend){try{let favs,sugg;({db,user,favs,sugg}=await window.rycBackend());S.favApi=favs||null;S.suggApi=sugg||null;maybeGuide();loadFavs()}catch(e){console.error(e)}}
   else if(window.claude&&claude.use){[db,user]=await Promise.all([claude.use("db"),claude.use("user")])}
   else return;
   S.user=user;
