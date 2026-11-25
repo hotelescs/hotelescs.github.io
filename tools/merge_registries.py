@@ -181,7 +181,7 @@ def pick(v, keys):
         if v.get(k): return v[k]
     return ""
 
-SKIP = re.compile(r"vivienda[s]? (vacacional|de uso tur|turistic|tur[ií]stica)|habitatge|\bhut\b|\bvut\b|\bvv\b|\bvft\b|vivenda|camping|c[aà]mping|campament|autocaravan|area de acampada|agencia|ag[eè]ncia|turismo activo|refugi|caravan|bungalow park|empresa|guia|restaura|cafeter", re.I)
+SKIP = re.compile(r"vivienda[s]? (vacacional|de uso tur|turistic|tur[ií]stica)|habitatge|\bhut\b|\bvut\b|\bvv\b|\bvft\b|vivenda|camping|c[aà]mping|campament|autocaravan|area de acampada|agencia|ag[eè]ncia|turismo activo|refugi|caravan|bungalow park|empresa|guia|restaura|cafeter|llars compartides|informador|oficina de turismo|puerto deportivo|administracion|cerrado sin actividad", re.I)
 CLOSED = re.compile(r"baja|baixa|cese|cesad|cerrad|revocad|anulad|inactiv|extingu|clausur", re.I)
 
 def classify(typ, name, cat, default):
@@ -189,7 +189,7 @@ def classify(typ, name, cat, default):
     if SKIP.search(t): return None
     if re.search(r"apart\s*-?\s*hotel|apartahotel|hotel[- ]?apartament|hotel apartament|^ha$|\bha\b", t + " " + n): return "P"
     if re.search(r"motel", t + " " + n): return "M"
-    if re.search(r"residencia|colegio mayor|residencia universitaria", t): return "R"
+    if re.search(r"colegio mayor|residencia universitari|residencia de estudiantes|residencia juvenil", t) or (re.fullmatch(r"\s*residencias?\s*", t)): return "R"
     if re.search(r"hostal|pension|pensio|fonda|casa de huesped|hospedaje|albergue|alberg|aterpe|rural|agroturism|casa de aldea|posada|hosteria|hospederia|\bhs\b|\bhr\b|\bp\b|turismo de interior|landa|masia|masoveria|fogar|casa de turismo", t):
         return "H" if re.search(r"hotel rural|hotel", t) and not re.search(r"hostal", t) else "S"
     if re.search(r"apartament|apartamento|ap\b|villa|bungalow|extrahotel|estudio", t): return "A"
@@ -203,8 +203,8 @@ def stars_of(cat, ty):
         m2 = re.search(r"(un|una|dos|tres|cuatro|cinco)\s+estrell", c)
         if m2: return str(["un", "dos", "tres", "cuatro", "cinco"].index(m2.group(1).replace("una", "un")) + 1)
         m3 = re.fullmatch(r"\s*(\*{1,5})\s*", c) or re.search(r"/(\*{1,5})\s*$", c)
-        return str(len(m3.group(1))) if m3 and ty in "HPSM" else ""
-    return m.group(1) if ty in "HPSM" else ""
+        return str(len(m3.group(1))) if m3 and ty in "HPM" else ""
+    return m.group(1) if ty in "HPM" else ""
 
 def tonum(x):
     try: return float(str(x).replace(",", "."))
@@ -271,6 +271,34 @@ def same(a, b):
     ta, tb = set(a.split()), set(b.split())
     if ta and tb and len(ta & tb) / min(len(ta), len(tb)) >= 0.99 and min(len(ta), len(tb)) >= 1 and (len(ta & tb) >= 2 or max(len(x) for x in ta & tb) >= 5): return True
     return SequenceMatcher(None, a, b).ratio() >= 0.86
+
+# ---------- street-level positions from CartoCiudad (official free geocoder of the IGN), cached in data/geocache.json ----------
+def geocode(rows, budget=1800):
+    path = "data/geocache.json"
+    cache = json.load(open(path)) if os.path.exists(path) else {}
+    t0 = time.time(); fails = [0]; asked = [0]
+    def one(r):
+        key = r[3] + "|" + r[4]
+        if key in cache or time.time() - t0 > budget or (asked[0] > 30 and fails[0] == asked[0]): return
+        asked[0] += 1
+        try:
+            q = urllib.parse.quote(r[3] + ", " + r[4])
+            js = json.loads(urllib.request.urlopen(urllib.request.Request("https://www.cartociudad.es/geocoder/api/geocoder/find?q=" + q, headers=UA), timeout=30).read() or b"{}")
+            lat, lon = js.get("lat"), js.get("lng")
+            muni = strip(js.get("muni") or "")
+            ok = lat and lon and in_spain(lat, lon) and js.get("type") in ("portal", "callejero", "Vial", "toponimo", "poblacion") and (
+                not muni or set(re.split(r"[^a-z]+", muni)) & set(re.split(r"[^a-z]+", strip(r[4]))) - {"", "de", "la", "el", "del", "les", "els"})
+            cache[key] = [round(lat, 5), round(lon, 5), js.get("type")] if ok else None
+        except Exception:
+            fails[0] += 1
+    with ThreadPoolExecutor(6) as ex: list(ex.map(one, rows))
+    better = 0
+    for r in rows:
+        c = cache.get(r[3] + "|" + r[4])
+        if c and c[2] in ("portal", "callejero", "Vial"):
+            r[6], r[7] = c[0], c[1]; r.pop(); better += 1
+    json.dump(cache, open(path, "w"), ensure_ascii=False, separators=(",", ":"))
+    print("geocoder: %d preguntas, %d fallos, %d con calle exacta de %d aproximados, %.0fs" % (asked[0], fails[0], better, len(rows), time.time() - t0))
 
 # ---------- main ----------
 def main(path):
@@ -343,8 +371,10 @@ def main(path):
             if not exact: r.append(1)     # 10th field: position is approximate (town or postcode centre)
             rows.append(r); index(r); added_all.append(r); st["añadido" + ("" if exact else " (ubicación aproximada)")] += 1
         report.append({"fuente": code, "region": NA[reg], "url": used, "filas": len(raw_rows), "resultado": dict(st), "errores": errs,
-                       "tipos": dict(types.most_common(25))})
+                       "tipos": dict(types.most_common(25)), "columnas": list(raw_rows[0].keys())[:40] if raw_rows else [],
+                       "ejemplo": {str(k): str(x)[:60] for k, x in list(raw_rows[0].items())[:25]} if raw_rows else {}})
         print("%-13s %-14s filas=%-6d %s %s" % (code, NA[reg], len(raw_rows), dict(st), ("ERR " + " | ".join(errs)) if not raw_rows else ""))
+    geocode([r for r in added_all if len(r) > 9 and r[3]])
     # stable ids: avoid collisions
     ids = Counter(r[0] for r in rows)
     for i, r in enumerate(added_all):

@@ -491,7 +491,7 @@ function loadCat(){
   if(catP) return catP;
   const get=u=>fetch(u).then(r=>r.ok?r.json():[]).catch(()=>[]);
   catP=Promise.all([get("hotels-es.json"),get("hotels-extra.json")]).then(([a,b])=>{a=(b||[]).concat(a||[]);
-    CAT=a.map(x=>({id:"osm-"+x[0],osm:x[0],name:x[1],type:TYPEMAP[x[2]]||"Hotel",address:x[3],city:x[4],region:x[5],lat:x[6],lon:x[7],stars:x[8],catalog:true,k:norm(x[1]),kc:norm(x[4]+" "+x[5])}));
+    CAT=a.map(x=>({id:"osm-"+x[0],osm:x[0],name:x[1],type:TYPEMAP[x[2]]||"Hotel",address:x[3],city:x[4],region:x[5],lat:x[6],lon:x[7],stars:x[8],approx:x[9]===1,catalog:true,k:norm(x[1]),kc:norm(x[4]+" "+x[5])}));
     const n=document.getElementById("catCount"); if(n) n.textContent=CAT.length.toLocaleString("es-ES");
     rerender(); return CAT}).catch(()=>{CAT=[];return CAT});
   return catP;
@@ -550,15 +550,16 @@ const placeLine = h => [h.address,h.city,h.region&&h.region!==h.city?h.region:""
 /* real street map (OpenStreetMap embed) for a place with coordinates */
 function osmEmbed(h,cls){
   if(h.lat==null||h.lon==null||location.protocol==="about:"||/claudeusercontent|claude\.ai/.test(location.host)) return "";
-  const la=+h.lat, lo=+h.lon, d=0.006;
-  const src=`https://www.openstreetmap.org/export/embed.html?bbox=${lo-d*1.4},${la-d},${lo+d*1.4},${la+d}&layer=mapnik&marker=${la},${lo}`;
-  return `<div class="osmmap ${cls||""}"><iframe title="Mapa de ${esc(h.name)}" loading="lazy" src="${esc(src)}"></iframe><a class="note" target="_blank" rel="noopener" href="https://www.openstreetmap.org/?mlat=${la}&mlon=${lo}#map=17/${la}/${lo}">Ver mapa grande ↗</a></div>`;
+  const ap=h.approx||(CAT&&h.osm&&(CAT.find(c=>c.osm===h.osm)||{}).approx);
+  const la=+h.lat, lo=+h.lon, d=ap?0.03:0.006;
+  const src=`https://www.openstreetmap.org/export/embed.html?bbox=${lo-d*1.4},${la-d},${lo+d*1.4},${la+d}&layer=mapnik`+(ap?"":`&marker=${la},${lo}`);
+  return `<div class="osmmap ${cls||""}"><iframe title="Mapa de ${esc(h.name)}" loading="lazy" src="${esc(src)}"></iframe>${ap?`<span class="note">Ubicación aproximada: el registro oficial solo da la población${h.address?" y la dirección ("+esc(h.address)+")":""}.</span>`:""}<a class="note" target="_blank" rel="noopener" href="https://www.openstreetmap.org/?mlat=${la}&mlon=${lo}#map=${ap?14:17}/${la}/${lo}">Ver mapa grande ↗</a></div>`;
 }
 const photosOf=rs=>rs.flatMap(r=>(r.photos||[]).filter(u=>/^https:\/\//.test(u)));
 /* free photos taken right next to the place (Wikimedia Commons), when there are any */
 const WM={};
 async function loadWikiPhotos(h){
-  const box=document.getElementById("wmPhotos"); if(!box||h.lat==null||h.lon==null) return;
+  const box=document.getElementById("wmPhotos"); if(!box||h.lat==null||h.lon==null||h.approx||(CAT&&h.osm&&(CAT.find(c=>c.osm===h.osm)||{}).approx)) return;
   const key=(+h.lat).toFixed(5)+","+(+h.lon).toFixed(5);
   if(!(key in WM)){ WM[key]=[];
     try{const r=await fetch("https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=geosearch&ggsnamespace=6&ggslimit=8&ggsradius=60&ggscoord="+(+h.lat)+"|"+(+h.lon)+"&prop=imageinfo&iiprop=url&iiurlwidth=480");
