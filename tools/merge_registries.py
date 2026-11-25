@@ -15,7 +15,7 @@ from difflib import SequenceMatcher
 
 UA = {"User-Agent": "HotelesCS-catalogo/1.0 (datos abiertos)"}
 NA = {"cl": "Cataluña", "cn": "Canarias", "pv": "País Vasco", "ex": "Extremadura", "cv": "C. Valenciana", "mu": "Murcia",
-      "ar": "Aragón", "cy": "Castilla y León", "na": "Navarra", "ga": "Galicia", "md": "Madrid", "as": "Asturias"}
+      "ar": "Aragón", "cy": "Castilla y León", "na": "Navarra", "ga": "Galicia", "md": "Madrid", "as": "Asturias", "an": "Andalucía", "ib": "Baleares", "cm": "Castilla-La Mancha"}
 
 # code, region, default type, url(s) (first that works), extra options
 SOURCES = [
@@ -61,6 +61,14 @@ SOURCES = [
  ("nav-apt", "na", "A", ["https://datosabiertos.navarra.es/datastore/dump/e761b1ec-23ed-4523-bf56-d8f7a338ae3c?format=csv&bom=True"], {}),
  ("nav-alb", "na", "S", ["https://datosabiertos.navarra.es/datastore/dump/95ca4059-d22d-4dbe-86d8-f05dc5a20c3f?format=csv&bom=True"], {}),
  ("nav-rur", "na", "S", ["https://datosabiertos.navarra.es/datastore/dump/74e164d1-a0a4-485f-993c-15befc3b04b7?format=csv&bom=True"], {}),
+ ("and", "an", "H", ["https://datos.juntadeandalucia.es/api/v0/openrta/all?format=csv", "https://datos.juntadeandalucia.es/api/v0/openrta/all?format=json"], {"utm": 30}),
+ ("bal-mal", "ib", "H", ["https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_mallorca/allotjaments_turistics_mallorca.geojson",
+                         "https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_mallorca/allotjaments_turistics_mallorca.csv"], {"utm": 31}),
+ ("bal-men", "ib", "H", ["https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_menorca/allotjaments_turistics_menorca.geojson",
+                         "https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_menorca/allotjaments_turistics_menorca.csv"], {"utm": 31}),
+ ("clm-hot", "cm", "H", ["https://datosabiertos.castillalamancha.es/node/1601/download", "https://datosabiertos.castillalamancha.es/sites/datosabiertos.castillalamancha.es/files/Hoteles.csv"], {}),
+ ("clm-rur", "cm", "S", ["https://datosabiertos.castillalamancha.es/sites/datosabiertos.castillalamancha.es/files/Alojamientos%20rurales.csv"], {}),
+ ("clm-alb", "cm", "S", ["https://datosabiertos.castillalamancha.es/sites/datosabiertos.castillalamancha.es/files/Albergues.csv"], {}),
  ("gal", "ga", "H", ["https://abertos.xunta.gal/catalogo/cultura-ocio-deporte/-/dataset/0022/rexistro-empresas-actividades-turisticas/103/acceso-aos-datos.csv",
                      "https://abertos.xunta.gal/catalogo/cultura-ocio-deporte/-/dataset/0022/rexistro-empresas-actividades-turisticas/101/acceso-aos-datos.xlsx"], {}),
  ("vigo", "ga", "H", ["https://datos.vigo.org/data/turismo/poi-hoteles-es.csv"], {}),
@@ -166,22 +174,22 @@ def val(r): return {colkey(k): ("" if v is None else str(v).strip()) for k, v in
 
 NAME = ["retol", "nombre_alojamiento", "nombre_de_la_vivienda", "establecimiento_nombre_comercial", "nombre_comercial", "nombre_establecimiento", "denominacion", "documentname",
         "nombre", "name", "etiqueta", "title", "titulo", "nome", "nome_comercial", "rotulo", "denominacion_comercial"]
-TYPE = ["tipus_establiment", "alojamiento_tipo", "actividad_sigla", "tipo_vivienda", "tipo_establecimiento_categoria", "grup", "modalitat", "establecimiento_tipologia", "establecimiento_modalidad", "nom_tipo", "tipo_recurso",
+TYPE = ["tipus_establiment", "object_type", "group", "alojamiento_tipo", "actividad_sigla", "tipo_vivienda", "tipo_establecimiento_categoria", "grup", "modalitat", "establecimiento_tipologia", "establecimiento_modalidad", "nom_tipo", "tipo_recurso",
         "tipo_establecimiento", "tipologia", "tipo", "modalidad", "grupo", "lodgingtype", "actividad_tipo", "subcategoria", "clase", "categoria_establecimiento"]
 CITY = ["municipi", "localidad_establecimiento", "direccion_municipio_nombre", "municipio_nombre", "nom_municipio", "municipio", "municipality", "concello", "localidad", "localitat", "poblacion", "locality"]
-ADDR = ["direccion_establecimiento", "direccion", "domicilio", "address", "direccion_completa", "enderezo", "adreca"]
-PC = ["codi_postal", "codigo_postal_establecimiento", "cdpostal", "direccion_codigo_postal", "codigo_postal", "cod_postal", "c_postal", "cp", "c_p", "postalcode", "postcode", "codpostal"]
-CAT = ["categoria", "category", "nom_categor", "clasificacion", "establecimiento_clasificacion", "categoria_establecimiento"]
+ADDR = ["direccion_establecimiento", "establishment_address", "adreca_establiment", "adreca", "direccion", "domicilio", "address", "direccion_completa", "enderezo", "adreca"]
+PC = ["codi_postal", "postal_code", "codigo_postal_establecimiento", "cdpostal", "direccion_codigo_postal", "codigo_postal", "cod_postal", "c_postal", "cp", "c_p", "postalcode", "postcode", "codpostal"]
+CAT = ["categoria", "categories", "category", "nom_categor", "clasificacion", "establecimiento_clasificacion", "categoria_establecimiento"]
 STAT = ["estat", "estado", "situacion", "estado_actual"]
-LAT = ["latitud", "latitude", "lat", "coordenada_y", "y"]
-LON = ["longitud", "longitude", "lon", "lng", "coordenada_x", "x"]
+LAT = ["latitud", "coord_y", "latitude", "lat", "coordenada_y", "y"]
+LON = ["longitud", "coord_x", "longitude", "lon", "lng", "coordenada_x", "x"]
 
 def pick(v, keys):
     for k in keys:
         if v.get(k): return v[k]
     return ""
 
-SKIP = re.compile(r"vivienda[s]? (vacacional|de uso tur|turistic|tur[ií]stica)|habitatge|\bhut\b|\bvut\b|\bvv\b|\bvt\b|\bvft\b|vivenda|camping|c[aà]mping|campament|autocaravan|area de acampada|agencia|ag[eè]ncia|turismo activo|refugi|caravan|vivienda de uso|vivienda turistica|vivienda turística|bungalow park|empresa|guia|restaura|cafeter|llars compartides|informador|oficina de turismo|puerto deportivo|administracion|cerrado sin actividad", re.I)
+SKIP = re.compile(r"vivienda[s]? (vacacional|de uso tur|turistic|tur[ií]stica)|habitatge|\bhut\b|\bvut\b|\bvv\b|\bvt\b|\bvft\b|vivenda|camping|c[aà]mping|campament|autocaravan|area de acampada|agencia|ag[eè]ncia|turismo activo|refugi|caravan|lloguer|estada tur|\betv\b|fines turistic|pernocta|vivienda de uso|vivienda turistica|vivienda turística|bungalow park|empresa|guia|restaura|cafeter|llars compartides|informador|oficina de turismo|puerto deportivo|administracion|cerrado sin actividad", re.I)
 CLOSED = re.compile(r"baja|baixa|cese|cesad|cerrad|revocad|anulad|inactiv|extingu|clausur", re.I)
 
 def classify(typ, name, cat, default):
