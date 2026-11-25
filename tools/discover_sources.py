@@ -1,6 +1,7 @@
 """Busca en datos.gob.es (catálogo nacional de datos abiertos) conjuntos de datos de alojamientos turísticos
 y apunta sus ficheros descargables y las columnas de cada uno en data/discovery.json."""
-import csv, io, json, re, sys, urllib.parse, urllib.request
+import csv, io, json, os, re, sys, urllib.parse, urllib.request
+os.makedirs("data", exist_ok=True)
 
 UA = {"User-Agent": "HotelesCS-catalogo/1.0 (datos abiertos)"}
 def get(url, n=None):
