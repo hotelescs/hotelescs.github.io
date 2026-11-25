@@ -1,15 +1,16 @@
 {
- "total": 44017,
- "añadidos": 19533,
+ "total": 61531,
+ "añadidos": 37047,
  "por_region": {
+  "Andalucía": 17522,
   "Aragón": 2223,
-  "Asturias": 18,
+  "Asturias": 16,
   "C. Valenciana": 1953,
   "Canarias": 2630,
   "Castilla y León": 4387,
   "Cataluña": 3824,
   "Extremadura": 1812,
-  "Galicia": 18,
+  "Galicia": 12,
   "Madrid": 1131,
   "Murcia": 733,
   "País Vasco": 804
@@ -2294,16 +2295,16 @@
    "fuente": "cyl-apt",
    "region": "Castilla y León",
    "url": "https://datosabiertos.jcyl.es/web/jcyl/risp/es/turismo/apartamentos/1284211832109.csv",
-   "filas": 683,
+   "filas": 684,
    "resultado": {
-    "añadido (ubicación aproximada)": 472,
+    "añadido (ubicación aproximada)": 473,
     "ya estaba": 171,
     "sin ubicación": 38,
     "repetido en la fuente": 2
    },
    "errores": [],
    "tipos": {
-    "": 683
+    "": 684
    },
    "columnas": [
     "N.Registro",
@@ -2421,15 +2422,15 @@
    "url": "https://datosabiertos.jcyl.es/web/jcyl/risp/es/turismo/turismo_rural/1284211842462.csv",
    "filas": 4140,
    "resultado": {
-    "añadido (ubicación aproximada)": 2861,
-    "ya estaba": 884,
+    "añadido (ubicación aproximada)": 2860,
+    "ya estaba": 885,
     "sin ubicación": 373,
     "repetido en la fuente": 22
    },
    "errores": [],
    "tipos": {
-    "Casa Rural": 1903,
-    "Casa Rural de Alquiler": 1478,
+    "Casa Rural": 1904,
+    "Casa Rural de Alquiler": 1477,
     "Hotel Rural": 536,
     "Posada": 123,
     "Casa Rural de Alojamiento Compartido": 100
@@ -2551,6 +2552,168 @@
    "ejemplo": {}
   },
   {
+   "fuente": "and",
+   "region": "Andalucía",
+   "url": "https://datos.juntadeandalucia.es/api/v0/openrta/all?format=csv",
+   "filas": 178737,
+   "resultado": {
+    "ya estaba": 14221,
+    "añadido": 16486,
+    "repetido en la fuente": 6702,
+    "añadido (ubicación aproximada)": 1036,
+    "sin ubicación": 1644,
+    "sin nombre": 138648
+   },
+   "errores": [],
+   "tipos": {
+    "Completa": 31948,
+    "": 4192,
+    "Hotel": 1403,
+    "Por habitaciones": 1131,
+    "Pensión": 668,
+    "Hostal": 599,
+    "Hotel-Apartamento": 90,
+    "Albergue": 58
+   },
+   "columnas": [
+    "active_tourism_activities",
+    "activity_start_date",
+    "block",
+    "catastral_ref",
+    "categories",
+    "category_id",
+    "coord_x",
+    "coord_y",
+    "core_id",
+    "description",
+    "domicile_complement",
+    "door",
+    "email",
+    "establishment_address",
+    "father_id",
+    "fixed_mobile_ind",
+    "floor",
+    "group",
+    "group_id",
+    "holder",
+    "id",
+    "ind_office_tour_integrated_network",
+    "ind_pub_open_rta",
+    "km",
+    "km_num",
+    "languages",
+    "locality",
+    "maximum_capacity_camp",
+    "mobile",
+    "modalities",
+    "modality_id",
+    "municipalities",
+    "municipality_id",
+    "name",
+    "np_camping_plots",
+    "np_fixed_installations",
+    "num_camping_plots",
+    "num_fixed_installations",
+    "numbering_type",
+    "object_type_id"
+   ],
+   "ejemplo": {
+    "active_tourism_activities": "",
+    "activity_start_date": "19970214",
+    "block": "",
+    "catastral_ref": "",
+    "categories": "4 Estrellas",
+    "category_id": "5.0",
+    "coord_x": "539165.31960284326",
+    "coord_y": "4074588.2917138939",
+    "core_id": "695.0",
+    "description": "",
+    "domicile_complement": "",
+    "door": "",
+    "email": "-",
+    "establishment_address": "PUERTO DEPORTIVO- AGUADULCE",
+    "father_id": "",
+    "fixed_mobile_ind": "",
+    "floor": "",
+    "group": "Hotel",
+    "group_id": "1.0",
+    "holder": "MARINA DE AGUADULCE INVERSIONES SLU",
+    "id": "3032",
+    "ind_office_tour_integrated_network": "",
+    "ind_pub_open_rta": "S",
+    "km": "",
+    "km_num": ""
+   }
+  },
+  {
+   "fuente": "bal-mal",
+   "region": "Baleares",
+   "url": null,
+   "filas": 0,
+   "resultado": {},
+   "errores": [
+    "https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_ma <HTTPError 404: 'Not Found'>",
+    "https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_ma <HTTPError 404: 'Not Found'>"
+   ],
+   "tipos": {},
+   "columnas": [],
+   "ejemplo": {}
+  },
+  {
+   "fuente": "bal-men",
+   "region": "Baleares",
+   "url": null,
+   "filas": 0,
+   "resultado": {},
+   "errores": [
+    "https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_me <HTTPError 404: 'Not Found'>",
+    "https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_me <HTTPError 404: 'Not Found'>"
+   ],
+   "tipos": {},
+   "columnas": [],
+   "ejemplo": {}
+  },
+  {
+   "fuente": "clm-hot",
+   "region": "Castilla-La Mancha",
+   "url": null,
+   "filas": 0,
+   "resultado": {},
+   "errores": [
+    "https://datosabiertos.castillalamancha.es/node/1601/download ValueError('html/xml instead of data')",
+    "https://datosabiertos.castillalamancha.es/sites/datosabiertos.castillalamancha.e ValueError('html/xml instead of data')"
+   ],
+   "tipos": {},
+   "columnas": [],
+   "ejemplo": {}
+  },
+  {
+   "fuente": "clm-rur",
+   "region": "Castilla-La Mancha",
+   "url": null,
+   "filas": 0,
+   "resultado": {},
+   "errores": [
+    "https://datosabiertos.castillalamancha.es/sites/datosabiertos.castillalamancha.e ValueError('html/xml instead of data')"
+   ],
+   "tipos": {},
+   "columnas": [],
+   "ejemplo": {}
+  },
+  {
+   "fuente": "clm-alb",
+   "region": "Castilla-La Mancha",
+   "url": null,
+   "filas": 0,
+   "resultado": {},
+   "errores": [
+    "https://datosabiertos.castillalamancha.es/sites/datosabiertos.castillalamancha.e ValueError('html/xml instead of data')"
+   ],
+   "tipos": {},
+   "columnas": [],
+   "ejemplo": {}
+  },
+  {
    "fuente": "gal",
    "region": "Galicia",
    "url": null,
@@ -2570,8 +2733,8 @@
    "url": "https://datos.vigo.org/data/turismo/poi-hoteles-es.csv",
    "filas": 42,
    "resultado": {
-    "añadido": 18,
-    "ya estaba": 24
+    "añadido": 12,
+    "ya estaba": 30
    },
    "errores": [],
    "tipos": {
@@ -2742,8 +2905,8 @@
    "url": "https://opendata.gijon.es/descargar.php?id=736&tipo=CSV",
    "filas": 26,
    "resultado": {
-    "ya estaba": 11,
-    "añadido (ubicación aproximada)": 7,
+    "ya estaba": 13,
+    "añadido (ubicación aproximada)": 5,
     "sin ubicación": 6,
     "añadido": 1,
     "repetido en la fuente": 1
