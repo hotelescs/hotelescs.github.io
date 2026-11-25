@@ -719,7 +719,7 @@ ${esc(m.body)}</pre>
           ${(r.tags||[]).length?`<div class="tags">${r.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>`:""}
           ${r.comment?`<div>${esc(r.comment)}</div>`:""}
           ${(r.photos||[]).length?`<div class="rphotos">${photosOf([r]).map(u=>`<a href="${esc(u)}" target="_blank" rel="noopener"><img src="${esc(u)}" alt="" loading="lazy"></a>`).join("")}</div>`:""}
-          ${S.me&&r.authorId===S.me&&!r.example?`<button class="del" data-del="${esc(r.id)}">Borrar mi reseña</button>`:""}
+          ${S.me&&r.authorId===S.me&&!r.example?`<button class="del" data-edit="${esc(r.id)}">Editar</button> <button class="del" data-del="${esc(r.id)}">Borrar mi reseña</button>`:""}
         </div>`).join(""):`<div class="note">Nadie ha opinado todavía.</div>`}
     </div>`;
   if(!h.example) loadWikiPhotos(h);
@@ -733,6 +733,7 @@ $("#hotel").addEventListener("click",async e=>{
     return}
   if(e.target.closest("[data-rev]")) return openSheet(S.hotelId);
   const fv=e.target.closest("[data-fav]"); if(fv) return toggleFav(fv.dataset.fav);
+  const ed=e.target.closest("[data-edit]"); if(ed) return editReview(ed.dataset.edit);
   const d=e.target.closest("[data-del]");
   if(d){ if(d.dataset.confirm!=="1"){d.dataset.confirm="1";d.textContent="Pulsa otra vez para borrar";return}
     try{await S.db.doc("reviews/"+d.dataset.del).delete();toast("Reseña borrada")}catch(err){toast("No se ha podido borrar")}}
@@ -749,6 +750,7 @@ function openSheet(hotelId,prefill){
   const f=S.form; f.hotelId=hotelId||null; f.stars=0; f.tags=new Set(); f.type="Hotel"; f.via=""; f.price=0;
   $("#fName").value=prefill||""; $("#fCity").value=""; $("#fAddr").value=""; $("#fComment").value=""; $("#fErr").hidden=true;
   document.querySelectorAll("#fTags button,#fType button,#fVia button,#fPrice button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.v==="Hotel"&&b.parentElement.id==="fType"));
+  f.editing=null; $("#sTitle").textContent="Nueva reseña"; $("#fSave").textContent="Guardar reseña";
   paintStars(); paintPick();
   $("#scrim").hidden=false; $("#sheet").hidden=false;
   setTimeout(()=>{(hotelId?$("#fStars button"):$("#fName")).focus()},50);
@@ -761,9 +763,20 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#sheet").hidden
 function savedIdFor(id){ if(!id) return null; if(!id.startsWith("osm-")) return id;
   const c=findHotel(id); if(!c) return null; const d=S.hotels.find(h=>h.osm===c.osm)||S.hotels.find(h=>norm(h.name)===norm(c.name)&&norm(h.city)===norm(c.city)); return d?d.id:null }
 const myReviewOf=hid=>hid&&S.me?S.reviews.find(r=>r.hotelId===hid&&r.authorId===S.me):null;
+/* edit one of my reviews: the form opens filled in; saving replaces the old one */
+function editReview(rid){
+  const r=S.reviews.find(x=>x.id===rid&&x.authorId===S.me); if(!r) return;
+  openSheet(r.hotelId); const f=S.form; f.editing=r.id;
+  f.stars=+r.rating||0; f.price=+r.price||0; f.tags=new Set(r.tags||[]); f.via=r.via||"";
+  $("#fComment").value=r.comment||"";
+  [...$("#fPrice").children].forEach(x=>x.setAttribute("aria-pressed",+x.dataset.v===f.price));
+  [...$("#fTags").children].forEach(x=>x.setAttribute("aria-pressed",f.tags.has(x.dataset.v)));
+  [...$("#fVia").children].forEach(x=>x.setAttribute("aria-pressed",x.dataset.v===f.via));
+  paintStars(); paintPick(); $("#sTitle").textContent="Editar reseña"; $("#fSave").textContent="Guardar cambios";
+}
 function paintPick(){
   const f=S.form; const h=f.hotelId?findHotel(f.hotelId):null;
-  const mine=h?myReviewOf(savedIdFor(f.hotelId)):null; $("#fMine").hidden=!mine;
+  const mine=h?myReviewOf(savedIdFor(f.hotelId)):null; $("#fMine").hidden=!mine||!!f.editing;
   $("#selBox").hidden=!h; $("#pickBox").hidden=!!h;
   if(h) $("#selBox").innerHTML=`<div class="sel"><span>${esc(h.name)}<small>${esc(placeLine(h))}</small></span><button type="button" id="chg">Cambiar</button></div>`+(osmEmbed(h,"small")||"");
   else suggest();
@@ -819,9 +832,9 @@ $("#form").addEventListener("submit",async e=>{
     const old=S.reviews.filter(r=>r.hotelId===hid&&r.authorId===S.me);   // one review per person and place: the new one replaces the old
     await S.db.collection("reviews").add({hotelId:hid,rating:f.stars,price,tags:[...f.tags],via:f.via||"",comment:$("#fComment").value.trim().slice(0,500),authorId:S.me||"",createdAt:Date.now()});
     for(const o of old){try{await S.db.doc("reviews/"+o.id).delete()}catch(e){}}
-    closeSheet(); toast(old.length?"Reseña actualizada. Sustituye a la que tenías.":"Reseña guardada. ¡Gracias!"); openHotel(hid);
+    closeSheet(); toast(f.editing?"Cambios guardados":old.length?"Reseña actualizada. Sustituye a la que tenías.":"Reseña guardada. ¡Gracias!"); openHotel(hid);
   }catch(x){fail("No se ha podido guardar. Revisa la conexión y vuelve a intentarlo.")}
-  finally{saving=false;$("#fSave").textContent="Guardar reseña"}
+  finally{saving=false;$("#fSave").textContent=S.form.editing?"Guardar cambios":"Guardar reseña"}
 });
 
 /* ---------- toast ---------- */
@@ -986,7 +999,7 @@ function renderTab(){
       <h2 class="subh">Mis reseñas <span class="note">${mine.length}</span></h2>
       ${mine.length?`<div class="list">`+mine.map(r=>{const h=findHotel(r.hotelId)||{name:"Alojamiento",city:""};return `<div class="card myrev"><div class="body"><h3><a href="#h-${esc(r.hotelId)}" data-open="${esc(r.hotelId)}">${esc(h.name)}</a></h3>
         <div class="meta">${starStr(+r.rating||0)}${+r.price>0?`<b class="tnum">${bandLabel(+r.price)}</b>`:""}${r.via?`<span class="pill via">${esc(r.via)}</span>`:""}<span class="note">${r.createdAt?new Date(r.createdAt).toLocaleDateString("es-ES",{day:"numeric",month:"short",year:"numeric"}):""}</span></div>
-        ${r.comment?`<div>${esc(r.comment)}</div>`:""}<button class="del" data-mydel="${esc(r.id)}">Borrar</button></div></div>`}).join("")+`</div>`:`<p class="note">${S.me?"Todavía no has escrito ninguna reseña.":"Entra con tu cuenta para ver tus reseñas."}</p>`}
+        ${r.comment?`<div>${esc(r.comment)}</div>`:""}<button class="del" data-edit="${esc(r.id)}">Editar</button> <button class="del" data-mydel="${esc(r.id)}">Borrar</button></div></div>`}).join("")+`</div>`:`<p class="note">${S.me?"Todavía no has escrito ninguna reseña.":"Entra con tu cuenta para ver tus reseñas."}</p>`}
       <h2 class="subh">Ayuda</h2>
       <div class="section"><p>¿Alguna duda de cómo va? Repasa la guía rápida en 1 minuto.</p><button class="btn ghost" id="guideBtn">Ver guía rápida</button></div>
       <h2 class="subh">Sugerencias</h2>
@@ -1008,6 +1021,7 @@ $("#tabBody").addEventListener("click",async e=>{
     if(!S.suggApi) return toast("Para enviar sugerencias entra en la web del equipo");
     e.target.disabled=true; try{await S.suggApi.send(t); $("#suggTxt").value=""; toast("¡Gracias! Sugerencia enviada")}catch(x){toast("No se ha podido enviar. Inténtalo más tarde")} e.target.disabled=false; return}
   if(e.target.id==="installBtn"&&S.installEvt){S.installEvt.prompt();try{await S.installEvt.userChoice}catch(x){} S.installEvt=null;return renderTab()}
+  const ed=e.target.closest("[data-edit]"); if(ed) return editReview(ed.dataset.edit);
   const d=e.target.closest("[data-mydel]");
   if(d){ if(d.dataset.confirm!=="1"){d.dataset.confirm="1";d.textContent="Pulsa otra vez para borrar";return}
     try{await S.db.doc("reviews/"+d.dataset.mydel).delete();toast("Reseña borrada")}catch(err){toast("No se ha podido borrar")}}
