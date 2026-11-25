@@ -1,0 +1,63 @@
+name: Actualizar catálogo de alojamientos
+
+# Descarga los datos de OpenStreetMap de España (Geofabrik), saca todos los alojamientos
+# y guarda hotels-es.json en el repositorio. Se lanza a mano o el día 1 de cada mes.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 1 * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: catalogo
+  cancel-in-progress: false
+
+jobs:
+  catalogo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Herramientas
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q osmium-tool
+          pip install osmium==4.0.2
+
+      - name: Descargar España y Canarias (Geofabrik)
+        run: |
+          mkdir -p /tmp/osm && cd /tmp/osm
+          curl -fsSL --retry 5 -o spain.osm.pbf https://download.geofabrik.de/europe/spain-latest.osm.pbf
+          curl -fsSL --retry 5 -o canarias.osm.pbf https://download.geofabrik.de/africa/canary-islands-latest.osm.pbf
+          ls -lh
+
+      - name: Quedarse solo con alojamientos y pueblos
+        run: |
+          cd /tmp/osm
+          for f in spain canarias; do
+            osmium tags-filter $f.osm.pbf \
+              nwr/tourism=hotel,apartment,guest_house,hostel,motel \
+              nwr/amenity=student_accommodation nwr/building=dormitory \
+              n/place=city,town,village \
+              -o $f-alojamientos.osm.pbf --overwrite
+          done
+          ls -lh
+
+      - name: Generar hotels-es.json
+        run: python tools/build_catalog.py hotels-es.json /tmp/osm/spain-alojamientos.osm.pbf /tmp/osm/canarias-alojamientos.osm.pbf
+
+      - name: Guardar cambios
+        run: |
+          git config user.name "HotelesCS bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add hotels-es.json
+          if git diff --cached --quiet; then echo "Sin cambios"; exit 0; fi
+          git commit -m "Catálogo de alojamientos actualizado desde OpenStreetMap ($(date +%F))"
+          git push
