@@ -23,6 +23,7 @@ create table if not exists public.reviews (
   rating int not null check (rating between 1 and 5),
   price int check (price between 0 and 2000),
   tags text[] not null default '{}',
+  via text check (via in ('Agencia','Booking','Hoteles.com','Directo','Otro')),
   comment text check (length(comment) <= 500),
   author_id uuid not null default auth.uid() references auth.users on delete cascade,
   created_at timestamptz not null default now()
@@ -81,3 +82,6 @@ grant select, insert, delete on public.reviews to authenticated;
 do $$ begin
   alter publication supabase_realtime add table public.hotels, public.reviews;
 exception when duplicate_object then null; end $$;
+
+-- Por si la tabla ya existía antes de añadir «cómo se reservó»
+alter table public.reviews add column if not exists via text check (via in ('Agencia','Booking','Hoteles.com','Directo','Otro'));

@@ -10,9 +10,9 @@
         lat: d.lat ?? null, lon: d.lon ?? null, osm: d.osm || null, stars: d.stars ? String(d.stars) : null })
     },
     reviews: {
-      toApp: r => ({ id: r.id, hotelId: r.hotel_id, rating: r.rating, price: r.price, tags: r.tags || [], comment: r.comment || "",
+      toApp: r => ({ id: r.id, hotelId: r.hotel_id, rating: r.rating, price: r.price, tags: r.tags || [], via: r.via || "", comment: r.comment || "",
         authorId: r.author_id, createdAt: Date.parse(r.created_at) }),
-      toDb: d => ({ hotel_id: d.hotelId, rating: d.rating, price: d.price || null, tags: d.tags || [], comment: d.comment || null })
+      toDb: d => ({ hotel_id: d.hotelId, rating: d.rating, price: d.price || null, tags: d.tags || [], via: d.via || null, comment: d.comment || null })
     }
   };
 
@@ -98,7 +98,11 @@
       collection(table) {
         return {
           async add(d) {
-            let { data, error } = await sb.from(table).insert(T[table].toDb(d)).select("id").single();
+            const row = T[table].toDb(d); if (!row.via) delete row.via;
+            let { data, error } = await sb.from(table).insert(row).select("id").single();
+            if (error && "via" in row && /via/.test(error.message || "")) {   // columna aún no creada en Supabase
+              delete row.via; ({ data, error } = await sb.from(table).insert(row).select("id").single());
+            }
             if (error && error.code === "23505" && table === "hotels" && d.osm) {   // otro compañero lo añadió a la vez
               ({ data, error } = await sb.from("hotels").select("id").eq("osm", d.osm).single());
             }
