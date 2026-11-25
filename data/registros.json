@@ -1,16 +1,16 @@
 {
- "total": 61531,
- "añadidos": 37047,
+ "total": 45215,
+ "añadidos": 20731,
  "por_region": {
-  "Andalucía": 17522,
+  "Andalucía": 1198,
   "Aragón": 2223,
-  "Asturias": 16,
+  "Asturias": 18,
   "C. Valenciana": 1953,
   "Canarias": 2630,
   "Castilla y León": 4387,
   "Cataluña": 3824,
   "Extremadura": 1812,
-  "Galicia": 12,
+  "Galicia": 18,
   "Madrid": 1131,
   "Murcia": 733,
   "País Vasco": 804
@@ -2557,12 +2557,12 @@
    "url": "https://datos.juntadeandalucia.es/api/v0/openrta/all?format=csv",
    "filas": 178737,
    "resultado": {
-    "ya estaba": 14221,
-    "añadido": 16486,
-    "repetido en la fuente": 6702,
-    "añadido (ubicación aproximada)": 1036,
-    "sin ubicación": 1644,
-    "sin nombre": 138648
+    "ya estaba": 1610,
+    "añadido": 1192,
+    "excluido (VUT, camping...)": 37270,
+    "repetido en la fuente": 11,
+    "sin nombre": 138648,
+    "añadido (ubicación aproximada)": 6
    },
    "errores": [],
    "tipos": {
@@ -2733,8 +2733,8 @@
    "url": "https://datos.vigo.org/data/turismo/poi-hoteles-es.csv",
    "filas": 42,
    "resultado": {
-    "añadido": 12,
-    "ya estaba": 30
+    "añadido": 18,
+    "ya estaba": 24
    },
    "errores": [],
    "tipos": {
@@ -2905,8 +2905,8 @@
    "url": "https://opendata.gijon.es/descargar.php?id=736&tipo=CSV",
    "filas": 26,
    "resultado": {
-    "ya estaba": 13,
-    "añadido (ubicación aproximada)": 5,
+    "ya estaba": 11,
+    "añadido (ubicación aproximada)": 7,
     "sin ubicación": 6,
     "añadido": 1,
     "repetido en la fuente": 1
