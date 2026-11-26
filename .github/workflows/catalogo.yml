@@ -52,7 +52,7 @@ jobs:
           ls -lh
 
       - name: Generar hotels-es.json
-        run: python tools/build_catalog.py hotels-es.json /tmp/osm/spain-alojamientos.osm.pbf /tmp/osm/canarias-alojamientos.osm.pbf
+        run: cp hotels-es.json /tmp/prev-hotels.json && python tools/build_catalog.py hotels-es.json /tmp/osm/spain-alojamientos.osm.pbf /tmp/osm/canarias-alojamientos.osm.pbf
 
       - name: Añadir registros oficiales de turismo (datos abiertos de comunidades y cabildos)
         run: python tools/merge_registries.py hotels-es.json

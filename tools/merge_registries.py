@@ -346,8 +346,17 @@ def main(path):
 
     with ThreadPoolExecutor(8) as ex: loaded = list(ex.map(load, SOURCES))
     report = []; added_all = []
+    # a source that cannot be downloaded this time keeps what it gave last time (the workflow saves the old catalogue first)
+    prev = []
+    if os.path.exists(os.environ.get("PREV_CATALOG", "/tmp/prev-hotels.json")):
+        try: prev = json.load(open(os.environ.get("PREV_CATALOG", "/tmp/prev-hotels.json"), encoding="utf-8"))
+        except Exception: prev = []
     for (code, reg, dty, urls, opt), (_, raw_rows, used, errs) in zip(SOURCES, loaded):
         st = Counter(); types = Counter(); seen = set()
+        if not raw_rows and prev:
+            for r in prev:
+                if str(r[0]).startswith("x" + code + ":"):
+                    rows.append(r); index(r); added_all.append(r); st["conservado de la vez anterior"] += 1
         for raw in raw_rows:
             v = val(raw)
             name = nice(pick(v, NAME))
