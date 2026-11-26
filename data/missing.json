@@ -1,1986 +1,343 @@
 {
- "datasets": [
-  {
-   "title": "Allotjaments turístics de Menorca | Alojamientos turísticos de Menorca | Tourist accommodation in Menorca",
-   "about": "https://datos.gob.es/catalogo/a04003003-alojamientos-turisticos-de-menorca1",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04003003\"",
-   "dist": [
-    {
-     "url": "https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_menorca/allotjaments_turistics_menorca.csv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04003003-alojamientos-turisticos-de-m"
-    },
-    {
-     "url": "https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_menorca/allotjaments_turistics_menorca.geojson",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04003003-alojamientos-turisticos-de-m"
-    }
+ "pages": {
+  "https://intranet.caib.es/opendatacataleg/api/3/action/package_search?q=allotjaments&rows=100": {
+   "status": 200,
+   "bytes": 612509,
+   "links": [
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000058A_000004/1.32.csv",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000058A_000004/1.32.json",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000058A_000004/1.32.xlsx",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000058A_000005/1.32.csv",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000058A_000005/1.32.json",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000058A_000005/1.32.xlsx",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000058A_000008/1.32.csv",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000058A_000008/1.32.json",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000058A_000008/1.32.xlsx",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000058A_000012/1.6.csv",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000058A_000012/1.6.json",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000058A_000012/1.6.xlsx",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000058A_000014/1.4.csv",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000058A_000014/1.4.json",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000058A_000014/1.4.xlsx",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000058A_000018/1.5.csv",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000058A_000018/1.5.json",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000058A_000018/1.5.xlsx",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000059A_000004/1.20.csv",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000059A_000004/1.20.json",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000059A_000004/1.20.xlsx",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000059A_000009/1.20.csv",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000059A_000009/1.20.json",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000059A_000009/1.20.xlsx",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000059A_000015/1.2.csv",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000059A_000015/1.2.json",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000059A_000015/1.2.xlsx",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000059A_000019/1.2.csv",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000059A_000019/1.2.json",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000059A_000019/1.2.xlsx",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000063A_000002/1.23.csv",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000063A_000002/1.23.json",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000063A_000002/1.23.xlsx",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000001/1.25.csv",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000001/1.25.json",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000001/1.25.xlsx",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000002/1.26.csv",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000002/1.26.json",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000002/1.26.xlsx",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000003/1.25.csv",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000003/1.25.json",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000003/1.25.xlsx",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000004/1.26.csv",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000004/1.26.json",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000004/1.26.xlsx",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000001/1.33.csv",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000001/1.33.json",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000001/1.33.xlsx",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000002/1.33.csv",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000002/1.33.json",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000002/1.33.xlsx",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000003/2.22.csv",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000003/2.22.json",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000003/2.22.xlsx",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000004/1.33.csv",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000004/1.33.json",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000004/1.33.xlsx",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000066A_000001/1.9.csv",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000066A_000001/1.9.json",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000066A_000001/1.9.xlsx",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000066A_000003/1.7.csv",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000066A_000003/1.7.json",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000066A_000003/1.7.xlsx",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000067A_000009/1.2.csv",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000067A_000009/1.2.json",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000067A_000009/1.2.xlsx",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000067A_000012/1.1.csv",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000067A_000012/1.1.json",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000067A_000012/1.1.xlsx",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/R00014A_000001/1.17.csv",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/R00014A_000001/1.17.json",
+    "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/R00014A_000001/1.17.xlsx",
+    "https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_ALOJAMIENTOS_TURISTICOS_ES53/02.000/codes.csv?fields=+description",
+    "https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_ALOJAMIENTOS_TURISTICOS_ES53/02.000/codes.json?fields=+description",
+    "https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_ALOJAMIENTOS_TURISTICOS_ES53/02.000/codes.xlsx?fields=+description",
+    "https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_ALOJAMIENTOS_TURISTICOS_INE/01.000/codes.csv?fields=+description",
+    "https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_ALOJAMIENTOS_TURISTICOS_INE/01.000/codes.json?fields=+description",
+    "https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_ALOJAMIENTOS_TURISTICOS_INE/01.000/codes.xlsx?fields=+description",
+    "https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_mallorca/allotjaments_turistics_mallorca.csv",
+    "https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_mallorca/allotjaments_turistics_mallorca.geojson",
+    "https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_menorca/allotjaments_turistics_menorca.csv",
+    "https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_menorca/allotjaments_turistics_menorca.geojson",
+    "https://intranet.caib.es/opendatacataleg/files/dataset/estades_habitatges_turistics_menorca/estades_habitatges_turistics_menorca.csv",
+    "https://intranet.caib.es/opendatacataleg/files/dataset/estades_habitatges_turistics_menorca/estades_habitatges_turistics_menorca.geojson"
    ]
   },
-  {
-   "title": "Allotjaments Turístics Registrats a Mallorca | Alojamientos Turísticos Registrados en Mallorca: | Mallorca Registered Tourist Accommodations",
-   "about": "https://datos.gob.es/catalogo/a04003003-allotjaments-turistics-mallorca",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04003003\"",
-   "dist": [
-    {
-     "url": "https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_mallorca/allotjaments_turistics_mallorca.geojson",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04003003-allotjaments-turistics-mallo"
-    },
-    {
-     "url": "https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_mallorca/allotjaments_turistics_mallorca.csv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04003003-allotjaments-turistics-mallo"
-    }
+  "https://intranet.caib.es/opendatacataleg/api/3/action/package_search?q=establiments%20turistics&rows=100": {
+   "status": 200,
+   "bytes": 63837,
+   "links": [
+    "https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_ALOJAMIENTOS_TURISTICOS_ES53/02.000/codes.csv?fields=+description",
+    "https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_ALOJAMIENTOS_TURISTICOS_ES53/02.000/codes.json?fields=+description",
+    "https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_ALOJAMIENTOS_TURISTICOS_ES53/02.000/codes.xlsx?fields=+description",
+    "https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_TARIFA_ESTANCIA_TURISTICA/01.000/codes.csv?fields=+description",
+    "https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_TARIFA_ESTANCIA_TURISTICA/01.000/codes.json?fields=+description",
+    "https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_TARIFA_ESTANCIA_TURISTICA/01.000/codes.xlsx?fields=+description",
+    "https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_mallorca/allotjaments_turistics_mallorca.csv",
+    "https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_mallorca/allotjaments_turistics_mallorca.geojson",
+    "https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_menorca/allotjaments_turistics_menorca.csv",
+    "https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_menorca/allotjaments_turistics_menorca.geojson",
+    "https://intranet.caib.es/opendatacataleg/files/dataset/estades_habitatges_turistics_menorca/estades_habitatges_turistics_menorca.csv",
+    "https://intranet.caib.es/opendatacataleg/files/dataset/estades_habitatges_turistics_menorca/estades_habitatges_turistics_menorca.geojson",
+    "https://intranet.caib.es/opendatacataleg/files/dataset/habitatges_turistics_mallorca/habitatges_turistics_mallorca.csv",
+    "https://intranet.caib.es/opendatacataleg/files/dataset/habitatges_turistics_mallorca/habitatges_turistics_mallorca.geojson"
    ]
   },
-  {
-   "title": "Edificios (excluidos los alojamientos) por isla-municipio en que se localizan y número de plantas sobre rasante. 01/11/2001. Illes Balears | Edificis (exclosos els allotjaments) per illa-municipi en què es localitzen i nombre de plantes sobre rasant. 01/11/2001. Illes Balears | Edificis (exclosos els allotjaments) per illa-municipi en què es localitzen i nombre de plantes sobre rasant. 01/11/2001. Illes Balears",
-   "about": "https://datos.gob.es/catalogo/a04027063-edificios-excluidos-los-alojamientos-por-isla-municipio-en-que-se-localizan-y-numero-de-plantas-sobre-rasante-01-11-2001-illes-balears",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=f374ea90-ca1c-4b67-aad7-636d28d3ab37",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-edificios-excluidos-los-aloj"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=f374ea90-ca1c-4b67-aad7-636d28d3ab37",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-edificios-excluidos-los-aloj"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=f374ea90-ca1c-4b67-aad7-636d28d3ab37",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-edificios-excluidos-los-aloj"
-    }
+  "https://intranet.caib.es/opendatacataleg/ca/dataset/groups/allotjaments-turistics-mallorca": {
+   "status": 200,
+   "bytes": 21057,
+   "links": [
+    "https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_mallorca/allotjaments_turistics_mallorca.csv",
+    "https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_mallorca/allotjaments_turistics_mallorca.geojson"
    ]
   },
-  {
-   "title": "Establecimientos abiertos y plazas en alojamientos de turismo rural según tipo de alojamiento. Illes Balears e islas por meses | Establiments oberts i places en allotjaments de turisme rural segons tipus d'allotjament. Illes Balears i illes per mesos | Establiments oberts i places en allotjaments de turisme rural segons tipus d'allotjament. Illes Balears i illes per mesos",
-   "about": "https://datos.gob.es/catalogo/a04027063-establecimientos-abiertos-y-plazas-en-alojamientos-de-turismo-rural-segun-tipo-de-alojamiento-illes-balears-e-islas-por-meses",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000001/1.25.json",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-establecimientos-abiertos-y-"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000001/1.25.jsonstat",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-establecimientos-abiertos-y-"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000001/1.25.tsv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-establecimientos-abiertos-y-"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000001/1.25.xlsx",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-establecimientos-abiertos-y-"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000001/1.25.csv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-establecimientos-abiertos-y-"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000001/1.25.xml",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-establecimientos-abiertos-y-"
-    }
+  "https://intranet.caib.es/opendatacataleg/dataset/?tags=allotjaments": {
+   "status": 200,
+   "bytes": 22213,
+   "links": []
+  },
+  "https://intranet.caib.es/opendatacataleg/group/turismo": {
+   "status": 200,
+   "bytes": 96486,
+   "links": []
+  },
+  "https://catalegdades.caib.cat/": {
+   "status": 200,
+   "bytes": 69420,
+   "links": []
+  },
+  "https://catalegdades.caib.cat/api/3/action/package_search?q=allotjaments&rows=100": {
+   "error": "<HTTPError 404: 'Not Found'>"
+  },
+  "https://datosabiertos.castillalamancha.es/node/282/revisions/683/view": {
+   "status": 200,
+   "bytes": 26285,
+   "links": []
+  },
+  "https://datosabiertos.castillalamancha.es/dataset/albergues-tur%C3%ADsticos-de-castilla-la-mancha": {
+   "status": 200,
+   "bytes": 26285,
+   "links": []
+  },
+  "https://datosabiertos.castillalamancha.es/dataset/alojamientos-tur%C3%ADsticos-hoteleros-de-castilla-la-mancha": {
+   "status": 200,
+   "bytes": 26285,
+   "links": []
+  },
+  "https://datosabiertos.castillalamancha.es/dataset/alojamientos-de-turismo-rural-de-castilla-la-mancha": {
+   "status": 200,
+   "bytes": 26285,
+   "links": []
+  },
+  "https://datos.gob.es/apidata/catalog/dataset/a08002880-establecimientos-de-alojamiento-turistico-de-castilla-la-mancha.json": {
+   "status": 200,
+   "bytes": 3937,
+   "links": [
+    "https://datosabiertos.castillalamancha.es/sites/datosabiertos.castillalamancha.es/files/Hoteles.csv",
+    "https://datosabiertos.castillalamancha.es/sites/datosabiertos.castillalamancha.es/files/Hoteles.xls"
    ]
   },
-  {
-   "title": "Grado de ocupación en alojamientos de turismo rural según tipo de alojamiento. Illes Balears e islas por meses | Grau d'ocupació en allotjaments de turisme rural segons tipus d'allotjament. Illes Balears i illes per mesos | Grau d'ocupació en allotjaments de turisme rural segons tipus d'allotjament. Illes Balears i illes per mesos",
-   "about": "https://datos.gob.es/catalogo/a04027063-grado-de-ocupacion-en-alojamientos-de-turismo-rural-segun-tipo-de-alojamiento-illes-balears-e-islas-por-meses",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000003/1.25.tsv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-grado-de-ocupacion-en-alojam"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000003/1.25.xml",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-grado-de-ocupacion-en-alojam"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000003/1.25.xlsx",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-grado-de-ocupacion-en-alojam"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000003/1.25.jsonstat",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-grado-de-ocupacion-en-alojam"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000003/1.25.csv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-grado-de-ocupacion-en-alojam"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000003/1.25.json",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-grado-de-ocupacion-en-alojam"
-    }
+  "https://datos.gob.es/apidata/catalog/dataset/a08002880-alojamientos-de-turismo-rural-de-castilla-la-mancha.json": {
+   "status": 200,
+   "bytes": 3640,
+   "links": [
+    "https://datosabiertos.castillalamancha.es/sites/datosabiertos.castillalamancha.es/files/Alojamientos%20rurales.csv",
+    "https://datosabiertos.castillalamancha.es/sites/datosabiertos.castillalamancha.es/files/Alojamientos%20rurales.xls"
    ]
   },
-  {
-   "title": "Índex de preus en allotjaments de turisme rural segons modalitat de l'estança. Illes Balears i mes | Índex de preus en allotjaments de turisme rural segons modalitat de l'estança. Illes Balears i mes | Índice de precios en alojamientos de turismo rural según modalidad de la estancia. Illes Balears y mes",
-   "about": "https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojamientos-de-turismo-rural-segun-modalidad-de-la-estancia-illes-balears-y-mes",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000002/1.33.xlsx",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000002/1.33.tsv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000002/1.33.xml",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000002/1.33.jsonstat",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000002/1.33.csv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000002/1.33.json",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    }
+  "https://datos.gob.es/apidata/catalog/dataset/a08002880-albergues-turisticos-de-castilla-la-mancha.json": {
+   "status": 200,
+   "bytes": 3378,
+   "links": [
+    "https://datosabiertos.castillalamancha.es/sites/datosabiertos.castillalamancha.es/files/Albergues.csv",
+    "https://datosabiertos.castillalamancha.es/sites/datosabiertos.castillalamancha.es/files/Albergues.xls"
    ]
   },
-  {
-   "title": "Índex de preus en allotjaments de turisme rural segons tarifa. Illes Balears i mes | Índex de preus en allotjaments de turisme rural segons tarifa. Illes Balears i mes | Índice de precios en alojamientos de turismo rural según tarifa. Illes Balears y mes",
-   "about": "https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojamientos-de-turismo-rural-segun-tarifa-illes-balears-y-mes",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000004/1.33.tsv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000004/1.33.jsonstat",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000004/1.33.xlsx",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000004/1.33.xml",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000004/1.33.json",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000004/1.33.csv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    }
-   ]
-  },
-  {
-   "title": "Índex de preus en allotjaments de turisme rural segons tipus d'establiment. Illes Balears i mes | Índex de preus en allotjaments de turisme rural segons tipus d'establiment. Illes Balears i mes | Índice de precios en alojamientos de turismo rural según tipo de establecimiento. Illes Balears y mes",
-   "about": "https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojamientos-de-turismo-rural-segun-tipo-de-establecimiento-illes-balears-y-mes",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000003/2.22.csv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000003/2.22.xlsx",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000003/2.22.jsonstat",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000003/2.22.json",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000003/2.22.tsv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000003/2.22.xml",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    }
-   ]
-  },
-  {
-   "title": "Tipo de edificio (excluidos los alojamientos) por año de construcción detallado e isla en la que se localizan. 01/11/2001. Illes Balears | Tipus d'edifici (exclosos els allotjaments) per any de construcció detallat i illa en la qual es localitza. 01/11/2001. Illes Balears | Tipus d'edifici (exclosos els allotjaments) per any de construcció detallat i illa en la qual es localitza. 01/11/2001. Illes Balears",
-   "about": "https://datos.gob.es/catalogo/a04027063-tipo-de-edificio-excluidos-los-alojamientos-por-ano-de-construccion-detallado-e-isla-en-la-que-se-localizan-01-11-2001-illes-balears",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=48b42eba-c152-434b-992c-049eff014c96",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-tipo-de-edificio-excluidos-l"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=48b42eba-c152-434b-992c-049eff014c96",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-tipo-de-edificio-excluidos-l"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=48b42eba-c152-434b-992c-049eff014c96",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-tipo-de-edificio-excluidos-l"
-    }
-   ]
-  },
-  {
-   "title": "Tipo de edificio (excluidos los alojamientos) por isla, año de construcción y tamaño del municipio en el que se localiza. 01/11/2001. Illes Balears | Tipus d'edifici (exclosos els allotjaments) per illa, any de construcció i grandària del municipi en el qual es localitza. 01/11/2001. Illes Balears | Tipus d'edifici (exclosos els allotjaments) per illa, any de construcció i grandària del municipi en el qual es localitza. 01/11/2001. Illes Balears",
-   "about": "https://datos.gob.es/catalogo/a04027063-tipo-de-edificio-excluidos-los-alojamientos-por-isla-ano-de-construccion-y-tamano-del-municipio-en-el-que-se-localiza-01-11-2001-illes-balears",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=2d34beae-70a0-4384-8216-531d8c5a9589",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-tipo-de-edificio-excluidos-l"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=2d34beae-70a0-4384-8216-531d8c5a9589",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-tipo-de-edificio-excluidos-l"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=2d34beae-70a0-4384-8216-531d8c5a9589",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-tipo-de-edificio-excluidos-l"
-    }
-   ]
-  },
-  {
-   "title": "Tipo de edificio (excluidos los alojamientos) por número de plantas bajo rasante e isla de localización. 01/11/2001. Illes Balears | Tipus d'edifici (exclosos els allotjaments) per nombre de plantes sota rasant i illa de localització. 01/11/2001. Illes Balears | Tipus d'edifici (exclosos els allotjaments) per nombre de plantes sota rasant i illa de localització. 01/11/2001. Illes Balears",
-   "about": "https://datos.gob.es/catalogo/a04027063-tipo-de-edificio-excluidos-los-alojamientos-por-numero-de-plantas-bajo-rasante-e-isla-de-localizacion-01-11-2001-illes-balears",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=6464e7a9-03cc-4234-9a2e-64240b3276c3",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-tipo-de-edificio-excluidos-l"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=6464e7a9-03cc-4234-9a2e-64240b3276c3",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-tipo-de-edificio-excluidos-l"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=6464e7a9-03cc-4234-9a2e-64240b3276c3",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-tipo-de-edificio-excluidos-l"
-    }
-   ]
-  },
-  {
-   "title": "Viajeros entrados, pernoctaciones y estancia media en alojamientos de turismo rural según lugar de residencia del viajero. Illes Balears e islas por meses | Viatgers entrats, pernoctacions i estada mitjana en allotjaments de turisme rural segons el lloc de residència del viatger. Illes Balears i illes per mesos | Viatgers entrats, pernoctacions i estada mitjana en allotjaments de turisme rural segons el lloc de residència del viatger. Illes Balears i illes per mesos",
-   "about": "https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaciones-y-estancia-media-en-alojamientos-de-turismo-rural-segun-lugar-de-residencia-del-viajero-illes-balears-e-islas-por-meses",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000004/1.26.xml",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000004/1.26.tsv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000004/1.26.jsonstat",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000004/1.26.json",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000004/1.26.xlsx",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000004/1.26.csv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    }
-   ]
-  },
-  {
-   "title": "Viajeros entrados, pernoctaciones y estancia media en alojamientos de turismo rural según tipo de alojamiento. Illes Balears e islas por meses | Viatgers entrats, pernoctacions i estada mitjana en allotjaments de turisme rural segons el tipus d'allotjament. Illes Balears i illas per mesos | Viatgers entrats, pernoctacions i estada mitjana en allotjaments de turisme rural segons el tipus d'allotjament. Illes Balears i illas per mesos",
-   "about": "https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaciones-y-estancia-media-en-alojamientos-de-turismo-rural-segun-tipo-de-alojamiento-illes-balears-e-islas-por-meses",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000002/1.26.jsonstat",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000002/1.26.xlsx",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000002/1.26.tsv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000002/1.26.xml",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000002/1.26.json",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000002/1.26.csv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    }
-   ]
-  },
-  {
-   "title": "Habitatges, exclosos els allotjaments, per illa de localització, instal·lacions de refrigeració/calefacció i grandària del municipi en el qual es localitza l'habitatge. 01/11/1991. Illes Balears | Habitatges, exclosos els allotjaments, per illa de localització, instal·lacions de refrigeració/calefacció i grandària del municipi en el qual es localitza l'habitatge. 01/11/1991. Illes Balears | Viviendas excluidos los alojamientos por isla de localización, instalaciones de refrigeración-calefacción y tamaño del municipio en el que se localiza la vivienda. 01/11/1991. Illes Balears",
-   "about": "https://datos.gob.es/catalogo/a04027063-viviendas-excluidos-los-alojamientos-por-isla-de-localizacion-instalaciones-de-refrigeracion-calefaccion-y-tamano-del-municipio-en-el-que-se-localiza-la-vivienda-01-11-1991-illes-balears",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=1fca3644-b742-4d5c-b15a-091124d57806",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-excluidos-los-aloj"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=1fca3644-b742-4d5c-b15a-091124d57806",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-excluidos-los-aloj"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=1fca3644-b742-4d5c-b15a-091124d57806",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-excluidos-los-aloj"
-    }
-   ]
-  },
-  {
-   "title": "Habitatges, exclosos els allotjaments, per illa-municipi de localització, instal·lacions de refrigeració i calefacció de l'habitatge. 01/11/1991. Illes Balears | Habitatges, exclosos els allotjaments, per illa-municipi de localització, instal·lacions de refrigeració i calefacció de l'habitatge. 01/11/1991. Illes Balears | Viviendas excluidos los alojamientos por isla-municipio de localización, instalaciones de refrigeración y calefacción de la vivienda. 01/11/1991. Illes Balears",
-   "about": "https://datos.gob.es/catalogo/a04027063-viviendas-excluidos-los-alojamientos-por-isla-municipio-de-localizacion-instalaciones-de-refrigeracion-y-calefaccion-de-la-vivienda-01-11-1991-illes-balears",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=1e106522-cbf3-42d0-ab15-e79145e17135",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-excluidos-los-aloj"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=1e106522-cbf3-42d0-ab15-e79145e17135",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-excluidos-los-aloj"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=1e106522-cbf3-42d0-ab15-e79145e17135",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-excluidos-los-aloj"
-    }
-   ]
-  },
-  {
-   "title": "Habitatges familiars, exclosos els allotjaments, per illa de localització, classe d'habitatge, instal·lacions de l'habitatge i període de construcció de l'edifici. 01/11/1991. Illes Balears | Habitatges familiars, exclosos els allotjaments, per illa de localització, classe d'habitatge, instal·lacions de l'habitatge i període de construcció de l'edifici. 01/11/1991. Illes Balears | Viviendas familiares excluidos los alojamientos por isla de localización, clase de vivienda, instalaciones de la vivienda y periodo de construcción del edificio. 01/11/1991. Illes Balears",
-   "about": "https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluidos-los-alojamientos-por-isla-de-localizacion-clase-de-vivienda-instalaciones-de-la-vivienda-y-periodo-de-construccion-del-edificio-01-11-1991-illes-balears",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=aa7a6670-b88c-48cb-95c7-f9bee64cbfc3",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluid"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=aa7a6670-b88c-48cb-95c7-f9bee64cbfc3",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluid"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=aa7a6670-b88c-48cb-95c7-f9bee64cbfc3",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluid"
-    }
-   ]
-  },
-  {
-   "title": "Habitatges familiars, exclosos els allotjaments, per illa de localització, classe d'habitatge, instal·lacions, nombre d'habitacions i superfície útil de l'habitatge. 01/11/1991. Illes Balears | Habitatges familiars, exclosos els allotjaments, per illa de localització, classe d'habitatge, instal·lacions, nombre d'habitacions i superfície útil de l'habitatge. 01/11/1991. Illes Balears | Viviendas familiares excluidos los alojamientos por isla de localización, clase de vivienda, instalaciones, número de habitaciones y superficie útil de la vivienda. 01/11/1991. Illes Balears",
-   "about": "https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluidos-los-alojamientos-por-isla-de-localizacion-clase-de-vivienda-instalaciones-numero-de-habitaciones-y-superficie-util-de-la-vivienda-01-11-1991-illes-balears",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=83b32947-aeff-4726-90bc-e755021af952",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluid"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=83b32947-aeff-4726-90bc-e755021af952",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluid"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=83b32947-aeff-4726-90bc-e755021af952",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluid"
-    }
-   ]
-  },
-  {
-   "title": "Habitatges familiars, exclosos els allotjaments, per illa de localització, estat de l'edifici, instal·lacions de l'habitatge i classe d'habitatge. 01/11/1991. Illes Balears | Habitatges familiars, exclosos els allotjaments, per illa de localització, estat de l'edifici, instal·lacions de l'habitatge i classe d'habitatge. 01/11/1991. Illes Balears | Viviendas familiares excluidos los alojamientos por isla de localización, estado del edificio, instalaciones de la vivienda y clase de vivienda. 01/11/1991. Illes Balears",
-   "about": "https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluidos-los-alojamientos-por-isla-de-localizacion-estado-del-edificio-instalaciones-de-la-vivienda-y-clase-de-vivienda-01-11-1991-illes-balears",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=364508af-bcb9-4432-a45c-3f4d2f0951d8",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluid"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=364508af-bcb9-4432-a45c-3f4d2f0951d8",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluid"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=364508af-bcb9-4432-a45c-3f4d2f0951d8",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluid"
-    }
-   ]
-  },
-  {
-   "title": "Habitatges familiars, exclosos els allotjaments, per illa i grandària del municipi de localització, instal·lacions de l'habitatge i classe d'habitatge. 01/11/1991. Illes Balears | Habitatges familiars, exclosos els allotjaments, per illa i grandària del municipi de localització, instal·lacions de l'habitatge i classe d'habitatge. 01/11/1991. Illes Balears | Viviendas familiares excluidos los alojamientos por isla y tamaño del municipio de localización, instalaciones de la vivienda y clase de vivienda. 01/11/1991. Illes Balears",
-   "about": "https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluidos-los-alojamientos-por-isla-y-tamano-del-municipio-de-localizacion-instalaciones-de-la-vivienda-y-clase-de-vivienda-01-11-1991-illes-balears",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=3cea4c23-791c-41af-9daa-9a731e2a1740",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluid"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=3cea4c23-791c-41af-9daa-9a731e2a1740",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluid"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=3cea4c23-791c-41af-9daa-9a731e2a1740",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluid"
-    }
-   ]
-  },
-  {
-   "title": "Habitatges familiars, exclosos els allotjaments, per illa i tipus del municipi de localització, instal·lacions de l'habitatge i classe d'habitatge. 01/11/1991. Illes Balears | Habitatges familiars, exclosos els allotjaments, per illa i tipus del municipi de localització, instal·lacions de l'habitatge i classe d'habitatge. 01/11/1991. Illes Balears | Viviendas familiares excluidos los alojamientos por isla y tipo del municipio de localización, instalaciones de la vivienda y clase de vivienda. 01/11/1991. Illes Balears",
-   "about": "https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluidos-los-alojamientos-por-isla-y-tipo-del-municipio-de-localizacion-instalaciones-de-la-vivienda-y-clase-de-vivienda-01-11-1991-illes-balears",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=1608febb-c12b-4cc5-8ee9-0971af275084",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluid"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=1608febb-c12b-4cc5-8ee9-0971af275084",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluid"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=1608febb-c12b-4cc5-8ee9-0971af275084",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluid"
-    }
-   ]
-  },
-  {
-   "title": "Alojamientos de turismo rural en Castilla-La Mancha",
-   "about": "https://datos.gob.es/catalogo/a08002880-alojamientos-de-turismo-rural-de-castilla-la-mancha",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A08002880\"",
-   "dist": [
-    {
-     "url": "https://datosabiertos.castillalamancha.es/sites/datosabiertos.castillalamancha.es/files/Alojamientos%20rurales.csv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a08002880-alojamientos-de-turismo-rura"
-    },
-    {
-     "url": "https://datosabiertos.castillalamancha.es/sites/datosabiertos.castillalamancha.es/files/Alojamientos%20rurales.xls",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a08002880-alojamientos-de-turismo-rura"
-    }
-   ]
-  },
-  {
-   "title": "Alojamientos Turísticos Hoteleros de Castilla-La Mancha",
-   "about": "https://datos.gob.es/catalogo/a08002880-establecimientos-de-alojamiento-turistico-de-castilla-la-mancha",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A08002880\"",
-   "dist": [
-    {
-     "url": "https://datosabiertos.castillalamancha.es/sites/datosabiertos.castillalamancha.es/files/Hoteles.csv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a08002880-establecimientos-de-alojamie"
-    },
-    {
-     "url": "https://datosabiertos.castillalamancha.es/sites/datosabiertos.castillalamancha.es/files/Hoteles.xls",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a08002880-establecimientos-de-alojamie"
-    }
-   ]
-  },
-  {
-   "title": "Alojamientos inscritos en el Registro de Turismo de Navarra | Nafarroako Turismo Erregistroan inskribatutako ostatuak",
-   "about": "https://datos.gob.es/catalogo/a15002917-alojamientos-inscritos-en-el-registro-de-turismo-de-navarra1",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A15002917\"",
-   "dist": [
-    {
-     "url": "https://datosabiertos.navarra.es/dataset/83c54879-a56f-449c-aaea-bd7b2084a837/resource/d32448d0-26be-4f1e-a1e3-d0a09af55d09/download/downloadfile.aspxcodigoaccesoopendataficheroturismoopendata_resultados_dd_es.xsd",
-     "format": "\"http://publications.europa.eu/resource/authority/file-type/XML\""
-    },
-    {
-     "url": "https://datosabiertos.navarra.es/dataset/83c54879-a56f-449c-aaea-bd7b2084a837/resource/5527debf-7e72-4f9e-8e12-b562f3027fc2/download/downloadfile.aspxcodigoaccesoopendataficheroturismoopendata_resultados_dd_es.csv",
-     "format": "\"http://publications.europa.eu/resource/authority/file-type/CSV\""
-    },
-    {
-     "url": "https://datosabiertos.navarra.es/datastore/dump/5527debf-7e72-4f9e-8e12-b562f3027fc2?format=json&bom=True",
-     "format": "\"http://publications.europa.eu/resource/authority/file-type/JSON\""
-    },
-    {
-     "url": "https://datosabiertos.navarra.es/datastore/dump/5527debf-7e72-4f9e-8e12-b562f3027fc2?format=csv&bom=True",
-     "format": "\"http://publications.europa.eu/resource/authority/file-type/CSV\""
-    },
-    {
-     "url": "https://datosabiertos.navarra.es/datastore/dump/5527debf-7e72-4f9e-8e12-b562f3027fc2?format=tsv&bom=True",
-     "format": "\"http://publications.europa.eu/resource/authority/file-type/TSV\""
-    },
-    {
-     "url": "https://datosabiertos.navarra.es/datastore/dump/5527debf-7e72-4f9e-8e12-b562f3027fc2?format=ods&bom=True",
-     "format": "\"http://publications.europa.eu/resource/authority/file-type/ODS\""
-    },
-    {
-     "url": "https://datosabiertos.navarra.es/dataset/alojamientos-inscritos-en-el-registro-de-turismo-de-navarra/resource/5527debf-7e72-4f9e-8e12-b562f3027fc2?view_id=2275568a-6ee8-42ff-9d3a-60c72daaada5",
-     "format": "\"http://publications.europa.eu/resource/authority/file-type/HTML\""
-    },
-    {
-     "url": "https://datosabiertos.navarra.es/datastore/dump/5527debf-7e72-4f9e-8e12-b562f3027fc2?format=xlsx&bom=True",
-     "format": "\"http://publications.europa.eu/resource/authority/file-type/XLSX\""
-    },
-    {
-     "url": "https://datosabiertos.navarra.es/datastore/dump/5527debf-7e72-4f9e-8e12-b562f3027fc2?format=json&bom=True",
-     "format": "\"http://publications.europa.eu/resource/authority/file-type/JSON\""
-    },
-    {
-     "url": "https://datosabiertos.navarra.es/datastore/dump/5527debf-7e72-4f9e-8e12-b562f3027fc2?format=xml&bom=True",
-     "format": "\"http://publications.europa.eu/resource/authority/file-type/XML\""
-    }
-   ]
-  },
-  {
-   "title": "Allotjaments turístics de Menorca | Alojamientos turísticos de Menorca | Tourist accommodation in Menorca",
-   "about": "https://datos.gob.es/catalogo/a04003003-alojamientos-turisticos-de-menorca1",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04003003\"",
-   "dist": [
-    {
-     "url": "https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_menorca/allotjaments_turistics_menorca.csv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04003003-alojamientos-turisticos-de-m"
-    },
-    {
-     "url": "https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_menorca/allotjaments_turistics_menorca.geojson",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04003003-alojamientos-turisticos-de-m"
-    }
-   ]
-  },
-  {
-   "title": "Allotjaments Turístics Registrats a Mallorca | Alojamientos Turísticos Registrados en Mallorca: | Mallorca Registered Tourist Accommodations",
-   "about": "https://datos.gob.es/catalogo/a04003003-allotjaments-turistics-mallorca",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04003003\"",
-   "dist": [
-    {
-     "url": "https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_mallorca/allotjaments_turistics_mallorca.geojson",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04003003-allotjaments-turistics-mallo"
-    },
-    {
-     "url": "https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_mallorca/allotjaments_turistics_mallorca.csv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04003003-allotjaments-turistics-mallo"
-    }
-   ]
-  },
-  {
-   "title": "Edificios (excluidos los alojamientos) por isla-municipio en que se localizan y número de plantas sobre rasante. 01/11/2001. Illes Balears | Edificis (exclosos els allotjaments) per illa-municipi en què es localitzen i nombre de plantes sobre rasant. 01/11/2001. Illes Balears | Edificis (exclosos els allotjaments) per illa-municipi en què es localitzen i nombre de plantes sobre rasant. 01/11/2001. Illes Balears",
-   "about": "https://datos.gob.es/catalogo/a04027063-edificios-excluidos-los-alojamientos-por-isla-municipio-en-que-se-localizan-y-numero-de-plantas-sobre-rasante-01-11-2001-illes-balears",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=f374ea90-ca1c-4b67-aad7-636d28d3ab37",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-edificios-excluidos-los-aloj"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=f374ea90-ca1c-4b67-aad7-636d28d3ab37",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-edificios-excluidos-los-aloj"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=f374ea90-ca1c-4b67-aad7-636d28d3ab37",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-edificios-excluidos-los-aloj"
-    }
-   ]
-  },
-  {
-   "title": "Establecimientos abiertos y plazas en alojamientos de turismo rural según tipo de alojamiento. Illes Balears e islas por meses | Establiments oberts i places en allotjaments de turisme rural segons tipus d'allotjament. Illes Balears i illes per mesos | Establiments oberts i places en allotjaments de turisme rural segons tipus d'allotjament. Illes Balears i illes per mesos",
-   "about": "https://datos.gob.es/catalogo/a04027063-establecimientos-abiertos-y-plazas-en-alojamientos-de-turismo-rural-segun-tipo-de-alojamiento-illes-balears-e-islas-por-meses",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000001/1.25.json",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-establecimientos-abiertos-y-"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000001/1.25.jsonstat",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-establecimientos-abiertos-y-"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000001/1.25.tsv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-establecimientos-abiertos-y-"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000001/1.25.xlsx",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-establecimientos-abiertos-y-"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000001/1.25.csv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-establecimientos-abiertos-y-"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000001/1.25.xml",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-establecimientos-abiertos-y-"
-    }
-   ]
-  },
-  {
-   "title": "Grado de ocupación en alojamientos de turismo rural según tipo de alojamiento. Illes Balears e islas por meses | Grau d'ocupació en allotjaments de turisme rural segons tipus d'allotjament. Illes Balears i illes per mesos | Grau d'ocupació en allotjaments de turisme rural segons tipus d'allotjament. Illes Balears i illes per mesos",
-   "about": "https://datos.gob.es/catalogo/a04027063-grado-de-ocupacion-en-alojamientos-de-turismo-rural-segun-tipo-de-alojamiento-illes-balears-e-islas-por-meses",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000003/1.25.tsv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-grado-de-ocupacion-en-alojam"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000003/1.25.xml",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-grado-de-ocupacion-en-alojam"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000003/1.25.xlsx",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-grado-de-ocupacion-en-alojam"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000003/1.25.jsonstat",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-grado-de-ocupacion-en-alojam"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000003/1.25.csv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-grado-de-ocupacion-en-alojam"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000003/1.25.json",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-grado-de-ocupacion-en-alojam"
-    }
-   ]
-  },
-  {
-   "title": "Índex de preus en allotjaments de turisme rural segons modalitat de l'estança. Illes Balears i mes | Índex de preus en allotjaments de turisme rural segons modalitat de l'estança. Illes Balears i mes | Índice de precios en alojamientos de turismo rural según modalidad de la estancia. Illes Balears y mes",
-   "about": "https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojamientos-de-turismo-rural-segun-modalidad-de-la-estancia-illes-balears-y-mes",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000002/1.33.xlsx",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000002/1.33.tsv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000002/1.33.xml",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000002/1.33.jsonstat",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000002/1.33.csv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000002/1.33.json",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    }
-   ]
-  },
-  {
-   "title": "Índex de preus en allotjaments de turisme rural segons tarifa. Illes Balears i mes | Índex de preus en allotjaments de turisme rural segons tarifa. Illes Balears i mes | Índice de precios en alojamientos de turismo rural según tarifa. Illes Balears y mes",
-   "about": "https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojamientos-de-turismo-rural-segun-tarifa-illes-balears-y-mes",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000004/1.33.tsv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000004/1.33.jsonstat",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000004/1.33.xlsx",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000004/1.33.xml",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000004/1.33.json",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000004/1.33.csv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    }
-   ]
-  },
-  {
-   "title": "Índex de preus en allotjaments de turisme rural segons tipus d'establiment. Illes Balears i mes | Índex de preus en allotjaments de turisme rural segons tipus d'establiment. Illes Balears i mes | Índice de precios en alojamientos de turismo rural según tipo de establecimiento. Illes Balears y mes",
-   "about": "https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojamientos-de-turismo-rural-segun-tipo-de-establecimiento-illes-balears-y-mes",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000003/2.22.csv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000003/2.22.xlsx",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000003/2.22.jsonstat",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000003/2.22.json",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000003/2.22.tsv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000003/2.22.xml",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    }
-   ]
-  },
-  {
-   "title": "Tipo de edificio (excluidos los alojamientos) por año de construcción detallado e isla en la que se localizan. 01/11/2001. Illes Balears | Tipus d'edifici (exclosos els allotjaments) per any de construcció detallat i illa en la qual es localitza. 01/11/2001. Illes Balears | Tipus d'edifici (exclosos els allotjaments) per any de construcció detallat i illa en la qual es localitza. 01/11/2001. Illes Balears",
-   "about": "https://datos.gob.es/catalogo/a04027063-tipo-de-edificio-excluidos-los-alojamientos-por-ano-de-construccion-detallado-e-isla-en-la-que-se-localizan-01-11-2001-illes-balears",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=48b42eba-c152-434b-992c-049eff014c96",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-tipo-de-edificio-excluidos-l"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=48b42eba-c152-434b-992c-049eff014c96",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-tipo-de-edificio-excluidos-l"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=48b42eba-c152-434b-992c-049eff014c96",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-tipo-de-edificio-excluidos-l"
-    }
-   ]
-  },
-  {
-   "title": "Tipo de edificio (excluidos los alojamientos) por isla, año de construcción y tamaño del municipio en el que se localiza. 01/11/2001. Illes Balears | Tipus d'edifici (exclosos els allotjaments) per illa, any de construcció i grandària del municipi en el qual es localitza. 01/11/2001. Illes Balears | Tipus d'edifici (exclosos els allotjaments) per illa, any de construcció i grandària del municipi en el qual es localitza. 01/11/2001. Illes Balears",
-   "about": "https://datos.gob.es/catalogo/a04027063-tipo-de-edificio-excluidos-los-alojamientos-por-isla-ano-de-construccion-y-tamano-del-municipio-en-el-que-se-localiza-01-11-2001-illes-balears",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=2d34beae-70a0-4384-8216-531d8c5a9589",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-tipo-de-edificio-excluidos-l"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=2d34beae-70a0-4384-8216-531d8c5a9589",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-tipo-de-edificio-excluidos-l"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=2d34beae-70a0-4384-8216-531d8c5a9589",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-tipo-de-edificio-excluidos-l"
-    }
-   ]
-  },
-  {
-   "title": "Tipo de edificio (excluidos los alojamientos) por número de plantas bajo rasante e isla de localización. 01/11/2001. Illes Balears | Tipus d'edifici (exclosos els allotjaments) per nombre de plantes sota rasant i illa de localització. 01/11/2001. Illes Balears | Tipus d'edifici (exclosos els allotjaments) per nombre de plantes sota rasant i illa de localització. 01/11/2001. Illes Balears",
-   "about": "https://datos.gob.es/catalogo/a04027063-tipo-de-edificio-excluidos-los-alojamientos-por-numero-de-plantas-bajo-rasante-e-isla-de-localizacion-01-11-2001-illes-balears",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=6464e7a9-03cc-4234-9a2e-64240b3276c3",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-tipo-de-edificio-excluidos-l"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=6464e7a9-03cc-4234-9a2e-64240b3276c3",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-tipo-de-edificio-excluidos-l"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=6464e7a9-03cc-4234-9a2e-64240b3276c3",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-tipo-de-edificio-excluidos-l"
-    }
-   ]
-  },
-  {
-   "title": "Viajeros entrados, pernoctaciones y estancia media en alojamientos de turismo rural según lugar de residencia del viajero. Illes Balears e islas por meses | Viatgers entrats, pernoctacions i estada mitjana en allotjaments de turisme rural segons el lloc de residència del viatger. Illes Balears i illes per mesos | Viatgers entrats, pernoctacions i estada mitjana en allotjaments de turisme rural segons el lloc de residència del viatger. Illes Balears i illes per mesos",
-   "about": "https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaciones-y-estancia-media-en-alojamientos-de-turismo-rural-segun-lugar-de-residencia-del-viajero-illes-balears-e-islas-por-meses",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000004/1.26.xml",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000004/1.26.tsv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000004/1.26.jsonstat",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000004/1.26.json",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000004/1.26.xlsx",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000004/1.26.csv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    }
-   ]
-  },
-  {
-   "title": "Viajeros entrados, pernoctaciones y estancia media en alojamientos de turismo rural según tipo de alojamiento. Illes Balears e islas por meses | Viatgers entrats, pernoctacions i estada mitjana en allotjaments de turisme rural segons el tipus d'allotjament. Illes Balears i illas per mesos | Viatgers entrats, pernoctacions i estada mitjana en allotjaments de turisme rural segons el tipus d'allotjament. Illes Balears i illas per mesos",
-   "about": "https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaciones-y-estancia-media-en-alojamientos-de-turismo-rural-segun-tipo-de-alojamiento-illes-balears-e-islas-por-meses",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000002/1.26.jsonstat",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000002/1.26.xlsx",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000002/1.26.tsv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000002/1.26.xml",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000002/1.26.json",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000002/1.26.csv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    }
-   ]
-  },
-  {
-   "title": "Habitatges, exclosos els allotjaments, per illa de localització, instal·lacions de refrigeració/calefacció i grandària del municipi en el qual es localitza l'habitatge. 01/11/1991. Illes Balears | Habitatges, exclosos els allotjaments, per illa de localització, instal·lacions de refrigeració/calefacció i grandària del municipi en el qual es localitza l'habitatge. 01/11/1991. Illes Balears | Viviendas excluidos los alojamientos por isla de localización, instalaciones de refrigeración-calefacción y tamaño del municipio en el que se localiza la vivienda. 01/11/1991. Illes Balears",
-   "about": "https://datos.gob.es/catalogo/a04027063-viviendas-excluidos-los-alojamientos-por-isla-de-localizacion-instalaciones-de-refrigeracion-calefaccion-y-tamano-del-municipio-en-el-que-se-localiza-la-vivienda-01-11-1991-illes-balears",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=1fca3644-b742-4d5c-b15a-091124d57806",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-excluidos-los-aloj"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=1fca3644-b742-4d5c-b15a-091124d57806",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-excluidos-los-aloj"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=1fca3644-b742-4d5c-b15a-091124d57806",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-excluidos-los-aloj"
-    }
-   ]
-  },
-  {
-   "title": "Habitatges, exclosos els allotjaments, per illa-municipi de localització, instal·lacions de refrigeració i calefacció de l'habitatge. 01/11/1991. Illes Balears | Habitatges, exclosos els allotjaments, per illa-municipi de localització, instal·lacions de refrigeració i calefacció de l'habitatge. 01/11/1991. Illes Balears | Viviendas excluidos los alojamientos por isla-municipio de localización, instalaciones de refrigeración y calefacción de la vivienda. 01/11/1991. Illes Balears",
-   "about": "https://datos.gob.es/catalogo/a04027063-viviendas-excluidos-los-alojamientos-por-isla-municipio-de-localizacion-instalaciones-de-refrigeracion-y-calefaccion-de-la-vivienda-01-11-1991-illes-balears",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=1e106522-cbf3-42d0-ab15-e79145e17135",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-excluidos-los-aloj"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=1e106522-cbf3-42d0-ab15-e79145e17135",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-excluidos-los-aloj"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=1e106522-cbf3-42d0-ab15-e79145e17135",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-excluidos-los-aloj"
-    }
-   ]
-  },
-  {
-   "title": "Habitatges familiars, exclosos els allotjaments, per illa de localització, classe d'habitatge, instal·lacions de l'habitatge i període de construcció de l'edifici. 01/11/1991. Illes Balears | Habitatges familiars, exclosos els allotjaments, per illa de localització, classe d'habitatge, instal·lacions de l'habitatge i període de construcció de l'edifici. 01/11/1991. Illes Balears | Viviendas familiares excluidos los alojamientos por isla de localización, clase de vivienda, instalaciones de la vivienda y periodo de construcción del edificio. 01/11/1991. Illes Balears",
-   "about": "https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluidos-los-alojamientos-por-isla-de-localizacion-clase-de-vivienda-instalaciones-de-la-vivienda-y-periodo-de-construccion-del-edificio-01-11-1991-illes-balears",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=aa7a6670-b88c-48cb-95c7-f9bee64cbfc3",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluid"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=aa7a6670-b88c-48cb-95c7-f9bee64cbfc3",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluid"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=aa7a6670-b88c-48cb-95c7-f9bee64cbfc3",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluid"
-    }
-   ]
-  },
-  {
-   "title": "Habitatges familiars, exclosos els allotjaments, per illa de localització, classe d'habitatge, instal·lacions, nombre d'habitacions i superfície útil de l'habitatge. 01/11/1991. Illes Balears | Habitatges familiars, exclosos els allotjaments, per illa de localització, classe d'habitatge, instal·lacions, nombre d'habitacions i superfície útil de l'habitatge. 01/11/1991. Illes Balears | Viviendas familiares excluidos los alojamientos por isla de localización, clase de vivienda, instalaciones, número de habitaciones y superficie útil de la vivienda. 01/11/1991. Illes Balears",
-   "about": "https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluidos-los-alojamientos-por-isla-de-localizacion-clase-de-vivienda-instalaciones-numero-de-habitaciones-y-superficie-util-de-la-vivienda-01-11-1991-illes-balears",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=83b32947-aeff-4726-90bc-e755021af952",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluid"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=83b32947-aeff-4726-90bc-e755021af952",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluid"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=83b32947-aeff-4726-90bc-e755021af952",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluid"
-    }
-   ]
-  },
-  {
-   "title": "Habitatges familiars, exclosos els allotjaments, per illa de localització, estat de l'edifici, instal·lacions de l'habitatge i classe d'habitatge. 01/11/1991. Illes Balears | Habitatges familiars, exclosos els allotjaments, per illa de localització, estat de l'edifici, instal·lacions de l'habitatge i classe d'habitatge. 01/11/1991. Illes Balears | Viviendas familiares excluidos los alojamientos por isla de localización, estado del edificio, instalaciones de la vivienda y clase de vivienda. 01/11/1991. Illes Balears",
-   "about": "https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluidos-los-alojamientos-por-isla-de-localizacion-estado-del-edificio-instalaciones-de-la-vivienda-y-clase-de-vivienda-01-11-1991-illes-balears",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=364508af-bcb9-4432-a45c-3f4d2f0951d8",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluid"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=364508af-bcb9-4432-a45c-3f4d2f0951d8",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluid"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=364508af-bcb9-4432-a45c-3f4d2f0951d8",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluid"
-    }
-   ]
-  },
-  {
-   "title": "Habitatges familiars, exclosos els allotjaments, per illa i grandària del municipi de localització, instal·lacions de l'habitatge i classe d'habitatge. 01/11/1991. Illes Balears | Habitatges familiars, exclosos els allotjaments, per illa i grandària del municipi de localització, instal·lacions de l'habitatge i classe d'habitatge. 01/11/1991. Illes Balears | Viviendas familiares excluidos los alojamientos por isla y tamaño del municipio de localización, instalaciones de la vivienda y clase de vivienda. 01/11/1991. Illes Balears",
-   "about": "https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluidos-los-alojamientos-por-isla-y-tamano-del-municipio-de-localizacion-instalaciones-de-la-vivienda-y-clase-de-vivienda-01-11-1991-illes-balears",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=3cea4c23-791c-41af-9daa-9a731e2a1740",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluid"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=3cea4c23-791c-41af-9daa-9a731e2a1740",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluid"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=3cea4c23-791c-41af-9daa-9a731e2a1740",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluid"
-    }
-   ]
-  },
-  {
-   "title": "Habitatges familiars, exclosos els allotjaments, per illa i tipus del municipi de localització, instal·lacions de l'habitatge i classe d'habitatge. 01/11/1991. Illes Balears | Habitatges familiars, exclosos els allotjaments, per illa i tipus del municipi de localització, instal·lacions de l'habitatge i classe d'habitatge. 01/11/1991. Illes Balears | Viviendas familiares excluidos los alojamientos por isla y tipo del municipio de localización, instalaciones de la vivienda y clase de vivienda. 01/11/1991. Illes Balears",
-   "about": "https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluidos-los-alojamientos-por-isla-y-tipo-del-municipio-de-localizacion-instalaciones-de-la-vivienda-y-clase-de-vivienda-01-11-1991-illes-balears",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=1608febb-c12b-4cc5-8ee9-0971af275084",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluid"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=1608febb-c12b-4cc5-8ee9-0971af275084",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluid"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=1608febb-c12b-4cc5-8ee9-0971af275084",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viviendas-familiares-excluid"
-    }
-   ]
-  },
-  {
-   "title": "Variables d'ús de TIC (a gener de 2006) per principals variables i agrupació d'activitat CNAE-93 (Total; Indústria; Construcció; Serveis: comerç, hotels i càmpings, resta) per a empreses de 10 i més assalariats. 2005-2006. Illes Balears | Variables d'ús de TIC (a gener de 2006) per principals variables i agrupació d'activitat CNAE-93 (Total; Indústria; Construcció; Serveis: comerç, hotels i càmpings, resta) per a empreses de 10 i més assalariats. 2005-2006. Illes Balears | Variables de uso de TIC (a enero de 2006) por principales variables y agrupación de  actividad CNAE-93 (Total; Industria; Construcción; Servicios: comercio, hoteles y campings, resto) para empresas de 10 y más asalariados. 2005-2006. Illes Balears",
-   "about": "https://datos.gob.es/catalogo/a04027063-variables-de-uso-de-tic-a-enero-de-2006-por-principales-variables-y-agrupacion-de-actividad-cnae-93-total-industria-construccion-servicios-comercio-hoteles-y-campings-resto-para-empresas-de-10-y-mas-asalariados-2005-2006-illes-balears",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=1ed9f624-315f-4fc5-b0bf-2f20921f231b",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-variables-de-uso-de-tic-a-en"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=1ed9f624-315f-4fc5-b0bf-2f20921f231b",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-variables-de-uso-de-tic-a-en"
-    },
-    {
-     "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=1ed9f624-315f-4fc5-b0bf-2f20921f231b",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-variables-de-uso-de-tic-a-en"
-    }
-   ]
-  },
-  {
-   "title": "Alojamientos de turismo rural en Castilla-La Mancha",
-   "about": "https://datos.gob.es/catalogo/a08002880-alojamientos-de-turismo-rural-de-castilla-la-mancha",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A08002880\"",
-   "dist": [
-    {
-     "url": "https://datosabiertos.castillalamancha.es/sites/datosabiertos.castillalamancha.es/files/Alojamientos%20rurales.csv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a08002880-alojamientos-de-turismo-rura"
-    },
-    {
-     "url": "https://datosabiertos.castillalamancha.es/sites/datosabiertos.castillalamancha.es/files/Alojamientos%20rurales.xls",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a08002880-alojamientos-de-turismo-rura"
-    }
-   ]
-  },
-  {
-   "title": "Establecimientos abiertos y plazas en alojamientos de turismo rural según tipo de alojamiento. Illes Balears e islas por meses | Establiments oberts i places en allotjaments de turisme rural segons tipus d'allotjament. Illes Balears i illes per mesos | Establiments oberts i places en allotjaments de turisme rural segons tipus d'allotjament. Illes Balears i illes per mesos",
-   "about": "https://datos.gob.es/catalogo/a04027063-establecimientos-abiertos-y-plazas-en-alojamientos-de-turismo-rural-segun-tipo-de-alojamiento-illes-balears-e-islas-por-meses",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000001/1.25.json",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-establecimientos-abiertos-y-"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000001/1.25.jsonstat",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-establecimientos-abiertos-y-"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000001/1.25.tsv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-establecimientos-abiertos-y-"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000001/1.25.xlsx",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-establecimientos-abiertos-y-"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000001/1.25.csv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-establecimientos-abiertos-y-"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000001/1.25.xml",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-establecimientos-abiertos-y-"
-    }
-   ]
-  },
-  {
-   "title": "Grado de ocupación en alojamientos de turismo rural según tipo de alojamiento. Illes Balears e islas por meses | Grau d'ocupació en allotjaments de turisme rural segons tipus d'allotjament. Illes Balears i illes per mesos | Grau d'ocupació en allotjaments de turisme rural segons tipus d'allotjament. Illes Balears i illes per mesos",
-   "about": "https://datos.gob.es/catalogo/a04027063-grado-de-ocupacion-en-alojamientos-de-turismo-rural-segun-tipo-de-alojamiento-illes-balears-e-islas-por-meses",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000003/1.25.tsv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-grado-de-ocupacion-en-alojam"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000003/1.25.xml",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-grado-de-ocupacion-en-alojam"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000003/1.25.xlsx",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-grado-de-ocupacion-en-alojam"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000003/1.25.jsonstat",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-grado-de-ocupacion-en-alojam"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000003/1.25.csv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-grado-de-ocupacion-en-alojam"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000003/1.25.json",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-grado-de-ocupacion-en-alojam"
-    }
-   ]
-  },
-  {
-   "title": "Índex de preus en allotjaments de turisme rural segons modalitat de l'estança. Illes Balears i mes | Índex de preus en allotjaments de turisme rural segons modalitat de l'estança. Illes Balears i mes | Índice de precios en alojamientos de turismo rural según modalidad de la estancia. Illes Balears y mes",
-   "about": "https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojamientos-de-turismo-rural-segun-modalidad-de-la-estancia-illes-balears-y-mes",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000002/1.33.xlsx",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000002/1.33.tsv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000002/1.33.xml",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000002/1.33.jsonstat",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000002/1.33.csv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000002/1.33.json",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    }
-   ]
-  },
-  {
-   "title": "Índex de preus en allotjaments de turisme rural segons tarifa. Illes Balears i mes | Índex de preus en allotjaments de turisme rural segons tarifa. Illes Balears i mes | Índice de precios en alojamientos de turismo rural según tarifa. Illes Balears y mes",
-   "about": "https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojamientos-de-turismo-rural-segun-tarifa-illes-balears-y-mes",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000004/1.33.tsv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000004/1.33.jsonstat",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000004/1.33.xlsx",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000004/1.33.xml",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000004/1.33.json",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000004/1.33.csv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    }
-   ]
-  },
-  {
-   "title": "Índex de preus en allotjaments de turisme rural segons tipus d'establiment. Illes Balears i mes | Índex de preus en allotjaments de turisme rural segons tipus d'establiment. Illes Balears i mes | Índice de precios en alojamientos de turismo rural según tipo de establecimiento. Illes Balears y mes",
-   "about": "https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojamientos-de-turismo-rural-segun-tipo-de-establecimiento-illes-balears-y-mes",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000003/2.22.csv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000003/2.22.xlsx",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000003/2.22.jsonstat",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000003/2.22.json",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000003/2.22.tsv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000003/2.22.xml",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-indice-de-precios-en-alojami"
-    }
-   ]
-  },
-  {
-   "title": "Viajeros entrados, pernoctaciones y estancia media en alojamientos de turismo rural según lugar de residencia del viajero. Illes Balears e islas por meses | Viatgers entrats, pernoctacions i estada mitjana en allotjaments de turisme rural segons el lloc de residència del viatger. Illes Balears i illes per mesos | Viatgers entrats, pernoctacions i estada mitjana en allotjaments de turisme rural segons el lloc de residència del viatger. Illes Balears i illes per mesos",
-   "about": "https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaciones-y-estancia-media-en-alojamientos-de-turismo-rural-segun-lugar-de-residencia-del-viajero-illes-balears-e-islas-por-meses",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000004/1.26.xml",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000004/1.26.tsv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000004/1.26.jsonstat",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000004/1.26.json",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000004/1.26.xlsx",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000004/1.26.csv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    }
-   ]
-  },
-  {
-   "title": "Viajeros entrados, pernoctaciones y estancia media en alojamientos de turismo rural según tipo de alojamiento. Illes Balears e islas por meses | Viatgers entrats, pernoctacions i estada mitjana en allotjaments de turisme rural segons el tipus d'allotjament. Illes Balears i illas per mesos | Viatgers entrats, pernoctacions i estada mitjana en allotjaments de turisme rural segons el tipus d'allotjament. Illes Balears i illas per mesos",
-   "about": "https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaciones-y-estancia-media-en-alojamientos-de-turismo-rural-segun-tipo-de-alojamiento-illes-balears-e-islas-por-meses",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A04027063\"",
-   "dist": [
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000002/1.26.jsonstat",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000002/1.26.xlsx",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000002/1.26.tsv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000002/1.26.xml",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000002/1.26.json",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    },
-    {
-     "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000002/1.26.csv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a04027063-viajeros-entrados-pernoctaci"
-    }
-   ]
-  },
-  {
-   "title": "Albergues turísticos de Castilla-La Mancha",
-   "about": "https://datos.gob.es/catalogo/a08002880-albergues-turisticos-de-castilla-la-mancha",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A08002880\"",
-   "dist": [
-    {
-     "url": "https://datosabiertos.castillalamancha.es/sites/datosabiertos.castillalamancha.es/files/Albergues.xls",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a08002880-albergues-turisticos-de-cast"
-    },
-    {
-     "url": "https://datosabiertos.castillalamancha.es/sites/datosabiertos.castillalamancha.es/files/Albergues.csv",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a08002880-albergues-turisticos-de-cast"
-    }
-   ]
-  },
-  {
-   "title": "Listado de albergues y campamentos para jóvenes en Castilla-La Mancha",
-   "about": "https://datos.gob.es/catalogo/a08002880-listado-de-albergues-y-campamentos-para-jovenes-en-castilla-la-mancha",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A08002880\"",
-   "dist": [
-    {
-     "url": "http://www.portaljovenclm.com/listadoAlbergues.php",
-     "format": "{\"_about\": \"https://datos.gob.es/catalogo/a08002880-listado-de-albergues-y-campa"
-    }
-   ]
-  },
-  {
-   "title": "Albergues turísticos en activo del Registro de Turismo de Navarra | Jarduneko aterpetxe turistikoak, Nafarroako Turismo Erregistrokoak",
-   "about": "https://datos.gob.es/catalogo/a15002917-albergues-turisticos-en-activo-del-registro-de-turismo-de-navarra1",
-   "publisher": "\"http://datos.gob.es/recurso/sector-publico/org/Organismo/A15002917\"",
-   "dist": [
-    {
-     "url": "https://datosabiertos.navarra.es/datastore/dump/95ca4059-d22d-4dbe-86d8-f05dc5a20c3f?format=csv&bom=True",
-     "format": "\"http://publications.europa.eu/resource/authority/file-type/CSV\""
-    },
-    {
-     "url": "https://datosabiertos.navarra.es/datastore/dump/95ca4059-d22d-4dbe-86d8-f05dc5a20c3f?format=xlsx&bom=True",
-     "format": "\"http://publications.europa.eu/resource/authority/file-type/XLSX\""
-    },
-    {
-     "url": "https://datosabiertos.navarra.es/datastore/dump/95ca4059-d22d-4dbe-86d8-f05dc5a20c3f?format=json&bom=True",
-     "format": "\"http://publications.europa.eu/resource/authority/file-type/JSON\""
-    },
-    {
-     "url": "https://datosabiertos.navarra.es/datastore/dump/95ca4059-d22d-4dbe-86d8-f05dc5a20c3f?format=xml&bom=True",
-     "format": "\"http://publications.europa.eu/resource/authority/file-type/XML\""
-    },
-    {
-     "url": "https://datosabiertos.navarra.es/dataset/2484bb82-e189-4165-8eb5-c88a8dcdf069/resource/95ca4059-d22d-4dbe-86d8-f05dc5a20c3f/download/downloadfile.aspxcodigoaccesoopendataficheroturismoopendata_resultados_dd_establecimientos_alber.csv",
-     "format": "\"http://publications.europa.eu/resource/authority/file-type/CSV\""
-    },
-    {
-     "url": "https://datosabiertos.navarra.es/datastore/dump/95ca4059-d22d-4dbe-86d8-f05dc5a20c3f?format=json&bom=True",
-     "format": "\"http://publications.europa.eu/resource/authority/file-type/JSON\""
-    },
-    {
-     "url": "https://datosabiertos.navarra.es/dataset/2484bb82-e189-4165-8eb5-c88a8dcdf069/resource/422b6aee-fc54-4b37-9447-a077fcefac43/download/downloadfile.aspxcodigoaccesoopendataficheroturismoopendata_resultados_dd_establecimientos_alber.xsd",
-     "format": "\"http://publications.europa.eu/resource/authority/file-type/XML\""
-    },
-    {
-     "url": "https://datosabiertos.navarra.es/datastore/dump/95ca4059-d22d-4dbe-86d8-f05dc5a20c3f?format=ods&bom=True",
-     "format": "\"http://publications.europa.eu/resource/authority/file-type/ODS\""
-    },
-    {
-     "url": "https://datosabiertos.navarra.es/datastore/dump/95ca4059-d22d-4dbe-86d8-f05dc5a20c3f?format=tsv&bom=True",
-     "format": "\"http://publications.europa.eu/resource/authority/file-type/TSV\""
-    },
-    {
-     "url": "https://datosabiertos.navarra.es/dataset/albergues-turisticos-en-activo-del-registro-de-turismo-de-navarra/resource/95ca4059-d22d-4dbe-86d8-f05dc5a20c3f?view_id=6ba827d4-8104-49c4-8abc-f74b96d9e552",
-     "format": "\"http://publications.europa.eu/resource/authority/file-type/HTML\""
-    }
-   ]
+  "https://datos.gob.es/apidata/catalog/dataset/a04003003-alojamientos-turisticos-mallorca.json": {
+   "status": 200,
+   "bytes": 888,
+   "links": []
   }
- ],
+ },
  "probes": [
   {
-   "url": "http://www.portaljovenclm.com/listadoAlbergues.php",
+   "url": "http://datosabiertos.navarra.es/datastore/dump/5527debf-7e72-4f9e-8e12-b562f3027fc2?format=csv",
+   "error": "URLError(TimeoutError('timed out'))"
+  },
+  {
+   "url": "https://abertos.xunta.gal/catalogo/cultura-ocio-deporte/-/dataset/0022/rexistro-empresas-actividades-turisticas/103/acceso-aos-datos.csv",
+   "error": "URLError(TimeoutError('timed out'))"
+  },
+  {
+   "url": "https://datosabiertos.castillalamancha.es/sites/datosabiertos.castillalamancha.es/files/01%20ESTABLECIMIENTOS%20HOTELEROS.csv",
+   "final": "https://datosabiertos.castillalamancha.es/",
    "status": 200,
-   "type": "text/html; charset=UTF-8",
-   "bytes": 113520,
-   "first": "<!DOCTYPE html>\\n<html lang=\"es\" dir=\"ltr\">\\n<head>\\n  <meta charset=\"utf-8\" />\\n<script>var _paq = _paq || [];(function(){var u=((\"https:\" == document.location.protocol) ? \"https://matomoportales.jccm.es/\" : \"http://matomoportales.jccm.es/\");_paq.push([\"setSiteId\", \"28\"]);_paq.push([\"setTrackerUrl\", u+"
+   "type": "text/html; charset=utf-8",
+   "bytes": 26285,
+   "first": "<!DOCTYPE html>\n<html lang=\"es\" dir=\"ltr\">\n<head>\n  <meta charset=\"utf-8\" />\n<script>var _paq = _paq || [];(function(){var u=((\"https:\" == document.location.protocol) ? \"https://matomoportales.jccm.es/\" : \"http://matomoportales.jccm.es/\");_paq.push([\"setSiteId\", \"73\"]);_paq.push([\"setTrackerUrl\", u+"
+  },
+  {
+   "url": "https://datosabiertos.castillalamancha.es/sites/datosabiertos.castillalamancha.es/files/01%20ESTABLECIMIENTOS%20HOTELEROS_0.csv",
+   "final": "https://datosabiertos.castillalamancha.es/",
+   "status": 200,
+   "type": "text/html; charset=utf-8",
+   "bytes": 26285,
+   "first": "<!DOCTYPE html>\n<html lang=\"es\" dir=\"ltr\">\n<head>\n  <meta charset=\"utf-8\" />\n<script>var _paq = _paq || [];(function(){var u=((\"https:\" == document.location.protocol) ? \"https://matomoportales.jccm.es/\" : \"http://matomoportales.jccm.es/\");_paq.push([\"setSiteId\", \"73\"]);_paq.push([\"setTrackerUrl\", u+"
+  },
+  {
+   "url": "https://datosabiertos.castillalamancha.es/sites/datosabiertos.castillalamancha.es/files/01%20HOTELES.csv",
+   "final": "https://datosabiertos.castillalamancha.es/",
+   "status": 200,
+   "type": "text/html; charset=utf-8",
+   "bytes": 26285,
+   "first": "<!DOCTYPE html>\n<html lang=\"es\" dir=\"ltr\">\n<head>\n  <meta charset=\"utf-8\" />\n<script>var _paq = _paq || [];(function(){var u=((\"https:\" == document.location.protocol) ? \"https://matomoportales.jccm.es/\" : \"http://matomoportales.jccm.es/\");_paq.push([\"setSiteId\", \"73\"]);_paq.push([\"setTrackerUrl\", u+"
   },
   {
    "url": "https://datosabiertos.castillalamancha.es/sites/datosabiertos.castillalamancha.es/files/Albergues.csv",
+   "final": "https://datosabiertos.castillalamancha.es/",
    "status": 200,
    "type": "text/html; charset=utf-8",
    "bytes": 26285,
-   "first": "<!DOCTYPE html>\\n<html lang=\"es\" dir=\"ltr\">\\n<head>\\n  <meta charset=\"utf-8\" />\\n<script>var _paq = _paq || [];(function(){var u=((\"https:\" == document.location.protocol) ? \"https://matomoportales.jccm.es/\" : \"http://matomoportales.jccm.es/\");_paq.push([\"setSiteId\", \"73\"]);_paq.push([\"setTrackerUrl\", u+"
+   "first": "<!DOCTYPE html>\n<html lang=\"es\" dir=\"ltr\">\n<head>\n  <meta charset=\"utf-8\" />\n<script>var _paq = _paq || [];(function(){var u=((\"https:\" == document.location.protocol) ? \"https://matomoportales.jccm.es/\" : \"http://matomoportales.jccm.es/\");_paq.push([\"setSiteId\", \"73\"]);_paq.push([\"setTrackerUrl\", u+"
   },
   {
    "url": "https://datosabiertos.castillalamancha.es/sites/datosabiertos.castillalamancha.es/files/Albergues.xls",
+   "final": "https://datosabiertos.castillalamancha.es/",
    "status": 200,
    "type": "text/html; charset=utf-8",
    "bytes": 26285,
-   "first": "<!DOCTYPE html>\\n<html lang=\"es\" dir=\"ltr\">\\n<head>\\n  <meta charset=\"utf-8\" />\\n<script>var _paq = _paq || [];(function(){var u=((\"https:\" == document.location.protocol) ? \"https://matomoportales.jccm.es/\" : \"http://matomoportales.jccm.es/\");_paq.push([\"setSiteId\", \"73\"]);_paq.push([\"setTrackerUrl\", u+"
+   "first": "<!DOCTYPE html>\n<html lang=\"es\" dir=\"ltr\">\n<head>\n  <meta charset=\"utf-8\" />\n<script>var _paq = _paq || [];(function(){var u=((\"https:\" == document.location.protocol) ? \"https://matomoportales.jccm.es/\" : \"http://matomoportales.jccm.es/\");_paq.push([\"setSiteId\", \"73\"]);_paq.push([\"setTrackerUrl\", u+"
   },
   {
    "url": "https://datosabiertos.castillalamancha.es/sites/datosabiertos.castillalamancha.es/files/Alojamientos%20rurales.csv",
+   "final": "https://datosabiertos.castillalamancha.es/",
    "status": 200,
    "type": "text/html; charset=utf-8",
    "bytes": 26285,
-   "first": "<!DOCTYPE html>\\n<html lang=\"es\" dir=\"ltr\">\\n<head>\\n  <meta charset=\"utf-8\" />\\n<script>var _paq = _paq || [];(function(){var u=((\"https:\" == document.location.protocol) ? \"https://matomoportales.jccm.es/\" : \"http://matomoportales.jccm.es/\");_paq.push([\"setSiteId\", \"73\"]);_paq.push([\"setTrackerUrl\", u+"
+   "first": "<!DOCTYPE html>\n<html lang=\"es\" dir=\"ltr\">\n<head>\n  <meta charset=\"utf-8\" />\n<script>var _paq = _paq || [];(function(){var u=((\"https:\" == document.location.protocol) ? \"https://matomoportales.jccm.es/\" : \"http://matomoportales.jccm.es/\");_paq.push([\"setSiteId\", \"73\"]);_paq.push([\"setTrackerUrl\", u+"
   },
   {
    "url": "https://datosabiertos.castillalamancha.es/sites/datosabiertos.castillalamancha.es/files/Alojamientos%20rurales.xls",
+   "final": "https://datosabiertos.castillalamancha.es/",
    "status": 200,
    "type": "text/html; charset=utf-8",
    "bytes": 26285,
-   "first": "<!DOCTYPE html>\\n<html lang=\"es\" dir=\"ltr\">\\n<head>\\n  <meta charset=\"utf-8\" />\\n<script>var _paq = _paq || [];(function(){var u=((\"https:\" == document.location.protocol) ? \"https://matomoportales.jccm.es/\" : \"http://matomoportales.jccm.es/\");_paq.push([\"setSiteId\", \"73\"]);_paq.push([\"setTrackerUrl\", u+"
+   "first": "<!DOCTYPE html>\n<html lang=\"es\" dir=\"ltr\">\n<head>\n  <meta charset=\"utf-8\" />\n<script>var _paq = _paq || [];(function(){var u=((\"https:\" == document.location.protocol) ? \"https://matomoportales.jccm.es/\" : \"http://matomoportales.jccm.es/\");_paq.push([\"setSiteId\", \"73\"]);_paq.push([\"setTrackerUrl\", u+"
   },
   {
    "url": "https://datosabiertos.castillalamancha.es/sites/datosabiertos.castillalamancha.es/files/Hoteles.csv",
+   "final": "https://datosabiertos.castillalamancha.es/",
    "status": 200,
    "type": "text/html; charset=utf-8",
    "bytes": 26285,
-   "first": "<!DOCTYPE html>\\n<html lang=\"es\" dir=\"ltr\">\\n<head>\\n  <meta charset=\"utf-8\" />\\n<script>var _paq = _paq || [];(function(){var u=((\"https:\" == document.location.protocol) ? \"https://matomoportales.jccm.es/\" : \"http://matomoportales.jccm.es/\");_paq.push([\"setSiteId\", \"73\"]);_paq.push([\"setTrackerUrl\", u+"
+   "first": "<!DOCTYPE html>\n<html lang=\"es\" dir=\"ltr\">\n<head>\n  <meta charset=\"utf-8\" />\n<script>var _paq = _paq || [];(function(){var u=((\"https:\" == document.location.protocol) ? \"https://matomoportales.jccm.es/\" : \"http://matomoportales.jccm.es/\");_paq.push([\"setSiteId\", \"73\"]);_paq.push([\"setTrackerUrl\", u+"
   },
   {
    "url": "https://datosabiertos.castillalamancha.es/sites/datosabiertos.castillalamancha.es/files/Hoteles.xls",
+   "final": "https://datosabiertos.castillalamancha.es/",
    "status": 200,
    "type": "text/html; charset=utf-8",
    "bytes": 26285,
-   "first": "<!DOCTYPE html>\\n<html lang=\"es\" dir=\"ltr\">\\n<head>\\n  <meta charset=\"utf-8\" />\\n<script>var _paq = _paq || [];(function(){var u=((\"https:\" == document.location.protocol) ? \"https://matomoportales.jccm.es/\" : \"http://matomoportales.jccm.es/\");_paq.push([\"setSiteId\", \"73\"]);_paq.push([\"setTrackerUrl\", u+"
+   "first": "<!DOCTYPE html>\n<html lang=\"es\" dir=\"ltr\">\n<head>\n  <meta charset=\"utf-8\" />\n<script>var _paq = _paq || [];(function(){var u=((\"https:\" == document.location.protocol) ? \"https://matomoportales.jccm.es/\" : \"http://matomoportales.jccm.es/\");_paq.push([\"setSiteId\", \"73\"]);_paq.push([\"setTrackerUrl\", u+"
   },
   {
-   "url": "https://datosabiertos.navarra.es/dataset/2484bb82-e189-4165-8eb5-c88a8dcdf069/resource/422b6aee-fc54-4b37-9447-a077fcefac43/download/downloadfile.aspxcodigoaccesoopendataficheroturismoopendata_resultados_dd_establecimientos_alber.xsd",
-   "error": "URLError(TimeoutError('timed out'))"
-  },
-  {
-   "url": "https://datosabiertos.navarra.es/dataset/2484bb82-e189-4165-8eb5-c88a8dcdf069/resource/95ca4059-d22d-4dbe-86d8-f05dc5a20c3f/download/downloadfile.aspxcodigoaccesoopendataficheroturismoopendata_resultados_dd_establecimientos_alber.csv",
-   "error": "URLError(TimeoutError('timed out'))"
-  },
-  {
-   "url": "https://datosabiertos.navarra.es/dataset/83c54879-a56f-449c-aaea-bd7b2084a837/resource/5527debf-7e72-4f9e-8e12-b562f3027fc2/download/downloadfile.aspxcodigoaccesoopendataficheroturismoopendata_resultados_dd_es.csv",
-   "error": "URLError(TimeoutError('timed out'))"
-  },
-  {
-   "url": "https://datosabiertos.navarra.es/dataset/83c54879-a56f-449c-aaea-bd7b2084a837/resource/d32448d0-26be-4f1e-a1e3-d0a09af55d09/download/downloadfile.aspxcodigoaccesoopendataficheroturismoopendata_resultados_dd_es.xsd",
-   "error": "URLError(TimeoutError('timed out'))"
-  },
-  {
-   "url": "https://datosabiertos.navarra.es/dataset/albergues-turisticos-en-activo-del-registro-de-turismo-de-navarra/resource/95ca4059-d22d-4dbe-86d8-f05dc5a20c3f?view_id=6ba827d4-8104-49c4-8abc-f74b96d9e552",
-   "error": "URLError(TimeoutError('timed out'))"
-  },
-  {
-   "url": "https://datosabiertos.navarra.es/dataset/alojamientos-inscritos-en-el-registro-de-turismo-de-navarra/resource/5527debf-7e72-4f9e-8e12-b562f3027fc2?view_id=2275568a-6ee8-42ff-9d3a-60c72daaada5",
-   "error": "URLError(TimeoutError('timed out'))"
-  },
-  {
-   "url": "https://datosabiertos.navarra.es/datastore/dump/5527debf-7e72-4f9e-8e12-b562f3027fc2?format=csv&bom=True",
-   "error": "URLError(TimeoutError('timed out'))"
-  },
-  {
-   "url": "https://datosabiertos.navarra.es/datastore/dump/5527debf-7e72-4f9e-8e12-b562f3027fc2?format=json&bom=True",
-   "error": "URLError(TimeoutError('timed out'))"
-  },
-  {
-   "url": "https://datosabiertos.navarra.es/datastore/dump/5527debf-7e72-4f9e-8e12-b562f3027fc2?format=ods&bom=True",
-   "error": "URLError(TimeoutError('timed out'))"
-  },
-  {
-   "url": "https://datosabiertos.navarra.es/datastore/dump/5527debf-7e72-4f9e-8e12-b562f3027fc2?format=tsv&bom=True",
-   "error": "URLError(TimeoutError('timed out'))"
-  },
-  {
-   "url": "https://datosabiertos.navarra.es/datastore/dump/5527debf-7e72-4f9e-8e12-b562f3027fc2?format=xlsx&bom=True",
-   "error": "URLError(TimeoutError('timed out'))"
-  },
-  {
-   "url": "https://datosabiertos.navarra.es/datastore/dump/5527debf-7e72-4f9e-8e12-b562f3027fc2?format=xml&bom=True",
-   "error": "URLError(TimeoutError('timed out'))"
-  },
-  {
-   "url": "https://datosabiertos.navarra.es/datastore/dump/95ca4059-d22d-4dbe-86d8-f05dc5a20c3f?format=csv&bom=True",
-   "error": "URLError(TimeoutError('timed out'))"
-  },
-  {
-   "url": "https://datosabiertos.navarra.es/datastore/dump/95ca4059-d22d-4dbe-86d8-f05dc5a20c3f?format=json&bom=True",
-   "error": "URLError(TimeoutError('timed out'))"
-  },
-  {
-   "url": "https://datosabiertos.navarra.es/datastore/dump/95ca4059-d22d-4dbe-86d8-f05dc5a20c3f?format=ods&bom=True",
-   "error": "URLError(TimeoutError('timed out'))"
-  },
-  {
-   "url": "https://datosabiertos.navarra.es/datastore/dump/95ca4059-d22d-4dbe-86d8-f05dc5a20c3f?format=tsv&bom=True",
-   "error": "URLError(TimeoutError('timed out'))"
-  },
-  {
-   "url": "https://datosabiertos.navarra.es/datastore/dump/95ca4059-d22d-4dbe-86d8-f05dc5a20c3f?format=xlsx&bom=True",
-   "error": "URLError(TimeoutError('timed out'))"
-  },
-  {
-   "url": "https://datosabiertos.navarra.es/datastore/dump/95ca4059-d22d-4dbe-86d8-f05dc5a20c3f?format=xml&bom=True",
-   "error": "URLError(TimeoutError('timed out'))"
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000001/1.25.csv",
+   "url": "https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_ALOJAMIENTOS_TURISTICOS_ES53/02.000/codes.csv?fields=+description",
+   "final": "https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_ALOJAMIENTOS_TURISTICOS_ES53/02.000/codes.csv?fields=+description",
    "status": 200,
    "type": "text/csv",
-   "bytes": 3000000,
-   "first": "TERRITORIO#es,TERRITORIO#ca,TERRITORIO_CODE,TIME_PERIOD#es,TIME_PERIOD#ca,TIME_PERIOD_CODE,MEDIDAS#es,MEDIDAS#ca,MEDIDAS_CODE,ALOJAMIENTOS_TURISTICOS#es,ALOJAMIENTOS_TURISTICOS#ca,ALOJAMIENTOS_TURISTICOS_CODE,OBS_VALUE,ESTADO_OBSERVACION#es,ESTADO_OBSERVACION#ca,ESTADO_OBSERVACION_CODE,CONFIDENCIALI"
+   "bytes": 59653,
+   "first": "code,parent,urn,name#ca,name#es,name#en,description#ca,description#es,description#en\n_T,,urn:sdmx:org.sdmx.infomodel.codelist.Code=IBESTAT:CL_ALOJAMIENTOS_TURISTICOS_ES53(02.000)._T,Total,Total,Total,Emprat per expressar totals.,Usado para expresar totales.,Used for expressing totals.\nMERCADO,,urn:s"
   },
   {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000001/1.25.json",
+   "url": "https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_ALOJAMIENTOS_TURISTICOS_ES53/02.000/codes.json?fields=+description",
+   "final": "https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_ALOJAMIENTOS_TURISTICOS_ES53/02.000/codes.json?fields=+description",
    "status": 200,
    "type": "application/json",
-   "bytes": 251461,
-   "first": "{\"id\":\"000064A_000001\",\"urn\":\"urn:siemac:org.siemac.metamac.infomodel.statisticalresources.Dataset=IBESTAT:000064A_000001(1.25)\",\"selfLink\":{\"kind\":\"statisticalResources#dataset\",\"href\":\"https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000001/1.25\"},\"parentLink\":{\"k"
+   "bytes": 113653,
+   "first": "{\"code\":[{\"id\":\"_T\",\"urn\":\"urn:sdmx:org.sdmx.infomodel.codelist.Code=IBESTAT:CL_ALOJAMIENTOS_TURISTICOS_ES53(02.000)._T\",\"selfLink\":{\"kind\":\"structuralResources#code\",\"href\":\"https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_ALOJAMIENTOS_TURISTICOS_ES53/02.000/codes/_T\"},"
   },
   {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000001/1.25.jsonstat",
-   "status": 200,
-   "type": "application/jsonstat+json",
-   "bytes": 110170,
-   "first": "{\"version\":\"2.0\",\"label\":\"Establiments oberts i places en allotjaments de turisme rural segons tipus d'allotjament. Illes Balears i illes per mesos\",\"updated\":\"2026-10-01T14:27:25.178+02:00\",\"extension\":{\"datasetId\":\"000064A_000001\",\"datasetUrn\":\"urn:siemac:org.siemac.metamac.infomodel.statisticalre"
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000001/1.25.tsv",
-   "status": 200,
-   "type": "text/tab-separated-values",
-   "bytes": 3000000,
-   "first": "TERRITORIO#es\tTERRITORIO#ca\tTERRITORIO_CODE\tTIME_PERIOD#es\tTIME_PERIOD#ca\tTIME_PERIOD_CODE\tMEDIDAS#es\tMEDIDAS#ca\tMEDIDAS_CODE\tALOJAMIENTOS_TURISTICOS#es\tALOJAMIENTOS_TURISTICOS#ca\tALOJAMIENTOS_TURISTICOS_CODE\tOBS_VALUE\tESTADO_OBSERVACION#es\tESTADO_OBSERVACION#ca\tESTADO_OBSERVACION_CODE\tCONFIDENCIALI"
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000001/1.25.xlsx",
+   "url": "https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_ALOJAMIENTOS_TURISTICOS_ES53/02.000/codes.xlsx?fields=+description",
+   "final": "https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_ALOJAMIENTOS_TURISTICOS_ES53/02.000/codes.xlsx?fields=+description",
    "status": 200,
    "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-   "bytes": 1155714,
-   "first": "PK\u0003\u0004-\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0013\u0000\u0000\u0000[Content_Types].xml�S�n�0\u0010����*6�PU\u0015�C\u001f�\u0016��\u0003\\{�X�%����]\u00078�R�\\nq�cfgfW�d�q�ZCB\u0013|��|�*�*h㻆},^�{Va�^K\u001b<4�\u00076�N\u0016�\bXQ�ǆ�9�\u0007!P��$�\u0010�\u0013҆�d�c�D�j);\u0010��ѝP�g��E�M'O�ʕ����H7L�h���R���G��^�'�\u0003\u0007{\u0013�\b�zސʮ\u001bB��3\u001c�\u000b˙��h.�h�W�жF�\u000ej娄CQՠ똈���}ιL�U:\u0012\u0014D�\u0013����%އ����,�B���[�\t��\u001e"
+   "bytes": 18562,
+   "first": "PK\u0003\u0004-\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0013\u0000\u0000\u0000[Content_Types].xml�S�n�0\u0010����*6�PU\u0015�C\u001f�\u0016��\u0003\\{�X�%����]\u00078�R�\nq�cfgfW�d�q�ZCB\u0013|��|�*�*h㻆},^�{Va�^K\u001b<4�\u00076�N\u0016�\bXQ�ǆ�9�\u0007!P��$�\u0010�\u0013҆�d�c�D�j);\u0010��ѝP�g��E�M'O�ʕ����H7L�h���R���G��^�'�\u0003\u0007{\u0013�\b�zސʮ\u001bB��3\u001c�\u000b˙��h.�h�W�жF�\u000ej娄CQՠ똈���}ιL�U:\u0012\u0014D�\u0013����%އ����,�B���[�\t��\u001e"
   },
   {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000001/1.25.xml",
-   "status": 200,
-   "type": "application/xml",
-   "bytes": 410667,
-   "first": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\\n<stat:dataset xmlns:cdomain=\"http://www.siemac.org/metamac/rest/common/v1.0/domain\" xmlns:stat=\"http://www.siemac.org/metamac/rest/statistical-resources/v1.0/domain\" xmlns:sr=\"http://www.siemac.org/metamac/rest/structural-resources-internal/v1."
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000002/1.26.csv",
+   "url": "https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_ALOJAMIENTOS_TURISTICOS_INE/01.000/codes.csv?fields=+description",
+   "final": "https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_ALOJAMIENTOS_TURISTICOS_INE/01.000/codes.csv?fields=+description",
    "status": 200,
    "type": "text/csv",
-   "bytes": 3000000,
-   "first": "TERRITORIO#ca,TERRITORIO#es,TERRITORIO_CODE,TIME_PERIOD#ca,TIME_PERIOD#es,TIME_PERIOD_CODE,MEDIDAS#ca,MEDIDAS#es,MEDIDAS_CODE,ALOJAMIENTOS_TURISTICOS#ca,ALOJAMIENTOS_TURISTICOS#es,ALOJAMIENTOS_TURISTICOS_CODE,OBS_VALUE,ESTADO_OBSERVACION#ca,ESTADO_OBSERVACION#es,ESTADO_OBSERVACION_CODE,CONFIDENCIALI"
+   "bytes": 13431,
+   "first": "code,parent,urn,name#ca,name#es,name#en,description#ca,description#es,description#en\n_T,,urn:sdmx:org.sdmx.infomodel.codelist.Code=IBESTAT:CL_ALOJAMIENTOS_TURISTICOS_INE(01.000)._T,Total,Total,Total,Emprat per expressar totals.,Usado para expresar totales.,Used for expressing totals.\nHOTEL,,urn:sdmx"
   },
   {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000002/1.26.json",
+   "url": "https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_ALOJAMIENTOS_TURISTICOS_INE/01.000/codes.json?fields=+description",
+   "final": "https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_ALOJAMIENTOS_TURISTICOS_INE/01.000/codes.json?fields=+description",
    "status": 200,
    "type": "application/json",
-   "bytes": 346662,
-   "first": "{\"id\":\"000064A_000002\",\"urn\":\"urn:siemac:org.siemac.metamac.infomodel.statisticalresources.Dataset=IBESTAT:000064A_000002(1.26)\",\"selfLink\":{\"kind\":\"statisticalResources#dataset\",\"href\":\"https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000002/1.26\"},\"parentLink\":{\"k"
+   "bytes": 26736,
+   "first": "{\"code\":[{\"id\":\"_T\",\"urn\":\"urn:sdmx:org.sdmx.infomodel.codelist.Code=IBESTAT:CL_ALOJAMIENTOS_TURISTICOS_INE(01.000)._T\",\"selfLink\":{\"kind\":\"structuralResources#code\",\"href\":\"https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_ALOJAMIENTOS_TURISTICOS_INE/01.000/codes/_T\"},\"n"
   },
   {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000002/1.26.jsonstat",
-   "status": 200,
-   "type": "application/jsonstat+json",
-   "bytes": 170499,
-   "first": "{\"version\":\"2.0\",\"label\":\"Viatgers entrats, pernoctacions i estada mitjana en allotjaments de turisme rural segons el tipus d'allotjament. Illes Balears i illas per mesos\",\"updated\":\"2026-10-01T14:27:21.635+02:00\",\"extension\":{\"datasetId\":\"000064A_000002\",\"datasetUrn\":\"urn:siemac:org.siemac.metamac."
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000002/1.26.tsv",
-   "status": 200,
-   "type": "text/tab-separated-values",
-   "bytes": 3000000,
-   "first": "TERRITORIO#ca\tTERRITORIO#es\tTERRITORIO_CODE\tTIME_PERIOD#ca\tTIME_PERIOD#es\tTIME_PERIOD_CODE\tMEDIDAS#ca\tMEDIDAS#es\tMEDIDAS_CODE\tALOJAMIENTOS_TURISTICOS#ca\tALOJAMIENTOS_TURISTICOS#es\tALOJAMIENTOS_TURISTICOS_CODE\tOBS_VALUE\tESTADO_OBSERVACION#ca\tESTADO_OBSERVACION#es\tESTADO_OBSERVACION_CODE\tCONFIDENCIALI"
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000002/1.26.xlsx",
+   "url": "https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_ALOJAMIENTOS_TURISTICOS_INE/01.000/codes.xlsx?fields=+description",
+   "final": "https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_ALOJAMIENTOS_TURISTICOS_INE/01.000/codes.xlsx?fields=+description",
    "status": 200,
    "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-   "bytes": 1723886,
-   "first": "PK\u0003\u0004-\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0013\u0000\u0000\u0000[Content_Types].xml�S�n�0\u0010����*6�PU\u0015�C\u001f�\u0016��\u0003\\{�X�%����]\u00078�R�\\nq�cfgfW�d�q�ZCB\u0013|��|�*�*h㻆},^�{Va�^K\u001b<4�\u00076�N\u0016�\bXQ�ǆ�9�\u0007!P��$�\u0010�\u0013҆�d�c�D�j);\u0010��ѝP�g��E�M'O�ʕ����H7L�h���R���G��^�'�\u0003\u0007{\u0013�\b�zސʮ\u001bB��3\u001c�\u000b˙��h.�h�W�жF�\u000ej娄CQՠ똈���}ιL�U:\u0012\u0014D�\u0013����%އ����,�B���[�\t��\u001e"
+   "bytes": 8160,
+   "first": "PK\u0003\u0004-\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0013\u0000\u0000\u0000[Content_Types].xml�S�n�0\u0010����*6�PU\u0015�C\u001f�\u0016��\u0003\\{�X�%����]\u00078�R�\nq�cfgfW�d�q�ZCB\u0013|��|�*�*h㻆},^�{Va�^K\u001b<4�\u00076�N\u0016�\bXQ�ǆ�9�\u0007!P��$�\u0010�\u0013҆�d�c�D�j);\u0010��ѝP�g��E�M'O�ʕ����H7L�h���R���G��^�'�\u0003\u0007{\u0013�\b�zސʮ\u001bB��3\u001c�\u000b˙��h.�h�W�жF�\u000ej娄CQՠ똈���}ιL�U:\u0012\u0014D�\u0013����%އ����,�B���[�\t��\u001e"
   },
   {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000002/1.26.xml",
-   "status": 200,
-   "type": "application/xml",
-   "bytes": 509132,
-   "first": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\\n<stat:dataset xmlns:cdomain=\"http://www.siemac.org/metamac/rest/common/v1.0/domain\" xmlns:stat=\"http://www.siemac.org/metamac/rest/statistical-resources/v1.0/domain\" xmlns:sr=\"http://www.siemac.org/metamac/rest/structural-resources-internal/v1."
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000003/1.25.csv",
+   "url": "https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_TARIFA_ESTANCIA_TURISTICA/01.000/codes.csv?fields=+description",
+   "final": "https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_TARIFA_ESTANCIA_TURISTICA/01.000/codes.csv?fields=+description",
    "status": 200,
    "type": "text/csv",
-   "bytes": 2846686,
-   "first": "TERRITORIO#ca,TERRITORIO#es,TERRITORIO_CODE,TIME_PERIOD#ca,TIME_PERIOD#es,TIME_PERIOD_CODE,MEDIDAS#ca,MEDIDAS#es,MEDIDAS_CODE,ALOJAMIENTOS_TURISTICOS#ca,ALOJAMIENTOS_TURISTICOS#es,ALOJAMIENTOS_TURISTICOS_CODE,OBS_VALUE,ESTADO_OBSERVACION#ca,ESTADO_OBSERVACION#es,ESTADO_OBSERVACION_CODE,CONFIDENCIALI"
+   "bytes": 6191,
+   "first": "code,parent,urn,name#ca,name#es,name#en,description#ca,description#es,description#en\n_T,,urn:sdmx:org.sdmx.infomodel.codelist.Code=IBESTAT:CL_TARIFA_ESTANCIA_TURISTICA(01.000)._T,Total,Total,Total,Emprat per expressar totals.,Usado para expresar totales.,Used for expressing totals.\nNORMAL,,urn:sdmx:"
   },
   {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000003/1.25.json",
+   "url": "https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_TARIFA_ESTANCIA_TURISTICA/01.000/codes.json?fields=+description",
+   "final": "https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_TARIFA_ESTANCIA_TURISTICA/01.000/codes.json?fields=+description",
    "status": 200,
    "type": "application/json",
-   "bytes": 221854,
-   "first": "{\"id\":\"000064A_000003\",\"urn\":\"urn:siemac:org.siemac.metamac.infomodel.statisticalresources.Dataset=IBESTAT:000064A_000003(1.25)\",\"selfLink\":{\"kind\":\"statisticalResources#dataset\",\"href\":\"https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000003/1.25\"},\"parentLink\":{\"k"
+   "bytes": 11196,
+   "first": "{\"code\":[{\"id\":\"_T\",\"urn\":\"urn:sdmx:org.sdmx.infomodel.codelist.Code=IBESTAT:CL_TARIFA_ESTANCIA_TURISTICA(01.000)._T\",\"selfLink\":{\"kind\":\"structuralResources#code\",\"href\":\"https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_TARIFA_ESTANCIA_TURISTICA/01.000/codes/_T\"},\"name\""
   },
   {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000003/1.25.jsonstat",
-   "status": 200,
-   "type": "application/jsonstat+json",
-   "bytes": 96444,
-   "first": "{\"version\":\"2.0\",\"label\":\"Grau d'ocupació en allotjaments de turisme rural segons tipus d'allotjament. Illes Balears i illes per mesos\",\"updated\":\"2026-10-01T14:27:18.162+02:00\",\"extension\":{\"datasetId\":\"000064A_000003\",\"datasetUrn\":\"urn:siemac:org.siemac.metamac.infomodel.statisticalresources.Data"
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000003/1.25.tsv",
-   "status": 200,
-   "type": "text/tab-separated-values",
-   "bytes": 2846686,
-   "first": "TERRITORIO#ca\tTERRITORIO#es\tTERRITORIO_CODE\tTIME_PERIOD#ca\tTIME_PERIOD#es\tTIME_PERIOD_CODE\tMEDIDAS#ca\tMEDIDAS#es\tMEDIDAS_CODE\tALOJAMIENTOS_TURISTICOS#ca\tALOJAMIENTOS_TURISTICOS#es\tALOJAMIENTOS_TURISTICOS_CODE\tOBS_VALUE\tESTADO_OBSERVACION#ca\tESTADO_OBSERVACION#es\tESTADO_OBSERVACION_CODE\tCONFIDENCIALI"
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000003/1.25.xlsx",
+   "url": "https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_TARIFA_ESTANCIA_TURISTICA/01.000/codes.xlsx?fields=+description",
+   "final": "https://ibestat.es/edatos/apis/structural-resources/v1.0/codelists/IBESTAT/CL_TARIFA_ESTANCIA_TURISTICA/01.000/codes.xlsx?fields=+description",
    "status": 200,
    "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-   "bytes": 891489,
-   "first": "PK\u0003\u0004-\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0013\u0000\u0000\u0000[Content_Types].xml�S�n�0\u0010����*6�PU\u0015�C\u001f�\u0016��\u0003\\{�X�%����]\u00078�R�\\nq�cfgfW�d�q�ZCB\u0013|��|�*�*h㻆},^�{Va�^K\u001b<4�\u00076�N\u0016�\bXQ�ǆ�9�\u0007!P��$�\u0010�\u0013҆�d�c�D�j);\u0010��ѝP�g��E�M'O�ʕ����H7L�h���R���G��^�'�\u0003\u0007{\u0013�\b�zސʮ\u001bB��3\u001c�\u000b˙��h.�h�W�жF�\u000ej娄CQՠ똈���}ιL�U:\u0012\u0014D�\u0013����%އ����,�B���[�\t��\u001e"
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000003/1.25.xml",
-   "status": 200,
-   "type": "application/xml",
-   "bytes": 379529,
-   "first": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\\n<stat:dataset xmlns:cdomain=\"http://www.siemac.org/metamac/rest/common/v1.0/domain\" xmlns:stat=\"http://www.siemac.org/metamac/rest/statistical-resources/v1.0/domain\" xmlns:sr=\"http://www.siemac.org/metamac/rest/structural-resources-internal/v1."
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000004/1.26.csv",
-   "status": 200,
-   "type": "text/csv",
-   "bytes": 3000000,
-   "first": "TERRITORIO#es,TERRITORIO#ca,TERRITORIO_CODE,TIME_PERIOD#es,TIME_PERIOD#ca,TIME_PERIOD_CODE,MEDIDAS#es,MEDIDAS#ca,MEDIDAS_CODE,LUGAR_RESIDENCIA#es,LUGAR_RESIDENCIA#ca,LUGAR_RESIDENCIA_CODE,OBS_VALUE,ESTADO_OBSERVACION#es,ESTADO_OBSERVACION#ca,ESTADO_OBSERVACION_CODE,CONFIDENCIALIDAD_OBSERVACION#es,CO"
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000004/1.26.json",
-   "status": 200,
-   "type": "application/json",
-   "bytes": 616119,
-   "first": "{\"id\":\"000064A_000004\",\"urn\":\"urn:siemac:org.siemac.metamac.infomodel.statisticalresources.Dataset=IBESTAT:000064A_000004(1.26)\",\"selfLink\":{\"kind\":\"statisticalResources#dataset\",\"href\":\"https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000004/1.26\"},\"parentLink\":{\"k"
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000004/1.26.jsonstat",
-   "status": 200,
-   "type": "application/jsonstat+json",
-   "bytes": 344171,
-   "first": "{\"version\":\"2.0\",\"label\":\"Viatgers entrats, pernoctacions i estada mitjana en allotjaments de turisme rural segons el lloc de residència del viatger. Illes Balears i illes per mesos\",\"updated\":\"2026-09-17T13:33:52.769+02:00\",\"extension\":{\"datasetId\":\"000064A_000004\",\"datasetUrn\":\"urn:siemac:org.sie"
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000004/1.26.tsv",
-   "status": 200,
-   "type": "text/tab-separated-values",
-   "bytes": 3000000,
-   "first": "TERRITORIO#es\tTERRITORIO#ca\tTERRITORIO_CODE\tTIME_PERIOD#es\tTIME_PERIOD#ca\tTIME_PERIOD_CODE\tMEDIDAS#es\tMEDIDAS#ca\tMEDIDAS_CODE\tLUGAR_RESIDENCIA#es\tLUGAR_RESIDENCIA#ca\tLUGAR_RESIDENCIA_CODE\tOBS_VALUE\tESTADO_OBSERVACION#es\tESTADO_OBSERVACION#ca\tESTADO_OBSERVACION_CODE\tCONFIDENCIALIDAD_OBSERVACION#es\tCO"
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000004/1.26.xlsx",
-   "status": 200,
-   "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-   "bytes": 3000000,
-   "first": "PK\u0003\u0004-\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0013\u0000\u0000\u0000[Content_Types].xml�S�n�0\u0010����*6�PU\u0015�C\u001f�\u0016��\u0003\\{�X�%����]\u00078�R�\\nq�cfgfW�d�q�ZCB\u0013|��|�*�*h㻆},^�{Va�^K\u001b<4�\u00076�N\u0016�\bXQ�ǆ�9�\u0007!P��$�\u0010�\u0013҆�d�c�D�j);\u0010��ѝP�g��E�M'O�ʕ����H7L�h���R���G��^�'�\u0003\u0007{\u0013�\b�zސʮ\u001bB��3\u001c�\u000b˙��h.�h�W�жF�\u000ej娄CQՠ똈���}ιL�U:\u0012\u0014D�\u0013����%އ����,�B���[�\t��\u001e"
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000064A_000004/1.26.xml",
-   "status": 200,
-   "type": "application/xml",
-   "bytes": 780921,
-   "first": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\\n<stat:dataset xmlns:cdomain=\"http://www.siemac.org/metamac/rest/common/v1.0/domain\" xmlns:stat=\"http://www.siemac.org/metamac/rest/statistical-resources/v1.0/domain\" xmlns:sr=\"http://www.siemac.org/metamac/rest/structural-resources-internal/v1."
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000002/1.33.csv",
-   "status": 200,
-   "type": "text/csv",
-   "bytes": 364079,
-   "first": "TIME_PERIOD#ca,TIME_PERIOD#es,TIME_PERIOD_CODE,MEDIDAS#ca,MEDIDAS#es,MEDIDAS_CODE,MODALIDAD_ESTANCIA_TURISTICA#ca,MODALIDAD_ESTANCIA_TURISTICA#es,MODALIDAD_ESTANCIA_TURISTICA_CODE,OBS_VALUE,NOTAS_OBSERVACION#ca,NOTAS_OBSERVACION#es,ESTADO_OBSERVACION#ca,ESTADO_OBSERVACION#es,ESTADO_OBSERVACION_CODE,"
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000002/1.33.json",
-   "status": 200,
-   "type": "application/json",
-   "bytes": 99442,
-   "first": "{\"id\":\"000065A_000002\",\"urn\":\"urn:siemac:org.siemac.metamac.infomodel.statisticalresources.Dataset=IBESTAT:000065A_000002(1.33)\",\"selfLink\":{\"kind\":\"statisticalResources#dataset\",\"href\":\"https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000002/1.33\"},\"parentLink\":{\"k"
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000002/1.33.jsonstat",
-   "status": 200,
-   "type": "application/jsonstat+json",
-   "bytes": 24431,
-   "first": "{\"version\":\"2.0\",\"label\":\"Índex de preus en allotjaments de turisme rural segons modalitat de l'estança. Illes Balears i mes\",\"updated\":\"2026-10-01T12:18:54.875+02:00\",\"extension\":{\"datasetId\":\"000065A_000002\",\"datasetUrn\":\"urn:siemac:org.siemac.metamac.infomodel.statisticalresources.Dataset=IBEST"
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000002/1.33.tsv",
-   "status": 200,
-   "type": "text/tab-separated-values",
-   "bytes": 364079,
-   "first": "TIME_PERIOD#ca\tTIME_PERIOD#es\tTIME_PERIOD_CODE\tMEDIDAS#ca\tMEDIDAS#es\tMEDIDAS_CODE\tMODALIDAD_ESTANCIA_TURISTICA#ca\tMODALIDAD_ESTANCIA_TURISTICA#es\tMODALIDAD_ESTANCIA_TURISTICA_CODE\tOBS_VALUE\tNOTAS_OBSERVACION#ca\tNOTAS_OBSERVACION#es\tESTADO_OBSERVACION#ca\tESTADO_OBSERVACION#es\tESTADO_OBSERVACION_CODE\t"
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000002/1.33.xlsx",
-   "status": 200,
-   "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-   "bytes": 94289,
-   "first": "PK\u0003\u0004-\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0013\u0000\u0000\u0000[Content_Types].xml�S�n�0\u0010����*6�PU\u0015�C\u001f�\u0016��\u0003\\{�X�%����]\u00078�R�\\nq�cfgfW�d�q�ZCB\u0013|��|�*�*h㻆},^�{Va�^K\u001b<4�\u00076�N\u0016�\bXQ�ǆ�9�\u0007!P��$�\u0010�\u0013҆�d�c�D�j);\u0010��ѝP�g��E�M'O�ʕ����H7L�h���R���G��^�'�\u0003\u0007{\u0013�\b�zސʮ\u001bB��3\u001c�\u000b˙��h.�h�W�жF�\u000ej娄CQՠ똈���}ιL�U:\u0012\u0014D�\u0013����%އ����,�B���[�\t��\u001e"
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000002/1.33.xml",
-   "status": 200,
-   "type": "application/xml",
-   "bytes": 240747,
-   "first": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\\n<stat:dataset xmlns:cdomain=\"http://www.siemac.org/metamac/rest/common/v1.0/domain\" xmlns:stat=\"http://www.siemac.org/metamac/rest/statistical-resources/v1.0/domain\" xmlns:sr=\"http://www.siemac.org/metamac/rest/structural-resources-internal/v1."
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000003/2.22.csv",
-   "status": 200,
-   "type": "text/csv",
-   "bytes": 430048,
-   "first": "TIME_PERIOD#ca,TIME_PERIOD#es,TIME_PERIOD_CODE,MEDIDAS#ca,MEDIDAS#es,MEDIDAS_CODE,ALOJAMIENTOS_TURISTICOS#ca,ALOJAMIENTOS_TURISTICOS#es,ALOJAMIENTOS_TURISTICOS_CODE,OBS_VALUE,CONFIDENCIALIDAD_OBSERVACION#ca,CONFIDENCIALIDAD_OBSERVACION#es,NOTAS_OBSERVACION#ca,NOTAS_OBSERVACION#es,ESTADO_OBSERVACION#"
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000003/2.22.json",
-   "status": 200,
-   "type": "application/json",
-   "bytes": 104343,
-   "first": "{\"id\":\"000065A_000003\",\"urn\":\"urn:siemac:org.siemac.metamac.infomodel.statisticalresources.Dataset=IBESTAT:000065A_000003(2.22)\",\"selfLink\":{\"kind\":\"statisticalResources#dataset\",\"href\":\"https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000003/2.22\"},\"parentLink\":{\"k"
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000003/2.22.jsonstat",
-   "status": 200,
-   "type": "application/jsonstat+json",
-   "bytes": 27725,
-   "first": "{\"version\":\"2.0\",\"label\":\"Índex de preus en allotjaments de turisme rural segons tipus d'establiment. Illes Balears i mes\",\"updated\":\"2026-10-01T12:18:42.533+02:00\",\"extension\":{\"datasetId\":\"000065A_000003\",\"datasetUrn\":\"urn:siemac:org.siemac.metamac.infomodel.statisticalresources.Dataset=IBESTAT:0"
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000003/2.22.tsv",
-   "status": 200,
-   "type": "text/tab-separated-values",
-   "bytes": 430048,
-   "first": "TIME_PERIOD#ca\tTIME_PERIOD#es\tTIME_PERIOD_CODE\tMEDIDAS#ca\tMEDIDAS#es\tMEDIDAS_CODE\tALOJAMIENTOS_TURISTICOS#ca\tALOJAMIENTOS_TURISTICOS#es\tALOJAMIENTOS_TURISTICOS_CODE\tOBS_VALUE\tCONFIDENCIALIDAD_OBSERVACION#ca\tCONFIDENCIALIDAD_OBSERVACION#es\tNOTAS_OBSERVACION#ca\tNOTAS_OBSERVACION#es\tESTADO_OBSERVACION#"
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000003/2.22.xlsx",
-   "status": 200,
-   "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-   "bytes": 119028,
-   "first": "PK\u0003\u0004-\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0013\u0000\u0000\u0000[Content_Types].xml�S�n�0\u0010����*6�PU\u0015�C\u001f�\u0016��\u0003\\{�X�%����]\u00078�R�\\nq�cfgfW�d�q�ZCB\u0013|��|�*�*h㻆},^�{Va�^K\u001b<4�\u00076�N\u0016�\bXQ�ǆ�9�\u0007!P��$�\u0010�\u0013҆�d�c�D�j);\u0010��ѝP�g��E�M'O�ʕ����H7L�h���R���G��^�'�\u0003\u0007{\u0013�\b�zސʮ\u001bB��3\u001c�\u000b˙��h.�h�W�жF�\u000ej娄CQՠ똈���}ιL�U:\u0012\u0014D�\u0013����%އ����,�B���[�\t��\u001e"
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000003/2.22.xml",
-   "status": 200,
-   "type": "application/xml",
-   "bytes": 245412,
-   "first": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\\n<stat:dataset xmlns:cdomain=\"http://www.siemac.org/metamac/rest/common/v1.0/domain\" xmlns:stat=\"http://www.siemac.org/metamac/rest/statistical-resources/v1.0/domain\" xmlns:sr=\"http://www.siemac.org/metamac/rest/structural-resources-internal/v1."
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000004/1.33.csv",
-   "status": 200,
-   "type": "text/csv",
-   "bytes": 304624,
-   "first": "TIME_PERIOD#es,TIME_PERIOD#ca,TIME_PERIOD_CODE,MEDIDAS#es,MEDIDAS#ca,MEDIDAS_CODE,TARIFA_ESTANCIA_TURISTICA#es,TARIFA_ESTANCIA_TURISTICA#ca,TARIFA_ESTANCIA_TURISTICA_CODE,OBS_VALUE,CONFIDENCIALIDAD_OBSERVACION#es,CONFIDENCIALIDAD_OBSERVACION#ca,NOTAS_OBSERVACION#es,NOTAS_OBSERVACION#ca,ESTADO_OBSERV"
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000004/1.33.json",
-   "status": 200,
-   "type": "application/json",
-   "bytes": 98274,
-   "first": "{\"id\":\"000065A_000004\",\"urn\":\"urn:siemac:org.siemac.metamac.infomodel.statisticalresources.Dataset=IBESTAT:000065A_000004(1.33)\",\"selfLink\":{\"kind\":\"statisticalResources#dataset\",\"href\":\"https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000004/1.33\"},\"parentLink\":{\"k"
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000004/1.33.jsonstat",
-   "status": 200,
-   "type": "application/jsonstat+json",
-   "bytes": 24310,
-   "first": "{\"version\":\"2.0\",\"label\":\"Índex de preus en allotjaments de turisme rural segons tarifa. Illes Balears i mes\",\"updated\":\"2026-10-01T12:18:29.524+02:00\",\"extension\":{\"datasetId\":\"000065A_000004\",\"datasetUrn\":\"urn:siemac:org.siemac.metamac.infomodel.statisticalresources.Dataset=IBESTAT:000065A_000004"
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000004/1.33.tsv",
-   "status": 200,
-   "type": "text/tab-separated-values",
-   "bytes": 304624,
-   "first": "TIME_PERIOD#es\tTIME_PERIOD#ca\tTIME_PERIOD_CODE\tMEDIDAS#es\tMEDIDAS#ca\tMEDIDAS_CODE\tTARIFA_ESTANCIA_TURISTICA#es\tTARIFA_ESTANCIA_TURISTICA#ca\tTARIFA_ESTANCIA_TURISTICA_CODE\tOBS_VALUE\tCONFIDENCIALIDAD_OBSERVACION#es\tCONFIDENCIALIDAD_OBSERVACION#ca\tNOTAS_OBSERVACION#es\tNOTAS_OBSERVACION#ca\tESTADO_OBSERV"
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000004/1.33.xlsx",
-   "status": 200,
-   "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-   "bytes": 88718,
-   "first": "PK\u0003\u0004-\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0013\u0000\u0000\u0000[Content_Types].xml�S�n�0\u0010����*6�PU\u0015�C\u001f�\u0016��\u0003\\{�X�%����]\u00078�R�\\nq�cfgfW�d�q�ZCB\u0013|��|�*�*h㻆},^�{Va�^K\u001b<4�\u00076�N\u0016�\bXQ�ǆ�9�\u0007!P��$�\u0010�\u0013҆�d�c�D�j);\u0010��ѝP�g��E�M'O�ʕ����H7L�h���R���G��^�'�\u0003\u0007{\u0013�\b�zސʮ\u001bB��3\u001c�\u000b˙��h.�h�W�жF�\u000ej娄CQՠ똈���}ιL�U:\u0012\u0014D�\u0013����%އ����,�B���[�\t��\u001e"
-  },
-  {
-   "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000065A_000004/1.33.xml",
-   "status": 200,
-   "type": "application/xml",
-   "bytes": 238853,
-   "first": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\\n<stat:dataset xmlns:cdomain=\"http://www.siemac.org/metamac/rest/common/v1.0/domain\" xmlns:stat=\"http://www.siemac.org/metamac/rest/statistical-resources/v1.0/domain\" xmlns:sr=\"http://www.siemac.org/metamac/rest/structural-resources-internal/v1."
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=1608febb-c12b-4cc5-8ee9-0971af275084",
-   "status": 200,
-   "type": "text/plain;charset=UTF-8",
-   "bytes": 18176,
-   "first": "AXIS-VERSION=\"2000\";\\nLANGUAGE=\"es\";\\nCHARSET=\"ANSI\";\\nCREATION-DATE=\"20100601 00:00\";\\nUPDATE-FREQUENCY=\"No se actualiza\";\\nDECIMALS=0;\\nSHOWDECIMALS=0;\\nMATRIX=\"I101002_V250\";\\nAGGREGALLOWED=NO;\\nAUTOPEN=NO;\\nSUBJECT-AREA=\"Poblaci�n > Censos de poblaci�n\";\\nSUBJECT-CODE=\"2.07\";\\nCOPYRIGHT=YES;\\nDESCRIPTION=\"Vi"
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=1e106522-cbf3-42d0-ab15-e79145e17135",
-   "status": 200,
-   "type": "text/plain;charset=UTF-8",
-   "bytes": 6137,
-   "first": "AXIS-VERSION=\"2000\";\\nLANGUAGE=\"es\";\\nCHARSET=\"ANSI\";\\nCREATION-DATE=\"20100601 00:00\";\\nUPDATE-FREQUENCY=\"No se actualiza\";\\nDECIMALS=0;\\nSHOWDECIMALS=0;\\nMATRIX=\"I101002_V104\";\\nAGGREGALLOWED=NO;\\nAUTOPEN=NO;\\nSUBJECT-AREA=\"Poblaci�n > Censos de poblaci�n\";\\nSUBJECT-CODE=\"2.07\";\\nCOPYRIGHT=YES;\\nDESCRIPTION=\"Vi"
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=1ed9f624-315f-4fc5-b0bf-2f20921f231b",
-   "status": 200,
-   "type": "text/plain;charset=UTF-8",
-   "bytes": 12291,
-   "first": "AXIS-VERSION=\"2000\";\\nLANGUAGE=\"es\";\\nCHARSET=\"ANSI\";\\nUPDATE-FREQUENCY=\"A\";\\nDECIMALS=2;\\nSHOWDECIMALS=2;\\nMATRIX=\"I312002_E053\";\\nAGGREGALLOWED=NO;\\nAUTOPEN=NO;\\nSUBJECT-AREA=\"Econom�a > I+D, innovaci�n tecnol�gica y TIC\";\\nSUBJECT-CODE=\"3.65\";\\nCOPYRIGHT=YES;\\nDESCRIPTION=\"Variables de uso de TIC (a enero de"
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=1fca3644-b742-4d5c-b15a-091124d57806",
-   "status": 200,
-   "type": "text/plain;charset=UTF-8",
-   "bytes": 3659,
-   "first": "AXIS-VERSION=\"2000\";\\nLANGUAGE=\"es\";\\nCHARSET=\"ANSI\";\\nCREATION-DATE=\"20100601 00:00\";\\nUPDATE-FREQUENCY=\"No se actualiza\";\\nDECIMALS=0;\\nSHOWDECIMALS=0;\\nMATRIX=\"I101002_V204\";\\nAGGREGALLOWED=NO;\\nAUTOPEN=NO;\\nSUBJECT-AREA=\"Poblaci�n > Censos de poblaci�n\";\\nSUBJECT-CODE=\"2.07\";\\nCOPYRIGHT=YES;\\nDESCRIPTION=\"Vi"
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=2d34beae-70a0-4384-8216-531d8c5a9589",
-   "status": 200,
-   "type": "text/plain;charset=UTF-8",
-   "bytes": 18852,
-   "first": "AXIS-VERSION=\"2000\";\\nLANGUAGE=\"es\";\\nCHARSET=\"ANSI\";\\nCREATION-DATE=\"20100601 00:00\";\\nUPDATE-FREQUENCY=\"No se actualiza\";\\nDECIMALS=0;\\nSHOWDECIMALS=0;\\nMATRIX=\"I101003_E211\";\\nAGGREGALLOWED=NO;\\nAUTOPEN=NO;\\nSUBJECT-AREA=\"Poblaci�n > Censos de poblaci�n\";\\nSUBJECT-CODE=\"2.07\";\\nCOPYRIGHT=YES;\\nDESCRIPTION=\"Ti"
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=364508af-bcb9-4432-a45c-3f4d2f0951d8",
-   "status": 200,
-   "type": "text/plain;charset=UTF-8",
-   "bytes": 23238,
-   "first": "AXIS-VERSION=\"2000\";\\nLANGUAGE=\"es\";\\nCHARSET=\"ANSI\";\\nCREATION-DATE=\"20100601 00:00\";\\nUPDATE-FREQUENCY=\"No se actualiza\";\\nDECIMALS=0;\\nSHOWDECIMALS=0;\\nMATRIX=\"I101002_V252\";\\nAGGREGALLOWED=NO;\\nAUTOPEN=NO;\\nSUBJECT-AREA=\"Poblaci�n > Censos de poblaci�n\";\\nSUBJECT-CODE=\"2.07\";\\nCOPYRIGHT=YES;\\nDESCRIPTION=\"Vi"
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=3cea4c23-791c-41af-9daa-9a731e2a1740",
-   "status": 200,
-   "type": "text/plain;charset=UTF-8",
-   "bytes": 31095,
-   "first": "AXIS-VERSION=\"2000\";\\nLANGUAGE=\"es\";\\nCHARSET=\"ANSI\";\\nCREATION-DATE=\"20100601 00:00\";\\nUPDATE-FREQUENCY=\"No se actualiza\";\\nDECIMALS=0;\\nSHOWDECIMALS=0;\\nMATRIX=\"I101002_V251\";\\nAGGREGALLOWED=NO;\\nAUTOPEN=NO;\\nSUBJECT-AREA=\"Poblaci�n > Censos de poblaci�n\";\\nSUBJECT-CODE=\"2.07\";\\nCOPYRIGHT=YES;\\nDESCRIPTION=\"Vi"
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=48b42eba-c152-434b-992c-049eff014c96",
-   "status": 200,
-   "type": "text/plain;charset=UTF-8",
-   "bytes": 5185,
-   "first": "AXIS-VERSION=\"2000\";\\nLANGUAGE=\"es\";\\nCHARSET=\"ANSI\";\\nCREATION-DATE=\"20100601 00:00\";\\nUPDATE-FREQUENCY=\"No se actualiza\";\\nDECIMALS=0;\\nSHOWDECIMALS=0;\\nMATRIX=\"I101003_E210\";\\nAGGREGALLOWED=NO;\\nAUTOPEN=NO;\\nSUBJECT-AREA=\"Poblaci�n > Censos de poblaci�n\";\\nSUBJECT-CODE=\"2.07\";\\nCOPYRIGHT=YES;\\nDESCRIPTION=\"Ti"
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=6464e7a9-03cc-4234-9a2e-64240b3276c3",
-   "status": 200,
-   "type": "text/plain;charset=UTF-8",
-   "bytes": 3113,
-   "first": "AXIS-VERSION=\"2000\";\\nLANGUAGE=\"es\";\\nCHARSET=\"ANSI\";\\nCREATION-DATE=\"20100601 00:00\";\\nUPDATE-FREQUENCY=\"No se actualiza\";\\nDECIMALS=0;\\nSHOWDECIMALS=0;\\nMATRIX=\"I101003_E213\";\\nAGGREGALLOWED=NO;\\nAUTOPEN=NO;\\nSUBJECT-AREA=\"Poblaci�n > Censos de poblaci�n\";\\nSUBJECT-CODE=\"2.07\";\\nCOPYRIGHT=YES;\\nDESCRIPTION=\"Ti"
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=83b32947-aeff-4726-90bc-e755021af952",
-   "status": 200,
-   "type": "text/plain;charset=UTF-8",
-   "bytes": 308073,
-   "first": "AXIS-VERSION=\"2000\";\\nLANGUAGE=\"es\";\\nCHARSET=\"ANSI\";\\nCREATION-DATE=\"20100601 00:00\";\\nUPDATE-FREQUENCY=\"No se actualiza\";\\nDECIMALS=0;\\nSHOWDECIMALS=0;\\nMATRIX=\"I101002_V264\";\\nAGGREGALLOWED=NO;\\nAUTOPEN=NO;\\nSUBJECT-AREA=\"Poblaci�n > Censos de poblaci�n\";\\nSUBJECT-CODE=\"2.07\";\\nCOPYRIGHT=YES;\\nDESCRIPTION=\"Vi"
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=aa7a6670-b88c-48cb-95c7-f9bee64cbfc3",
-   "status": 200,
-   "type": "text/plain;charset=UTF-8",
-   "bytes": 59519,
-   "first": "AXIS-VERSION=\"2000\";\\nLANGUAGE=\"es\";\\nCHARSET=\"ANSI\";\\nCREATION-DATE=\"20100601 00:00\";\\nUPDATE-FREQUENCY=\"No se actualiza\";\\nDECIMALS=0;\\nSHOWDECIMALS=0;\\nMATRIX=\"I101002_V255\";\\nAGGREGALLOWED=NO;\\nAUTOPEN=NO;\\nSUBJECT-AREA=\"Poblaci�n > Censos de poblaci�n\";\\nSUBJECT-CODE=\"2.07\";\\nCOPYRIGHT=YES;\\nDESCRIPTION=\"Vi"
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=0&px=f374ea90-ca1c-4b67-aad7-636d28d3ab37",
-   "status": 200,
-   "type": "text/plain;charset=UTF-8",
-   "bytes": 6110,
-   "first": "AXIS-VERSION=\"2000\";\\nLANGUAGE=\"es\";\\nCHARSET=\"ANSI\";\\nCREATION-DATE=\"20100601 00:00\";\\nUPDATE-FREQUENCY=\"No se actualiza\";\\nDECIMALS=0;\\nSHOWDECIMALS=0;\\nMATRIX=\"I101003_E102\";\\nAGGREGALLOWED=NO;\\nAUTOPEN=NO;\\nSUBJECT-AREA=\"Poblaci�n > Censos de poblaci�n\";\\nSUBJECT-CODE=\"2.07\";\\nCOPYRIGHT=YES;\\nDESCRIPTION=\"Ed"
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=1608febb-c12b-4cc5-8ee9-0971af275084",
-   "status": 200,
-   "type": "application/json;charset=UTF-8",
-   "bytes": 37801,
-   "first": "{\\n  \"version\": \"2.0\",\\n  \"class\": \"dataset\",\\n  \"label\": \"Viviendas familiares excluidos los alojamientos por isla y tipo del municipio de localización, instalaciones de la vivienda y clase de vivienda. 01/11/1991\",\\n  \"source\": \"Institut d\\u0027Estadística de les Illes Balears (IBESTAT) a partir de "
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=1e106522-cbf3-42d0-ab15-e79145e17135",
-   "status": 200,
-   "type": "application/json;charset=UTF-8",
-   "bytes": 12504,
-   "first": "{\\n  \"version\": \"2.0\",\\n  \"class\": \"dataset\",\\n  \"label\": \"Viviendas excluidos los alojamientos por isla-municipio de localización, instalaciones de refrigeración y calefacción de la vivienda. 01/11/1991\",\\n  \"source\": \"Institut d\\u0027Estadística de les Illes Balears (IBESTAT) a partir de lo microd"
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=1ed9f624-315f-4fc5-b0bf-2f20921f231b",
-   "status": 200,
-   "type": "application/json;charset=UTF-8",
-   "bytes": 13847,
-   "first": "{\\n  \"version\": \"2.0\",\\n  \"class\": \"dataset\",\\n  \"label\": \"Variables de uso de TIC (a enero de 2006) por principales variables y agrupación de  actividad CNAE-93 (Total; Industria; Construcción; Servicios: comercio, hoteles y campings, resto) para empresas de 10 y más asalariados. 2005-2006\",\\n  \"sou"
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=1fca3644-b742-4d5c-b15a-091124d57806",
-   "status": 200,
-   "type": "application/json;charset=UTF-8",
-   "bytes": 7114,
-   "first": "{\\n  \"version\": \"2.0\",\\n  \"class\": \"dataset\",\\n  \"label\": \"Viviendas excluidos los alojamientos por isla de localización, instalaciones de refrigeración-calefacción y tamaño del municipio en el que se localiza la vivienda. 01/11/1991\",\\n  \"source\": \"Institut d\\u0027Estadística de les Illes Balears "
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=2d34beae-70a0-4384-8216-531d8c5a9589",
-   "status": 200,
-   "type": "application/json;charset=UTF-8",
-   "bytes": 51401,
-   "first": "{\\n  \"version\": \"2.0\",\\n  \"class\": \"dataset\",\\n  \"label\": \"Tipo de edificio (excluidos los alojamientos) por isla, año de construcción y tamaño del municipio en el que se localiza.\",\\n  \"source\": \"Institut d\\u0027Estadística de les Illes Balears (IBESTAT) a partir de lo microdatos proporcionados por"
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=364508af-bcb9-4432-a45c-3f4d2f0951d8",
-   "status": 200,
-   "type": "application/json;charset=UTF-8",
-   "bytes": 51606,
-   "first": "{\\n  \"version\": \"2.0\",\\n  \"class\": \"dataset\",\\n  \"label\": \"Viviendas familiares excluidos los alojamientos por isla de localización, estado del edificio, instalaciones de la vivienda y clase de vivienda. 01/11/1991\",\\n  \"source\": \"Institut d\\u0027Estadística de les Illes Balears (IBESTAT) a partir de "
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=3cea4c23-791c-41af-9daa-9a731e2a1740",
-   "status": 200,
-   "type": "application/json;charset=UTF-8",
-   "bytes": 72527,
-   "first": "{\\n  \"version\": \"2.0\",\\n  \"class\": \"dataset\",\\n  \"label\": \"Viviendas familiares excluidos los alojamientos por isla y tamaño del municipio de localización, instalaciones de la vivienda y clase de vivienda. 01/11/1991\",\\n  \"source\": \"Institut d\\u0027Estadística de les Illes Balears (IBESTAT) a partir "
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=48b42eba-c152-434b-992c-049eff014c96",
-   "status": 200,
-   "type": "application/json;charset=UTF-8",
-   "bytes": 11325,
-   "first": "{\\n  \"version\": \"2.0\",\\n  \"class\": \"dataset\",\\n  \"label\": \"Tipo de edificio (excluidos los alojamientos) por año de construcción detallado e isla en la que se localizan.\",\\n  \"source\": \"Institut d\\u0027Estadística de les Illes Balears (IBESTAT) a partir de lo microdatos proporcionados por el Institut"
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=6464e7a9-03cc-4234-9a2e-64240b3276c3",
-   "status": 200,
-   "type": "application/json;charset=UTF-8",
-   "bytes": 5827,
-   "first": "{\\n  \"version\": \"2.0\",\\n  \"class\": \"dataset\",\\n  \"label\": \"Tipo de edificio (excluidos los alojamientos) por número de plantas bajo rasante e isla de localización. 01/11/2001\",\\n  \"source\": \"Institut d\\u0027Estadística de les Illes Balears (IBESTAT) a partir de lo microdatos proporcionados por el Ins"
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=83b32947-aeff-4726-90bc-e755021af952",
-   "status": 200,
-   "type": "application/json;charset=UTF-8",
-   "bytes": 835092,
-   "first": "{\\n  \"version\": \"2.0\",\\n  \"class\": \"dataset\",\\n  \"label\": \"Viviendas familiares excluidos los alojamientos por isla de localización, clase de vivienda, instalaciones, número de habitaciones y superficie útil de la vivienda. 01/11/1991\",\\n  \"source\": \"Institut d\\u0027Estadística de les Illes Balears "
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=aa7a6670-b88c-48cb-95c7-f9bee64cbfc3",
-   "status": 200,
-   "type": "application/json;charset=UTF-8",
-   "bytes": 140282,
-   "first": "{\\n  \"version\": \"2.0\",\\n  \"class\": \"dataset\",\\n  \"label\": \"Viviendas familiares excluidos los alojamientos por isla de localización, clase de vivienda, instalaciones de la vivienda y periodo de construcción del edificio.\",\\n  \"source\": \"Institut d\\u0027Estadística de les Illes Balears (IBESTAT) a par"
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=6&px=f374ea90-ca1c-4b67-aad7-636d28d3ab37",
-   "status": 200,
-   "type": "application/json;charset=UTF-8",
-   "bytes": 13950,
-   "first": "{\\n  \"version\": \"2.0\",\\n  \"class\": \"dataset\",\\n  \"label\": \"Edificios (excluidos los alojamientos) por isla-municipio en que se localizan y número de plantas sobre rasante. 01/11/2001\",\\n  \"source\": \"Institut d\\u0027Estadística de les Illes Balears (IBESTAT) a partir de lo microdatos proporcionados por"
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=1608febb-c12b-4cc5-8ee9-0971af275084",
-   "status": 200,
-   "type": "application/json;charset=UTF-8",
-   "bytes": 896463,
-   "first": "{\\n  \"matrix\": \"I101002_V250\",\\n  \"title\": \"Viviendas familiares excluidos los alojamientos por isla y tipo del municipio de localización, instalaciones de la vivienda y clase de vivienda.\",\\n  \"survey\": \"Censos de población y viviendas\",\\n  \"source\": \"Institut d\\u0027Estadística de les Illes Balears"
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=1e106522-cbf3-42d0-ab15-e79145e17135",
-   "status": 200,
-   "type": "application/json;charset=UTF-8",
-   "bytes": 117627,
-   "first": "{\\n  \"matrix\": \"I101002_V104\",\\n  \"title\": \"Viviendas excluidos los alojamientos por isla-municipio de localización, instalaciones de refrigeración y calefacción de la vivienda.\",\\n  \"survey\": \"Censos de población y viviendas\",\\n  \"source\": \"Institut d\\u0027Estadística de les Illes Balears (IBESTAT"
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=1ed9f624-315f-4fc5-b0bf-2f20921f231b",
-   "status": 200,
-   "type": "application/json;charset=UTF-8",
-   "bytes": 74184,
-   "first": "{\\n  \"matrix\": \"I312002_E053\",\\n  \"title\": \"Variables de uso de TIC (a enero de 2006) por principales variables y agrupación de  actividad CNAE-93 (Total; Industria; Construcción; Servicios: comercio, hoteles y campings, resto) para empresas de 10 y más asalariados.\",\\n  \"survey\": \"Encuesta de uso d"
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=1fca3644-b742-4d5c-b15a-091124d57806",
-   "status": 200,
-   "type": "application/json;charset=UTF-8",
-   "bytes": 86420,
-   "first": "{\\n  \"matrix\": \"I101002_V204\",\\n  \"title\": \"Viviendas excluidos los alojamientos por isla de localización, instalaciones de refrigeración-calefacción y tamaño del municipio en el que se localiza la vivienda.\",\\n  \"survey\": \"Censos de población y viviendas\",\\n  \"source\": \"Institut d\\u0027Estadístic"
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=2d34beae-70a0-4384-8216-531d8c5a9589",
-   "status": 200,
-   "type": "application/json;charset=UTF-8",
-   "bytes": 1657636,
-   "first": "{\\n  \"matrix\": \"I101003_E211\",\\n  \"title\": \"Tipo de edificio (excluidos los alojamientos) por isla, año de construcción y tamaño del municipio en el que se localiza.\",\\n  \"survey\": \"Censos de población y viviendas\",\\n  \"source\": \"Institut d\\u0027Estadística de les Illes Balears (IBESTAT) a partir d"
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=364508af-bcb9-4432-a45c-3f4d2f0951d8",
-   "status": 200,
-   "type": "application/json;charset=UTF-8",
-   "bytes": 1357452,
-   "first": "{\\n  \"matrix\": \"I101002_V252\",\\n  \"title\": \"Viviendas familiares excluidos los alojamientos por isla de localización, estado del edificio, instalaciones de la vivienda y clase de vivienda.\",\\n  \"survey\": \"Censos de población y viviendas\",\\n  \"source\": \"Institut d\\u0027Estadística de les Illes Balears"
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=3cea4c23-791c-41af-9daa-9a731e2a1740",
-   "status": 200,
-   "type": "application/json;charset=UTF-8",
-   "bytes": 2108397,
-   "first": "{\\n  \"matrix\": \"I101002_V251\",\\n  \"title\": \"Viviendas familiares excluidos los alojamientos por isla y tamaño del municipio de localización, instalaciones de la vivienda y clase de vivienda.\",\\n  \"survey\": \"Censos de población y viviendas\",\\n  \"source\": \"Institut d\\u0027Estadística de les Illes Bale"
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=48b42eba-c152-434b-992c-049eff014c96",
-   "status": 200,
-   "type": "application/json;charset=UTF-8",
-   "bytes": 183939,
-   "first": "{\\n  \"matrix\": \"I101003_E210\",\\n  \"title\": \"Tipo de edificio (excluidos los alojamientos) por año de construcción detallado e isla en la que se localizan.\",\\n  \"survey\": \"Censos de población y viviendas\",\\n  \"source\": \"Institut d\\u0027Estadística de les Illes Balears (IBESTAT) a partir de lo microda"
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=6464e7a9-03cc-4234-9a2e-64240b3276c3",
-   "status": 200,
-   "type": "application/json;charset=UTF-8",
-   "bytes": 56385,
-   "first": "{\\n  \"matrix\": \"I101003_E213\",\\n  \"title\": \"Tipo de edificio (excluidos los alojamientos) por número de plantas bajo rasante e isla de localización.\",\\n  \"survey\": \"Censos de población y viviendas\",\\n  \"source\": \"Institut d\\u0027Estadística de les Illes Balears (IBESTAT) a partir de lo microdatos pr"
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=83b32947-aeff-4726-90bc-e755021af952",
-   "status": 200,
-   "type": "application/json;charset=UTF-8",
-   "bytes": 201,
-   "first": "{\\n  \"error\": {\\n    \"item\": \"No es posible generar el fichero Json por la dimensión de los datos. Contacte con nosotros mediante el correo info@ibestat.caib.es o llamando a 971 17 65 11. Gracias\"\\n  }\\n}"
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=aa7a6670-b88c-48cb-95c7-f9bee64cbfc3",
-   "status": 200,
-   "type": "application/json;charset=UTF-8",
-   "bytes": 3000000,
-   "first": "{\\n  \"matrix\": \"I101002_V255\",\\n  \"title\": \"Viviendas familiares excluidos los alojamientos por isla de localización, clase de vivienda, instalaciones de la vivienda y periodo de construcción del edificio.\",\\n  \"survey\": \"Censos de población y viviendas\",\\n  \"source\": \"Institut d\\u0027Estadística de"
-  },
-  {
-   "url": "https://intranet.caib.es/ibestat-jaxi/tabla.do?typeDownload=7&px=f374ea90-ca1c-4b67-aad7-636d28d3ab37",
-   "status": 200,
-   "type": "application/json;charset=UTF-8",
-   "bytes": 129077,
-   "first": "{\\n  \"matrix\": \"I101003_E102\",\\n  \"title\": \"Edificios (excluidos los alojamientos) por isla-municipio en que se localizan y número de plantas sobre rasante.\",\\n  \"survey\": \"Censos de población y viviendas\",\\n  \"source\": \"Institut d\\u0027Estadística de les Illes Balears (IBESTAT) a partir de lo microd"
+   "bytes": 5919,
+   "first": "PK\u0003\u0004-\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0013\u0000\u0000\u0000[Content_Types].xml�S�n�0\u0010����*6�PU\u0015�C\u001f�\u0016��\u0003\\{�X�%����]\u00078�R�\nq�cfgfW�d�q�ZCB\u0013|��|�*�*h㻆},^�{Va�^K\u001b<4�\u00076�N\u0016�\bXQ�ǆ�9�\u0007!P��$�\u0010�\u0013҆�d�c�D�j);\u0010��ѝP�g��E�M'O�ʕ����H7L�h���R���G��^�'�\u0003\u0007{\u0013�\b�zސʮ\u001bB��3\u001c�\u000b˙��h.�h�W�жF�\u000ej娄CQՠ똈���}ιL�U:\u0012\u0014D�\u0013����%އ����,�B���[�\t��\u001e"
   },
   {
    "url": "https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_mallorca/allotjaments_turistics_mallorca.csv",
@@ -1997,26 +354,22 @@
   {
    "url": "https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_menorca/allotjaments_turistics_menorca.geojson",
    "error": "<HTTPError 404: 'Not Found'>"
+  },
+  {
+   "url": "https://intranet.caib.es/opendatacataleg/files/dataset/estades_habitatges_turistics_menorca/estades_habitatges_turistics_menorca.csv",
+   "error": "<HTTPError 404: 'Not Found'>"
+  },
+  {
+   "url": "https://intranet.caib.es/opendatacataleg/files/dataset/estades_habitatges_turistics_menorca/estades_habitatges_turistics_menorca.geojson",
+   "error": "<HTTPError 404: 'Not Found'>"
+  },
+  {
+   "url": "https://intranet.caib.es/opendatacataleg/files/dataset/habitatges_turistics_mallorca/habitatges_turistics_mallorca.csv",
+   "error": "<HTTPError 404: 'Not Found'>"
+  },
+  {
+   "url": "https://intranet.caib.es/opendatacataleg/files/dataset/habitatges_turistics_mallorca/habitatges_turistics_mallorca.geojson",
+   "error": "<HTTPError 404: 'Not Found'>"
   }
- ],
- "portals": {
-  "caib-socrata": {
-   "_error": "<HTTPError 404: 'Not Found'>"
-  },
-  "caib-socrata2": {
-   "_error": "<HTTPError 404: 'Not Found'>"
-  },
-  "clm-ckan": {
-   "_error": "JSONDecodeError('Expecting value: line 1 column 1 (char 0)')"
-  },
-  "clm-ckan2": {
-   "_error": "JSONDecodeError('Expecting value: line 1 column 1 (char 0)')"
-  },
-  "nav-ckan": {
-   "_error": "URLError(TimeoutError('timed out'))"
-  },
-  "gal-ckan": {
-   "_error": "URLError(TimeoutError('timed out'))"
-  }
- }
+ ]
 }
