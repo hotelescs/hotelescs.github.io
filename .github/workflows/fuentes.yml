@@ -18,7 +18,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install openpyxl xlrd
-      - run: python tools/probe_sources.py
+      - run: python tools/find_missing.py
       - name: Guardar
         run: |
           git config user.name "HotelesCS bot"
