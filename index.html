@@ -46,6 +46,14 @@ header.top .wrap{padding-block:12px 14px;display:grid;gap:10px}
 .logo{font-family:var(--f-head);font-size:24px;font-weight:700;display:flex;align-items:center;gap:8px}
 .logo svg{flex:none}
 .who{font-size:12px;opacity:.85;font-weight:500;text-align:right}
+.qwrap{position:relative}
+.qsug{position:absolute;left:0;right:0;top:calc(100% + 6px);background:var(--surface);color:var(--fg);border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.28);z-index:30;max-height:62vh;overflow:auto;padding:4px;border:1px solid var(--line)}
+.qsug button{display:flex;width:100%;text-align:left;gap:10px;padding:9px 10px;border:0;background:none;color:inherit;font:inherit;font-size:15px;align-items:center;border-radius:8px;cursor:pointer}
+.qsug button:hover,.qsug button.on{background:var(--line)}
+.qsug small{display:block;color:var(--muted);font-size:12.5px;margin-top:1px}
+.qsug .ic{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;flex:none;font-weight:700;font-size:13px;background:var(--line)}
+.qsug .ic.t{background:var(--accent);color:#111}
+.qsug .hd{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:8px 10px 2px}
 .search{display:flex;align-items:center;gap:8px;background:var(--surface);color:var(--fg);border-radius:10px;padding:0 12px;border:2px solid var(--brand-fg)}
 .search input{border:0;background:transparent;flex:1;min-width:0;padding:11px 0;font-size:16px;outline:none}
 .dates{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:end}
@@ -328,8 +336,9 @@ a.logo{color:inherit;text-decoration:none}
       <div class="who" id="who">Customer Service · Uso interno</div>
     </div></div>
   <div class="wrap band">
-    <label class="search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-      <input id="q" type="search" placeholder="Ciudad, zona u hotel" autocomplete="off" aria-label="Buscar ciudad u hotel"></label>
+    <div class="qwrap"><label class="search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input id="q" type="search" placeholder="Ciudad, zona u hotel" autocomplete="off" aria-label="Buscar ciudad u hotel" aria-controls="qs"></label>
+      <div id="qs" class="qsug" role="listbox" aria-label="Sugerencias" hidden></div></div>
     <div class="dates">
       <label class="dl">Entrada<span class="dv tnum" id="dinV"></span><input id="din" type="date"></label>
       <label class="dl">Salida<span class="dv tnum" id="doutV"></span><input id="dout" type="date"></label>
@@ -541,7 +550,7 @@ function loadCat(){
   return catP;
 }
 /* live search in OpenStreetMap (Photon) for places not yet in the downloaded catalogue */
-const LQ={},LIVE={};let liveT=null;
+const LQ={},LIVE={},SUG={};let liveT=null;
 const toksIn=(q,name)=>{const n=norm(name);return q.split(/\s+/).filter(t=>t.length>2).some(t=>n.includes(t))};
 const PHOTON_TAGS=["hotel","apartment","guest_house","hostel","motel"].map(t=>"&osm_tag=tourism:"+t).join("");
 function liveSearch(raw){
@@ -553,15 +562,17 @@ function liveSearch(raw){
       const base="https://photon.komoot.io/api/?q="+encodeURIComponent(raw.trim())+"&bbox=-18.5,27.4,4.6,44.0";
       const [a,b]=await Promise.all([fetch(base+"&limit=50"+PHOTON_TAGS).then(r=>r.ok?r.json():{}).catch(()=>({})),
         fetch(base+"&limit=15").then(r=>r.ok?r.json():{}).catch(()=>({}))]);
+      SUG[q]=(b.features||[]).filter(f=>f.geometry&&f.properties&&f.properties.name&&(!f.properties.countrycode||f.properties.countrycode==="ES")); renderSug();
       const SKIP=/^(place|highway|boundary|landuse|natural|waterway|railway|route|shop|office|leisure|man_made|power|aeroway|public_transport)$/;
       const LODGE_V=/^(hotel|apartment|apartments|guest_house|hostel|motel|dormitory|student_accommodation|chalet)$/, LODGE_N=/residencia|living|apartament|apartahotel|aparthotel|suites|hostal|hotel|rooms|pensi[oó]n|albergue|hospeder|posada|inn\b/i;
       const extra=(b.features||[]).filter(f=>{const p=f.properties||{};return p.name&&!SKIP.test(p.osm_key||"")&&toksIn(q,p.name)&&(LODGE_V.test(p.osm_value||"")||LODGE_N.test(p.name))});
       const pf=(b.features||[]).find(f=>{const p=f.properties||{};return p.osm_key==="place"&&/^(city|town|village|hamlet|suburb|municipality|quarter|neighbourhood)$/.test(p.osm_value||"")&&(!p.countrycode||p.countrycode==="ES")&&norm(p.name).startsWith(q)&&f.geometry});
       // "Linde La Garriga": a client or any other place that is not a lodging (a company, a factory, a street)
       if(!pf&&!PLACE[q]){ const ws=q.split(/\s+/).filter(w=>w.length>2);
-        const pc=(b.features||[]).find(f=>{const p=f.properties||{}; if(!p.name||!f.geometry||(p.countrycode&&p.countrycode!=="ES")||/^(tourism|place|boundary)$/.test(p.osm_key||"")) return false;
-          const nm=norm(p.name), loc=norm([p.street,p.city,p.town,p.village,p.district,p.county,p.state].filter(Boolean).join(" "));
-          return ws.some(w=>nm.includes(w))&&ws.every(w=>nm.includes(w)||loc.includes(w))});
+        const pc=(b.features||[]).find(f=>{const p=f.properties||{}; if(!p.name||!f.geometry||(p.countrycode&&p.countrycode!=="ES")||/^(tourism|place|boundary|highway)$/.test(p.osm_key||"")||LODGE_N.test(p.name)) return false;
+          const nm=norm(p.name), loc=norm([p.street,p.locality,p.district,p.city,p.town,p.village,p.county,p.state].filter(Boolean).join(" "));
+          const lw=(nm+" "+loc).split(/[^a-z0-9]+/).filter(Boolean), has=w=>nm.includes(w)||loc.includes(w)||(w.length>=5&&lw.some(x=>lev(w,x,1)<=1));
+          return ws.some(w=>nm.includes(w))&&ws.every(has)});
         if(pc){const p=pc.properties; PLACE[q]={client:true,name:p.name,town:p.city||p.town||p.village||"",lat:pc.geometry.coordinates[1],lon:pc.geometry.coordinates[0]}} }
       if(pf&&!PLACE[q]) PLACE[q]={name:pf.properties.name,province:pf.properties.county&&!/comarca|isla/i.test(pf.properties.county)?pf.properties.county.split("/")[0]:"",region:pf.properties.state||"",lat:pf.geometry.coordinates[1],lon:pf.geometry.coordinates[0]};
       const j={features:[...(a.features||[]),...extra]}; await loadCat(); if(!CAT) return;
@@ -597,6 +608,11 @@ function placeFor(q){
       const t=CITYIX.m.get(k); if(t&&k.length>=3){town=t;rest=r;break} } }
   if(P&&P.client){ const t=town||CITYIX.m.get(norm(P.town)); return {client:true,name:P.name,townName:t?t.name:P.town,region:t?t.region:"",lat:P.lat,lon:P.lon} }
   if(P) return P;
+  if(!town&&q.length>=5&&words.length<=3){   // typo in a town name: "zaragzoa", "benetuser"
+    let best=null,bd=3; const tol=q.length<7?1:2;
+    for(const [k,t] of CITYIX.m){ if(Math.abs(k.length-q.length)>tol) continue; const d=lev(q,k,tol); if(d<bd||(d===bd&&best&&t.la.length>best.la.length)){bd=d;best=t} }
+    if(best&&bd<=tol) return {name:best.name,region:best.region,lat:med(best.la),lon:med(best.lo),typo:true};
+  }
   if(town){
     // "hotel colon barcelona" is a lodging search, not a client: leave it to the name search
     const rw=rest.split(/\s+/).filter(w=>w.length>1), tk=norm(town.name);
@@ -605,6 +621,54 @@ function placeFor(q){
   }
   return null;
 }
+/* suggestions while typing: towns (typos allowed), lodgings and any other place from the map (clients, factories, areas) */
+function lev(a,b,max){ if(Math.abs(a.length-b.length)>max) return max+1; let p=[...Array(b.length+1).keys()];
+  for(let i=1;i<=a.length;i++){ const c=[i]; let lo=i; for(let j=1;j<=b.length;j++){ c[j]=Math.min(p[j]+1,c[j-1]+1,p[j-1]+(a[i-1]===b[j-1]?0:1)); lo=Math.min(lo,c[j]) } if(lo>max) return max+1; p=c } return p[b.length] }
+let sugItems=[], sugOn=-1;
+function renderSug(){
+  const box=$("#qs"), raw=$("#q").value.trim(), q=norm(raw);
+  if(document.activeElement!==$("#q")||q.length<2||S.sugOff===q||!CAT){box.hidden=true;sugItems=[];return}
+  placeFor("zzz"); const items=[], seen=new Set();
+  const towns=[]; const tol=q.length<5?0:q.length<7?1:2;
+  for(const [k,e] of CITYIX.m){ let sc=null;
+    if(k.startsWith(q)) sc=0; else if(q.length>=4&&k.split(/[\s-]+/).some(w=>w.startsWith(q))) sc=1;
+    else if(tol){ const d=lev(q,k.length>q.length+2?k.slice(0,q.length):k,tol); if(d<=tol) sc=1+d; }
+    if(sc!=null) towns.push([sc,-e.la.length,k,e]); }
+  towns.sort((a,b)=>a[0]-b[0]||a[1]-b[1]);
+  for(const [,,k,e] of towns.slice(0,4)){ seen.add(k); items.push({kind:"town",label:cityLbl({city:e.name,region:e.region}),sub:e.la.length+(e.la.length===1?" alojamiento":" alojamientos"),val:e.name}) }
+  const known=new Set(); const D=data(); const team=D.ex?[]:D.hotels.filter(h=>norm(h.name).includes(q)).slice(0,3);
+  for(const h of team){ known.add(h.osm); items.push({kind:"hotel",label:h.name,sub:placeLine(h)+" · con reseñas",id:h.id}) }
+  const first=q.split(/\s+/)[0];
+  for(const c of catSearch(raw,6,known).filter(c=>c.k.includes(first)).slice(0,Math.max(0,4-team.length))){ known.add(c.osm); items.push({kind:"hotel",label:c.name,sub:c.type+" · "+placeLine(c),id:c.id}) }
+  let np=0;
+  for(const f of (SUG[q]||[])){ if(np>=4) break; const p=f.properties, nm=norm(p.name);
+    if(seen.has(nm)) continue;
+    const k=({N:"n",W:"w",R:"r"}[p.osm_type]||"x")+p.osm_id;
+    if(p.osm_key==="tourism"){ const c=CAT.find(x=>x.osm===k); if(c&&!known.has(k)&&items.filter(i=>i.kind==="hotel").length<5){known.add(k);items.push({kind:"hotel",label:c.name,sub:c.type+" · "+placeLine(c),id:c.id})} continue }
+    const town=p.city||p.town||p.village||"", where=[p.street,p.locality||p.district,town].filter(Boolean);
+    const lbl=p.name+(town&&norm(town)!==nm?", "+town:"");
+    seen.add(nm); np++; items.push({kind:"place",label:lbl,sub:where.join(" · ")||p.county||"",pl:{client:p.osm_key!=="place",name:p.name,town,lat:f.geometry.coordinates[1],lon:f.geometry.coordinates[0]}}); }
+  const order={town:0,hotel:1,place:2}; sugItems=items.sort((a,b)=>order[a.kind]-order[b.kind]).slice(0,12); sugOn=-1;
+  if(!sugItems.length){box.hidden=true;return}
+  const ic={town:"P",hotel:"H",place:"◎"}, hd={town:"Poblaciones",hotel:"Alojamientos",place:"Clientes y lugares"}; let last="";
+  box.innerHTML=sugItems.map((it,i)=>(it.kind!==last?`<div class="hd">${hd[last=it.kind]}</div>`:"")+`<button type="button" role="option" data-si="${i}"><span class="ic${it.kind==="town"?" t":""}">${ic[it.kind]}</span><span>${esc(it.label)}<small>${esc(it.sub)}</small></span></button>`).join("");
+  box.hidden=false;
+}
+function pickSug(i){
+  const it=sugItems[i]; if(!it) return; $("#qs").hidden=true;
+  if(it.kind==="hotel") return openHotel(it.id);
+  const v=it.kind==="town"?it.val:it.label; $("#q").value=v; const k=norm(v).trim(); S.sugOff=k;
+  if(it.kind==="place") PLACE[k]=it.pl;
+  if(S.view==="hotel"||S.tab!=="buscar") setTab("buscar");
+  renderList(); liveSearch(v); $("#q").blur();
+}
+$("#qs").addEventListener("mousedown",e=>{const b=e.target.closest("[data-si]"); if(b){e.preventDefault(); pickSug(+b.dataset.si)}});
+$("#q").addEventListener("keydown",e=>{ if($("#qs").hidden) return;
+  if(e.key==="Escape"){$("#qs").hidden=true;S.sugOff=norm($("#q").value.trim());return}
+  if(e.key==="ArrowDown"||e.key==="ArrowUp"){e.preventDefault(); sugOn=(sugOn+(e.key==="ArrowDown"?1:-1)+sugItems.length)%sugItems.length; $("#qs").querySelectorAll("[data-si]").forEach((b,i)=>b.classList.toggle("on",i===sugOn)); return}
+  if(e.key==="Enter"){ e.preventDefault(); if(sugOn>=0) pickSug(sugOn); else {$("#qs").hidden=true; S.sugOff=norm($("#q").value.trim()); $("#q").blur()} } });
+$("#q").addEventListener("focus",()=>{S.sugOff=null;renderSug()});
+$("#q").addEventListener("blur",()=>setTimeout(()=>{$("#qs").hidden=true},150));
 const kmBetween=(a,b,c,d)=>{const r=Math.PI/180,x=(d-b)*r*Math.cos((a+c)/2*r),y=(c-a)*r;return Math.sqrt(x*x+y*y)*6371};
 const kmLabel=k=>k<1?"< 1 km":k<10?k.toFixed(1).replace(".",",")+" km":Math.round(k)+" km";
 function nearPlace(pl,n,exclude,type,maxKm){
@@ -732,7 +796,7 @@ function renderList(){
   const pl=(q.length>=3&&!onlyTeam)?placeFor(q):null, kmOf=new Map(); S.mapPlace=pl;
   if(S.radQ!==q){S.radQ=q;S.radius=15}   // 15 km around the place; "ver más lejos" widens it to 30 and 60
   if(pl){ const near=nearPlace(pl,60,known,typeF&&typeF.slice(2),S.radius); near.forEach(([km,c])=>kmOf.set(c,km));
-    const ids=new Set(near.map(x=>x[1])); cat=[...near.map(x=>x[1]),...cat.filter(c=>!ids.has(c)).slice(0,10)]; }
+    const ids=new Set(near.map(x=>x[1])); cat=[...near.map(x=>x[1]),...(pl.client?[]:cat.filter(c=>!ids.has(c)).slice(0,10))]; }
   S.mapPts=[...rows.map(({h,st})=>({h,team:true,avg:st.avg})),...cat.slice(0,300).map(c=>({h:c,team:false}))].filter(p=>p.h.lat!=null&&p.h.lon!=null);
   const mk=q+"|"+[...S.filters].join(",")+"|"+(pl?pl.lat.toFixed(3)+"|"+S.radius:"");
   if(mk!==S.mapKey){S.mapKey=mk;S.mapFit=true}
@@ -741,7 +805,7 @@ function renderList(){
   cat=cat.slice(0,pl?70:25);
   const nearN=cat.filter(c=>kmOf.has(c)).length;
   const wider=pl&&S.radius<60?`<button class="btn ghost wide more" data-radius="${S.radius<30?30:60}">Ver más lejos (hasta ${S.radius<30?30:60} km)</button>`:"";
-  const catHtml=pl&&!nearN?`<div class="note">No hay alojamientos a menos de ${S.radius} km de ${esc(placeLbl(pl))}.</div>${wider}`:cat.length?(pl&&nearN?`${pl.guess?`<div class="note">No encuentro «${esc(pl.guess)}» en el mapa, así que te enseño lo que hay cerca del centro de ${esc(pl.name)}.</div>`:""}<h2 class="subh">Más cerca de ${esc(placeLbl(pl))} <span class="note">a menos de ${S.radius} km, sin reseñas del equipo</span></h2>`+cat.slice(0,nearN).map(c=>liteCard(c,`<span class="km tnum">${kmLabel(kmOf.get(c))}</span>`)).join("")+wider+(cat.length>nearN?`<h2 class="subh">Otros con «${esc($("#q").value.trim())}» en el nombre</h2>`+cat.slice(nearN).map(c=>liteCard(c)).join(""):""):`<h2 class="subh">Otros alojamientos <span class="note">sin reseñas del equipo</span></h2>`+cat.map(c=>liteCard(c)).join("")):(q.length>=3&&CAT===null?`<div class="note">Cargando alojamientos de España…</div>`:"");
+  const catHtml=pl&&!nearN?`<div class="note">No hay alojamientos a menos de ${S.radius} km de ${esc(placeLbl(pl))}.</div>${wider}`:cat.length?(pl&&nearN?`${pl.typo?`<div class="note">¿Querías decir <b>${esc(pl.name)}</b>? Te enseño lo que hay allí.</div>`:""}${pl.guess?`<div class="note">No encuentro «${esc(pl.guess)}» en el mapa, así que te enseño lo que hay cerca del centro de ${esc(pl.name)}.</div>`:""}<h2 class="subh">Más cerca de ${esc(placeLbl(pl))} <span class="note">a menos de ${S.radius} km, sin reseñas del equipo</span></h2>`+cat.slice(0,nearN).map(c=>liteCard(c,`<span class="km tnum">${kmLabel(kmOf.get(c))}</span>`)).join("")+wider+(cat.length>nearN?`<h2 class="subh">Otros con «${esc($("#q").value.trim())}» en el nombre</h2>`+cat.slice(nearN).map(c=>liteCard(c)).join(""):""):`<h2 class="subh">Otros alojamientos <span class="note">sin reseñas del equipo</span></h2>`+cat.map(c=>liteCard(c)).join("")):(q.length>=3&&CAT===null?`<div class="note">Cargando alojamientos de España…</div>`:"");
   if(!rows.length){list.innerHTML=(cat.length?(q?`<div class="note">Ningún compañero ha reseñado todavía un sitio con «${esc($("#q").value)}».</div>`:""):`<div class="empty"><h2>Nada por aquí</h2><p>${q?"No encuentro «"+esc($("#q").value)+"». Prueba con la ciudad o parte del nombre.":"No hay alojamientos con esos filtros."}</p><button class="btn acc" data-new="1">Añadirlo a mano</button></div>`)+catHtml;return}
   list.innerHTML=(rows.length&&q.length>=3?`<h2 class="subh">Con reseñas del equipo</h2>`:"")+rows.map(({h,st})=>teamCard(h,st)).join("")+catHtml;
 }
@@ -750,7 +814,7 @@ $("#list").addEventListener("click",e=>{
   if(e.target.closest("[data-new]")) openSheet(null,$("#q").value.trim());
   const w=e.target.closest("[data-radius]"); if(w){S.radius=+w.dataset.radius; renderList()}
 });
-$("#q").addEventListener("input",()=>{if(S.view==="hotel"||(S.view==="tab"&&S.tab!=="ranking"))setTab("buscar");if(S.tab==="ranking"){renderTab();return}renderList();liveSearch($("#q").value)});
+$("#q").addEventListener("input",()=>{S.sugOff=null;renderSug();if(S.view==="hotel"||(S.view==="tab"&&S.tab!=="ranking"))setTab("buscar");if(S.tab==="ranking"){renderTab();return}renderList();liveSearch($("#q").value)});
 document.querySelectorAll(".chip").forEach(b=>b.addEventListener("click",()=>{
   const f=b.dataset.f;
   if(S.filters.has(f)) S.filters.delete(f);
@@ -1019,7 +1083,8 @@ function drawMap(){
     if(first){S.mapFit=true; return setTimeout(()=>{LM.invalidateSize();drawMap()},60)}
     if(S.mapFit&&S.mapPlace){S.mapFit=false; const pl=S.mapPlace;
       const near=S.mapPts.map(p=>[kmBetween(pl.lat,pl.lon,+p.h.lat,+p.h.lon),p]).sort((a,b)=>a[0]-b[0]).slice(0,8).map(x=>[x[1].h.lat,x[1].h.lon]);
-      LM.fitBounds(L.latLngBounds([[pl.lat,pl.lon],...near]),{padding:[40,40],maxZoom:14})}
+      const dl=Math.max(0.01,...near.map(x=>Math.abs(x[0]-pl.lat))), dn=Math.max(0.01,...near.map(x=>Math.abs(x[1]-pl.lon)));   // keep the searched place in the middle
+      LM.fitBounds(L.latLngBounds([[pl.lat-dl,pl.lon-dn],[pl.lat+dl,pl.lon+dn]]),{padding:[40,40],maxZoom:14})}
     if(S.mapFit){S.mapFit=false; const P=S.mapPts; if(P.length===1) LM.setView([P[0].h.lat,P[0].h.lon],15); else if(P.length) LM.fitBounds(L.latLngBounds(P.map(p=>[p.h.lat,p.h.lon])),{padding:[30,30],maxZoom:15}); else LM.setView([40.1,-3.7],5.5)}
     paintLeaflet(); return }
   const svg=$("#map"),W=svg.clientWidth||360,H=svg.clientHeight||360;
