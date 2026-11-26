@@ -2,11 +2,14 @@ name: Actualizar catálogo de alojamientos
 
 # Descarga los datos de OpenStreetMap de España (Geofabrik), saca todos los alojamientos
 # le suma los registros oficiales de turismo (tools/merge_registries.py)
-# y guarda hotels-es.json en el repositorio. Se lanza a mano o el día 1 de cada mes.
+# y guarda hotels-es.json en el repositorio. Se lanza a mano y sola a las 4:00 (hora de España):
+# a diario del 27 al 29 de noviembre de 2026 y, desde el 30, cada lunes.
+# Si una comunidad no responde, se conservan sus alojamientos de la vez anterior.
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 3 1 * *"
+    - cron: "0 3 27-29 11 *"
+    - cron: "0 3 * * 1"
 
 permissions:
   contents: write
