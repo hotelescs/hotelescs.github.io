@@ -35,24 +35,28 @@
       const el = document.createElement("div"); el.id = "ryc-login";
       el.innerHTML = `<div class="box"><div class="hd"><b>Hoteles<span style="background:linear-gradient(135deg,#ff5f00,#ff8a3d);color:#111;padding:0 7px;border-radius:7px;margin-left:4px">CS</span></b>Reseñas de alojamientos del equipo técnico</div>
         <form novalidate>
-          <label>Correo de empresa<input name="email" type="email" autocomplete="email" required placeholder="nombre@${C.domain || "empresa.com"}"></label>
-          <label class="nm" hidden>Tu nombre (lo verán los compañeros)<input name="name" autocomplete="name" maxlength="80"></label>
+          <label>Nombre<input name="email" autocomplete="given-name" required maxlength="40" placeholder="Ej.: Ana" autocapitalize="words"></label>
+          <label>Apellido<input name="ap" autocomplete="family-name" maxlength="40" placeholder="Ej.: García" autocapitalize="words"></label>
           <label>Contraseña<input name="pw" type="password" autocomplete="current-password" required minlength="6"></label>
           <p class="err" role="alert"></p>
           <button type="submit" class="go">Entrar</button>
           <button type="button" class="sw">¿Primera vez? Crear cuenta</button>
         </form></div>`;
       document.body.appendChild(el);
-      const f = el.querySelector("form"), err = el.querySelector(".err"), go = el.querySelector(".go"), sw = el.querySelector(".sw"), nm = el.querySelector(".nm");
+      const f = el.querySelector("form"), err = el.querySelector(".err"), go = el.querySelector(".go"), sw = el.querySelector(".sw");
       let signup = false;
-      sw.onclick = () => { signup = !signup; nm.hidden = !signup; go.textContent = signup ? "Crear cuenta" : "Entrar";
+      sw.onclick = () => { signup = !signup; go.textContent = signup ? "Crear cuenta" : "Entrar";
         sw.textContent = signup ? "Ya tengo cuenta" : "¿Primera vez? Crear cuenta"; f.pw.autocomplete = signup ? "new-password" : "current-password"; err.textContent = ""; };
       f.onsubmit = async e => {
         e.preventDefault(); err.textContent = "";
-        const email = f.email.value.trim().toLowerCase(), pw = f.pw.value, name = f.name.value.trim();
-        if (C.domain && !email.endsWith("@" + C.domain)) return err.textContent = "Usa tu correo de empresa (@" + C.domain + ").";
+        // name + password only. Supabase still needs an e-mail, so the name becomes an internal one: "Nandor Palfi" -> nandor.palfi@usuarios.hotelescs.app
+        // (accents, capitals and extra spaces do not matter). Old accounts made with a company e-mail still log in by typing that e-mail.
+        const n1 = f.email.value.trim(), raw = (n1.includes("@") ? n1 : n1 + " " + f.ap.value.trim()).trim().replace(/\s+/g, " "), pw = f.pw.value, name = raw;
+        const slug = raw.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, ".").replace(/^\.|\.$/g, "");
+        const email = raw.includes("@") ? raw.toLowerCase() : slug + "@usuarios.hotelescs.app";
+        if (!raw.includes("@") && (!n1 || !f.ap.value.trim())) return err.textContent = "Pon tu nombre y tu apellido.";
         if (pw.length < 6) return err.textContent = "La contraseña debe tener al menos 6 caracteres.";
-        if (signup && !name) return err.textContent = "Pon tu nombre.";
+
         go.disabled = true; go.textContent = "Un momento…";
         try {
           const r = signup ? await sb.auth.signUp({ email, password: pw, options: { data: { name } } })
@@ -62,10 +66,10 @@
           el.remove(); resolve(r.data.session);
         } catch (x) {
           const m = String(x && x.message || "");
-          err.textContent = /invalid login/i.test(m) ? "Correo o contraseña incorrectos."
-            : /already registered/i.test(m) ? "Ese correo ya tiene cuenta. Pulsa «Ya tengo cuenta»."
-            : /correos de empresa|database error/i.test(m) ? "Solo se admiten correos de empresa."
-            : m === "confirm" ? "Cuenta creada. Revisa tu correo para confirmarla y luego entra."
+          err.textContent = /invalid login/i.test(m) ? "Nombre o contraseña incorrectos."
+            : /already registered/i.test(m) ? "Ese nombre ya tiene cuenta. Pulsa «Ya tengo cuenta» o añade tu apellido."
+            : /correos de empresa|database error/i.test(m) ? "Aún no se pueden crear cuentas nuevas: falta un ajuste en el servidor."
+            : m === "confirm" ? "Aún no se pueden crear cuentas nuevas: falta un ajuste en el servidor."
             : "No se ha podido entrar. Revisa la conexión.";
         } finally { go.disabled = false; go.textContent = signup ? "Crear cuenta" : "Entrar"; }
       };

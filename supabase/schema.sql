@@ -1,6 +1,6 @@
 -- HotelesCS: tablas, permisos y tiempo real.
 -- Pegar entero en Supabase > SQL Editor > New query > Run.
--- Solo correos @kuka.com.
+-- Se entra con nombre y apellido + contraseña (ver sin-correo.sql).
 
 create table if not exists public.profiles (
   id uuid primary key references auth.users on delete cascade,
@@ -29,18 +29,15 @@ create table if not exists public.reviews (
   created_at timestamptz not null default now()
 );
 
--- Solo correos del dominio de empresa
+-- Cualquier persona con sesión iniciada es del equipo
 create or replace function public.is_team() returns boolean
 language sql stable as $$
-  select coalesce(auth.jwt()->>'email','') ilike '%@kuka.com'
+  select auth.uid() is not null
 $$;
 
 create or replace function public.handle_new_user() returns trigger
 language plpgsql security definer set search_path = public as $$
 begin
-  if new.email is null or new.email not ilike '%@kuka.com' then
-    raise exception 'Solo se admiten correos de empresa';
-  end if;
   insert into public.profiles(id, name)
   values (new.id, left(coalesce(new.raw_user_meta_data->>'name',''), 80))
   on conflict (id) do nothing;
