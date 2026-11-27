@@ -1,0 +1,21 @@
+name: Probar el inicio de sesión
+# Herramienta de mantenimiento: crea (o reutiliza) la cuenta "Prueba Sistema" y comprueba que puede entrar y leer las reseñas.
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          URL=$(grep -o 'https://[a-z0-9]*\.supabase\.co' config.js); KEY=$(grep -o 'sb_publishable_[A-Za-z0-9_-]*' config.js)
+          EMAIL="prueba.sistema@usuarios.hotelescs.app"; PW="prueba-$(echo $KEY | cut -c16-28)"
+          echo "== crear cuenta"
+          curl -s -X POST "$URL/auth/v1/signup" -H "apikey: $KEY" -H "Content-Type: application/json" -d "{\"email\":\"$EMAIL\",\"password\":\"$PW\",\"data\":{\"name\":\"Prueba Sistema\"}}" | python3 -c "import json,sys;d=json.load(sys.stdin);print('sesion' if d.get('access_token') else 'sin sesion', d.get('msg') or d.get('error_description') or d.get('error_code') or '')"
+          echo "== entrar"
+          TOK=$(curl -s -X POST "$URL/auth/v1/token?grant_type=password" -H "apikey: $KEY" -H "Content-Type: application/json" -d "{\"email\":\"$EMAIL\",\"password\":\"$PW\"}" | python3 -c "import json,sys;d=json.load(sys.stdin);print(d.get('access_token') or ('ERROR '+str(d.get('msg') or d.get('error_description') or d)))")
+          echo "$TOK" | cut -c1-12
+          echo "== leer reseñas y hoteles"
+          for t in reviews hotels profiles; do curl -s "$URL/rest/v1/$t?select=id" -H "apikey: $KEY" -H "Authorization: Bearer $TOK" | python3 -c "import json,sys;d=json.load(sys.stdin);print('$t', len(d) if isinstance(d,list) else d)"; done
