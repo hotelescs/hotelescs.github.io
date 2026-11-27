@@ -337,7 +337,7 @@ a.logo{color:inherit;text-decoration:none}
     </div></div>
   <div class="wrap band">
     <div class="qwrap"><label class="search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-      <input id="q" type="search" placeholder="Ciudad, zona u hotel" autocomplete="off" aria-label="Buscar ciudad u hotel" aria-controls="qs"></label>
+      <input id="q" type="search" placeholder="Ciudad, zona, hotel o cliente" autocomplete="off" aria-label="Buscar ciudad, zona, hotel o cliente" aria-controls="qs"></label>
       <div id="qs" class="qsug" role="listbox" aria-label="Sugerencias" hidden></div></div>
     <div class="dates">
       <label class="dl">Entrada<span class="dv tnum" id="dinV"></span><input id="din" type="date"></label>
@@ -825,12 +825,15 @@ document.querySelectorAll(".chip").forEach(b=>b.addEventListener("click",()=>{
 }));
 
 /* ---------- hotel detail ---------- */
+const lucky=(site,h)=>"https://duckduckgo.com/?q="+encodeURIComponent("\\site:"+site+' "'+h.name+'" '+(h.city||""));
 function bookingLinks(h){
   const din=$("#din").value,dout=$("#dout").value,q=encodeURIComponent(h.name+" "+h.city);
   const mq=encodeURIComponent(h.name+", "+placeLine(h));
   return [
-    ["Booking",`https://www.booking.com/searchresults.es.html?ss=${q}&checkin=${din}&checkout=${dout}&group_adults=1&no_rooms=1&group_children=0`],
-    ["Hoteles.com",`https://es.hoteles.com/Hotel-Search?destination=${q}&startDate=${din}&endDate=${dout}&adults=1`],
+    // Booking and Hoteles.com have no free way to look up a hotel's own page, so these go through DuckDuckGo's
+    // "first result" shortcut (the backslash), limited to each site's hotel pages: it lands straight on the hotel's page there.
+    ["Booking",lucky("booking.com/hotel/es",h)],
+    ["Hoteles.com",lucky("hoteles.com/ho",h)],
     ["Google Hoteles",`https://www.google.com/travel/search?q=${q}&hl=es`],
     ["Mapa",`https://www.google.com/maps/search/?api=1&query=${mq}`]
   ];
@@ -874,7 +877,7 @@ function renderHotel(){
     <div class="section">
       <h3>Precio de hoy y reserva</h3>
       <div class="links">${bookingLinks(h).map(([t,u])=>`<a class="lbtn" href="${esc(u)}" target="_blank" rel="noopener">${t}<span>abrir ↗</span></a>`).join("")}</div>
-      <div class="note">Se abren con tus fechas (${shortDate($("#din").value)} a ${shortDate($("#dout").value)}) para ver el precio real de hoy.</div>
+      <div class="note">Booking y Hoteles.com abren la ficha de este alojamiento: pon allí tus fechas (${shortDate($("#din").value)} a ${shortDate($("#dout").value)}) para ver el precio de hoy. Si no lo tienen, verás la búsqueda.</div>
     </div>
 
     <div class="section mail">
