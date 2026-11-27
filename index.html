@@ -239,7 +239,7 @@ header.top .band{padding-block:8px 16px;display:grid;gap:10px}
 .card .price{font-size:19px;white-space:nowrap}
 .card.lite{background:var(--surface);grid-template-columns:auto 1fr auto;gap:12px;box-shadow:none;border:1px solid var(--line)}
 .more{margin:8px 0 4px}
-.card.lite .km{font-weight:700;color:var(--accent)}
+.card .km{font-weight:700;color:var(--accent)}
 .card.lite .ico{width:38px;height:38px;border-radius:12px;background:var(--bg);color:var(--muted);display:grid;place-content:center;font-family:var(--f-head);font-weight:700;font-size:18px}
 .card.lite h3{font-size:17px}
 .card .go{color:var(--muted);font-size:24px;line-height:1}
@@ -274,7 +274,7 @@ header.top .band{padding-block:8px 16px;display:grid;gap:10px}
 @media (prefers-reduced-motion:no-preference){.card{animation:fadein .25s ease both}@keyframes fadein{from{opacity:0;transform:translateY(4px)}}}
 
 /* bottom navigation & tabs */
-.bnav{position:fixed;left:0;right:0;bottom:0;z-index:7;display:grid;grid-template-columns:repeat(4,1fr);background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:6px max(8px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px))}
+.bnav{position:fixed;left:0;right:0;bottom:0;z-index:7;display:grid;grid-template-columns:repeat(3,1fr);background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:6px max(8px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px))}
 .bnav button{background:none;border:0;display:grid;justify-items:center;gap:2px;font-size:11px;font-weight:600;color:var(--muted);padding:4px 0;border-radius:12px}
 .bnav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .bnav button[aria-current]{color:var(--brand)}
@@ -390,7 +390,6 @@ a.logo{color:inherit;text-decoration:none}
 <nav class="bnav" aria-label="Secciones">
   <button data-tab="buscar" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>Buscar</button>
   <button data-tab="ranking"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4zM7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3"/></svg>Ranking</button>
-  <button data-tab="cerca"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Cerca</button>
   <button data-tab="mio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>Lo mío</button>
 </nav>
 
@@ -778,14 +777,18 @@ function renderList(){
   if(ex){banner.hidden=false;banner.className="banner";banner.textContent=S.live?"Aún no hay reseñas. Lo que ves son ejemplos: pulsa «Reseña» para añadir el primer alojamiento de verdad.":"Vista de ejemplo. Para guardar y ver reseñas del equipo, abre la página con tu cuenta."}
   else banner.hidden=true;
   let rows=hotels.map(h=>({h,st:stats(h,reviews)}));
-  if(q) rows=rows.filter(({h})=>norm(h.name+" "+h.city+" "+(h.area||"")).includes(q));
+  if(S.radQ!==q){S.radQ=q;S.radius=15}   // 15 km around the place; "ver más lejos" widens it to 30 and 60
+  // searching a town or a client: the team's places nearby come first, nearest first, with their distance
+  const plT=q.length>=3&&!ex?placeFor(q):null, teamKm=new Map();
+  if(plT){ for(const r of rows){ if(r.h.lat!=null&&r.h.lon!=null) teamKm.set(r.h,kmBetween(plT.lat,plT.lon,+r.h.lat,+r.h.lon)) } }
+  if(q) rows=rows.filter(({h})=>norm(h.name+" "+h.city+" "+(h.area||"")).includes(q)||(teamKm.has(h)&&teamKm.get(h)<=S.radius));
   for(const f of S.filters){
     if(f.startsWith("t:")) rows=rows.filter(({h})=>h.type===f.slice(2));
     if(f==="p80") rows=rows.filter(({st})=>st.price!=null&&st.price<=LIMIT);
     if(f.startsWith("g:")) rows=rows.filter(({st})=>st.topTags.includes(f.slice(2)));
     if(f==="s4") rows=rows.filter(({st})=>st.avg>=4);
   }
-  rows.sort((a,b)=>b.st.avg-a.st.avg||b.st.rs.length-a.st.rs.length);
+  rows.sort((a,b)=>plT&&teamKm.has(a.h)&&teamKm.has(b.h)?teamKm.get(a.h)-teamKm.get(b.h):b.st.avg-a.st.avg||b.st.rs.length-a.st.rs.length);
   const list=$("#list");
   if(S.live&&S.loading){list.innerHTML=`<div class="empty">Cargando reseñas…</div>`;return}
   const known=new Set(hotels.map(h=>h.osm).filter(Boolean));
@@ -794,7 +797,6 @@ function renderList(){
   let cat=(q.length>=3&&!onlyTeam)?catSearch($("#q").value,60,known):[];
   if(typeF) cat=cat.filter(c=>c.type===typeF.slice(2));
   const pl=(q.length>=3&&!onlyTeam)?placeFor(q):null, kmOf=new Map(); S.mapPlace=pl;
-  if(S.radQ!==q){S.radQ=q;S.radius=15}   // 15 km around the place; "ver más lejos" widens it to 30 and 60
   if(pl){ const near=nearPlace(pl,60,known,typeF&&typeF.slice(2),S.radius); near.forEach(([km,c])=>kmOf.set(c,km));
     const ids=new Set(near.map(x=>x[1])); cat=[...near.map(x=>x[1]),...(pl.client?[]:cat.filter(c=>!ids.has(c)).slice(0,10))]; }
   S.mapPts=[...rows.map(({h,st})=>({h,team:true,avg:st.avg})),...cat.slice(0,300).map(c=>({h:c,team:false}))].filter(p=>p.h.lat!=null&&p.h.lon!=null);
@@ -807,7 +809,7 @@ function renderList(){
   const wider=pl&&S.radius<60?`<button class="btn ghost wide more" data-radius="${S.radius<30?30:60}">Ver más lejos (hasta ${S.radius<30?30:60} km)</button>`:"";
   const catHtml=pl&&!nearN?`<div class="note">No hay alojamientos a menos de ${S.radius} km de ${esc(placeLbl(pl))}.</div>${wider}`:cat.length?(pl&&nearN?`${pl.typo?`<div class="note">¿Querías decir <b>${esc(pl.name)}</b>? Te enseño lo que hay allí.</div>`:""}${pl.guess?`<div class="note">No encuentro «${esc(pl.guess)}» en el mapa, así que te enseño lo que hay cerca del centro de ${esc(pl.name)}.</div>`:""}<h2 class="subh">Más cerca de ${esc(placeLbl(pl))} <span class="note">a menos de ${S.radius} km, sin reseñas del equipo</span></h2>`+cat.slice(0,nearN).map(c=>liteCard(c,`<span class="km tnum">${kmLabel(kmOf.get(c))}</span>`)).join("")+wider+(cat.length>nearN?`<h2 class="subh">Otros con «${esc($("#q").value.trim())}» en el nombre</h2>`+cat.slice(nearN).map(c=>liteCard(c)).join(""):""):`<h2 class="subh">Otros alojamientos <span class="note">sin reseñas del equipo</span></h2>`+cat.map(c=>liteCard(c)).join("")):(q.length>=3&&CAT===null?`<div class="note">Cargando alojamientos de España…</div>`:"");
   if(!rows.length){list.innerHTML=(cat.length?(q?`<div class="note">Ningún compañero ha reseñado todavía un sitio con «${esc($("#q").value)}».</div>`:""):`<div class="empty"><h2>Nada por aquí</h2><p>${q?"No encuentro «"+esc($("#q").value)+"». Prueba con la ciudad o parte del nombre.":"No hay alojamientos con esos filtros."}</p><button class="btn acc" data-new="1">Añadirlo a mano</button></div>`)+catHtml;return}
-  list.innerHTML=(rows.length&&q.length>=3?`<h2 class="subh">Con reseñas del equipo</h2>`:"")+rows.map(({h,st})=>teamCard(h,st)).join("")+catHtml;
+  list.innerHTML=(rows.length&&q.length>=3?`<h2 class="subh">Con reseñas del equipo${plT?` <span class="note">del más cercano al más lejano</span>`:""}</h2>`:"")+rows.map(({h,st})=>teamCard(h,st,teamKm.has(h)&&plT?`<span class="km tnum">${kmLabel(teamKm.get(h))}</span>`:"")).join("")+catHtml;
 }
 $("#list").addEventListener("click",e=>{
   const c=e.target.closest("[data-h]"); if(c) return openHotel(c.dataset.h);
@@ -1241,7 +1243,7 @@ const GUIDE=[
  ["🏨","Mira la ficha","Toca un alojamiento para ver las opiniones, el mapa, y los botones de Booking, Hoteles.com y Google con tus fechas puestas para ver el precio de hoy."],
  ["✉️","Pide la reserva a la agencia","Pon las fechas de entrada y salida arriba. En la ficha, «Copiar correo» te deja el email listo para la agencia, con el hotel y las fechas. Solo tienes que pegarlo y enviarlo."],
  ["⭐","Deja tu reseña","Al volver, pulsa «+ Reseña»: elige el sitio, toca las estrellas y el rango de precio. Lo demás es opcional. Son 10 segundos y ayudas a todos."],
- ["📍","Cerca del cliente y ranking","En la barra de abajo: «Cerca» te enseña dónde dormir cerca de la dirección del cliente, y «Ranking» los mejores de cada ciudad."],
+ ["📍","Cerca del cliente","Escribe el cliente y el pueblo, por ejemplo «Seat Martorell», y te salen los alojamientos ordenados por distancia, con los km. En «Ranking», abajo, tienes los mejores de cada ciudad."],
  ["📱","Tenla en el móvil","En «Lo mío» te explico cómo instalarla como una app. Ahí también tienes tus favoritos, tus reseñas y el buzón de sugerencias."]
 ];
 let gi=0;
