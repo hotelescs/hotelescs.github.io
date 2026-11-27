@@ -1225,10 +1225,12 @@ $("#tabBody").addEventListener("submit",async e=>{
 addEventListener("beforeinstallprompt",e=>{e.preventDefault();S.installEvt=e;if(S.tab==="mio")renderTab()});
 
 /* favourites: saved in the team database when available, and on this device */
-function lsFavs(){try{return JSON.parse(localStorage.getItem("ryc-favs")||"[]")}catch(e){return []}}
-function saveFavsLocal(){try{localStorage.setItem("ryc-favs",JSON.stringify([...S.favs]))}catch(e){}}
-S.favs=new Set(lsFavs());
-async function loadFavs(){ if(!S.favApi) return; try{const ks=await S.favApi.list(); for(const k of ks) S.favs.add(k); saveFavsLocal(); rerender()}catch(e){S.favApi=null} }
+/* favourites belong to the account (saved in the database); the copy on the phone is kept per account, only for when there is no signal */
+const favKey=()=>"ryc-favs-"+(S.me||"anon");
+function lsFavs(){try{return JSON.parse(localStorage.getItem(favKey())||"[]")}catch(e){return []}}
+function saveFavsLocal(){try{localStorage.setItem(favKey(),JSON.stringify([...S.favs]))}catch(e){}}
+try{localStorage.removeItem("ryc-favs")}catch(e){}   // old shared copy from before favourites were per account
+async function loadFavs(){ S.favs=new Set(lsFavs()); rerender(); if(!S.favApi) return; try{const ks=await S.favApi.list(); S.favs=new Set(ks); saveFavsLocal(); rerender()}catch(e){S.favApi=null} }
 async function toggleFav(id){ const on=!S.favs.has(id); on?S.favs.add(id):S.favs.delete(id); saveFavsLocal(); rerender(); toast(on?"Guardado en favoritos":"Quitado de favoritos");
   if(S.favApi){try{on?await S.favApi.add(id):await S.favApi.remove(id)}catch(e){}} }
 
@@ -1266,11 +1268,12 @@ setTimeout(loadCat,300);
 try{if(localStorage.getItem("ryc-mode")==="map")setMode("map")}catch(e){}
 (async function(){
   let db=null,user=null;
-  if(window.rycBackend){try{let favs,sugg;({db,user,favs,sugg}=await window.rycBackend());S.favApi=favs||null;S.suggApi=sugg||null;maybeGuide();loadFavs()}catch(e){console.error(e)}}
+  if(window.rycBackend){try{let favs,sugg;({db,user,favs,sugg}=await window.rycBackend());S.favApi=favs||null;S.suggApi=sugg||null;maybeGuide()}catch(e){console.error(e)}}
   else if(window.claude&&claude.use){[db,user]=await Promise.all([claude.use("db"),claude.use("user")])}
   else return;
   S.user=user;
   if(user){try{S.me=await user.id();S.myName=(await user.name())||"";if(S.myName)$("#who").textContent="Hola, "+S.myName.split(" ")[0]}catch(e){}}
+  loadFavs();
   if(!db){rerender();return}
   S.db=db; S.live=true; S.loading=true; rerender();
   let got=0; const timer=setTimeout(()=>{if(S.loading){S.loading=false;rerender()}},10000);
