@@ -1,18 +1,19 @@
 {
- "total": 45211,
- "añadidos": 20725,
+ "total": 46723,
+ "añadidos": 22233,
  "por_region": {
   "Andalucía": 1193,
-  "Aragón": 2223,
+  "Aragón": 2238,
   "Asturias": 18,
   "C. Valenciana": 1952,
   "Canarias": 2630,
-  "Castilla y León": 4386,
+  "Castilla y León": 4389,
   "Cataluña": 3824,
   "Extremadura": 1812,
   "Galicia": 18,
   "Madrid": 1131,
   "Murcia": 733,
+  "Navarra": 1490,
   "País Vasco": 805
  },
  "fuentes": [
@@ -115,9 +116,9 @@
    "url": "https://datos.canarias.es/catalogos/general/dataset/429db33d-cbce-4920-b1b6-b4dde9e5f90f/resource/87741d75-2ce2-4a45-8131-ad8263257664/download/establecimientos-hoteleros-inscritos-en-el-registro-general-turistico-de-canarias.csv",
    "filas": 849,
    "resultado": {
-    "ya estaba": 547,
+    "ya estaba": 546,
     "añadido": 239,
-    "añadido (ubicación aproximada)": 51,
+    "añadido (ubicación aproximada)": 52,
     "repetido en la fuente": 9,
     "sin ubicación": 3
    },
@@ -234,8 +235,8 @@
    "url": "https://datos.canarias.es/catalogos/estadisticas/dataset/46b11d54-6efc-42d7-8de7-7f849168cbe5/resource/01215581-33a6-4b4e-a6f5-f0eb6c120a40/download/alojatur_2026.csv",
    "filas": 1336,
    "resultado": {
-    "ya estaba": 1247,
-    "añadido": 80,
+    "ya estaba": 1248,
+    "añadido": 79,
     "repetido en la fuente": 9
    },
    "errores": [],
@@ -1870,9 +1871,9 @@
    "url": "https://opendata.aragon.es/GA_OD_Core/download?resource_id=65&formato=csv",
    "filas": 946,
    "resultado": {
-    "añadido (ubicación aproximada)": 415,
+    "añadido (ubicación aproximada)": 416,
     "ya estaba": 442,
-    "sin ubicación": 80,
+    "sin ubicación": 79,
     "repetido en la fuente": 9
    },
    "errores": [],
@@ -1957,9 +1958,9 @@
    "url": "https://opendata.aragon.es/GA_OD_Core/download?resource_id=66&formato=csv",
    "filas": 508,
    "resultado": {
-    "añadido (ubicación aproximada)": 333,
+    "añadido (ubicación aproximada)": 334,
     "ya estaba": 90,
-    "sin ubicación": 79,
+    "sin ubicación": 78,
     "repetido en la fuente": 5,
     "sin nombre": 1
    },
@@ -2043,10 +2044,10 @@
    "url": "https://opendata.aragon.es/GA_OD_Core/download?resource_id=73&formato=csv",
    "filas": 2057,
    "resultado": {
-    "añadido (ubicación aproximada)": 1370,
-    "sin ubicación": 503,
-    "ya estaba": 167,
+    "añadido (ubicación aproximada)": 1383,
+    "ya estaba": 169,
     "repetido en la fuente": 14,
+    "sin ubicación": 488,
     "sin nombre": 3
    },
    "errores": [],
@@ -2295,16 +2296,16 @@
    "fuente": "cyl-apt",
    "region": "Castilla y León",
    "url": "https://datosabiertos.jcyl.es/web/jcyl/risp/es/turismo/apartamentos/1284211832109.csv",
-   "filas": 685,
+   "filas": 688,
    "resultado": {
-    "añadido (ubicación aproximada)": 474,
+    "añadido (ubicación aproximada)": 477,
     "ya estaba": 171,
     "sin ubicación": 38,
     "repetido en la fuente": 2
    },
    "errores": [],
    "tipos": {
-    "": 685
+    "": 688
    },
    "columnas": [
     "N.Registro",
@@ -2357,16 +2358,16 @@
    "fuente": "cyl-alb",
    "region": "Castilla y León",
    "url": "https://datosabiertos.jcyl.es/web/jcyl/risp/es/turismo/albergues_turisticos/1284211830763.csv",
-   "filas": 368,
+   "filas": 369,
    "resultado": {
-    "ya estaba": 145,
+    "ya estaba": 146,
     "añadido (ubicación aproximada)": 200,
     "sin ubicación": 21,
     "repetido en la fuente": 2
    },
    "errores": [],
    "tipos": {
-    "Albergue turístico": 248,
+    "Albergue turístico": 249,
     "Albergue turístico de los Caminos a Santiago": 120
    },
    "columnas": [
@@ -2420,17 +2421,17 @@
    "fuente": "cyl-rur",
    "region": "Castilla y León",
    "url": "https://datosabiertos.jcyl.es/web/jcyl/risp/es/turismo/turismo_rural/1284211842462.csv",
-   "filas": 4137,
+   "filas": 4136,
    "resultado": {
     "añadido (ubicación aproximada)": 2857,
     "ya estaba": 885,
-    "sin ubicación": 373,
+    "sin ubicación": 372,
     "repetido en la fuente": 22
    },
    "errores": [],
    "tipos": {
     "Casa Rural": 1900,
-    "Casa Rural de Alquiler": 1477,
+    "Casa Rural de Alquiler": 1476,
     "Hotel Rural": 537,
     "Posada": 123,
     "Casa Rural de Alojamiento Compartido": 100
@@ -2489,85 +2490,305 @@
   {
    "fuente": "nav-all",
    "region": "Navarra",
-   "url": null,
-   "filas": 0,
-   "resultado": {},
-   "errores": [
-    "https://datosabiertos.navarra.es/datastore/dump/5527debf-7e72-4f9e-8e12-b562f302 URLError(TimeoutError(110, 'Connection timed out'))"
+   "url": "https://datosabiertos.navarra.es/datastore/dump/5527debf-7e72-4f9e-8e12-b562f3027fc2?format=csv&bom=True",
+   "filas": 2851,
+   "resultado": {
+    "añadido (ubicación aproximada)": 1488,
+    "ya estaba": 534,
+    "excluido (VUT, camping...)": 332,
+    "sin ubicación": 420,
+    "sin nombre": 1,
+    "repetido en la fuente": 76
+   },
+   "errores": [],
+   "tipos": {
+    "Apartamento Turístico": 1000,
+    "Casa rural vivienda": 602,
+    "Apartamento Turístico Rural": 319,
+    "Vivienda Turística": 175,
+    "Hostal": 144,
+    "Vivienda Turística Rural": 131,
+    "Albergue turístico": 115,
+    "Casa rural habitaciones": 102,
+    "Hotel": 100,
+    "Pensión": 93,
+    "Hotel rural": 30,
+    "Camping": 26,
+    "Bloque apartamentos turísticos": 8,
+    "Hotel-apartamento": 4,
+    "Apartamento": 1
+   },
+   "columnas": [
+    "_id",
+    "COD_INSCRIPCION",
+    "NOMBRE",
+    "MODALIDAD",
+    "CATEGORIA",
+    "DIRECCION",
+    "CODIGO_POSTAL",
+    "LOCALIDAD",
+    "MUNICIPIO",
+    "SUB_ZONA",
+    "PLAZAS",
+    "SUPLETORIAS",
+    "FECHA_DE_INSCRIPCION",
+    "EMAIL",
+    "WEB",
+    "TELEFONO_RESERVAS_1"
    ],
-   "tipos": {},
-   "columnas": [],
-   "ejemplo": {}
+   "ejemplo": {
+    "_id": "1",
+    "COD_INSCRIPCION": "UH000003",
+    "NOMBRE": "Europa",
+    "MODALIDAD": "Hotel",
+    "CATEGORIA": "3 Estrellas",
+    "DIRECCION": "Espoz y Mina 11",
+    "CODIGO_POSTAL": "31002",
+    "LOCALIDAD": "Pamplona / Iruña",
+    "MUNICIPIO": "Pamplona / Iruña",
+    "SUB_ZONA": "Pamplona y Comarca",
+    "PLAZAS": "38",
+    "SUPLETORIAS": "0",
+    "FECHA_DE_INSCRIPCION": "01/01/1949",
+    "EMAIL": "No se consiente la publicación",
+    "WEB": "No se consiente la publicación",
+    "TELEFONO_RESERVAS_1": "No se consiente la publicación"
+   }
   },
   {
    "fuente": "nav-hot",
    "region": "Navarra",
-   "url": null,
-   "filas": 0,
-   "resultado": {},
-   "errores": [
-    "https://datosabiertos.navarra.es/datastore/dump/623f1d34-6ef3-4591-bbc0-6a71ff86 URLError(TimeoutError(110, 'Connection timed out'))"
+   "url": "https://datosabiertos.navarra.es/datastore/dump/623f1d34-6ef3-4591-bbc0-6a71ff867ad1?format=csv&bom=True",
+   "filas": 371,
+   "resultado": {
+    "ya estaba": 333,
+    "sin ubicación": 35,
+    "añadido (ubicación aproximada)": 1,
+    "repetido en la fuente": 2
+   },
+   "errores": [],
+   "tipos": {
+    "Hostal": 144,
+    "Hotel": 100,
+    "Pensión": 93,
+    "Hotel rural": 30,
+    "Hotel-apartamento": 4
+   },
+   "columnas": [
+    "_id",
+    "COD_INSCRIPCION",
+    "NOMBRE",
+    "MODALIDAD",
+    "CATEGORIA",
+    "DIRECCION",
+    "CODIGO_POSTAL",
+    "LOCALIDAD",
+    "MUNICIPIO",
+    "SUB_ZONA",
+    "PLAZAS",
+    "SUPLETORIAS",
+    "FECHA_DE_INSCRIPCION",
+    "EMAIL",
+    "WEB",
+    "TELEFONO_RESERVAS_1"
    ],
-   "tipos": {},
-   "columnas": [],
-   "ejemplo": {}
+   "ejemplo": {
+    "_id": "1",
+    "COD_INSCRIPCION": "UH000003",
+    "NOMBRE": "Europa",
+    "MODALIDAD": "Hotel",
+    "CATEGORIA": "3 Estrellas",
+    "DIRECCION": "Espoz y Mina 11",
+    "CODIGO_POSTAL": "31002",
+    "LOCALIDAD": "Pamplona / Iruña",
+    "MUNICIPIO": "Pamplona / Iruña",
+    "SUB_ZONA": "Pamplona y Comarca",
+    "PLAZAS": "38",
+    "SUPLETORIAS": "0",
+    "FECHA_DE_INSCRIPCION": "01/01/1949",
+    "EMAIL": "No se consiente la publicación",
+    "WEB": "No se consiente la publicación",
+    "TELEFONO_RESERVAS_1": "No se consiente la publicación"
+   }
   },
   {
    "fuente": "nav-apt",
    "region": "Navarra",
-   "url": null,
-   "filas": 0,
-   "resultado": {},
-   "errores": [
-    "https://datosabiertos.navarra.es/datastore/dump/e761b1ec-23ed-4523-bf56-d8f7a338 URLError(TimeoutError(110, 'Connection timed out'))"
+   "url": "https://datosabiertos.navarra.es/datastore/dump/e761b1ec-23ed-4523-bf56-d8f7a338ae3c?format=csv&bom=True",
+   "filas": 1635,
+   "resultado": {
+    "excluido (VUT, camping...)": 306,
+    "ya estaba": 1105,
+    "sin ubicación": 180,
+    "sin nombre": 1,
+    "añadido (ubicación aproximada)": 1,
+    "repetido en la fuente": 42
+   },
+   "errores": [],
+   "tipos": {
+    "Apartamento Turístico": 1000,
+    "Apartamento Turístico Rural": 319,
+    "Vivienda Turística": 175,
+    "Vivienda Turística Rural": 131,
+    "Bloque apartamentos turísticos": 8,
+    "Apartamento": 1
+   },
+   "columnas": [
+    "_id",
+    "COD_INSCRIPCION",
+    "NOMBRE",
+    "MODALIDAD",
+    "CATEGORIA",
+    "DIRECCION",
+    "CODIGO_POSTAL",
+    "LOCALIDAD",
+    "MUNICIPIO",
+    "SUB_ZONA",
+    "PLAZAS",
+    "SUPLETORIAS",
+    "FECHA_DE_INSCRIPCION",
+    "EMAIL",
+    "WEB",
+    "TELEFONO_RESERVAS_1"
    ],
-   "tipos": {},
-   "columnas": [],
-   "ejemplo": {}
+   "ejemplo": {
+    "_id": "1",
+    "COD_INSCRIPCION": "UVTR1422",
+    "NOMBRE": "Ainariak",
+    "MODALIDAD": "Vivienda Turística Rural",
+    "CATEGORIA": "Segunda/2 Llaves",
+    "DIRECCION": "Nueva-Karrika Berria 37 bajo",
+    "CODIGO_POSTAL": "31412",
+    "LOCALIDAD": "Burgui / Burgi",
+    "MUNICIPIO": "Burgui / Burgi",
+    "SUB_ZONA": "Pirineo",
+    "PLAZAS": "8",
+    "SUPLETORIAS": "2",
+    "FECHA_DE_INSCRIPCION": "27/04/2023",
+    "EMAIL": "No se consiente la publicación",
+    "WEB": "No se consiente la publicación",
+    "TELEFONO_RESERVAS_1": "No se consiente la publicación"
+   }
   },
   {
    "fuente": "nav-alb",
    "region": "Navarra",
-   "url": null,
-   "filas": 0,
-   "resultado": {},
-   "errores": [
-    "https://datosabiertos.navarra.es/datastore/dump/95ca4059-d22d-4dbe-86d8-f05dc5a2 URLError(TimeoutError(110, 'Connection timed out'))"
+   "url": "https://datosabiertos.navarra.es/datastore/dump/95ca4059-d22d-4dbe-86d8-f05dc5a20c3f?format=csv&bom=True",
+   "filas": 115,
+   "resultado": {
+    "ya estaba": 110,
+    "sin ubicación": 5
+   },
+   "errores": [],
+   "tipos": {
+    "Albergue turístico": 115
+   },
+   "columnas": [
+    "_id",
+    "COD_INSCRIPCION",
+    "NOMBRE",
+    "MODALIDAD",
+    "CATEGORIA",
+    "DIRECCION",
+    "CODIGO_POSTAL",
+    "LOCALIDAD",
+    "MUNICIPIO",
+    "SUB_ZONA",
+    "PLAZAS",
+    "SUPLETORIAS",
+    "FECHA_DE_INSCRIPCION",
+    "EMAIL",
+    "WEB",
+    "TELEFONO_RESERVAS_1"
    ],
-   "tipos": {},
-   "columnas": [],
-   "ejemplo": {}
+   "ejemplo": {
+    "_id": "1",
+    "COD_INSCRIPCION": "UAB00136",
+    "NOMBRE": "Iratiko Kabiak",
+    "MODALIDAD": "Albergue turístico",
+    "CATEGORIA": "2ª Categoria",
+    "DIRECCION": "NA-2030 Pk 8.370 0",
+    "CODIGO_POSTAL": "31670",
+    "LOCALIDAD": "Orbaizeta",
+    "MUNICIPIO": "Orbaizeta",
+    "SUB_ZONA": "Pirineo",
+    "PLAZAS": "34",
+    "SUPLETORIAS": "0",
+    "FECHA_DE_INSCRIPCION": "15/06/2023",
+    "EMAIL": "info@iratikokabiak.com",
+    "WEB": "www.iratikokabiak.com",
+    "TELEFONO_RESERVAS_1": "948203090"
+   }
   },
   {
    "fuente": "nav-rur",
    "region": "Navarra",
-   "url": null,
-   "filas": 0,
-   "resultado": {},
-   "errores": [
-    "https://datosabiertos.navarra.es/datastore/dump/74e164d1-a0a4-485f-993c-15befc3b URLError(TimeoutError(110, 'Connection timed out'))"
+   "url": "https://datosabiertos.navarra.es/datastore/dump/74e164d1-a0a4-485f-993c-15befc3b04b7?format=csv&bom=True",
+   "filas": 704,
+   "resultado": {
+    "sin ubicación": 200,
+    "ya estaba": 494,
+    "repetido en la fuente": 10
+   },
+   "errores": [],
+   "tipos": {
+    "Casa rural vivienda": 602,
+    "Casa rural habitaciones": 102
+   },
+   "columnas": [
+    "_id",
+    "COD_INSCRIPCION",
+    "NOMBRE",
+    "MODALIDAD",
+    "CATEGORIA",
+    "DIRECCION",
+    "CODIGO_POSTAL",
+    "LOCALIDAD",
+    "MUNICIPIO",
+    "SUB_ZONA",
+    "PLAZAS",
+    "SUPLETORIAS",
+    "FECHA_DE_INSCRIPCION",
+    "EMAIL",
+    "WEB",
+    "TELEFONO_RESERVAS_1"
    ],
-   "tipos": {},
-   "columnas": [],
-   "ejemplo": {}
+   "ejemplo": {
+    "_id": "1",
+    "COD_INSCRIPCION": "UCR01205",
+    "NOMBRE": "Galain",
+    "MODALIDAD": "Casa rural vivienda",
+    "CATEGORIA": "CRV 3 Estrellas",
+    "DIRECCION": "San Martín 33 A",
+    "CODIGO_POSTAL": "31797",
+    "LOCALIDAD": "Iraizotz",
+    "MUNICIPIO": "Ultzama",
+    "SUB_ZONA": "Plazaola-Sakana-Ultzama",
+    "PLAZAS": "7",
+    "SUPLETORIAS": "2",
+    "FECHA_DE_INSCRIPCION": "08/05/2023",
+    "EMAIL": "No se consiente la publicación",
+    "WEB": "No se consiente la publicación",
+    "TELEFONO_RESERVAS_1": "No se consiente la publicación"
+   }
   },
   {
    "fuente": "and",
    "region": "Andalucía",
    "url": "https://datos.juntadeandalucia.es/api/v0/openrta/all?format=csv",
-   "filas": 178870,
+   "filas": 178862,
    "resultado": {
     "ya estaba": 1601,
     "añadido": 1187,
-    "excluido (VUT, camping...)": 37331,
+    "excluido (VUT, camping...)": 37332,
     "repetido en la fuente": 11,
-    "sin nombre": 138734,
+    "sin nombre": 138725,
     "añadido (ubicación aproximada)": 6
    },
    "errores": [],
    "tipos": {
-    "Completa": 31977,
-    "": 4210,
+    "Completa": 31973,
+    "": 4215,
     "Hotel": 1397,
     "Por habitaciones": 1145,
     "Pensión": 665,
